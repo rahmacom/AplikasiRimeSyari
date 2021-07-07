@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:showIn="navigation_view">
+
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/nav_home"
+            android:icon="@drawable/ic_baseline_home_24"
+            android:title="@string/menu_home" />
+        <item
+            android:id="@+id/nav_daftar_jadi_reseller"
+            android:icon="@drawable/ic_baseline_person_add_alt_1_24"
+            android:title="@string/menu_reseller" />
+        <item
+            android:id="@+id/nav_status_pengiriman"
+            android:icon="@drawable/ic_baseline_playlist_add_check_24"
+            android:title="@string/menu_pengiriman" />
+        <item
+            android:id="@+id/nav_riwayat_transaksi"
+            android:icon="@drawable/ic_baseline_list_alt_24"
+            android:title="@string/menu_transaksi" />
+        <item
+            android:id="@+id/nav_settings"
+            android:icon="@drawable/ic_baseline_settings_24"
+            android:title="@string/menu_settings" />
+        <item
+            android:id="@+id/nav_tentang"
+            android:icon="@drawable/ic_baseline_info_24"
+            android:title="@string/menu_about" />
+        <item
+            android:id="@+id/nav_logout"
+            android:icon="@drawable/ic_baseline_logout_24"
+            android:title="@string/menu_logout" />
+    </group>
+</menu>

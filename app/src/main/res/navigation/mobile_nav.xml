@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    app:startDestination="@id/nav_home">
+
+    <!-- Beranda -->
+    <fragment
+        android:id="@+id/nav_home"
+        android:name="com.rahmacom.rimesyarifix.ui.home.HomeFragment"
+        android:label="@string/label_home"
+        tools:layout="@layout/fragment_home"/>
+
+    <fragment
+        android:id="@+id/nav_daftar_jadi_reseller"
+        android:name="com.rahmacom.rimesyarifix.ui.informasi.InformasiFragment"
+        android:label="@string/label_info_reseller"
+        tools:layout="@layout/fragment_informasi"/>
+
+    <fragment
+        android:id="@+id/nav_status_pengiriman"
+        android:name="com.rahmacom.rimesyarifix.ui.status_pengiriman.StatusPengirimanFragment"
+        android:label="Status Pengiriman produk"
+        tools:layout="@layout/fragment_status_pengiriman"/>
+
+    <fragment
+        android:id="@+id/nav_riwayat_transaksi"
+        android:name="com.rahmacom.rimesyarifix.ui.riwayat_transaksi.RiwayatTransaksiFragment"
+        android:label="@string/label_riwayat_transaksi"
+        tools:layout="@layout/item_transaksi_riwayat" />
+
+    <fragment
+        android:id="@+id/nav_settings"
+        android:name="com.rahmacom.rimesyarifix.ui.settings.SettingsFragment"
+        android:label="@string/label_settings" />
+
+    <fragment
+        android:id="@+id/nav_tentang"
+        android:name="com.rahmacom.rimesyarifix.ui.tentang.TentangFragment"
+        android:label="@string/label_tentang"
+        tools:layout="@layout/fragment_tentang" />
+
+</navigation>
