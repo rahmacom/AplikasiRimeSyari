@@ -3,11 +3,11 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.riwayat_transaksi.RiwayatTransaksiFragment">
+    tools:context=".ui.belanja.BelanjaFragment">
 
     <androidx.recyclerview.widget.RecyclerView
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
-    </androidx.recyclerview.widget.RecyclerView>
-
-</androidx.constraintlayout.widget.ConstraintLayout>
+        android:layout_height="match_parent"
+        tools:layout_editor_absoluteX="146dp"
+        tools:layout_editor_absoluteY="153dp" />
+</>

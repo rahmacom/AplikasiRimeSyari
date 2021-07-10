@@ -11,12 +11,12 @@
         android:layout_height="match_parent">
 
         <TextView
-            android:id="@+id/pengiriman_luarkota"
+            android:id="@+id/tv1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
             android:layout_marginTop="16dp"
-            android:text="Pengiriman Luar Kota"
+            android:text="Gunakan alamat saat ini"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
@@ -28,7 +28,7 @@
             android:layout_marginEnd="16dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="1.0"
-            app:layout_constraintStart_toEndOf="@+id/pengiriman_luarkota"
+            app:layout_constraintStart_toEndOf="@+id/tv1"
             app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
@@ -39,7 +39,7 @@
             android:layout_marginTop="32dp"
             android:text="Kode Voucer "
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/pengiriman_luarkota" />
+            app:layout_constraintTop_toBottomOf="@+id/tv1" />
 
         <EditText
             android:id="@+id/nama"
@@ -114,7 +114,7 @@
             android:id="@+id/harga1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="68dp"
+            android:layout_marginTop="32dp"
             android:layout_marginEnd="16dp"
             android:text="Rp."
             app:layout_constraintEnd_toEndOf="parent"
