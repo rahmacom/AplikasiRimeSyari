@@ -6,8 +6,8 @@
     tools:context=".ui.belanja.BelanjaFragment">
 
     <androidx.recyclerview.widget.RecyclerView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        tools:layout_editor_absoluteX="146dp"
-        tools:layout_editor_absoluteY="153dp" />
-</>
+        android:layout_width="407dp"
+        android:layout_height="728dp"
+        tools:layout_editor_absoluteX="-2dp"
+        tools:layout_editor_absoluteY="3dp" />
+</androidx.constraintlayout.widget.ConstraintLayout>
