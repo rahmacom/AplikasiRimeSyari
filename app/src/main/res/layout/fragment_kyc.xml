@@ -10,28 +10,19 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <Button
+        <ImageButton
             android:id="@+id/btn_take_photo"
             android:layout_width="100dp"
             android:layout_height="wrap_content"
             android:layout_marginBottom="64dp"
+            android:drawable=""
             android:elevation="2dp"
             android:scaleType="fitCenter"
+            android:src="@drawable/ic_baseline_photo_camera_24"
             android:text="Take Photo"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent" />
-
-        <Button
-            android:id="@+id/btn_switch_camera"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="64dp"
-            android:text="Switch"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/btn_take_photo"
-            app:layout_constraintTop_toTopOf="@+id/btn_take_photo" />
 
         <androidx.camera.view.PreviewView
             android:id="@+id/view_finder"
@@ -39,6 +30,7 @@
             android:layout_height="match_parent"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent">
 
         </androidx.camera.view.PreviewView>
