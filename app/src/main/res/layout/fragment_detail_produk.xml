@@ -7,7 +7,7 @@
     tools:context=".ui.detail_produk.DetailProdukFragment">
 
     <ImageView
-        android:id="@+id/imageView2"
+        android:id="@+id/iv_logodp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="32dp"
@@ -19,37 +19,37 @@
         tools:src="@tools:sample/avatars" />
 
     <TextView
-        android:id="@+id/textView23"
+        android:id="@+id/tv_namaproduk"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
         android:layout_marginTop="16dp"
         android:text="Nama Produk"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView25" />
+        app:layout_constraintTop_toBottomOf="@+id/tv_harga" />
 
     <TextView
-        android:id="@+id/textView24"
+        android:id="@+id/tv_stok"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
         android:layout_marginTop="32dp"
         android:text="Stok"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageView2" />
+        app:layout_constraintTop_toBottomOf="@+id/iv_logodp" />
 
     <TextView
-        android:id="@+id/textView25"
+        android:id="@+id/tv_harga"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
         android:layout_marginTop="16dp"
         android:text="Harga"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView24" />
+        app:layout_constraintTop_toBottomOf="@+id/tv_stok" />
 
     <Button
-        android:id="@+id/button3"
+        android:id="@+id/btn_add_keranjang"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="144dp"
@@ -58,46 +58,46 @@
         android:text="Tambahkan ke keranjang"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView25" />
+        app:layout_constraintTop_toBottomOf="@+id/tv_harga" />
 
     <TextView
-        android:id="@+id/textView21"
+        android:id="@+id/tv_deskripsi"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
         android:layout_marginTop="16dp"
         android:text="Deskripsi"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView27" />
+        app:layout_constraintTop_toBottomOf="@+id/tv_jumlah" />
 
     <TextView
-        android:id="@+id/textView22"
+        android:id="@+id/tv_warna"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
         android:layout_marginTop="16dp"
         android:text="Warna"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView23" />
+        app:layout_constraintTop_toBottomOf="@+id/tv_namaproduk" />
 
     <TextView
-        android:id="@+id/textView26"
+        android:id="@+id/tv_ukuran"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
         android:layout_marginTop="16dp"
         android:text="Ukuran"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView22" />
+        app:layout_constraintTop_toBottomOf="@+id/tv_warna" />
 
     <TextView
-        android:id="@+id/textView27"
+        android:id="@+id/tv_jumlah"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
         android:layout_marginTop="16dp"
         android:text="Jumlah"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView26" />
+        app:layout_constraintTop_toBottomOf="@+id/tv_ukuran" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

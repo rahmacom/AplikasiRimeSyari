@@ -91,7 +91,7 @@ public class KYCFragment extends Fragment {
         }
 
         binding.btnTakePhoto.setOnClickListener(v -> takePhoto());
-        binding.btnSwitchCamera.setOnClickListener(v -> {
+        binding.btnTakePhoto.setOnClickListener(v -> {
             switchCam = !switchCam;
             if (switchCam) {
                 cameraSelector = CameraSelector.DEFAULT_BACK_CAMERA;
