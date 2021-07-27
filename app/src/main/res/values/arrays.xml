@@ -1,12 +1,52 @@
 <resources>
-    <!-- Reply Preference -->
-    <string-array name="reply_entries">
-        <item>Reply</item>
-        <item>Reply to all</item>
+
+    <string-array name="list_data_profil_judul">
+        <item>Profil</item>
+        <item>Daftar jadi Reseller</item>
+        <item>Testimoni</item>
+        <item>Pengaturan</item>
+        <item>Bantuan</item>
+        <item>Tentang</item>
+        <item>Logout</item>
     </string-array>
 
-    <string-array name="reply_values">
-        <item>reply</item>
-        <item>reply_all</item>
+    <integer-array name="list_data_profil_action">
+        <item>@id/action_nav_akun_saya_to_profilBiodataFragment</item>
+        <item>@id/action_profilFragment_to_resellerInfoFragment</item>
+        <item>@id/action_nav_akun_saya_to_profilTestimoniFragment</item>
+        <item>@id/action_profilFragment_to_settingsFragment</item>
+        <item>@id/action_nav_akun_saya_to_profilBantuanFragment</item>
+        <item>@id/action_profilFragment_to_tentangFragment</item>
+        <item />
+    </integer-array>
+
+    <string-array name="list_biodata_profil_judul">
+        <item>Nama Lengkap</item>
+        <item>Jenis Kelamin</item>
+        <item>Alamat</item>
+        <item>No. Telpon / WA</item>
+        <item>Email</item>
+        <item>Member sejak</item>
     </string-array>
+
+    <string-array name="list_biodata_profil_dummy">
+        <item>Jane Doe</item>
+        <item>Perempuan</item>
+        <item>Jl. Kulintang No. 33, Kel. Sidodadi, Kec. Samarinda Ulu, Samarinda,
+            Kalimantan Timur, 75123</item>
+        <item>+6281234567890</item>
+        <item>reseller@email.com</item>
+        <item>23 September 2020</item>
+    </string-array>
+
+    <integer-array name="list_data_profil_icon">
+        <item>@drawable/icon_account</item>
+        <item>@drawable/icon_person_add</item>
+        <item>@drawable/icon_star</item>
+        <item>@drawable/icon_settings</item>
+        <item>@drawable/icon_help</item>
+        <item>@drawable/icon_info</item>
+        <item>@drawable/icon_logout</item>
+    </integer-array>
+
 </resources>

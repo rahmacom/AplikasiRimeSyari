@@ -4,6 +4,5 @@ public enum Status {
     LOADING,
     SUCCESS,
     EMPTY,
-    ERROR,
-    TOKEN_EXPIRED
+    ERROR
 }

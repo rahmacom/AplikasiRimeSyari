@@ -1,4 +1,7 @@
 package com.rahmacom.rimesyarifix.ui.produk;
 
-public class ProdukViewModel {
+import androidx.lifecycle.ViewModel;
+
+public class ProdukViewModel extends ViewModel {
+    // TODO: Implement the ViewModel
 }

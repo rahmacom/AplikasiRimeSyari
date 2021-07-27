@@ -9,24 +9,32 @@ import android.view.ViewGroup;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
-import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.navigation.NavController;
+import androidx.navigation.Navigation;
+import androidx.navigation.ui.AppBarConfiguration;
 
+import com.rahmacom.rimesyarifix.R;
 import com.rahmacom.rimesyarifix.databinding.FragmentHomeBinding;
-import com.rahmacom.rimesyarifix.ui.RecycleViewAdapter;
+import com.rahmacom.rimesyarifix.manager.PreferenceManager;
+import com.rahmacom.rimesyarifix.utils.Const;
 
+import dagger.hilt.android.AndroidEntryPoint;
+
+@AndroidEntryPoint
 public class HomeFragment extends Fragment {
 
-    private RecycleViewAdapter rvAdapter;
     private FragmentHomeBinding binding;
 
-    public static HomeFragment newInstance() {
-        return new HomeFragment();
-    }
+    public static final String ARGS_LOGIN = "args_login";
+    public static final String ARG_USER = "arg_user_has_login";
+    public static final String ARG_GUEST = "arg_user_not_login";
 
-    @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-    }
+    private static final String[] TITLES = new String[]{
+            "ABAYA",
+            "OUTER",
+            "KHIMAR",
+            "MASKER"
+    };
 
     @Override
     public View onCreateView(
@@ -44,10 +52,14 @@ public class HomeFragment extends Fragment {
 
         Log.d("HomeFragment", "This is home fragment");
 
-        rvAdapter = new RecycleViewAdapter();
-        binding.rvProductMain.setHasFixedSize(true);
-        binding.rvProductMain.setLayoutManager(new LinearLayoutManager(getContext()));
-        binding.rvProductMain.setAdapter(rvAdapter);
+        NavController navController = Navigation.findNavController(view);
+        PreferenceManager manager = new PreferenceManager(requireContext());
+
+        if (!manager.keyExists(Const.KEY_TOKEN) || manager.getString(Const.KEY_TOKEN) == null) {
+            navController.navigate(R.id.loginFragment);
+        }
+
+        binding.fragmentHomeToolbar.inflateMenu(R.menu.menu_main);
     }
 
     @Override

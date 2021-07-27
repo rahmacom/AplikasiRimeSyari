@@ -1,4 +1,7 @@
 package com.rahmacom.rimesyarifix.ui.profil;
 
-public class ProfilViewModel {
+import androidx.lifecycle.ViewModel;
+
+public class ProfilViewModel extends ViewModel {
+
 }

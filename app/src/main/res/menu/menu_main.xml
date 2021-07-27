@@ -4,22 +4,14 @@
 
     <item
         android:id="@+id/menu_search"
-        android:icon="@drawable/ic_baseline_search_24"
-        android:title="@string/search"
-        app:actionViewClass="androidx.appcompat.widget.SearchView"
-        app:showAsAction="always" />
+        android:icon="@drawable/icon_search"
+        android:title="Cari..."
+        app:showAsAction="always|collapseActionView" />
 
     <item
         android:id="@+id/menu_keranjang"
-        android:icon="@drawable/ic_baseline_shopping_cart_24"
+        android:icon="@drawable/icon_cart"
         android:title="Keranjang"
-        app:showAsAction="collapseActionView" />
-
-    <item
-        android:id="@+id/menu_person"
-        android:icon="@drawable/ic_baseline_person_24"
-        android:title="Profil"
-        app:showAsAction="collapseActionView" />
-
+        app:showAsAction="ifRoom|collapseActionView" />
 
 </menu>

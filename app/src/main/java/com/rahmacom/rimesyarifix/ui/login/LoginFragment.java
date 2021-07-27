@@ -1,27 +1,33 @@
 package com.rahmacom.rimesyarifix.ui.login;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
-import android.widget.EditText;
-import android.widget.ProgressBar;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.Observer;
+import androidx.lifecycle.SavedStateHandle;
 import androidx.lifecycle.ViewModelProvider;
+import androidx.navigation.NavController;
+import androidx.navigation.NavGraph;
+import androidx.navigation.fragment.NavHostFragment;
 
+import com.rahmacom.rimesyarifix.data.network.model.ResponseLogin;
 import com.rahmacom.rimesyarifix.databinding.FragmentLoginBinding;
-import com.rahmacom.rimesyarifix.ui.MainActivity;
-import com.rahmacom.rimesyarifix.utils.RimeSyariViewModelFactory;
+import com.rahmacom.rimesyarifix.manager.PreferenceManager;
+import com.rahmacom.rimesyarifix.utils.Const;
 
 public class LoginFragment extends Fragment {
 
-    private LoginViewModel loginViewModel;
+    private LoginViewModel viewModel;
     private FragmentLoginBinding binding;
+
+    private SavedStateHandle savedStateHandle;
+
+    public static final String LOGIN_SUCCESS = "loginSuccess";
 
     @Nullable
     @Override
@@ -37,103 +43,25 @@ public class LoginFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        loginViewModel = new ViewModelProvider(this, new RimeSyariViewModelFactory())
-                .get(LoginViewModel.class);
 
-        final EditText usernameEditText = binding.username;
-        final EditText passwordEditText = binding.password;
-        final Button loginButton = binding.login;
-        final ProgressBar loadingProgressBar = binding.loading;
+        viewModel = new ViewModelProvider(requireActivity()).get(LoginViewModel.class);
 
-//        loginViewModel.getLoginFormState().observe(getViewLifecycleOwner(), loginFormState -> {
-//            if (loginFormState == null) {
-//                return;
-//            }
-//            loginButton.setEnabled(loginFormState.isDataValid());
-//            if (loginFormState.getUsernameError() != null) {
-//                usernameEditText.setError(getString(loginFormState.getUsernameError()));
-//            }
-//            if (loginFormState.getPasswordError() != null) {
-//                passwordEditText.setError(getString(loginFormState.getPasswordError()));
-//            }
-//        });
-//
-//        loginViewModel.getLoginResult().observe(getViewLifecycleOwner(), new Observer<LoginResult>() {
-//            @Override
-//            public void onChanged(@Nullable LoginResult loginResult) {
-//                if (loginResult == null) {
-//                    return;
-//                }
-//                loadingProgressBar.setVisibility(View.GONE);
-//                if (loginResult.getError() != null) {
-//                    showLoginFailed(loginResult.getError());
-//                }
-//                if (loginResult.getSuccess() != null) {
-//                    updateUiWithUser(loginResult.getSuccess());
-//                }
-//            }
-//        });
-//
-//        TextWatcher afterTextChangedListener = new TextWatcher() {
-//            @Override
-//            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-//                // ignore
-//            }
-//
-//            @Override
-//            public void onTextChanged(CharSequence s, int start, int before, int count) {
-//                // ignore
-//            }
-//
-//            @Override
-//            public void afterTextChanged(Editable s) {
-//                loginViewModel.loginDataChanged(usernameEditText.getText().toString(),
-//                        passwordEditText.getText().toString());
-//            }
-//        };
-//        usernameEditText.addTextChangedListener(afterTextChangedListener);
-//        passwordEditText.addTextChangedListener(afterTextChangedListener);
-//        passwordEditText.setOnEditorActionListener(new TextView.OnEditorActionListener() {
-//
-//            @Override
-//            public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
-//                if (actionId == EditorInfo.IME_ACTION_DONE) {
-//                    loginViewModel.login(usernameEditText.getText().toString(),
-//                            passwordEditText.getText().toString());
-//                }
-//                return false;
-//            }
-//        });
+        binding.btnLogin.setOnClickListener(v -> {
+            viewModel.setLogin(
+                    binding.edtLoginUsername.getText().toString(),
+                    binding.edtLoginPassword.getText().toString()
+            ).observe(getViewLifecycleOwner(), (Observer<ResponseLogin>) login -> {
+                PreferenceManager manager = new PreferenceManager(requireContext());
+                manager.setString(Const.KEY_TOKEN, login.getAccessToken());
+                manager.setString(Const.KEY_TYPE, login.getTokenType());
+                manager.setInt(Const.KEY_TTL, login.getExpiresIn());
 
-        loginButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-//                loadingProgressBar.setVisibility(View.VISIBLE);
-//                loginViewModel.login(usernameEditText.getText().toString(),
-//                        passwordEditText.getText().toString());
-                Intent intent = new Intent(getActivity(), MainActivity.class);
-                startActivity(intent);
-                getActivity().finish();
-            }
+                NavController navController = NavHostFragment.findNavController(this);
+                NavGraph navGraph = navController.getGraph();
+                navController.navigate(navGraph.getStartDestination());
+            });
         });
     }
-
-//    private void updateUiWithUser(LoggedInUserView model) {
-//        String welcome = getString(R.string.welcome) + model.getDisplayName();
-//        // TODO : initiate successful logged in experience
-//        if (getContext() != null && getContext().getApplicationContext() != null) {
-//            Toast.makeText(getContext().getApplicationContext(), welcome, Toast.LENGTH_LONG).show();
-//        }
-//    }
-//
-//    private void showLoginFailed(@StringRes Integer errorString) {
-//        if (getContext() != null && getContext().getApplicationContext() != null) {
-//            Toast.makeText(
-//                    getContext().getApplicationContext(),
-//                    errorString,
-//                    Toast.LENGTH_LONG).show();
-//        }
-//    }
 
     @Override
     public void onDestroyView() {

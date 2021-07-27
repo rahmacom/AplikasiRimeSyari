@@ -1,4 +1,6 @@
 package com.rahmacom.rimesyarifix.ui.keranjang;
 
-public class KeranjangViewModel {
+import androidx.lifecycle.ViewModel;
+
+public class KeranjangViewModel extends ViewModel {
 }

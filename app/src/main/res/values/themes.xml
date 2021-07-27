@@ -1,25 +1,142 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
-    <!-- Base application theme. -->
-    <style name="Theme.RimeSyariFix" parent="Theme.MaterialComponents.DayNight.DarkActionBar">
+
+    <!-- Base Theme -->
+
+    <style name="RimeSyariFix" parent="Theme.MaterialComponents.DayNight.DarkActionBar">
         <!-- Primary brand color. -->
-        <item name="colorPrimary">@color/primary</item>
-        <item name="colorPrimaryVariant">@color/primary_light</item>
-        <item name="colorOnPrimary">@color/primary_dark</item>
+        <item name="colorPrimary">@color/pink_400</item>
+        <item name="colorPrimaryVariant">@color/gray_100</item>
+        <item name="colorOnPrimary">@color/gray_700</item>
+
         <!-- Secondary brand color. -->
-        <item name="colorSecondary">@color/secondary</item>
-        <item name="colorSecondaryVariant">@color/secondary_light</item>
-        <item name="colorOnSecondary">@color/secondary_dark</item>
+        <item name="colorSecondary">@color/gray_400</item>
+        <item name="colorSecondaryVariant">@color/gray_400</item>
+        <item name="colorOnSecondary">@color/gray_900</item>
+
         <!-- Status bar color. -->
-        <item name="android:statusBarColor" tools:targetApi="l">?attr/colorOnPrimary</item>
+        <item name="android:statusBarColor" tools:targetApi="l">@color/white</item>
+        <item name="android:windowLightStatusBar" tools:targetApi="m">true</item>
+
         <!-- Customize your theme here. -->
+        <item name="android:windowBackground">@color/gray_50</item>
+        <item name="android:fontFamily">@font/rubik</item>
+
+        <item name="materialAlertDialogTheme">@style/ThemeOverlay.RimeSyariFix.Dialog</item>
+        <item name="materialButtonStyle">@style/Component.RimeSyariFix.Button</item>
+        <item name="extendedFloatingActionButtonStyle">@style/Compopnent.RimeSyariFix.ExtendedFAB</item>
+        <item name="tabStyle">@style/Component.RimeSyariFix.TabLayout</item>
     </style>
 
-    <style name="Theme.RimeSyariFix.NoActionBar">
+    <style name="RimeSyariFix.NoActionBar">
         <item name="windowActionBar">false</item>
         <item name="windowNoTitle">true</item>
     </style>
 
-    <style name="Theme.RimeSyariFix.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
+    <style name="RimeSyariFix.Preference" parent="PreferenceThemeOverlay">
+        <item name="materialAlertDialogTheme">@style/ThemeOverlay.RimeSyariFix.Dialog</item>
+    </style>
 
-    <style name="Theme.RimeSyariFix.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
+    <!-- Components -->
+
+    <style name="Component.RimeSyariFix.Button" parent="Widget.MaterialComponents.Button">
+        <item name="materialThemeOverlay">@style/ThemeOverlay.RimeSyariFix.Button</item>
+        <item name="fontFamily">@font/rubik_medium</item>
+    </style>
+
+    <style name="Compopnent.RimeSyariFix.ExtendedFAB"
+        parent="Widget.MaterialComponents.ExtendedFloatingActionButton.Icon">
+        <item name="materialThemeOverlay">@style/ThemeOverlay.RimeSyariFix.ExtendedFAB</item>
+    </style>
+
+    <style name="Component.RimeSyariFix.Dialog"
+        parent="MaterialAlertDialog.MaterialComponents">
+        <item name="shapeAppearance">@style/Dialog.RimeSyariFix.Shape</item>
+    </style>
+
+    <style name="Component.RimeSyariFix.TabLayout"
+        parent="Widget.MaterialComponents.TabLayout">
+        <item name="materialThemeOverlay">@style/ThemeOverlay.RimeSyariFix.TabLayout</item>
+        <item name="textAppearanceButton">@style/Component.RimeSyariFix.Button</item>
+    </style>
+
+    <!-- Component Themes -->
+
+    <style name="ThemeOverlay.RimeSyariFix.AppBar"
+        parent="ThemeOverlay.MaterialComponents.Dark.ActionBar">
+        <item name="colorPrimary">@color/white</item>
+        <item name="colorPrimarySurface">@color/white</item>
+        <item name="android:textColorPrimary">@color/gray_700</item>
+        <item name="android:fontFamily">@font/rubik_medium</item>
+    </style>
+
+    <style name="ThemeOverlay.RimeSyariFix.ToolBar"
+        parent="ThemeOverlay.MaterialComponents.Light">
+        <item name="colorOnSecondary">@color/gray_400</item>
+    </style>
+
+    <style name="ThemeOverlay.RimeSyariFix.NavigationDrawer"
+        parent="ThemeOverlay.MaterialComponents.Light">
+        <item name="colorPrimary">@color/gray_700</item>
+        <item name="android:colorPrimary">@color/gray_700</item>
+        <item name="android:colorActivatedHighlight">@color/pink_400</item>
+        <item name="android:colorControlActivated">@color/pink_400</item>
+        <item name="android:fontFamily">@font/rubik_medium</item>
+    </style>
+
+    <style name="ThemeOverlay.RimeSyariFix.Dialog"
+        parent="ThemeOverlay.MaterialComponents.MaterialAlertDialog">
+        <item name="colorPrimary">@color/pink_400</item>
+        <item name="colorSecondary">@color/gray_400</item>
+        <item name="colorSurface">@color/white</item>
+        <item name="colorOnSurface">@color/gray_900</item>
+        <item name="alertDialogStyle">@style/Component.RimeSyariFix.Dialog</item>
+        <item name="materialAlertDialogTitleTextStyle">@style/Dialog.RimeSyariFix.Title</item>
+        <item name="materialAlertDialogBodyTextStyle">@style/Dialog.RimeSyariFix.Content</item>
+        <item name="buttonBarPositiveButtonStyle">@style/Dialog.RimeSyariFix.Button</item>
+        <item name="buttonBarNeutralButtonStyle">@style/Dialog.RimeSyariFix.Button</item>
+    </style>
+
+    <style name="ThemeOverlay.RimeSyariFix.Button" parent="">
+        <item name="colorPrimary">@color/white</item>
+        <item name="colorOnPrimary">@color/pink_400</item>
+    </style>
+
+    <style name="ThemeOverlay.RimeSyariFix.ExtendedFAB" parent="">
+        <item name="colorSecondary">@color/pink_400</item>
+        <item name="colorOnSecondary">@color/white</item>
+    </style>
+
+    <style name="ThemeOverlay.RimeSyariFix.TabLayout" parent="">
+        <item name="colorPrimary">@color/pink_400</item>
+        <item name="background">@color/gray_400</item>
+        <item name="colorOnSurface">@color/gray_400</item>
+
+    </style>
+
+    <!-- Component Styles -->
+
+    <style name="Dialog.RimeSyariFix.Title"
+        parent="MaterialAlertDialog.MaterialComponents.Title.Text">
+        <item name="android:textColor">@color/gray_900</item>
+        <item name="fontFamily">@font/rubik_medium</item>
+    </style>
+
+    <style name="Dialog.RimeSyariFix.Content"
+        parent="TextAppearance.MaterialComponents.Body2">
+        <item name="android:textColor">@color/gray_700</item>
+        <item name="android:textSize">14sp</item>
+        <item name="fontFamily">@font/rubik</item>
+    </style>
+
+    <style name="Dialog.RimeSyariFix.Button"
+        parent="Widget.MaterialComponents.Button.TextButton.Dialog">
+        <item name="materialThemeOverlay">@style/ThemeOverlay.RimeSyariFix.Button</item>
+    </style>
+
+    <style name="Dialog.RimeSyariFix.Shape"
+        parent="ShapeAppearance.MaterialComponents.MediumComponent">
+        <item name="cornerRadius">16dp</item>
+        <item name="cornerFamily">rounded</item>
+    </style>
+
 </resources>

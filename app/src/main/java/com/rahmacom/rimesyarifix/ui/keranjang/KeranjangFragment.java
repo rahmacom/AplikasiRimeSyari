@@ -13,6 +13,7 @@ import com.rahmacom.rimesyarifix.databinding.FragmentKeranjangBinding;
 public class KeranjangFragment extends Fragment {
 
     private FragmentKeranjangBinding binding;
+    private KeranjangViewModel mViewModel;
 
     public static KeranjangFragment newInstance() {
         return new KeranjangFragment();

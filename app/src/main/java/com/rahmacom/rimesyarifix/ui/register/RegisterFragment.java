@@ -1,21 +1,18 @@
 package com.rahmacom.rimesyarifix.ui.register;
 
-import androidx.lifecycle.ViewModelProvider;
-
 import android.os.Bundle;
-
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.fragment.app.Fragment;
-
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.rahmacom.rimesyarifix.R;
+import androidx.annotation.NonNull;
+import androidx.fragment.app.Fragment;
+
+import com.rahmacom.rimesyarifix.databinding.FragmentRegisterBinding;
 
 public class RegisterFragment extends Fragment {
 
+    private FragmentRegisterBinding binding;
     private RegisterViewModel mViewModel;
 
     public static RegisterFragment newInstance() {
@@ -23,16 +20,12 @@ public class RegisterFragment extends Fragment {
     }
 
     @Override
-    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
-                             @Nullable Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.fragment_register, container, false);
+    public View onCreateView(
+            @NonNull LayoutInflater inflater,
+            ViewGroup container,
+            Bundle savedInstanceState
+    ) {
+        binding = FragmentRegisterBinding.inflate(getLayoutInflater());
+        return binding.getRoot();
     }
-
-    @Override
-    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
-        super.onActivityCreated(savedInstanceState);
-        mViewModel = new ViewModelProvider(this).get(RegisterViewModel.class);
-        // TODO: Use the ViewModel
-    }
-
 }

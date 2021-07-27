@@ -4,40 +4,184 @@
     xmlns:tools="http://schemas.android.com/tools"
     app:startDestination="@id/nav_home">
 
-    <!-- Beranda -->
     <fragment
         android:id="@+id/nav_home"
         android:name="com.rahmacom.rimesyarifix.ui.home.HomeFragment"
-        android:label="@string/label_home"
-        tools:layout="@layout/fragment_home"/>
+        android:label="@string/title_beranda" >
+        <action
+            android:id="@+id/action_homeFragment_to_produkFragment"
+            app:destination="@id/produkFragment" />
+    </fragment>
 
     <fragment
-        android:id="@+id/nav_daftar_jadi_reseller"
-        android:name="com.rahmacom.rimesyarifix.ui.informasi.InformasiFragment"
-        android:label="@string/label_info_reseller"
-        tools:layout="@layout/fragment_informasi"/>
+        android:id="@+id/nav_status_order"
+        android:name="com.rahmacom.rimesyarifix.ui.order_status.OrderStatusFragment"
+        android:label="@string/title_status_order"
+        tools:layout="@layout/fragment_order_status" >
+        <action
+            android:id="@+id/action_orderStatusFragment_to_keranjangFragment"
+            app:destination="@id/keranjangFragment" />
+    </fragment>
 
     <fragment
-        android:id="@+id/nav_status_pengiriman"
-        android:name="com.rahmacom.rimesyarifix.ui.status_pengiriman.StatusPengirimanFragment"
-        android:label="Status Pengiriman produk"
-        tools:layout="@layout/fragment_status_pengiriman"/>
+        android:id="@+id/settingsFragment"
+        android:name="com.rahmacom.rimesyarifix.ui.profil_settings.ProfilSettingsFragment"
+        android:label="@string/title_settings" />
 
     <fragment
         android:id="@+id/nav_riwayat_transaksi"
-        android:name="com.rahmacom.rimesyarifix.ui.riwayat_transaksi.RiwayatTransaksiFragment"
-        android:label="@string/label_riwayat_transaksi"
-        tools:layout="@layout/item_transaksi_riwayat" />
+        android:name="com.rahmacom.rimesyarifix.ui.transaksi_riwayat.TransaksiRiwayatFragment"
+        android:label="@string/title_riwayat_transaksi"
+        tools:layout="@layout/fragment_transaksi_riwayat" >
+        <action
+            android:id="@+id/action_transaksiRiwayatFragment_to_transaksiDetailFragment"
+            app:destination="@id/transaksiDetailFragment" />
+    </fragment>
 
     <fragment
-        android:id="@+id/nav_settings"
-        android:name="com.rahmacom.rimesyarifix.ui.settings.SettingsFragment"
-        android:label="@string/label_settings" />
+        android:id="@+id/nav_akun_saya"
+        android:name="com.rahmacom.rimesyarifix.ui.profil.ProfilFragment"
+        android:label="@string/title_profil"
+        tools:layout="@layout/fragment_profil" >
+        <action
+            android:id="@+id/action_profilFragment_to_tentangFragment"
+            app:destination="@id/tentangFragment" />
+        <action
+            android:id="@+id/action_profilFragment_to_resellerInfoFragment"
+            app:destination="@id/resellerInfoFragment" />
+        <action
+            android:id="@+id/action_profilFragment_to_settingsFragment"
+            app:destination="@id/settingsFragment" />
+        <action
+            android:id="@+id/action_nav_akun_saya_to_profilBantuanFragment"
+            app:destination="@id/profilBantuanFragment" />
+        <action
+            android:id="@+id/action_nav_akun_saya_to_profilTestimoniFragment"
+            app:destination="@id/profilTestimoniFragment" />
+        <action
+            android:id="@+id/action_nav_akun_saya_to_profilBiodataFragment"
+            app:destination="@id/profilBiodataFragment" />
+    </fragment>
 
     <fragment
-        android:id="@+id/nav_tentang"
-        android:name="com.rahmacom.rimesyarifix.ui.tentang.TentangFragment"
-        android:label="@string/label_tentang"
+        android:id="@+id/keranjangFragment"
+        android:name="com.rahmacom.rimesyarifix.ui.keranjang.KeranjangFragment"
+        android:label="fragment_keranjang"
+        tools:layout="@layout/fragment_keranjang" >
+        <action
+            android:id="@+id/action_keranjangFragment_to_orderPengirimanFragment"
+            app:destination="@id/orderPengirimanFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/loginFragment"
+        android:name="com.rahmacom.rimesyarifix.ui.login.LoginFragment"
+        android:label="fragment_login"
+        tools:layout="@layout/fragment_login" >
+        <action
+            android:id="@+id/action_loginFragment_to_registerFragment"
+            app:destination="@id/registerFragment" />
+        <action
+            android:id="@+id/action_loginFragment_to_homeFragment"
+            app:destination="@id/nav_home" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/orderPengirimanFragment"
+        android:name="com.rahmacom.rimesyarifix.ui.order_pengiriman.OrderPengirimanFragment"
+        android:label="fragment_order_pengiriman"
+        tools:layout="@layout/fragment_order_pengiriman" />
+
+    <fragment
+        android:id="@+id/produkFragment"
+        android:name="com.rahmacom.rimesyarifix.ui.produk.ProdukFragment"
+        android:label="fragment_produk"
+        tools:layout="@layout/fragment_produk" />
+
+    <fragment
+        android:id="@+id/registerFragment"
+        android:name="com.rahmacom.rimesyarifix.ui.register.RegisterFragment"
+        android:label="fragment_register"
+        tools:layout="@layout/fragment_register" >
+        <action
+            android:id="@+id/action_registerFragment_to_homeFragment"
+            app:destination="@id/nav_home" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/resellerDaftarFragment"
+        android:name="com.rahmacom.rimesyarifix.ui.reseller_daftar.ResellerDaftarFragment"
+        android:label="fragment_reseller_daftar"
+        tools:layout="@layout/fragment_reseller_daftar" >
+        <action
+            android:id="@+id/action_resellerDaftarFragment_to_resellerKYCFragment"
+            app:destination="@id/resellerKYCFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/resellerInfoFragment"
+        android:name="com.rahmacom.rimesyarifix.ui.reseller_info.ResellerInfoFragment"
+        android:label="fragment_reseller_info"
+        tools:layout="@layout/fragment_reseller_info" >
+        <action
+            android:id="@+id/action_resellerInfoFragment_to_resellerDaftarFragment"
+            app:destination="@id/resellerDaftarFragment" />
+        <action
+            android:id="@+id/action_resellerInfoFragment_to_resellerKYCFragment"
+            app:destination="@id/resellerKYCFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/resellerKYCFragment"
+        android:name="com.rahmacom.rimesyarifix.ui.reseller_kyc.ResellerKYCFragment"
+        android:label="fragment_reseller_kyc"
+        tools:layout="@layout/fragment_reseller_kyc" />
+
+    <fragment
+        android:id="@+id/resellerStatusVerifikasiFragment"
+        android:name="com.rahmacom.rimesyarifix.ui.reseller_status_verifikasi.ResellerStatusVerifikasiFragment"
+        android:label="fragment_reseller_status_verifikasi"
+        tools:layout="@layout/fragment_reseller_status_verifikasi" />
+
+    <fragment
+        android:id="@+id/splashScreenFragment"
+        android:name="com.rahmacom.rimesyarifix.ui.splash_screen.SplashScreenFragment"
+        android:label="fragment_splash_screen"
+        tools:layout="@layout/fragment_splash_screen" >
+        <action
+            android:id="@+id/action_splashScreenFragment_to_loginFragment"
+            app:destination="@id/loginFragment" />
+        <action
+            android:id="@+id/action_splashScreenFragment_to_homeFragment"
+            app:destination="@id/nav_home" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/tentangFragment"
+        android:name="com.rahmacom.rimesyarifix.ui.profil_tentang.ProfilTentangFragment"
+        android:label="fragment_tentang"
         tools:layout="@layout/fragment_tentang" />
+
+    <fragment
+        android:id="@+id/transaksiDetailFragment"
+        android:name="com.rahmacom.rimesyarifix.ui.transaksi_detail.TransaksiDetailFragment"
+        android:label="fragment_transaksi_detail"
+        tools:layout="@layout/fragment_transaksi_detail" />
+    <fragment
+        android:id="@+id/profilBantuanFragment"
+        android:name="com.rahmacom.rimesyarifix.ui.profil_bantuan.ProfilBantuanFragment"
+        android:label="fragment_profil_bantuan"
+        tools:layout="@layout/fragment_profil_bantuan" />
+    <fragment
+        android:id="@+id/profilTestimoniFragment"
+        android:name="com.rahmacom.rimesyarifix.ui.profil_testimoni.ProfilTestimoniFragment"
+        android:label="fragment_profil_testimoni"
+        tools:layout="@layout/fragment_profil_testimoni" />
+    <fragment
+        android:id="@+id/profilBiodataFragment"
+        android:name="com.rahmacom.rimesyarifix.ui.profil_biodata.ProfilBiodataFragment"
+        android:label="fragment_profil_biodata"
+        tools:layout="@layout/fragment_profil_biodata" />
+
 
 </navigation>

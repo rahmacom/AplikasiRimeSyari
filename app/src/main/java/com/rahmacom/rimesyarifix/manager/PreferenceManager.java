@@ -75,4 +75,8 @@ public class PreferenceManager {
             editor.commit();
         }
     }
+
+    public boolean keyExists(String prefName) {
+        return preferences.contains(prefName);
+    }
 }
