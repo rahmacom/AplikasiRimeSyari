@@ -1,10 +1,14 @@
 package com.rahmacom.rimesyarifix.ui.home;
 
+import android.location.SettingInjectorService;
 import android.os.Bundle;
+import android.provider.ContactsContract;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.GridLayout;
+import android.widget.LinearLayout;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -12,11 +16,16 @@ import androidx.fragment.app.Fragment;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 import androidx.navigation.ui.AppBarConfiguration;
+import androidx.recyclerview.widget.GridLayoutManager;
+import androidx.recyclerview.widget.LinearLayoutManager;
 
 import com.rahmacom.rimesyarifix.R;
 import com.rahmacom.rimesyarifix.databinding.FragmentHomeBinding;
 import com.rahmacom.rimesyarifix.manager.PreferenceManager;
 import com.rahmacom.rimesyarifix.utils.Const;
+
+import java.lang.reflect.Array;
+import java.util.ArrayList;
 
 import dagger.hilt.android.AndroidEntryPoint;
 
@@ -60,11 +69,41 @@ public class HomeFragment extends Fragment {
         }
 
         binding.fragmentHomeToolbar.inflateMenu(R.menu.menu_main);
+        setUpDataProduk();
     }
 
     @Override
     public void onDestroyView() {
         super.onDestroyView();
         binding = null;
+    }
+
+    private ArrayList<Produk> getListProduk() {
+        String[] gambar = getResources().getStringArray(R.array.produk_gambar);
+        String[] nama = getResources().getStringArray(R.array.produk_nama);
+        String[] harga = getResources().getStringArray(R.array.produk_harga);
+        String[] like = getResources().getStringArray(R.array.produk_like);
+
+        ArrayList<Produk> list = new ArrayList<>();
+
+        for (int i=0; i< gambar.length; i++) {
+            Produk produk = new Produk();
+            produk.setGambar(gambar[i]);
+            produk.setNama(nama[i]);
+            produk.setHarga(harga[i]);
+            produk.setLike(like[i]);
+            list.add(produk);
+        }
+        return list;
+    }
+
+    private void setUpDataProduk() {
+        ArrayList<Produk> listProduk = getListProduk();
+        DataProdukAdapter adapter = new DataProdukAdapter();
+        adapter.setLists(listProduk);
+        GridLayoutManager gridLayoutManager = new GridLayoutManager(getContext(),2);
+
+        binding.rvFragmentHome.setAdapter(adapter);
+        binding.rvFragmentHome.setLayoutManager(gridLayoutManager);
     }
 }

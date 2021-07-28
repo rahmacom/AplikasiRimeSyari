@@ -49,4 +49,32 @@
         <item>@drawable/icon_logout</item>
     </integer-array>
 
+    <string-array name="produk_gambar">
+        <item>https://i.picsum.photos/id/0/5616/3744.jpg?hmac=3GAAioiQziMGEtLbfrdbcoenXoWAW-zlyEAMkfEdBzQ</item>
+        <item>https://i.picsum.photos/id/0/5616/3744.jpg?hmac=3GAAioiQziMGEtLbfrdbcoenXoWAW-zlyEAMkfEdBzQ</item>
+        <item>https://i.picsum.photos/id/0/5616/3744.jpg?hmac=3GAAioiQziMGEtLbfrdbcoenXoWAW-zlyEAMkfEdBzQ</item>
+        <item>https://i.picsum.photos/id/0/5616/3744.jpg?hmac=3GAAioiQziMGEtLbfrdbcoenXoWAW-zlyEAMkfEdBzQ</item>
+    </string-array>
+
+    <string-array name="produk_harga">
+        <item>RP.15000</item>
+        <item>RP.15000</item>
+        <item>RP.15000</item>
+        <item>RP.15000</item>
+    </string-array>
+
+    <string-array name="produk_nama">
+        <item>KHIMAR</item>
+        <item>OUTER</item>
+        <item>MASKER</item>
+        <item>ABAYA</item>
+    </string-array>
+
+    <string-array name="produk_like">
+        <item>25</item>
+        <item>25</item>
+        <item>30</item>
+        <item>25</item>
+    </string-array>
+
 </resources>
