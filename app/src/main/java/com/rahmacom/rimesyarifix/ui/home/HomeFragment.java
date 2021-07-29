@@ -65,7 +65,7 @@ public class HomeFragment extends Fragment {
         PreferenceManager manager = new PreferenceManager(requireContext());
 
         if (!manager.keyExists(Const.KEY_TOKEN) || manager.getString(Const.KEY_TOKEN) == null) {
-            navController.navigate(R.id.loginFragment);
+            navController.navigate(R.id.splashScreenFragment);
         }
 
         binding.fragmentHomeToolbar.inflateMenu(R.menu.menu_main);
@@ -82,7 +82,8 @@ public class HomeFragment extends Fragment {
         String[] gambar = getResources().getStringArray(R.array.produk_gambar);
         String[] nama = getResources().getStringArray(R.array.produk_nama);
         String[] harga = getResources().getStringArray(R.array.produk_harga);
-        String[] like = getResources().getStringArray(R.array.produk_like);
+        int[] like = getResources().getIntArray(R.array.produk_like);
+        int[] preOrderReady = getResources().getIntArray(R.array.produk_preoder_ready);
 
         ArrayList<Produk> list = new ArrayList<>();
 
@@ -92,6 +93,7 @@ public class HomeFragment extends Fragment {
             produk.setNama(nama[i]);
             produk.setHarga(harga[i]);
             produk.setLike(like[i]);
+            produk.setPreOrderReady(preOrderReady[i]);
             list.add(produk);
         }
         return list;

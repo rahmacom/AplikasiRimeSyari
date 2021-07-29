@@ -14,7 +14,7 @@ import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
 
-public class BiodataProfilAdapter extends RecyclerView.Adapter<BiodataProfilAdapter.ViewHolder> {
+public class    BiodataProfilAdapter extends RecyclerView.Adapter<BiodataProfilAdapter.ViewHolder> {
 
     private ItemBiodataProfilBinding binding;
     private ArrayList<Profil> listBiodata = new ArrayList<>();

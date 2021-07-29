@@ -4,7 +4,8 @@ public class Produk {
     private String gambar;
     private String nama;
     private String harga;
-    private String like;
+    private int like;
+    private int preOrderReady;
 
     public String getGambar() {
         return gambar;
@@ -30,11 +31,19 @@ public class Produk {
         this.harga = harga;
     }
 
-    public String getLike() {
+    public int getLike() {
         return like;
     }
 
-    public void setLike(String like) {
+    public void setLike(int like) {
         this.like = like;
+    }
+
+    public int getPreOrderReady() {
+        return preOrderReady;
+    }
+
+    public void setPreOrderReady(int preOrderReady) {
+        this.preOrderReady = preOrderReady;
     }
 }

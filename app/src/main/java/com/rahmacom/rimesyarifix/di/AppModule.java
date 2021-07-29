@@ -30,7 +30,7 @@ public class AppModule {
 
     @Singleton
     @Provides
-    public final RimeSyariAPI provideApiService() {
+    public static RimeSyariAPI provideApiService() {
         final Gson gson = new GsonBuilder()
                 .setDateFormat("yyyy-MM-dd HH:mm:ss")
                 .create();
@@ -45,7 +45,7 @@ public class AppModule {
 
     @Singleton
     @Provides
-    public final AppDb provideDatabaseService(@ApplicationContext Context context) {
+    public static AppDb provideDatabaseService(@ApplicationContext Context context) {
         return Room.databaseBuilder(context, AppDb.class, "rimesyari.db")
                 .fallbackToDestructiveMigration()
                 .build();

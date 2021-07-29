@@ -55,14 +55,13 @@ public class DataProdukAdapter extends RecyclerView.Adapter<DataProdukAdapter.Vi
         }
 
         void bind(Produk produk) {
-
             binding.tvNamaProduk.setText(produk.getNama());
+            binding.tvHargaProduk.setText(produk.getHarga());
+            binding.tvLikeProduk.setText(String.valueOf(produk.getLike()));
+            binding.tvPreorderReadyProduk.setText(String.valueOf(produk.getPreOrderReady()));
             Glide.with(binding.getRoot())
                     .load(produk.getGambar())
                     .into(binding.ivGambarProduk);
-
-            binding.tvHargaProduk.setText(produk.getHarga());
-            binding.tvLikeProduk.setText(produk.getLike());
 
         }
     }

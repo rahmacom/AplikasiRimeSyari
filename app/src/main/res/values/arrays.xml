@@ -50,17 +50,17 @@
     </integer-array>
 
     <string-array name="produk_gambar">
-        <item>https://i.picsum.photos/id/0/5616/3744.jpg?hmac=3GAAioiQziMGEtLbfrdbcoenXoWAW-zlyEAMkfEdBzQ</item>
-        <item>https://i.picsum.photos/id/0/5616/3744.jpg?hmac=3GAAioiQziMGEtLbfrdbcoenXoWAW-zlyEAMkfEdBzQ</item>
-        <item>https://i.picsum.photos/id/0/5616/3744.jpg?hmac=3GAAioiQziMGEtLbfrdbcoenXoWAW-zlyEAMkfEdBzQ</item>
-        <item>https://i.picsum.photos/id/0/5616/3744.jpg?hmac=3GAAioiQziMGEtLbfrdbcoenXoWAW-zlyEAMkfEdBzQ</item>
+        <item>https://picsum.photos/200</item>
+        <item>https://picsum.photos/200</item>
+        <item>https://picsum.photos/200</item>
+        <item>https://picsum.photos/200</item>
     </string-array>
 
     <string-array name="produk_harga">
-        <item>RP.15000</item>
-        <item>RP.15000</item>
-        <item>RP.15000</item>
-        <item>RP.15000</item>
+        <item>Rp. 95.000</item>
+        <item>RP. 150.000</item>
+        <item>RP. 133.000</item>
+        <item>RP. 112.000</item>
     </string-array>
 
     <string-array name="produk_nama">
@@ -70,11 +70,18 @@
         <item>ABAYA</item>
     </string-array>
 
-    <string-array name="produk_like">
-        <item>25</item>
-        <item>25</item>
+    <integer-array name="produk_like">
+        <item>175</item>
+        <item>44</item>
+        <item>99</item>
+        <item>112</item>
+    </integer-array>
+
+    <integer-array name="produk_preoder_ready">
+        <item>20</item>
         <item>30</item>
-        <item>25</item>
-    </string-array>
+        <item>40</item>
+        <item>50</item>
+    </integer-array>
 
 </resources>

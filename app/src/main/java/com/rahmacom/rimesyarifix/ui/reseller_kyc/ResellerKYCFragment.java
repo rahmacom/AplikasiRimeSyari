@@ -1,5 +1,6 @@
 package com.rahmacom.rimesyarifix.ui.reseller_kyc;
 
+import android.content.Context;
 import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.os.Bundle;
@@ -7,6 +8,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.WindowManager;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -65,6 +67,18 @@ public class ResellerKYCFragment extends Fragment {
         Bundle args = new Bundle();
         args.putInt(KYC_ARGS, mode);
         return new ResellerKYCFragment();
+    }
+
+    @Override
+    public void onAttach(@NonNull @NotNull Context context) {
+        super.onAttach(context);
+        requireActivity().getWindow().addFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN);
+    }
+
+    @Override
+    public void onDetach() {
+        super.onDetach();
+        requireActivity().getWindow().clearFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN);
     }
 
     @Override
