@@ -8,7 +8,9 @@ import android.view.ViewGroup;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.navigation.Navigation;
 
+import com.rahmacom.rimesyarifix.R;
 import com.rahmacom.rimesyarifix.databinding.FragmentRegisterBinding;
 
 import org.jetbrains.annotations.NotNull;
@@ -34,6 +36,9 @@ public class RegisterFragment extends Fragment {
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        binding.tvLoginClick.setOnClickListener(v -> {
+            Navigation.findNavController(view).navigate(R.id.action_registerFragment_to_loginFragment);
+        });
 
     }
 }

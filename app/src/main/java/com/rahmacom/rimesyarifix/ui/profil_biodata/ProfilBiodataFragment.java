@@ -1,9 +1,12 @@
 package com.rahmacom.rimesyarifix.ui.profil_biodata;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -43,6 +46,7 @@ public class ProfilBiodataFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
 
         setUpBiodataProfil();
+        showDialog();
     }
 
     private void setUpBiodataProfil() {
@@ -71,6 +75,18 @@ public class ProfilBiodataFragment extends Fragment {
         }
 
         return list;
+    }
+
+    private void showDialog() {
+        AlertDialog.Builder alertDialog = new AlertDialog.Builder(requireContext());
+        alertDialog.setView(getLayoutInflater().inflate(R.layout.dialog_biodata, null));
+        alertDialog.setPositiveButton("simpan", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                Toast.makeText(requireContext(), "data tersimpan", Toast.LENGTH_SHORT).show();
+            }
+        });
+        alertDialog.show();
     }
 
 }
