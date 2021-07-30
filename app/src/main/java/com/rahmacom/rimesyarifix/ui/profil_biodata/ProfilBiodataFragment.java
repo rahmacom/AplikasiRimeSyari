@@ -73,7 +73,6 @@ public class ProfilBiodataFragment extends Fragment {
             profil.setValue(dummy[i]);
             list.add(profil);
         }
-
         return list;
     }
 
@@ -88,5 +87,4 @@ public class ProfilBiodataFragment extends Fragment {
         });
         alertDialog.show();
     }
-
 }
