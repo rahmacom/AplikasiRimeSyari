@@ -19,8 +19,9 @@
             android:insetTop="0dp"
             android:insetRight="0dp"
             android:insetBottom="0dp"
-            app:cornerRadius="50dp"
             android:src="@drawable/ic_menu_camera"
+            app:cornerRadius="50dp"
+            app:iconTint="@color/black"
             app:iconGravity="textStart"
             app:iconPadding="0dp"
             app:iconSize="35dp"
@@ -42,9 +43,9 @@
             app:iconGravity="textStart"
             app:iconPadding="0dp"
             app:iconSize="35dp"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/btn_take_photo"
-            app:layout_constraintTop_toTopOf="@+id/btn_take_photo" />
+            app:layout_constraintStart_toEndOf="@+id/btn_take_photo" />
 
         <androidx.camera.view.PreviewView
             android:id="@+id/view_finder"

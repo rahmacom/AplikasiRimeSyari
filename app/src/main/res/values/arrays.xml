@@ -84,4 +84,28 @@
         <item>50</item>
     </integer-array>
 
+    <string-array name="no_transaksi">
+        <item>001</item>
+        <item>002</item>
+        <item>003</item>
+    </string-array>
+
+    <string-array name="tanggal_transaksi">
+        <item>03-06-2021</item>
+        <item>03-06-2021</item>
+        <item>03-06-2021</item>
+    </string-array>
+
+    <string-array name="jumlah_transaksi">
+        <item>20 pcs</item>
+        <item>20 pcs</item>
+        <item>20 pcs</item>
+    </string-array>
+
+    <string-array name="total_harga">
+        <item>Rp.150000</item>
+        <item>Rp.150000</item>
+        <item>Rp.150000</item>
+    </string-array>
+
 </resources>
