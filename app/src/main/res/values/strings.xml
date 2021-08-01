@@ -5,7 +5,7 @@
     <string name="key_ttg_app">tentang</string>
     <string name="key_logout">logout</string>
     <string name="title_beranda">Beranda</string>
-    <string name="title_status_order">Status Order</string>
+    <string name="title_riwayat_order">Riwayat Order</string>
     <string name="title_riwayat_transaksi">Riwayat Transaksi</string>
     <string name="title_profil">Akun Saya</string>
     <string name="title_settings">Pengaturan</string>

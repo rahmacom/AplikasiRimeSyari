@@ -10,11 +10,8 @@
         <item
             android:id="@+id/nav_status_order"
             android:icon="@drawable/icon_list_add"
-            android:title="@string/title_status_order" />
-        <item
-            android:id="@+id/nav_riwayat_transaksi"
-            android:icon="@drawable/icon_list"
-            android:title="@string/title_riwayat_transaksi" />
+            android:title="@string/title_riwayat_order" />
+
         <item
             android:id="@+id/nav_akun_saya"
             android:icon="@drawable/icon_person"

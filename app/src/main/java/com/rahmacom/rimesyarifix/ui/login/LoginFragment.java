@@ -1,6 +1,7 @@
 package com.rahmacom.rimesyarifix.ui.login;
 
 import android.os.Bundle;
+import android.renderscript.ScriptGroup;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -46,6 +47,10 @@ public class LoginFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+
+        binding.tvLoginForget.setOnClickListener(v -> {
+
+        });
 
         viewModel = new ViewModelProvider(requireActivity()).get(LoginViewModel.class);
 
