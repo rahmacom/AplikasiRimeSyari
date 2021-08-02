@@ -10,12 +10,12 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
-import com.rahmacom.rimesyarifix.databinding.FragmentOrderStatusBinding;
+import com.rahmacom.rimesyarifix.databinding.FragmentOrderDetailBinding;
 
 public class OrderStatusFragment extends Fragment {
 
     private OrderStatusViewModel mViewModel;
-    private FragmentOrderStatusBinding binding;
+    private FragmentOrderDetailBinding binding;
 
     public static OrderStatusFragment newInstance() {
         return new OrderStatusFragment();
@@ -27,7 +27,7 @@ public class OrderStatusFragment extends Fragment {
             ViewGroup container,
             Bundle savedInstanceState
     ) {
-        binding = FragmentOrderStatusBinding.inflate(getLayoutInflater());
+        binding = FragmentOrderDetailBinding.inflate(getLayoutInflater());
         return binding.getRoot();
     }
 

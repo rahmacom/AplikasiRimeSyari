@@ -18,7 +18,7 @@
         <item name="android:windowLightStatusBar" tools:targetApi="m">true</item>
 
         <!-- Customize your theme here. -->
-        <item name="android:windowBackground">@color/gray_50</item>
+        <item name="android:windowBackground">@color/white</item>
         <item name="android:fontFamily">@font/rubik</item>
 
         <item name="materialAlertDialogTheme">@style/ThemeOverlay.RimeSyariFix.Dialog</item>

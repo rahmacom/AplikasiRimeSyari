@@ -1,17 +1,12 @@
 package com.rahmacom.rimesyarifix.ui.transaksi_riwayat;
 
 import android.view.LayoutInflater;
-import android.view.View;
 import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.bumptech.glide.Glide;
-import com.rahmacom.rimesyarifix.databinding.ItemDataProfilBinding;
 import com.rahmacom.rimesyarifix.databinding.ItemTransaksiRiwayatBinding;
-import com.rahmacom.rimesyarifix.ui.profil.DataProfilAdapter;
-import com.rahmacom.rimesyarifix.ui.profil.Profil;
 
 import java.util.ArrayList;
 

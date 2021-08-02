@@ -1,8 +1,8 @@
-package com.rahmacom.rimesyarifix.data.network.model;
+package com.rahmacom.rimesyarifix.data.network.response;
 
 import com.google.gson.annotations.SerializedName;
 
-public class User{
+public class ResponseUser {
 
 	@SerializedName("updated_at")
 	private String updatedAt;

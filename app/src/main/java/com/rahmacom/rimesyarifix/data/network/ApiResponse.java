@@ -5,16 +5,17 @@ import java.util.Objects;
 
 import retrofit2.Response;
 
+@SuppressWarnings("rawtypes")
 public class ApiResponse<T> {
 
-    public ApiResponse<T> create(Throwable error) {
+    public static ApiResponse create(Throwable error) {
         return new ApiErrorResponse<>(Objects.equals(error.getMessage(), "") ? error.getMessage()
                 : "Unknown error");
     }
 
-    public ApiResponse<T> create(Response<T> response) {
+    public static ApiResponse create(Response response) {
         if (response.isSuccessful()) {
-            T body = response.body();
+            Object body = response.body();
             if (body == null || response.code() == 204) {
                 return new ApiEmptyResponse<>();
             } else {
@@ -31,7 +32,6 @@ public class ApiResponse<T> {
             return new ApiErrorResponse<>(message);
         }
     }
-
 
     public static class ApiErrorResponse<T> extends ApiResponse<T> {
 

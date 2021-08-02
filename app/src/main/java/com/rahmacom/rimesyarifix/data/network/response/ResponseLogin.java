@@ -1,4 +1,4 @@
-package com.rahmacom.rimesyarifix.data.network.model;
+package com.rahmacom.rimesyarifix.data.network.response;
 
 import com.google.gson.annotations.SerializedName;
 
@@ -12,6 +12,18 @@ public class ResponseLogin {
 
     @SerializedName("expires_in")
     private int expiresIn;
+
+    public void setAccessToken(String accessToken) {
+        this.accessToken = accessToken;
+    }
+
+    public void setTokenType(String tokenType) {
+        this.tokenType = tokenType;
+    }
+
+    public void setExpiresIn(int expiresIn) {
+        this.expiresIn = expiresIn;
+    }
 
     public String getAccessToken() {
         return accessToken;

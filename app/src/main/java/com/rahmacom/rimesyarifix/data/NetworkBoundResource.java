@@ -95,7 +95,6 @@ public abstract class NetworkBoundResource<ResultType, RequestType> {
     @MainThread
     protected abstract boolean shouldFetch(@Nullable ResultType data);
 
-    @NonNull
     @MainThread
     protected abstract LiveData<ResultType> loadFromDb();
 

@@ -1,4 +1,4 @@
-package com.rahmacom.rimesyarifix.data.network.model;
+package com.rahmacom.rimesyarifix.data.network.response;
 
 import com.google.gson.annotations.SerializedName;
 
@@ -28,68 +28,43 @@ public class ResponseProduk{
 	@SerializedName("reseller_minimum")
 	private int resellerMinimum;
 
-	public void setHargaCustomer(int hargaCustomer){
-		this.hargaCustomer = hargaCustomer;
-	}
+	@SerializedName("suka")
+	private int suka;
 
 	public int getHargaCustomer(){
 		return hargaCustomer;
-	}
-
-	public void setNama(String nama){
-		this.nama = nama;
 	}
 
 	public String getNama(){
 		return nama;
 	}
 
-	public void setCategoryId(int categoryId){
-		this.categoryId = categoryId;
-	}
-
 	public int getCategoryId(){
 		return categoryId;
-	}
-
-	public void setId(int id){
-		this.id = id;
 	}
 
 	public int getId(){
 		return id;
 	}
 
-	public void setDeskripsi(String deskripsi){
-		this.deskripsi = deskripsi;
-	}
-
 	public String getDeskripsi(){
 		return deskripsi;
-	}
-
-	public void setHargaReseller(int hargaReseller){
-		this.hargaReseller = hargaReseller;
 	}
 
 	public int getHargaReseller(){
 		return hargaReseller;
 	}
 
-	public void setTotalStok(String totalStok){
-		this.totalStok = totalStok;
-	}
-
 	public String getTotalStok(){
 		return totalStok;
 	}
 
-	public void setResellerMinimum(int resellerMinimum){
-		this.resellerMinimum = resellerMinimum;
-	}
-
 	public int getResellerMinimum(){
 		return resellerMinimum;
+	}
+
+	public int getSuka(){
+		return suka;
 	}
 
 	@Override
@@ -104,6 +79,7 @@ public class ResponseProduk{
 			",harga_reseller = '" + hargaReseller + '\'' + 
 			",total_stok = '" + totalStok + '\'' + 
 			",reseller_minimum = '" + resellerMinimum + '\'' + 
+			",suka = '" + suka + '\'' + 
 			"}";
 		}
 }

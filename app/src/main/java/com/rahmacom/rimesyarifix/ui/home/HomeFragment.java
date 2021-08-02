@@ -1,30 +1,25 @@
 package com.rahmacom.rimesyarifix.ui.home;
 
-import android.location.SettingInjectorService;
 import android.os.Bundle;
-import android.provider.ContactsContract;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.GridLayout;
-import android.widget.LinearLayout;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
-import androidx.navigation.ui.AppBarConfiguration;
 import androidx.recyclerview.widget.GridLayoutManager;
-import androidx.recyclerview.widget.LinearLayoutManager;
 
 import com.rahmacom.rimesyarifix.R;
+import com.rahmacom.rimesyarifix.data.network.response.ResponseProduk;
 import com.rahmacom.rimesyarifix.databinding.FragmentHomeBinding;
 import com.rahmacom.rimesyarifix.manager.PreferenceManager;
 import com.rahmacom.rimesyarifix.utils.Const;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 import dagger.hilt.android.AndroidEntryPoint;
@@ -38,7 +33,7 @@ public class HomeFragment extends Fragment {
     public static final String ARG_USER = "arg_user_has_login";
     public static final String ARG_GUEST = "arg_user_not_login";
 
-    private static final String[] TITLES = new String[]{
+    private static final String[] TITLES = new String[] {
             "ABAYA",
             "OUTER",
             "KHIMAR",
@@ -58,6 +53,7 @@ public class HomeFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+        HomeViewModel viewModel = new ViewModelProvider(requireActivity()).get(HomeViewModel.class);
 
         Log.d("HomeFragment", "This is home fragment");
 
@@ -65,11 +61,28 @@ public class HomeFragment extends Fragment {
         PreferenceManager manager = new PreferenceManager(requireContext());
 
         if (!manager.keyExists(Const.KEY_TOKEN) || manager.getString(Const.KEY_TOKEN) == null) {
-            navController.navigate(R.id.splashScreenFragment);
+            navController.navigate(HomeFragmentDirections.globalToLoginFragment());
         }
 
+        viewModel.setToken(manager.getString(Const.KEY_TOKEN));
+        viewModel.getAllProducts.observe(getViewLifecycleOwner(), produk -> {
+            if (produk != null) {
+                switch (produk.getStatus()) {
+                    case SUCCESS:
+//                        Log.d("asdf", produk.getData().toString());
+                        ArrayList<ResponseProduk> produks = new ArrayList<>();
+                        produks.addAll(produk.getData());
+                        setUpDataProduk2(produks);
+                    case ERROR:
+                    case LOADING:
+                    case EMPTY:
+                    case INVALID:
+                }
+            }
+        });
+
         binding.fragmentHomeToolbar.inflateMenu(R.menu.menu_main);
-        setUpDataProduk();
+        setUpDataProduk(getListProduk());
     }
 
     @Override
@@ -87,7 +100,7 @@ public class HomeFragment extends Fragment {
 
         ArrayList<Produk> list = new ArrayList<>();
 
-        for (int i=0; i< gambar.length; i++) {
+        for (int i = 0; i < gambar.length; i++) {
             Produk produk = new Produk();
             produk.setGambar(gambar[i]);
             produk.setNama(nama[i]);
@@ -99,11 +112,19 @@ public class HomeFragment extends Fragment {
         return list;
     }
 
-    private void setUpDataProduk() {
-        ArrayList<Produk> listProduk = getListProduk();
+    private void setUpDataProduk2(ArrayList<ResponseProduk> list) {
         DataProdukAdapter adapter = new DataProdukAdapter();
-        adapter.setLists(listProduk);
-        GridLayoutManager gridLayoutManager = new GridLayoutManager(getContext(),2);
+        adapter.setLists2(list);
+        GridLayoutManager gridLayoutManager = new GridLayoutManager(getContext(), 2);
+
+        binding.rvFragmentHome.setAdapter(adapter);
+        binding.rvFragmentHome.setLayoutManager(gridLayoutManager);
+    }
+
+    private void setUpDataProduk(ArrayList<Produk> list) {
+        DataProdukAdapter adapter = new DataProdukAdapter();
+        adapter.setLists(list);
+        GridLayoutManager gridLayoutManager = new GridLayoutManager(getContext(), 2);
 
         binding.rvFragmentHome.setAdapter(adapter);
         binding.rvFragmentHome.setLayoutManager(gridLayoutManager);

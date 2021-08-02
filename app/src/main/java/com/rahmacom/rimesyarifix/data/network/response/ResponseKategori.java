@@ -1,6 +1,6 @@
-package com.rahmacom.rimesyarifix.data.network.model;
+package com.rahmacom.rimesyarifix.data.network.response;
 
-public class ResponseKategori{
+public class ResponseKategori {
 	private String nama;
 	private int id;
 

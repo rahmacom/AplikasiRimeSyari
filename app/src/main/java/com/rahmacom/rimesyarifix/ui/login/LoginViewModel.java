@@ -1,41 +1,43 @@
 package com.rahmacom.rimesyarifix.ui.login;
 
-import android.util.Log;
+import android.view.View;
 
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
+import androidx.lifecycle.SavedStateHandle;
+import androidx.lifecycle.Transformations;
 import androidx.lifecycle.ViewModel;
 
-import com.rahmacom.rimesyarifix.data.network.api.RimeSyariAPI;
-import com.rahmacom.rimesyarifix.data.network.model.ResponseLogin;
-import com.rahmacom.rimesyarifix.di.ApiClient;
+import com.rahmacom.rimesyarifix.data.MainRepository;
+import com.rahmacom.rimesyarifix.data.network.response.ResponseLogin;
+import com.rahmacom.rimesyarifix.data.vo.Resource;
 
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
+import javax.inject.Inject;
 
+import dagger.hilt.android.lifecycle.HiltViewModel;
+
+@HiltViewModel
 public class LoginViewModel extends ViewModel {
-    public MutableLiveData<ResponseLogin> login = new MutableLiveData<>();
 
-    public LiveData<ResponseLogin> setLogin(String email, String password) {
-        RimeSyariAPI service = ApiClient.getApiClient().create(RimeSyariAPI.class);
-        Call<ResponseLogin> api = service.setLogin(email, password);
-        api.enqueue(new Callback<ResponseLogin>() {
-            @Override
-            public void onResponse(Call<ResponseLogin> call, Response<ResponseLogin> response) {
-                Log.d("login", String.valueOf(response.body()));
-                if (response.isSuccessful()) {
-                    login.postValue(response.body());
-                }
-            }
+    private MainRepository mainRepository;
+    private SavedStateHandle savedStateHandle;
 
-            @Override
-            public void onFailure(Call<ResponseLogin> call, Throwable t) {
-                login.postValue(null);
-                Log.e("LoginViewModel", t.getMessage(), t);
-            }
-        });
+    private MutableLiveData<Login> credentials = new MutableLiveData<>();
 
-        return login;
+    public MutableLiveData<String> username = new MutableLiveData<>();
+    public MutableLiveData<String> password = new MutableLiveData<>();
+
+    @Inject
+    public LoginViewModel(MainRepository mainRepository, SavedStateHandle savedStateHandle) {
+        this.mainRepository = mainRepository;
+        this.savedStateHandle = savedStateHandle;
+    }
+
+    public final LiveData<Resource<ResponseLogin>> login = Transformations.switchMap(credentials,
+            (user) -> mainRepository.login(user.getUsername(), user.getPassword()));
+
+    public void setLogin(String email, String password) {
+        Login login = new Login(email, password);
+        credentials.setValue(login);
     }
 }

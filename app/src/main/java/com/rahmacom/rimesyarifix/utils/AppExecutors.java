@@ -4,10 +4,12 @@ import android.os.Handler;
 import android.os.Looper;
 
 import androidx.annotation.MainThread;
+import androidx.annotation.NonNull;
 
 import java.util.concurrent.Executor;
 import java.util.concurrent.Executors;
 
+import javax.inject.Inject;
 import javax.inject.Singleton;
 
 @Singleton
@@ -24,6 +26,7 @@ public class AppExecutors {
         this.mainThread = mainThread;
     }
 
+    @Inject
     public AppExecutors() {
         this(
                 Executors.newSingleThreadExecutor(),
@@ -32,19 +35,19 @@ public class AppExecutors {
         );
     }
 
-    public Executor diskIO() {
+    public final Executor diskIO() {
         return diskIO;
     }
 
-    public Executor networkIO() {
+    public final Executor networkIO() {
         return networkIO;
     }
 
-    public Executor mainThread() {
+    public final Executor mainThread() {
         return mainThread;
     }
 
-    private static class MainThreadExecutor implements Executor {
+    private static final class MainThreadExecutor implements Executor {
         private final Handler mainThreadHandler = new Handler(Looper.getMainLooper());
 
         @Override

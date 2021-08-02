@@ -4,6 +4,8 @@ import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.SharedPreferences;
 
+import dagger.hilt.android.qualifiers.ApplicationContext;
+
 public class PreferenceManager {
 
     private static final String PREFERENCE_NAME = "preference_manager";

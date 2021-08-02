@@ -6,13 +6,12 @@ import android.view.ViewGroup;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
-import androidx.navigation.NavDirections;
 import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.rahmacom.rimesyarifix.R;
-import com.rahmacom.rimesyarifix.databinding.ItemDataProfilBinding;
+import com.rahmacom.rimesyarifix.databinding.ItemProfilBinding;
 import com.rahmacom.rimesyarifix.manager.PreferenceManager;
 import com.rahmacom.rimesyarifix.utils.Const;
 
@@ -20,7 +19,7 @@ import java.util.ArrayList;
 
 public class DataProfilAdapter extends RecyclerView.Adapter<DataProfilAdapter.ViewHolder> {
 
-    private ItemDataProfilBinding binding;
+    private ItemProfilBinding binding;
     private ArrayList<Profil> listData = new ArrayList<>();
     private OnItemClickCallback onItemClickCallback = null;
 
@@ -37,7 +36,7 @@ public class DataProfilAdapter extends RecyclerView.Adapter<DataProfilAdapter.Vi
     @NonNull
     @Override
     public DataProfilAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        binding = ItemDataProfilBinding.inflate(
+        binding = ItemProfilBinding.inflate(
                 LayoutInflater.from(parent.getContext()),
                 parent,
                 false
@@ -74,9 +73,9 @@ public class DataProfilAdapter extends RecyclerView.Adapter<DataProfilAdapter.Vi
     }
 
     static class ViewHolder extends RecyclerView.ViewHolder {
-        private ItemDataProfilBinding binding;
+        private ItemProfilBinding binding;
 
-        ViewHolder(@NonNull ItemDataProfilBinding binding) {
+        ViewHolder(@NonNull ItemProfilBinding binding) {
             super(binding.getRoot());
             this.binding = binding;
         }
