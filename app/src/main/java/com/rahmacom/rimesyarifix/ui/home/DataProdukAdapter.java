@@ -6,6 +6,7 @@ import android.view.LayoutInflater;
 import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
+import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
@@ -48,6 +49,12 @@ public class DataProdukAdapter extends RecyclerView.Adapter<DataProdukAdapter.Vi
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         holder.bind(listData.get(position));
+
+        holder.itemView.setOnClickListener(v -> {
+            HomeFragmentDirections.ActionHomeFragmentToProdukFragment action=HomeFragmentDirections.actionHomeFragmentToProdukFragment();
+            action.setProductId(listData.get(position).getId());
+            Navigation.findNavController(v).navigate(action);
+        });
     }
 
     @Override

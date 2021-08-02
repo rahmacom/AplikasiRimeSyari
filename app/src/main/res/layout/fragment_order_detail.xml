@@ -78,7 +78,7 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
-        android:text="TextView"
+        android:text="Alamat Tujuan"
         android:textSize="12sp"
         app:layout_constraintEnd_toStartOf="@+id/vge_status_pengiriman"
         app:layout_constraintStart_toStartOf="@+id/tv_status_pengiriman_ket"

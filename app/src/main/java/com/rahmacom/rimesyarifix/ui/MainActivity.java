@@ -41,18 +41,16 @@ public class MainActivity extends AppCompatActivity {
         mAppBarConfig = new AppBarConfiguration.Builder(
                 R.id.nav_home,
                 R.id.nav_status_order,
-                R.id.nav_riwayat_transaksi,
                 R.id.nav_akun_saya
         ).build();
 
         navController.addOnDestinationChangedListener((controller, destination, arguments) -> {
             if (destination.getId() == R.id.nav_akun_saya
                     || destination.getId() == R.id.nav_home
-                    || destination.getId() == R.id.nav_status_order
-                    || destination.getId() == R.id.nav_riwayat_transaksi) {
+                    || destination.getId() == R.id.nav_status_order) {
                 binding.navView.setVisibility(View.VISIBLE);
             } else {
-                binding.navView.setVisibility(View.INVISIBLE);
+                binding.navView.setVisibility(View.GONE);
             }
         });
 

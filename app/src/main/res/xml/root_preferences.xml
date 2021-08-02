@@ -15,9 +15,4 @@
         app:iconSpaceReserved="false"
         app:title="Tentang Aplikasi Rime Syari" />
 
-    <Preference
-        app:key="@string/key_logout"
-        app:iconSpaceReserved="false"
-        app:title="Logout" />
-
 </PreferenceScreen>

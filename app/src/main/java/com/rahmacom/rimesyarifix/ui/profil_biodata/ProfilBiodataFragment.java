@@ -46,12 +46,12 @@ public class ProfilBiodataFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
 
         setUpBiodataProfil();
-        showDialog();
+        //showDialog();
     }
 
     private void setUpBiodataProfil() {
         ArrayList<Profil> listBiodata = getListBiodata();
-        BiodataProfilAdapter adapter = new BiodataProfilAdapter();
+        BiodataProfilAdapter adapter = new BiodataProfilAdapter(this);
         adapter.setLists(listBiodata);
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext());
 
@@ -74,17 +74,5 @@ public class ProfilBiodataFragment extends Fragment {
             list.add(profil);
         }
         return list;
-    }
-
-    private void showDialog() {
-        AlertDialog.Builder alertDialog = new AlertDialog.Builder(requireContext());
-        alertDialog.setView(getLayoutInflater().inflate(R.layout.dialog_biodata, null));
-        alertDialog.setPositiveButton("simpan", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-                Toast.makeText(requireContext(), "data tersimpan", Toast.LENGTH_SHORT).show();
-            }
-        });
-        alertDialog.show();
     }
 }
