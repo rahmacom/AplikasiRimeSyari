@@ -14,7 +14,7 @@ import com.rahmacom.rimesyarifix.databinding.FragmentProdukBinding;
 public class ProdukFragment extends Fragment {
 
     private FragmentProdukBinding binding;
-    private ProdukViewModel mViewModel;
+    private ProdukViewModel viewModel;
 
     public static ProdukFragment newInstance() {
         return new ProdukFragment();

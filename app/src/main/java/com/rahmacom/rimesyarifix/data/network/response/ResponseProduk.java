@@ -2,84 +2,92 @@ package com.rahmacom.rimesyarifix.data.network.response;
 
 import com.google.gson.annotations.SerializedName;
 
-public class ResponseProduk{
+import java.util.List;
 
-	@SerializedName("harga_customer")
-	private int hargaCustomer;
+public class ResponseProduk {
 
-	@SerializedName("nama")
-	private String nama;
+    @SerializedName("harga_customer")
+    private int hargaCustomer;
 
-	@SerializedName("category_id")
-	private int categoryId;
+    @SerializedName("nama")
+    private String nama;
 
-	@SerializedName("id")
-	private int id;
+    @SerializedName("id")
+    private int id;
 
-	@SerializedName("deskripsi")
-	private String deskripsi;
+    @SerializedName("deskripsi")
+    private String deskripsi;
 
-	@SerializedName("harga_reseller")
-	private int hargaReseller;
+    @SerializedName("harga_reseller")
+    private int hargaReseller;
 
-	@SerializedName("total_stok")
-	private String totalStok;
+    @SerializedName("category")
+    private ResponseKategori kategori;
 
-	@SerializedName("reseller_minimum")
-	private int resellerMinimum;
+    @SerializedName("reseller_minimum")
+    private int resellerMinimum;
 
-	@SerializedName("suka")
-	private int suka;
+    @SerializedName("suka")
+    private int suka;
 
-	public int getHargaCustomer(){
-		return hargaCustomer;
-	}
+    @SerializedName("total_stok")
+    private int totalStok;
 
-	public String getNama(){
-		return nama;
-	}
+    @SerializedName("files")
+    private List<ResponseFile> files;
 
-	public int getCategoryId(){
-		return categoryId;
-	}
+    public int getTotalStok() {
+        return totalStok;
+    }
 
-	public int getId(){
-		return id;
-	}
+    public List<ResponseFile> getFiles() {
+        return files;
+    }
 
-	public String getDeskripsi(){
-		return deskripsi;
-	}
+    public int getHargaCustomer() {
+        return hargaCustomer;
+    }
 
-	public int getHargaReseller(){
-		return hargaReseller;
-	}
+    public String getNama() {
+        return nama;
+    }
 
-	public String getTotalStok(){
-		return totalStok;
-	}
+    public int getId() {
+        return id;
+    }
 
-	public int getResellerMinimum(){
-		return resellerMinimum;
-	}
+    public String getDeskripsi() {
+        return deskripsi;
+    }
 
-	public int getSuka(){
-		return suka;
-	}
+    public int getHargaReseller() {
+        return hargaReseller;
+    }
 
-	@Override
- 	public String toString(){
-		return 
-			"ResponseProduk{" + 
-			"harga_customer = '" + hargaCustomer + '\'' + 
-			",nama = '" + nama + '\'' + 
-			",category_id = '" + categoryId + '\'' + 
-			",id = '" + id + '\'' + 
-			",deskripsi = '" + deskripsi + '\'' + 
-			",harga_reseller = '" + hargaReseller + '\'' + 
-			",total_stok = '" + totalStok + '\'' + 
-			",reseller_minimum = '" + resellerMinimum + '\'' + 
-			",suka = '" + suka + '\'' + 
-			"}";
-		}
+    public ResponseKategori getKategori() {
+        return kategori;
+    }
+
+    public int getResellerMinimum() {
+        return resellerMinimum;
+    }
+
+    public int getSuka() {
+        return suka;
+    }
+
+    @Override
+    public String toString() {
+        return
+                "ResponseProduk{" +
+                        "harga_customer = '" + hargaCustomer + '\'' +
+                        ",nama = '" + nama + '\'' +
+                        ",id = '" + id + '\'' +
+                        ",deskripsi = '" + deskripsi + '\'' +
+                        ",harga_reseller = '" + hargaReseller + '\'' +
+                        ",category = '" + kategori + '\'' +
+                        ",reseller_minimum = '" + resellerMinimum + '\'' +
+                        ",suka = '" + suka + '\'' +
+                        "}";
+    }
 }

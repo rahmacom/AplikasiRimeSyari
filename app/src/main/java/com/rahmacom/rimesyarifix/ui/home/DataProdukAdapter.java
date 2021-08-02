@@ -1,5 +1,6 @@
 package com.rahmacom.rimesyarifix.ui.home;
 
+import android.content.Context;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
@@ -10,24 +11,26 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.bumptech.glide.Glide;
 import com.rahmacom.rimesyarifix.data.network.response.ResponseProduk;
 import com.rahmacom.rimesyarifix.databinding.ItemHomeProdukBinding;
+import com.rahmacom.rimesyarifix.manager.PreferenceManager;
+import com.rahmacom.rimesyarifix.utils.Const;
 
+import java.text.DecimalFormat;
+import java.text.NumberFormat;
 import java.util.ArrayList;
 
 public class DataProdukAdapter extends RecyclerView.Adapter<DataProdukAdapter.ViewHolder> {
 
     private ItemHomeProdukBinding binding;
-    private ArrayList<Produk> listData = new ArrayList<>();
-    private ArrayList<ResponseProduk> listData2 = new ArrayList<>();
+    private ArrayList<ResponseProduk> listData = new ArrayList<>();
+    private Context context;
 
-    public void setLists(ArrayList<Produk> list) {
-        listData.clear();
-        listData.addAll(list);
-        notifyDataSetChanged();
+    public DataProdukAdapter(Context context) {
+        this.context = context;
     }
 
-    public void setLists2(ArrayList<ResponseProduk> list) {
-        listData2.clear();
-        listData2.addAll(list);
+    public void setLists(ArrayList<ResponseProduk> list) {
+        listData.clear();
+        listData.addAll(list);
         notifyDataSetChanged();
     }
 
@@ -44,46 +47,45 @@ public class DataProdukAdapter extends RecyclerView.Adapter<DataProdukAdapter.Vi
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-//        holder.bind(listData.get(position));
-        Log.d("listData2", listData2.toString());
-        holder.bind2(listData2.get(position));
+        holder.bind(listData.get(position));
     }
 
     @Override
 
     public int getItemCount() {
-//        return listData.size();
-        return listData2.size();
+        return listData.size();
     }
 
     static class ViewHolder extends RecyclerView.ViewHolder {
         private ItemHomeProdukBinding binding;
+        private PreferenceManager manager = new PreferenceManager(itemView.getContext());
 
         ViewHolder(ItemHomeProdukBinding binding) {
             super(binding.getRoot());
             this.binding = binding;
         }
 
-        void bind(Produk produk) {
-            binding.tvNamaProduk.setText(produk.getNama());
-            binding.tvHargaProduk.setText(produk.getHarga());
-            binding.tvLikeProduk.setText(String.valueOf(produk.getLike()));
-            binding.tvPreorderReadyProduk.setText(String.valueOf(produk.getPreOrderReady()));
-            Glide.with(binding.getRoot())
-                    .load(produk.getGambar())
-                    .into(binding.ivGambarProduk);
+        void bind(ResponseProduk produk) {
 
-        }
+            if (manager.keyExists(Const.KEY_ROLE)) {
+                manager.getString(Const.KEY_ROLE);
+            }
 
-        void bind2(ResponseProduk produk) {
             binding.tvNamaProduk.setText(produk.getNama());
             binding.tvHargaProduk.setText(String.valueOf(produk.getHargaCustomer()));
             binding.tvLikeProduk.setText(String.valueOf(produk.getSuka()));
-            binding.tvPreorderReadyProduk.setText(String.valueOf(produk.getTotalStok()));
-//            Glide.with(binding.getRoot())
-//                    .load(produk.getGambar())
-//                    .into(binding.ivGambarProduk);
 
+            if (produk.getTotalStok() > 0) {
+                binding.tvPreorderReadyProduk.setText("Stok tersedia!");
+            } else {
+                binding.tvPreorderReadyProduk.setText("Stok habis!");
+            }
+
+            if (!produk.getFiles().isEmpty()) {
+                Glide.with(binding.getRoot())
+                        .load(produk.getFiles().get(0).getUrl())
+                        .into(binding.ivGambarProduk);
+            }
         }
     }
 }

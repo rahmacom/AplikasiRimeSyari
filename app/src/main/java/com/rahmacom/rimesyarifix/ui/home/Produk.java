@@ -1,18 +1,36 @@
 package com.rahmacom.rimesyarifix.ui.home;
 
-public class Produk {
-    private String gambar;
-    private String nama;
-    private String harga;
-    private int like;
-    private int preOrderReady;
+import com.google.gson.annotations.SerializedName;
 
-    public String getGambar() {
-        return gambar;
+public class Produk {
+    private int id;
+    private String nama;
+    private String deskripsi;
+    private String category;
+    private int hargaCustomer;
+    private int hargaReseller;
+    private int totalStok;
+    private int resellerMinimum;
+    private int suka;
+
+    public Produk(int id, String nama, String deskripsi, String category, int hargaCustomer, int hargaReseller, int totalStok, int resellerMinimum, int suka) {
+        this.id = id;
+        this.nama = nama;
+        this.deskripsi = deskripsi;
+        this.category = category;
+        this.hargaCustomer = hargaCustomer;
+        this.hargaReseller = hargaReseller;
+        this.totalStok = totalStok;
+        this.resellerMinimum = resellerMinimum;
+        this.suka = suka;
     }
 
-    public void setGambar(String gambar) {
-        this.gambar = gambar;
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 
     public String getNama() {
@@ -23,27 +41,59 @@ public class Produk {
         this.nama = nama;
     }
 
-    public String getHarga() {
-        return harga;
+    public String getDeskripsi() {
+        return deskripsi;
     }
 
-    public void setHarga(String harga) {
-        this.harga = harga;
+    public void setDeskripsi(String deskripsi) {
+        this.deskripsi = deskripsi;
     }
 
-    public int getLike() {
-        return like;
+    public String getCategory() {
+        return category;
     }
 
-    public void setLike(int like) {
-        this.like = like;
+    public void setCategory(String category) {
+        this.category = category;
     }
 
-    public int getPreOrderReady() {
-        return preOrderReady;
+    public int getHargaCustomer() {
+        return hargaCustomer;
     }
 
-    public void setPreOrderReady(int preOrderReady) {
-        this.preOrderReady = preOrderReady;
+    public void setHargaCustomer(int hargaCustomer) {
+        this.hargaCustomer = hargaCustomer;
+    }
+
+    public int getHargaReseller() {
+        return hargaReseller;
+    }
+
+    public void setHargaReseller(int hargaReseller) {
+        this.hargaReseller = hargaReseller;
+    }
+
+    public int getTotalStok() {
+        return totalStok;
+    }
+
+    public void setTotalStok(int totalStok) {
+        this.totalStok = totalStok;
+    }
+
+    public int getResellerMinimum() {
+        return resellerMinimum;
+    }
+
+    public void setResellerMinimum(int resellerMinimum) {
+        this.resellerMinimum = resellerMinimum;
+    }
+
+    public int getSuka() {
+        return suka;
+    }
+
+    public void setSuka(int suka) {
+        this.suka = suka;
     }
 }

@@ -103,7 +103,12 @@
         android:id="@+id/produkFragment"
         android:name="com.rahmacom.rimesyarifix.ui.produk.ProdukFragment"
         android:label="fragment_produk"
-        tools:layout="@layout/fragment_produk" />
+        tools:layout="@layout/fragment_produk" >
+        <argument
+            android:name="productId"
+            app:argType="integer"
+            android:defaultValue="-1" />
+    </fragment>
 
     <fragment
         android:id="@+id/registerFragment"

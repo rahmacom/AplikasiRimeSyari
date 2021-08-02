@@ -72,7 +72,7 @@ public class HomeFragment extends Fragment {
 //                        Log.d("asdf", produk.getData().toString());
                         ArrayList<ResponseProduk> produks = new ArrayList<>();
                         produks.addAll(produk.getData());
-                        setUpDataProduk2(produks);
+                        setUpDataProduk(produks);
                     case ERROR:
                     case LOADING:
                     case EMPTY:
@@ -82,47 +82,40 @@ public class HomeFragment extends Fragment {
         });
 
         binding.fragmentHomeToolbar.inflateMenu(R.menu.menu_main);
-        setUpDataProduk(getListProduk());
     }
 
-    @Override
-    public void onDestroyView() {
-        super.onDestroyView();
-        binding = null;
-    }
+//    private ArrayList<Produk> getListProduk() {
+//        String[] gambar = getResources().getStringArray(R.array.produk_gambar);
+//        String[] nama = getResources().getStringArray(R.array.produk_nama);
+//        String[] harga = getResources().getStringArray(R.array.produk_harga);
+//        int[] like = getResources().getIntArray(R.array.produk_like);
+//        int[] preOrderReady = getResources().getIntArray(R.array.produk_preoder_ready);
+//
+//        ArrayList<Produk> list = new ArrayList<>();
+//
+//        for (int i = 0; i < gambar.length; i++) {
+//            Produk produk = new Produk();
+//            produk.setGambar(gambar[i]);
+//            produk.setNama(nama[i]);
+//            produk.setHarga(harga[i]);
+//            produk.setLike(like[i]);
+//            produk.setPreOrderReady(preOrderReady[i]);
+//            list.add(produk);
+//        }
+//        return list;
+//    }
+//
+//    private void setUpDataProduk2(ArrayList<ResponseProduk> list) {
+//        DataProdukAdapter adapter = new DataProdukAdapter();
+//        adapter.setLists2(list);
+//        GridLayoutManager gridLayoutManager = new GridLayoutManager(getContext(), 2);
+//
+//        binding.rvFragmentHome.setAdapter(adapter);
+//        binding.rvFragmentHome.setLayoutManager(gridLayoutManager);
+//    }
 
-    private ArrayList<Produk> getListProduk() {
-        String[] gambar = getResources().getStringArray(R.array.produk_gambar);
-        String[] nama = getResources().getStringArray(R.array.produk_nama);
-        String[] harga = getResources().getStringArray(R.array.produk_harga);
-        int[] like = getResources().getIntArray(R.array.produk_like);
-        int[] preOrderReady = getResources().getIntArray(R.array.produk_preoder_ready);
-
-        ArrayList<Produk> list = new ArrayList<>();
-
-        for (int i = 0; i < gambar.length; i++) {
-            Produk produk = new Produk();
-            produk.setGambar(gambar[i]);
-            produk.setNama(nama[i]);
-            produk.setHarga(harga[i]);
-            produk.setLike(like[i]);
-            produk.setPreOrderReady(preOrderReady[i]);
-            list.add(produk);
-        }
-        return list;
-    }
-
-    private void setUpDataProduk2(ArrayList<ResponseProduk> list) {
-        DataProdukAdapter adapter = new DataProdukAdapter();
-        adapter.setLists2(list);
-        GridLayoutManager gridLayoutManager = new GridLayoutManager(getContext(), 2);
-
-        binding.rvFragmentHome.setAdapter(adapter);
-        binding.rvFragmentHome.setLayoutManager(gridLayoutManager);
-    }
-
-    private void setUpDataProduk(ArrayList<Produk> list) {
-        DataProdukAdapter adapter = new DataProdukAdapter();
+    private void setUpDataProduk(ArrayList<ResponseProduk> list) {
+        DataProdukAdapter adapter = new DataProdukAdapter(requireContext());
         adapter.setLists(list);
         GridLayoutManager gridLayoutManager = new GridLayoutManager(getContext(), 2);
 

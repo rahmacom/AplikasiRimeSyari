@@ -9,6 +9,7 @@ public class Const {
     public static final String KEY_TTL = "key_ttl";
 
     public static final String KEY_NAME = "rime_syari_key_name";
+    public static final String KEY_ROLE = "rime_syari_key_role";
     public static final String KEY_EMAIL = "rime_syari_key_email";
     public static final String KEY_NAMA_LENGKAP = "rime_syari_key_nl";
     public static final String KEY_JENIS_KELAMIN = "rime_syari_key_jk";
