@@ -14,14 +14,11 @@
             android:id="@+id/btn_take_photo"
             android:layout_width="60dp"
             android:layout_height="60dp"
-            android:layout_margin="10dp"
-            android:insetLeft="0dp"
-            android:insetTop="0dp"
-            android:insetRight="0dp"
-            android:insetBottom="0dp"
+            android:layout_margin="24dp"
             android:src="@drawable/ic_menu_camera"
-            android:background="#00000000"
-            app:iconTint="@color/white"
+            app:iconTint="@color/black"
+            app:iconPadding="0dp"
+            app:iconSize="45dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent" />
@@ -31,17 +28,17 @@
             android:layout_width="60dp"
             android:layout_height="60dp"
             android:layout_margin="24dp"
+            android:background="#00000000"
             android:insetLeft="0dp"
             android:insetTop="0dp"
             android:insetRight="0dp"
             android:insetBottom="0dp"
-            android:background="#00000000"
-            app:iconTint="@color/white"
             app:elevation="0dp"
             app:icon="@drawable/ic_baseline_flip_camera_ios_24"
             app:iconGravity="textStart"
             app:iconPadding="0dp"
-            app:iconSize="35dp"
+            app:iconSize="45dp"
+            app:iconTint="@color/white"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@+id/btn_take_photo" />
@@ -53,9 +50,7 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
-            app:layout_constraintStart_toStartOf="parent">
-
-        </androidx.camera.view.PreviewView>
+            app:layout_constraintStart_toStartOf="parent"></androidx.camera.view.PreviewView>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
