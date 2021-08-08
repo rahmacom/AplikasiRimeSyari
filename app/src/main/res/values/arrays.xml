@@ -5,7 +5,6 @@
         <item>Daftar jadi Reseller</item>
         <item>Testimoni</item>
         <item>Pengaturan</item>
-        <item>Bantuan</item>
         <item>Tentang</item>
         <item>Logout</item>
     </string-array>
@@ -15,7 +14,6 @@
         <item>@id/action_profilFragment_to_resellerInfoFragment</item>
         <item>@id/action_nav_akun_saya_to_profilTestimoniFragment</item>
         <item>@id/action_profilFragment_to_settingsFragment</item>
-        <item>@id/action_nav_akun_saya_to_profilBantuanFragment</item>
         <item>@id/action_profilFragment_to_tentangFragment</item>
         <item />
     </integer-array>
@@ -44,7 +42,6 @@
         <item>@drawable/icon_person_add</item>
         <item>@drawable/icon_star</item>
         <item>@drawable/icon_settings</item>
-        <item>@drawable/icon_help</item>
         <item>@drawable/icon_info</item>
         <item>@drawable/icon_logout</item>
     </integer-array>

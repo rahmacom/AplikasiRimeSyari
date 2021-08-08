@@ -15,7 +15,7 @@
             android:layout_width="60dp"
             android:layout_height="60dp"
             android:layout_margin="24dp"
-            android:src="@drawable/ic_menu_camera"
+            android:src="@drawable/ic_baseline_camera_24"
             app:iconTint="@color/black"
             app:iconPadding="0dp"
             app:iconSize="45dp"

@@ -84,6 +84,7 @@ public class HomeFragment extends Fragment {
         binding.fragmentHomeToolbar.inflateMenu(R.menu.menu_main);
     }
 
+
 //    private ArrayList<Produk> getListProduk() {
 //        String[] gambar = getResources().getStringArray(R.array.produk_gambar);
 //        String[] nama = getResources().getStringArray(R.array.produk_nama);
