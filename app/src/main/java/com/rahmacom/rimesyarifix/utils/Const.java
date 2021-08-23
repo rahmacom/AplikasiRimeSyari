@@ -3,8 +3,8 @@ package com.rahmacom.rimesyarifix.utils;
 import java.time.ZonedDateTime;
 
 public class Const {
-//    public static final String BASE_URL = "https://rimesyari.myskripsi.xyz/";
-    public static final String BASE_URL = "http://192.168.1.9/rimesyari/public/";
+    public static final String BASE_URL = "https://rimesyari.myskripsi.xyz/";
+//    public static final String BASE_URL = "http://192.168.1.9/rimesyari/public/";
     public static final String BASE_API_URL = BASE_URL + "api/";
 
     public static final String KEY_TOKEN = "key_token";
