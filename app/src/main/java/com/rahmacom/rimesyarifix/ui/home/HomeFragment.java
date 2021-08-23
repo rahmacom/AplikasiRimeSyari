@@ -1,10 +1,11 @@
 package com.rahmacom.rimesyarifix.ui.home;
 
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -15,7 +16,7 @@ import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.GridLayoutManager;
 
 import com.rahmacom.rimesyarifix.R;
-import com.rahmacom.rimesyarifix.data.network.response.ResponseProduk;
+import com.rahmacom.rimesyarifix.data.entity.Product;
 import com.rahmacom.rimesyarifix.databinding.FragmentHomeBinding;
 import com.rahmacom.rimesyarifix.manager.PreferenceManager;
 import com.rahmacom.rimesyarifix.utils.Const;
@@ -28,17 +29,11 @@ import dagger.hilt.android.AndroidEntryPoint;
 public class HomeFragment extends Fragment {
 
     private FragmentHomeBinding binding;
+    private HomeViewModel viewModel;
 
-    public static final String ARGS_LOGIN = "args_login";
-    public static final String ARG_USER = "arg_user_has_login";
-    public static final String ARG_GUEST = "arg_user_not_login";
-
-    private static final String[] TITLES = new String[] {
-            "ABAYA",
-            "OUTER",
-            "KHIMAR",
-            "MASKER"
-    };
+    private NavController navController;
+    private PreferenceManager manager;
+    private DataProdukAdapter adapter;
 
     @Override
     public View onCreateView(
@@ -53,74 +48,57 @@ public class HomeFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        HomeViewModel viewModel = new ViewModelProvider(requireActivity()).get(HomeViewModel.class);
+        viewModel = new ViewModelProvider(requireActivity()).get(HomeViewModel.class);
 
-        Log.d("HomeFragment", "This is home fragment");
-
-        NavController navController = Navigation.findNavController(view);
-        PreferenceManager manager = new PreferenceManager(requireContext());
+        navController = Navigation.findNavController(view);
+        manager = new PreferenceManager(requireContext());
 
         if (!manager.keyExists(Const.KEY_TOKEN) || manager.getString(Const.KEY_TOKEN) == null) {
             navController.navigate(HomeFragmentDirections.globalToLoginFragment());
         }
 
         viewModel.setToken(manager.getString(Const.KEY_TOKEN));
-        viewModel.getAllProducts.observe(getViewLifecycleOwner(), produk -> {
-            if (produk != null) {
-                switch (produk.getStatus()) {
+        viewModel.getAllProducts.observe(getViewLifecycleOwner(), product -> {
+            if (product != null) {
+                switch (product.getStatus()) {
                     case SUCCESS:
-//                        Log.d("asdf", produk.getData().toString());
-                        ArrayList<ResponseProduk> produks = new ArrayList<>();
-                        produks.addAll(produk.getData());
-                        setUpDataProduk(produks);
+                        ArrayList<Product> products = new ArrayList<>();
+                        products.addAll(product.getData());
+                        setUpDataProduk(products);
+                        adapter.setOnItemClickListener(item -> {
+                            HomeFragmentDirections.NavHomeToProdukFragment action =
+                                    HomeFragmentDirections.navHomeToProdukFragment();
+                            action.setProductId(item.getId());
+                            navController.navigate(action);
+                        });
+
                     case ERROR:
                     case LOADING:
                     case EMPTY:
-                    case INVALID:
+//                    case INVALID:
                 }
             }
         });
 
-        binding.fragmentHomeToolbar.inflateMenu(R.menu.menu_main);
+        binding.toolbarFragmentHome.inflateMenu(R.menu.menu_home);
+        binding.toolbarFragmentHome.setOnMenuItemClickListener(this::onOptionsItemSelected);
     }
 
-
-//    private ArrayList<Produk> getListProduk() {
-//        String[] gambar = getResources().getStringArray(R.array.produk_gambar);
-//        String[] nama = getResources().getStringArray(R.array.produk_nama);
-//        String[] harga = getResources().getStringArray(R.array.produk_harga);
-//        int[] like = getResources().getIntArray(R.array.produk_like);
-//        int[] preOrderReady = getResources().getIntArray(R.array.produk_preoder_ready);
-//
-//        ArrayList<Produk> list = new ArrayList<>();
-//
-//        for (int i = 0; i < gambar.length; i++) {
-//            Produk produk = new Produk();
-//            produk.setGambar(gambar[i]);
-//            produk.setNama(nama[i]);
-//            produk.setHarga(harga[i]);
-//            produk.setLike(like[i]);
-//            produk.setPreOrderReady(preOrderReady[i]);
-//            list.add(produk);
-//        }
-//        return list;
-//    }
-//
-//    private void setUpDataProduk2(ArrayList<ResponseProduk> list) {
-//        DataProdukAdapter adapter = new DataProdukAdapter();
-//        adapter.setLists2(list);
-//        GridLayoutManager gridLayoutManager = new GridLayoutManager(getContext(), 2);
-//
-//        binding.rvFragmentHome.setAdapter(adapter);
-//        binding.rvFragmentHome.setLayoutManager(gridLayoutManager);
-//    }
-
-    private void setUpDataProduk(ArrayList<ResponseProduk> list) {
-        DataProdukAdapter adapter = new DataProdukAdapter(requireContext());
+    private void setUpDataProduk(ArrayList<Product> list) {
+        adapter = new DataProdukAdapter(requireContext());
         adapter.setLists(list);
         GridLayoutManager gridLayoutManager = new GridLayoutManager(getContext(), 2);
 
-        binding.rvFragmentHome.setAdapter(adapter);
-        binding.rvFragmentHome.setLayoutManager(gridLayoutManager);
+        binding.rvHomeProdukGrid.setAdapter(adapter);
+        binding.rvHomeProdukGrid.setLayoutManager(gridLayoutManager);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        if (item.getItemId() == R.id.menu_keranjang) {
+            Toast.makeText(requireContext(), "Hey I'm clicked!", Toast.LENGTH_SHORT).show();
+            navController.navigate(HomeFragmentDirections.navHomeToKeranjangFragment());
+        }
+        return super.onOptionsItemSelected(item);
     }
 }

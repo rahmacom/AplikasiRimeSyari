@@ -7,32 +7,49 @@ import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.navigation.NavController;
+import androidx.navigation.Navigation;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
 import com.rahmacom.rimesyarifix.R;
+import com.rahmacom.rimesyarifix.databinding.FragmentProfilTestimoniBinding;
+import com.rahmacom.rimesyarifix.manager.PreferenceManager;
 
 public class ProfilTestimoniFragment extends Fragment {
 
-    private ProfilTestimoniViewModel mViewModel;
+    private FragmentProfilTestimoniBinding binding;
+    private ProfilTestimoniViewModel viewModel;
+    private PreferenceManager manager;
+    private NavController navController;
+    private ProfilTestimoniAdapter adapter;
 
-    public static ProfilTestimoniFragment newInstance() {
-        return new ProfilTestimoniFragment();
+    @Override
+    public View onCreateView(
+            @NonNull LayoutInflater inflater,
+            @Nullable ViewGroup container,
+            @Nullable Bundle savedInstanceState
+    ) {
+        binding = FragmentProfilTestimoniBinding.inflate(inflater, container, false);
+        return binding.getRoot();
     }
 
     @Override
-    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
-                             @Nullable Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.fragment_profil_testimoni, container, false);
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        viewModel = new ViewModelProvider(requireActivity()).get(ProfilTestimoniViewModel.class);
+        manager = new PreferenceManager(requireContext());
+        navController = Navigation.findNavController(view);
     }
 
     @Override
-    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
-        super.onActivityCreated(savedInstanceState);
-        mViewModel = new ViewModelProvider(this).get(ProfilTestimoniViewModel.class);
-        // TODO: Use the ViewModel
+    public void onDestroy() {
+        super.onDestroy();
+        binding = null;
     }
 
+    private void setupRecyclerView() {
+
+    }
 }

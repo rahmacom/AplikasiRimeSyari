@@ -28,18 +28,23 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
+            android:letterSpacing="0.1"
             android:text="Nama user"
+            android:textAllCaps="true"
+            android:textColor="@color/pink_600"
             android:textSize="20sp"
+            android:textStyle="bold"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/iv_profil_foto" />
 
         <TextView
-            android:id="@+id/tv_profil_status_user"
+            android:id="@+id/tv_profil_email_user"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
-            android:text="Status User"
+            android:text="user@email.com"
+            android:textColor="@color/gray_600"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/tv_profil_nama_lengkap_user" />
@@ -53,7 +58,7 @@
             app:cardCornerRadius="8dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/tv_profil_status_user">
+            app:layout_constraintTop_toBottomOf="@+id/tv_profil_email_user">
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/rv_list_akun"

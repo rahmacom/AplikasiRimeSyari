@@ -1,12 +1,10 @@
 package com.rahmacom.rimesyarifix.ui.profil;
 
 public class Profil {
-
     private String title;
-    private String subTitle;
-    private String value;
     private int drawableId;
     private int actionId;
+    private String value;
 
     public String getTitle() {
         return title;
@@ -16,20 +14,12 @@ public class Profil {
         this.title = title;
     }
 
-    public String getSubTitle() {
-        return subTitle;
+    public int getDrawableId() {
+        return drawableId;
     }
 
-    public void setSubTitle(String subTitle) {
-        this.subTitle = subTitle;
-    }
-
-    public String getValue() {
-        return value;
-    }
-
-    public void setValue(String value) {
-        this.value = value;
+    public void setDrawableId(int drawableId) {
+        this.drawableId = drawableId;
     }
 
     public int getActionId() {
@@ -40,11 +30,10 @@ public class Profil {
         this.actionId = actionId;
     }
 
-    public int getDrawableId() {
-        return drawableId;
+    public String getValue() {
+        return value;
     }
-
-    public void setDrawableId(int drawableId) {
-        this.drawableId = drawableId;
+    public void setValue(String value) {
+        this.value = value;
     }
 }

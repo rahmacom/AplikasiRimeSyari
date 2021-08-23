@@ -6,8 +6,8 @@ import androidx.lifecycle.SavedStateHandle;
 import androidx.lifecycle.Transformations;
 import androidx.lifecycle.ViewModel;
 
-import com.rahmacom.rimesyarifix.data.MainRepository;
-import com.rahmacom.rimesyarifix.data.network.response.ResponseProduk;
+import com.rahmacom.rimesyarifix.data.ProductRepository;
+import com.rahmacom.rimesyarifix.data.entity.Product;
 import com.rahmacom.rimesyarifix.data.vo.Resource;
 
 import java.util.List;
@@ -19,19 +19,19 @@ import dagger.hilt.android.lifecycle.HiltViewModel;
 @HiltViewModel
 public class HomeViewModel extends ViewModel {
 
-    private MainRepository mainRepository;
+    private ProductRepository productRepository;
     private SavedStateHandle savedStateHandle;
 
     private MutableLiveData<String> token = new MutableLiveData<>();
 
     @Inject
-    public HomeViewModel(MainRepository mainRepository, SavedStateHandle savedStateHandle) {
-        this.mainRepository = mainRepository;
+    public HomeViewModel(ProductRepository productRepository, SavedStateHandle savedStateHandle) {
+        this.productRepository = productRepository;
         this.savedStateHandle = savedStateHandle;
     }
 
-    public final LiveData<Resource<List<ResponseProduk>>> getAllProducts =
-            Transformations.switchMap(token, getToken -> mainRepository.getAllProducts(token.getValue()));
+    public final LiveData<Resource<List<Product>>> getAllProducts =
+            Transformations.switchMap(token, getToken -> productRepository.getAllProducts(token.getValue()));
 
     public void setToken(String token) {
         this.token.setValue(token);

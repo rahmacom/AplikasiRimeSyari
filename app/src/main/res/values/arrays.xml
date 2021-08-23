@@ -1,6 +1,6 @@
 <resources>
 
-    <string-array name="list_data_profil_judul">
+    <string-array name="list_profil_menu_title">
         <item>Profil</item>
         <item>Daftar jadi Reseller</item>
         <item>Testimoni</item>
@@ -9,22 +9,43 @@
         <item>Logout</item>
     </string-array>
 
-    <integer-array name="list_data_profil_action">
-        <item>@id/action_nav_akun_saya_to_profilBiodataFragment</item>
-        <item>@id/action_profilFragment_to_resellerInfoFragment</item>
-        <item>@id/action_nav_akun_saya_to_profilTestimoniFragment</item>
-        <item>@id/action_profilFragment_to_settingsFragment</item>
-        <item>@id/action_profilFragment_to_tentangFragment</item>
+    <integer-array name="list_profil_menu_action">
+        <item>@id/nav_profil_to_profilBiodataFragment</item>
+        <item>@id/nav_profil_to_resellerInfoFragment</item>
+        <item>@id/nav_profil_to_profilTestimoniFragment</item>
+        <item>@id/nav_profil_to_profilSettingsFragment</item>
+        <item>@id/nav_profil_to_profilTentangFragment</item>
         <item />
     </integer-array>
+
+    <integer-array name="list_profil_menu_icon">
+        <item>@drawable/icon_account</item>
+        <item>@drawable/icon_register</item>
+        <item>@drawable/icon_star</item>
+        <item>@drawable/icon_settings</item>
+        <item>@drawable/icon_info</item>
+        <item>@drawable/icon_logout</item>
+    </integer-array>
+
+    <string-array name="tab_status_order">
+        <item>Semua</item>
+        <item>Belum diproses</item>
+        <item>Sedang diproses</item>
+        <item>Sedang dikemas</item>
+        <item>Dalam pengiriman</item>
+        <item>Selesai</item>
+        <item>Ditunda</item>
+        <item>Dibatalkan</item>
+    </string-array>
 
     <string-array name="list_biodata_profil_judul">
         <item>Nama Lengkap</item>
         <item>Jenis Kelamin</item>
         <item>Alamat</item>
-        <item>No. Telpon / WA</item>
+        <item>No. Telpon</item>
+        <item>No. WA</item>
         <item>Email</item>
-        <item>Member sejak</item>
+        <item>Status</item>
     </string-array>
 
     <string-array name="list_biodata_profil_dummy">
@@ -35,74 +56,6 @@
         <item>+6281234567890</item>
         <item>reseller@email.com</item>
         <item>23 September 2020</item>
-    </string-array>
-
-    <integer-array name="list_data_profil_icon">
-        <item>@drawable/icon_account</item>
-        <item>@drawable/icon_person_add</item>
-        <item>@drawable/icon_star</item>
-        <item>@drawable/icon_settings</item>
-        <item>@drawable/icon_info</item>
-        <item>@drawable/icon_logout</item>
-    </integer-array>
-
-    <string-array name="produk_gambar">
-        <item>https://picsum.photos/200</item>
-        <item>https://picsum.photos/200</item>
-        <item>https://picsum.photos/200</item>
-        <item>https://picsum.photos/200</item>
-    </string-array>
-
-    <string-array name="produk_harga">
-        <item>Rp. 95.000</item>
-        <item>RP. 150.000</item>
-        <item>RP. 133.000</item>
-        <item>RP. 112.000</item>
-    </string-array>
-
-    <string-array name="produk_nama">
-        <item>KHIMAR</item>
-        <item>OUTER</item>
-        <item>MASKER</item>
-        <item>ABAYA</item>
-    </string-array>
-
-    <integer-array name="produk_like">
-        <item>175</item>
-        <item>44</item>
-        <item>99</item>
-        <item>112</item>
-    </integer-array>
-
-    <integer-array name="produk_preoder_ready">
-        <item>20</item>
-        <item>30</item>
-        <item>40</item>
-        <item>50</item>
-    </integer-array>
-
-    <string-array name="no_transaksi">
-        <item>001</item>
-        <item>002</item>
-        <item>003</item>
-    </string-array>
-
-    <string-array name="tanggal_transaksi">
-        <item>03-06-2021</item>
-        <item>03-06-2021</item>
-        <item>03-06-2021</item>
-    </string-array>
-
-    <string-array name="jumlah_transaksi">
-        <item>20 pcs</item>
-        <item>20 pcs</item>
-        <item>20 pcs</item>
-    </string-array>
-
-    <string-array name="total_harga">
-        <item>Rp.150000</item>
-        <item>Rp.150000</item>
-        <item>Rp.150000</item>
     </string-array>
 
 </resources>

@@ -5,13 +5,10 @@ import androidx.annotation.Nullable;
 
 public class Resource<T> {
 
-    @NonNull
     private final Status status;
 
-    @Nullable
     private final String message;
 
-    @Nullable
     private final T data;
 
     public Resource(@NonNull Status status, @Nullable String message, @Nullable T data) {
@@ -53,5 +50,17 @@ public class Resource<T> {
 
     public static <T> Resource<T> invalid(@Nullable String message) {
         return new Resource(Status.INVALID, message, null);
+    }
+
+    public static <T> Resource<T> unauthorized(String message) {
+        return new Resource(Status.UNAUTHORIZED, message, null);
+    }
+
+    public static <T> Resource<T> forbidden(String message) {
+        return new Resource(Status.FORBIDDEN, message, null);
+    }
+
+    public static <T> Resource<T> unprocessableEntity(String message, @Nullable T data) {
+        return new Resource(Status.UNPROCESSABLE_ENTITY, message, data);
     }
 }

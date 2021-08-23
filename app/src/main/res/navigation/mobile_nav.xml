@@ -4,205 +4,234 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     app:startDestination="@id/nav_home">
-
     <action
         android:id="@+id/global_to_loginFragment"
-        app:popUpTo="@id/main_nav_graph"
-        app:popUpToInclusive="true"
-        app:destination="@id/loginFragment" />
-
+        app:destination="@id/loginFragment"
+        app:popUpTo="@id/loginFragment"
+        app:popUpToInclusive="true" />
     <fragment
         android:id="@+id/nav_home"
         android:name="com.rahmacom.rimesyarifix.ui.home.HomeFragment"
-        android:label="@string/title_beranda" >
+        android:label="Beranda"
+        tools:layout="@layout/fragment_home">
         <action
-            android:id="@+id/action_homeFragment_to_produkFragment"
+            android:id="@+id/nav_home_to_keranjangFragment"
+            app:destination="@id/keranjangFragment" />
+        <action
+            android:id="@+id/nav_home_to_produkFragment"
             app:destination="@id/produkFragment" />
     </fragment>
-
     <fragment
-        android:id="@+id/nav_status_order"
-        android:name="com.rahmacom.rimesyarifix.ui.order_status.OrderStatusFragment"
-        android:label="@string/title_riwayat_order"
-        tools:layout="@layout/fragment_order_detail" >
-        <action
-            android:id="@+id/action_orderStatusFragment_to_keranjangFragment"
-            app:destination="@id/keranjangFragment" />
-    </fragment>
-
-    <fragment
-        android:id="@+id/settingsFragment"
+        android:id="@+id/profilSettingsFragment"
         android:name="com.rahmacom.rimesyarifix.ui.profil_settings.ProfilSettingsFragment"
-        android:label="@string/title_settings" />
-
+        android:label="Pengaturan" />
     <fragment
-        android:id="@+id/nav_riwayat_transaksi"
-        android:name="com.rahmacom.rimesyarifix.ui.transaksi_riwayat.TransaksiRiwayatFragment"
-        android:label="@string/title_riwayat_transaksi"
-        tools:layout="@layout/fragment_transaksi_riwayat" >
-        <action
-            android:id="@+id/action_transaksiRiwayatFragment_to_transaksiDetailFragment"
-            app:destination="@id/transaksiDetailFragment" />
+        android:id="@+id/formAlamatFragment"
+        android:name="com.rahmacom.rimesyarifix.ui.form_edit_alamat.FormEditAlamatFragment"
+        android:label="Ubah Alamat"
+        tools:layout="@layout/fragment_form_edit_alamat" >
+        <argument
+            android:name="shipment_id"
+            app:argType="integer"
+            android:defaultValue="-1" />
     </fragment>
-
     <fragment
-        android:id="@+id/nav_akun_saya"
-        android:name="com.rahmacom.rimesyarifix.ui.profil.ProfilFragment"
-        android:label="@string/title_profil"
-        tools:layout="@layout/fragment_profil" >
+        android:id="@+id/formEditBiodataFragment"
+        android:name="com.rahmacom.rimesyarifix.ui.form_edit_biodata.FormEditBiodataFragment"
+        android:label="Edit biodata"
+        tools:layout="@layout/fragment_form_edit_biodata">
         <action
-            android:id="@+id/action_profilFragment_to_tentangFragment"
-            app:destination="@id/tentangFragment" />
+            android:id="@+id/formEditBiodataFragment_to_resellerKYCFragment"
+            app:destination="@id/resellerKYCFragment" />
+        <argument
+            android:name="user_id"
+            app:argType="integer"
+            android:defaultValue="-1" />
         <action
-            android:id="@+id/action_profilFragment_to_resellerInfoFragment"
-            app:destination="@id/resellerInfoFragment" />
-        <action
-            android:id="@+id/action_profilFragment_to_settingsFragment"
-            app:destination="@id/settingsFragment" />
-        <action
-            android:id="@+id/action_nav_akun_saya_to_profilBantuanFragment"
-            app:destination="@id/profilBantuanFragment" />
-        <action
-            android:id="@+id/action_nav_akun_saya_to_profilTestimoniFragment"
-            app:destination="@id/profilTestimoniFragment" />
-        <action
-            android:id="@+id/action_nav_akun_saya_to_profilBiodataFragment"
-            app:destination="@id/profilBiodataFragment" />
+            android:id="@+id/formEditBiodataFragment_to_profilBiodataAlamatFragment"
+            app:destination="@id/profilBiodataAlamatFragment" />
     </fragment>
-
+    <fragment
+        android:id="@+id/keranjangDetailFragment"
+        android:name="com.rahmacom.rimesyarifix.ui.keranjang_detail.KeranjangDetailFragment"
+        android:label="Detail keranjang"
+        tools:layout="@layout/fragment_keranjang_detail">
+        <action
+            android:id="@+id/keranjangDetailFragment_to_orderDetailFragment"
+            app:destination="@id/orderDetailFragment" />
+        <action
+            android:id="@+id/keranjangDetailFragment_to_profilBiodataAlamatFragment"
+            app:destination="@id/profilBiodataAlamatFragment" />
+        <argument
+            android:name="cart_id"
+            android:defaultValue="-1"
+            app:argType="integer" />
+    </fragment>
     <fragment
         android:id="@+id/keranjangFragment"
         android:name="com.rahmacom.rimesyarifix.ui.keranjang.KeranjangFragment"
-        android:label="fragment_keranjang"
-        tools:layout="@layout/fragment_keranjang" >
+        android:label="Keranjang Kamu"
+        tools:layout="@layout/fragment_keranjang">
         <action
-            android:id="@+id/action_keranjangFragment_to_orderPengirimanFragment"
-            app:destination="@id/orderPengirimanFragment" />
+            android:id="@+id/keranjangFragment_to_keranjangDetailFragment"
+            app:destination="@id/keranjangDetailFragment" />
     </fragment>
-
     <fragment
         android:id="@+id/loginFragment"
         android:name="com.rahmacom.rimesyarifix.ui.login.LoginFragment"
         android:label="fragment_login"
         tools:layout="@layout/fragment_login" >
         <action
-            android:id="@+id/action_loginFragment_to_registerFragment"
-            app:destination="@id/registerFragment" />
+            android:id="@+id/loginFragment_to_nav_home"
+            app:destination="@id/nav_home"
+            app:popUpTo="@id/nav_home"
+            app:popUpToInclusive="true" />
         <action
-            android:id="@+id/action_loginFragment_to_homeFragment"
-            app:destination="@id/nav_home" />
+            android:id="@+id/loginFragment_to_registerFragment"
+            app:destination="@id/registerFragment"
+            app:popUpTo="@id/registerFragment"
+            app:popUpToInclusive="true" />
     </fragment>
-
     <fragment
-        android:id="@+id/orderPengirimanFragment"
-        android:name="com.rahmacom.rimesyarifix.ui.order_pengiriman.OrderPengirimanFragment"
-        android:label="fragment_order_pengiriman"
-        tools:layout="@layout/fragment_order_pengiriman" />
-
+        android:id="@+id/nav_order"
+        android:name="com.rahmacom.rimesyarifix.ui.order.OrderFragment"
+        android:label="Riwayat order"
+        tools:layout="@layout/fragment_order">
+        <action
+            android:id="@+id/nav_order_to_orderDetailFragment"
+            app:destination="@id/orderDetailFragment" />
+    </fragment>
     <fragment
-        android:id="@+id/produkFragment"
-        android:name="com.rahmacom.rimesyarifix.ui.produk.ProdukFragment"
-        android:label="fragment_produk"
-        tools:layout="@layout/fragment_produk" >
+        android:id="@+id/orderDetailFragment"
+        android:name="com.rahmacom.rimesyarifix.ui.order_detail.OrderDetailFragment"
+        android:label="Detail order"
+        tools:layout="@layout/fragment_order_detail">
         <argument
-            android:name="productId"
+            android:name="order_id"
             app:argType="integer"
             android:defaultValue="-1" />
     </fragment>
-
+    <fragment
+        android:id="@+id/nav_profil"
+        android:name="com.rahmacom.rimesyarifix.ui.profil.ProfilFragment"
+        android:label="Profil"
+        tools:layout="@layout/fragment_profil">
+        <action
+            android:id="@+id/nav_profil_to_profilBiodataFragment"
+            app:destination="@id/profilBiodataFragment" />
+        <action
+            android:id="@+id/nav_profil_to_profilTestimoniFragment"
+            app:destination="@id/profilTestimoniFragment" />
+        <action
+            android:id="@+id/nav_profil_to_profilSettingsFragment"
+            app:destination="@id/profilSettingsFragment" />
+        <action
+            android:id="@+id/nav_profil_to_profilTentangFragment"
+            app:destination="@id/profilTentangFragment" />
+        <action
+            android:id="@+id/nav_profil_to_resellerInfoFragment"
+            app:destination="@id/resellerInfoFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/produkFragment"
+        android:name="com.rahmacom.rimesyarifix.ui.produk.ProdukFragment"
+        android:label="Produk"
+        tools:layout="@layout/fragment_produk">
+        <action
+            android:id="@+id/produkFragment_to_keranjangDetailFragment"
+            app:destination="@id/keranjangDetailFragment" />
+        <argument
+            android:name="product_id"
+            app:argType="integer"
+            android:defaultValue="-1" />
+    </fragment>
+    <fragment
+        android:id="@+id/profilBiodataFragment"
+        android:name="com.rahmacom.rimesyarifix.ui.profil_biodata.ProfilBiodataFragment"
+        android:label="Biodata"
+        tools:layout="@layout/fragment_profil_biodata">
+        <action
+            android:id="@+id/profilBiodataFragment_to_formEditBiodataFragment"
+            app:destination="@id/formEditBiodataFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/profilTentangFragment"
+        android:name="com.rahmacom.rimesyarifix.ui.profil_tentang.ProfilTentangFragment"
+        android:label="Tentang"
+        tools:layout="@layout/fragment_profil_tentang" />
+    <fragment
+        android:id="@+id/profilTestimoniFragment"
+        android:name="com.rahmacom.rimesyarifix.ui.profil_testimoni.ProfilTestimoniFragment"
+        android:label="Testimoni"
+        tools:layout="@layout/fragment_profil_testimoni" />
     <fragment
         android:id="@+id/registerFragment"
         android:name="com.rahmacom.rimesyarifix.ui.register.RegisterFragment"
         android:label="fragment_register"
         tools:layout="@layout/fragment_register" >
         <action
-            android:id="@+id/action_registerFragment_to_homeFragment"
-            app:destination="@id/nav_home" />
-        <action
-            android:id="@+id/action_registerFragment_to_loginFragment"
+            android:id="@+id/registerFragment_to_loginFragment"
             app:destination="@id/loginFragment"
             app:popUpTo="@id/loginFragment"
-            app:popUpToInclusive="true" />
-    </fragment>
-
-    <fragment
-        android:id="@+id/resellerDaftarFragment"
-        android:name="com.rahmacom.rimesyarifix.ui.reseller_daftar.ResellerDaftarFragment"
-        android:label="fragment_reseller_daftar"
-        tools:layout="@layout/fragment_reseller_daftar" >
+            app:popUpToInclusive="true"/>
         <action
-            android:id="@+id/action_resellerDaftarFragment_to_resellerKYCFragment"
-            app:destination="@id/resellerKYCFragment" />
+            android:id="@+id/registerFragment_to_nav_home"
+            app:destination="@id/nav_home"
+            app:popUpTo="@id/nav_home"
+            app:popUpToInclusive="true"/>
     </fragment>
-
     <fragment
         android:id="@+id/resellerInfoFragment"
         android:name="com.rahmacom.rimesyarifix.ui.reseller_info.ResellerInfoFragment"
-        android:label="fragment_reseller_info"
-        tools:layout="@layout/fragment_reseller_info" >
+        android:label="Syarat dan Ketentuan"
+        tools:layout="@layout/fragment_reseller_info">
         <action
-            android:id="@+id/action_resellerInfoFragment_to_resellerDaftarFragment"
-            app:destination="@id/resellerDaftarFragment" />
+            android:id="@+id/resellerInfoFragment_to_formEditBiodataFragment"
+            app:destination="@id/formEditBiodataFragment" />
         <action
-            android:id="@+id/action_resellerInfoFragment_to_resellerKYCFragment"
+            android:id="@+id/resellerInfoFragment_to_resellerKYCFragment"
             app:destination="@id/resellerKYCFragment" />
     </fragment>
-
     <fragment
         android:id="@+id/resellerKYCFragment"
         android:name="com.rahmacom.rimesyarifix.ui.reseller_kyc.ResellerKYCFragment"
-        android:label="fragment_reseller_kyc"
-        tools:layout="@layout/fragment_reseller_kyc" />
-
+        tools:layout="@layout/fragment_reseller_kyc_camera">
+        <action
+            android:id="@+id/resellerKYCFragment_to_resellerStatusVerifikasiFragment"
+            app:destination="@id/resellerStatusVerifikasiFragment" />
+        <argument
+            android:name="user_verification_id"
+            app:argType="integer"
+            android:defaultValue="-1" />
+    </fragment>
     <fragment
         android:id="@+id/resellerStatusVerifikasiFragment"
         android:name="com.rahmacom.rimesyarifix.ui.reseller_status_verifikasi.ResellerStatusVerifikasiFragment"
-        android:label="fragment_reseller_status_verifikasi"
-        tools:layout="@layout/fragment_reseller_status_verifikasi" />
-
+        android:label="Status Verifikasi"
+        tools:layout="@layout/fragment_reseller_status_verifikasi" >
+        <argument
+            android:name="user_verification_id"
+            app:argType="integer"
+            android:defaultValue="-1" />
+    </fragment>
     <fragment
         android:id="@+id/splashScreenFragment"
         android:name="com.rahmacom.rimesyarifix.ui.splash_screen.SplashScreenFragment"
         android:label="fragment_splash_screen"
-        tools:layout="@layout/fragment_splash_screen">
+        tools:layout="@layout/fragment_splash_screen" >
         <action
-            android:id="@+id/action_splashScreenFragment_to_loginFragment"
-            app:popUpTo="@id/main_nav_graph"
-            app:popUpToInclusive="true"
-            app:destination="@id/loginFragment" />
-        <action
-            android:id="@+id/action_splashScreenFragment_to_homeFragment"
-            app:popUpTo="@id/main_nav_graph"
-            app:popUpToInclusive="true"
-            app:destination="@id/nav_home" />
+            android:id="@+id/splashScreenFragment_to_loginFragment"
+            app:destination="@id/loginFragment"
+            app:popUpTo="@id/loginFragment"
+            app:popUpToInclusive="true" />
     </fragment>
-
     <fragment
-        android:id="@+id/tentangFragment"
-        android:name="com.rahmacom.rimesyarifix.ui.profil_tentang.ProfilTentangFragment"
-        android:label="fragment_tentang"
-        tools:layout="@layout/fragment_tentang" />
-
-    <fragment
-        android:id="@+id/transaksiDetailFragment"
-        android:name="com.rahmacom.rimesyarifix.ui.transaksi_detail.TransaksiDetailFragment"
-        android:label="fragment_transaksi_detail"
-        tools:layout="@layout/fragment_transaksi_detail" />
-    <fragment
-        android:id="@+id/profilBantuanFragment"
-        android:name="com.rahmacom.rimesyarifix.ui.profil_bantuan.ProfilBantuanFragment"
-        android:label="fragment_profil_bantuan"
-        tools:layout="@layout/fragment_profil_bantuan" />
-    <fragment
-        android:id="@+id/profilTestimoniFragment"
-        android:name="com.rahmacom.rimesyarifix.ui.profil_testimoni.ProfilTestimoniFragment"
-        android:label="fragment_profil_testimoni"
-        tools:layout="@layout/fragment_profil_testimoni" />
-    <fragment
-        android:id="@+id/profilBiodataFragment"
-        android:name="com.rahmacom.rimesyarifix.ui.profil_biodata.ProfilBiodataFragment"
-        android:label="fragment_profil_biodata"
-        tools:layout="@layout/fragment_profil_biodata" />
-
-
+        android:id="@+id/profilBiodataAlamatFragment"
+        android:name="com.rahmacom.rimesyarifix.ui.profil_biodata_alamat.ProfilBiodataAlamatFragment"
+        android:label="Alamat Tersimpan"
+        tools:layout="@layout/fragment_profil_biodata_alamat">
+        <action
+            android:id="@+id/profilBiodataAlamatFragment_to_formAlamatFragment"
+            app:destination="@id/formAlamatFragment" />
+    </fragment>
 </navigation>

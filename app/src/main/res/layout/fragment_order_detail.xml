@@ -1,100 +1,224 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.order_status.OrderStatusFragment">
+    android:orientation="vertical"
+    tools:context=".ui.order_detail.OrderDetailFragment">
 
-    <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/hgb_status_pengiriman"
-        android:layout_width="wrap_content"
+    <com.google.android.material.appbar.MaterialToolbar
+        android:id="@+id/toolbar_order_detail"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        app:layout_constraintGuide_begin="16dp" />
+        android:theme="@style/ThemeOverlay.RimeSyariFix.ToolBar"
+        android:background="@color/white"
+        android:paddingBottom="@dimen/layout_padding" />
 
-    <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/hge_status_pengiriman"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        app:layout_constraintGuide_end="16dp" />
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
 
-    <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/vgb_status_pengiriman"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        app:layout_constraintGuide_begin="16dp" />
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingTop="@dimen/layout_padding"
+            android:paddingBottom="32dp">
 
-    <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/vge_status_pengiriman"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        app:layout_constraintGuide_end="16dp" />
+            <TextView
+                android:id="@+id/tv_order_detail_nomor"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:letterSpacing="0.05"
+                android:text="O19-A113BZ"
+                android:textAllCaps="true"
+                android:textColor="@color/gray_800"
+                android:textSize="24sp"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toStartOf="@+id/cv_order_detail_tag_status"
+                app:layout_constraintStart_toStartOf="@+id/gl_order_detail"
+                app:layout_constraintTop_toTopOf="parent" />
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/rv_status_pengiriman"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:layout_marginTop="16dp"
-        app:layout_constraintBottom_toTopOf="@+id/hge_status_pengiriman"
-        app:layout_constraintEnd_toStartOf="@+id/vge_status_pengiriman"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="@+id/vgb_status_pengiriman"
-        app:layout_constraintTop_toBottomOf="@+id/tv_alamat_pengiriman"
-        app:layout_constraintVertical_bias="1.0" />
+            <androidx.cardview.widget.CardView
+                android:id="@+id/cv_order_detail_tag_status"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:cardBackgroundColor="@color/gray_200"
+                app:cardCornerRadius="50dp"
+                app:cardElevation="0dp"
+                app:cardMaxElevation="0dp"
+                app:contentPaddingBottom="2dp"
+                app:contentPaddingLeft="8dp"
+                app:contentPaddingRight="8dp"
+                app:contentPaddingTop="2dp"
+                app:layout_constraintBottom_toBottomOf="@+id/tv_order_detail_nomor"
+                app:layout_constraintEnd_toStartOf="@+id/gr_order_detail"
+                app:layout_constraintTop_toTopOf="@+id/tv_order_detail_nomor">
 
-    <TextView
-        android:id="@+id/tv_no_order_pengiriman"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:text="Order #27AY9"
-        android:textSize="20sp"
-        app:layout_constraintStart_toStartOf="@+id/gd_status"
-        app:layout_constraintTop_toTopOf="@+id/hgb_status_pengiriman" />
+                <TextView
+                    android:id="@+id/tv_order_detail_status"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:letterSpacing="0.15"
+                    android:text="Sedang dikemas"
+                    android:textAllCaps="true"
+                    android:textColor="@color/gray_500"
+                    android:textSize="8sp"
+                    android:textStyle="bold" />
 
-    <TextView
-        android:id="@+id/tv_status_pengiriman_ket"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        android:text="sedang dikirim"
-        android:textSize="14sp"
-        app:layout_constraintStart_toStartOf="@+id/tv_no_order_pengiriman"
-        app:layout_constraintTop_toBottomOf="@+id/tv_no_order_pengiriman" />
+            </androidx.cardview.widget.CardView>
 
-    <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/gd_status"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        app:layout_constraintGuide_begin="120dp" />
+            <TextView
+                android:id="@+id/tv_order_detail_pesan"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="12dp"
+                android:text="pesan"
+                android:textColor="@color/gray_600"
+                android:textSize="16sp"
+                app:layout_constraintEnd_toStartOf="@+id/gr_order_detail"
+                app:layout_constraintStart_toStartOf="@+id/gl_order_detail"
+                app:layout_constraintTop_toBottomOf="@+id/tv_order_detail_nomor" />
 
-    <TextView
-        android:id="@+id/tv_alamat_pengiriman"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        android:text="Alamat Tujuan"
-        android:textSize="12sp"
-        app:layout_constraintEnd_toStartOf="@+id/vge_status_pengiriman"
-        app:layout_constraintStart_toStartOf="@+id/tv_status_pengiriman_ket"
-        app:layout_constraintTop_toBottomOf="@+id/tv_status_pengiriman_ket" />
+            <TextView
+                android:id="@+id/tv_order_detail_alamat_title"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="24dp"
+                android:text="Alamat"
+                android:textAllCaps="true"
+                android:textColor="@color/gray_700"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toStartOf="@+id/gr_order_detail"
+                app:layout_constraintStart_toStartOf="@+id/gl_order_detail"
+                app:layout_constraintTop_toBottomOf="@+id/tv_order_detail_pesan" />
 
-    <ImageView
-        android:id="@+id/iv_status_pengiriman"
-        android:layout_width="wrap_content"
-        android:layout_height="0dp"
-        android:adjustViewBounds="true"
-        app:layout_constraintBottom_toBottomOf="@+id/tv_status_pengiriman_ket"
-        app:layout_constraintEnd_toStartOf="@+id/gd_status"
-        app:layout_constraintHorizontal_bias="0.592"
-        app:layout_constraintStart_toStartOf="@+id/vgb_status_pengiriman"
-        app:layout_constraintTop_toTopOf="@+id/hgb_status_pengiriman"
-        app:layout_constraintVertical_bias="0.0"
-        tools:src="@tools:sample/avatars" />
+            <TextView
+                android:id="@+id/tv_order_detail_alamat"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:text="Jalan Kulintang no. 33 RT 36, Kelurahan Dadi Mulya, Kecamatan Samarinda Ulu, Samarinda, 75123 (depan sanggar rubinha)"
+                android:textColor="@color/gray_600"
+                app:layout_constraintEnd_toStartOf="@+id/gr_order_detail"
+                app:layout_constraintStart_toStartOf="@+id/gl_order_detail"
+                app:layout_constraintTop_toBottomOf="@+id/tv_order_detail_alamat_title" />
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rv_order_detail_produk_list"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/tv_order_detail_produk_list_title" />
+
+            <TextView
+                android:id="@+id/tv_order_detail_produk_list_title"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="24dp"
+                android:text="Produk dalam order"
+                android:textColor="@color/gray_700"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toStartOf="@+id/gr_order_detail"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="@+id/gl_order_detail"
+                app:layout_constraintTop_toBottomOf="@+id/divider" />
+
+            <TextView
+                android:id="@+id/tv_order_detail_total_pembelian_title"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:text="Total pembelian"
+                android:textAllCaps="true"
+                android:textColor="@color/gray_600"
+                android:textStyle="bold"
+                app:layout_constraintBottom_toBottomOf="@+id/tv_order_detail_total_harga"
+                app:layout_constraintStart_toStartOf="@+id/gl_order_detail"
+                app:layout_constraintTop_toTopOf="@+id/tv_order_detail_total_harga" />
+
+            <androidx.constraintlayout.widget.Guideline
+                android:id="@+id/gl_order_detail"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                app:layout_constraintGuide_begin="16dp" />
+
+            <androidx.constraintlayout.widget.Guideline
+                android:id="@+id/gr_order_detail"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                app:layout_constraintGuide_end="16dp" />
+
+            <TextView
+                android:id="@+id/tv_order_detail_metode_pembelian_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:text="Metode pembayaran"
+                android:textColor="@color/gray_600"
+                android:textStyle="bold"
+                app:layout_constraintStart_toStartOf="@+id/gl_order_detail"
+                app:layout_constraintTop_toBottomOf="@+id/tv_order_detail_alamat" />
+
+            <View
+                android:id="@+id/divider"
+                android:layout_width="0dp"
+                android:layout_height="1dp"
+                android:layout_marginTop="24dp"
+                android:background="@color/gray_400"
+                app:layout_constraintEnd_toStartOf="@+id/gr_order_detail"
+                app:layout_constraintStart_toStartOf="@+id/gl_order_detail"
+                app:layout_constraintTop_toBottomOf="@+id/tv_order_detail_metode_pembelian_title" />
+
+            <TextView
+                android:id="@+id/tv_order_detail_total_harga"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:text="Rp 1.250.000"
+                android:textColor="@color/gray_800"
+                android:textSize="18sp"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toStartOf="@+id/gr_order_detail"
+                app:layout_constraintTop_toBottomOf="@+id/tv_order_detail_total_jumlah" />
+
+            <TextView
+                android:id="@+id/tv_order_detail_total_jumlah"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:text="x32"
+                android:textColor="@color/gray_700"
+                app:layout_constraintEnd_toStartOf="@+id/gr_order_detail"
+                app:layout_constraintTop_toBottomOf="@+id/rv_order_detail_produk_list" />
+
+            <TextView
+                android:id="@+id/tv_order_detail_total_jumlah_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Jumlah"
+                android:textAllCaps="true"
+                android:textColor="@color/gray_600"
+                android:textStyle="bold"
+                app:layout_constraintBottom_toBottomOf="@+id/tv_order_detail_total_jumlah"
+                app:layout_constraintStart_toStartOf="@+id/gl_order_detail"
+                app:layout_constraintTop_toTopOf="@+id/tv_order_detail_total_jumlah" />
+
+            <TextView
+                android:id="@+id/tv_order_detail_metode_pembayaran_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="COD"
+                android:textColor="@color/gray_700"
+                app:layout_constraintBottom_toBottomOf="@+id/tv_order_detail_metode_pembelian_title"
+                app:layout_constraintEnd_toStartOf="@+id/gr_order_detail"
+                app:layout_constraintTop_toTopOf="@+id/tv_order_detail_metode_pembelian_title" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </androidx.core.widget.NestedScrollView>
+
+</LinearLayout>

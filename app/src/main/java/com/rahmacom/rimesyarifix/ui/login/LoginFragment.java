@@ -12,20 +12,14 @@ import androidx.activity.OnBackPressedCallback;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
-import androidx.lifecycle.LifecycleOwner;
 import androidx.lifecycle.SavedStateHandle;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.NavController;
-import androidx.navigation.NavGraph;
-import androidx.navigation.Navigation;
 import androidx.navigation.fragment.NavHostFragment;
 
-import com.rahmacom.rimesyarifix.data.network.response.ResponseLogin;
 import com.rahmacom.rimesyarifix.databinding.FragmentLoginBinding;
 import com.rahmacom.rimesyarifix.manager.PreferenceManager;
 import com.rahmacom.rimesyarifix.utils.Const;
-
-import java.util.Objects;
 
 import dagger.hilt.android.AndroidEntryPoint;
 
@@ -34,8 +28,7 @@ public class LoginFragment extends Fragment {
 
     private LoginViewModel viewModel;
     private FragmentLoginBinding binding;
-
-    private SavedStateHandle savedStateHandle;
+    private PreferenceManager manager;
 
     @Nullable
     @Override
@@ -51,6 +44,7 @@ public class LoginFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+        manager = new PreferenceManager(requireContext());
 
         binding.tvLoginForget.setOnClickListener(v -> {
 
@@ -68,62 +62,70 @@ public class LoginFragment extends Fragment {
                     etPass.getText().toString()
             );
             viewModel.login.observe(getViewLifecycleOwner(), login -> {
-                if (login != null) {
-                    switch (login.getStatus()) {
-                        case SUCCESS:
-                            Toast.makeText(requireContext(), "Login berhasil",
-                                    Toast.LENGTH_SHORT).show();
+                switch (login.getStatus()) {
+                    case SUCCESS:
+                        Toast.makeText(requireContext(), "Login berhasil",
+                                Toast.LENGTH_SHORT).show();
+                        manager.setString(
+                                Const.KEY_TOKEN,
+                                login.getData().getTokenType() + " " + login.getData()
+                                        .getAccessToken());
+                        manager.setString(Const.KEY_TYPE, login.getData().getTokenType());
+                        manager.setInt(Const.KEY_TTL, login.getData().getExpiresIn());
 
-                            PreferenceManager preferenceManager =
-                                    new PreferenceManager(requireContext());
-                            preferenceManager.setString(Const.KEY_TOKEN, login.getData().getAccessToken());
-                            preferenceManager.setString(Const.KEY_TYPE, login.getData().getTokenType());
-                            preferenceManager.setInt(Const.KEY_TTL, login.getData().getExpiresIn());
+                        manager.setString(Const.KEY_NAME, login.getData().getUser().getName());
+                        manager.setString(Const.KEY_JENIS_KELAMIN,
+                                login.getData().getUser().getJenisKelamin());
+                        manager.setString(Const.KEY_ALAMAT,
+                                login.getData().getUser().getShipment().getAlamat());
+                        manager.setString(Const.KEY_NO_TELP, login.getData().getUser().getNoHp());
+                        manager.setString(Const.KEY_NO_WA, login.getData().getUser().getNoWa());
+                        manager.setString(Const.KEY_EMAIL, login.getData().getUser().getEmail());
+                        manager.setString(Const.KEY_ROLE, login.getData().getUser().getRoles().get(0));
 
-                            navController.navigate(LoginFragmentDirections.actionLoginFragmentToHomeFragment());
-                            break;
+                        navController.navigate(LoginFragmentDirections.loginFragmentToNavHome());
+                        break;
 
-                        case ERROR:
-                            binding.pbLoginLoading.setVisibility(View.INVISIBLE);
-                            binding.btnLogin.setText("Login");
-                            Toast.makeText(
-                                    requireContext(),
-                                    "Terjadi error! Silahkan hubungi admin Rime Syari",
-                                    Toast.LENGTH_SHORT
-                            ).show();
-                            break;
+                    case ERROR:
+                        binding.pbLoginLoading.setVisibility(View.INVISIBLE);
+                        binding.btnLogin.setText("Login");
+                        Toast.makeText(
+                                requireContext(),
+                                "Terjadi error! Silahkan hubungi admin Rime Syari",
+                                Toast.LENGTH_SHORT
+                        ).show();
+                        break;
 
-                        case EMPTY:
-                            break;
+                    case EMPTY:
+                        break;
 
-                        case LOADING:
-                            binding.pbLoginLoading.setVisibility(View.VISIBLE);
-                            binding.btnLogin.setText("");
-                            Toast.makeText(
-                                    requireContext(),
-                                    "Tunggu sebentar...",
-                                    Toast.LENGTH_SHORT
-                            ).show();
-                            break;
+                    case LOADING:
+                        binding.pbLoginLoading.setVisibility(View.VISIBLE);
+                        binding.btnLogin.setText("");
+                        Toast.makeText(
+                                requireContext(),
+                                "Tunggu sebentar...",
+                                Toast.LENGTH_SHORT
+                        ).show();
+                        break;
 
-                        case INVALID:
-                            binding.pbLoginLoading.setVisibility(View.INVISIBLE);
-                            binding.btnLogin.setText("Login");
-                            etUser.setText("");
-                            etPass.setText("");
-                            Toast.makeText(
-                                    requireContext(),
-                                    "Login gagal! Username atau password salah",
-                                    Toast.LENGTH_SHORT
-                            ).show();
-                            break;
-                    }
+                    case INVALID:
+                        binding.pbLoginLoading.setVisibility(View.INVISIBLE);
+                        binding.btnLogin.setText("Login");
+                        etUser.setText("");
+                        etPass.setText("");
+                        Toast.makeText(
+                                requireContext(),
+                                "Login gagal! Username atau password salah",
+                                Toast.LENGTH_SHORT
+                        ).show();
+                        break;
                 }
             });
         });
 
         binding.tvRegisterLink.setOnClickListener(v -> {
-            navController.navigate(LoginFragmentDirections.actionLoginFragmentToRegisterFragment());
+            navController.navigate(LoginFragmentDirections.loginFragmentToRegisterFragment());
         });
 
         OnBackPressedCallback onBackPressedCallback = new OnBackPressedCallback(true) {

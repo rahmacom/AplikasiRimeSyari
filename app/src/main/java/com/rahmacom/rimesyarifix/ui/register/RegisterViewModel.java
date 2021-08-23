@@ -6,9 +6,11 @@ import androidx.lifecycle.SavedStateHandle;
 import androidx.lifecycle.Transformations;
 import androidx.lifecycle.ViewModel;
 
-import com.rahmacom.rimesyarifix.data.MainRepository;
-import com.rahmacom.rimesyarifix.data.network.response.ResponseLogin;
+import com.rahmacom.rimesyarifix.data.AuthRepository;
+import com.rahmacom.rimesyarifix.data.network.response.LoginResponse;
 import com.rahmacom.rimesyarifix.data.vo.Resource;
+
+import java.util.Objects;
 
 import javax.inject.Inject;
 
@@ -17,23 +19,54 @@ import dagger.hilt.android.lifecycle.HiltViewModel;
 @HiltViewModel
 public class RegisterViewModel extends ViewModel {
 
-    private MutableLiveData<Register> registerCredentials = new MutableLiveData<>();
-
-    private MainRepository mainRepository;
+    private AuthRepository authRepository;
     private SavedStateHandle savedStateHandle;
 
+    private MutableLiveData<Register> register = new MutableLiveData<>();
+
     @Inject
-    public RegisterViewModel(MainRepository mainRepository, SavedStateHandle savedStateHandle) {
-        this.mainRepository = mainRepository;
+    public RegisterViewModel(AuthRepository authRepository, SavedStateHandle savedStateHandle) {
+        this.authRepository = authRepository;
         this.savedStateHandle = savedStateHandle;
     }
 
-    public final LiveData<Resource<ResponseLogin>> register =
-            Transformations.switchMap(registerCredentials,
-                    (user) -> mainRepository.register(user.getUsername(), user.getEmail(),
-                            user.getPassword()));
+    public final LiveData<Resource<LoginResponse>> registerUser =
+            Transformations.switchMap(register,
+                    user -> authRepository.register(user.name, user.email,
+                            user.password));
 
-    public void setRegister(Register register) {
-        registerCredentials.setValue(register);
+    public void setRegister(String name, String email, String password, String passwordConfirm) throws Exception {
+        Register register = new Register(name, email, password, passwordConfirm);
+        if (register.isPasswordConfirmable()) {
+            this.register.setValue(register);
+        } else {
+            throw new Exception("Password do not match");
+        }
+    }
+
+    static class Register {
+        String name;
+        String email;
+        String password;
+        String passwordConfirm;
+
+        public Register(String name, String email, String password, String passwordConfirm) {
+            this.name = name;
+            this.email = email;
+            this.password = password;
+            this.passwordConfirm = passwordConfirm;
+        }
+
+        Boolean isPasswordConfirmable(String password, String passwordConfirm) {
+            if (password == null && passwordConfirm == null) {
+                return false;
+            }
+
+            return Objects.equals(password, passwordConfirm);
+        }
+
+        public Boolean isPasswordConfirmable() {
+            return isPasswordConfirmable(this.password, this.passwordConfirm);
+        }
     }
 }

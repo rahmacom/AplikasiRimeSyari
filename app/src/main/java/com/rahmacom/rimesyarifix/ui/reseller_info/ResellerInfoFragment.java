@@ -38,7 +38,7 @@ public class ResellerInfoFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
         Log.d("InformasiFragment", "This is informasi fragment");
         binding.btnMulaiKycVerifikasi.setOnClickListener(v -> {
-            Navigation.findNavController(view).navigate(R.id.action_resellerInfoFragment_to_resellerKYCFragment);
+            Navigation.findNavController(view).navigate(ResellerInfoFragmentDirections.resellerInfoFragmentToResellerKYCFragment());
         });
     }
 

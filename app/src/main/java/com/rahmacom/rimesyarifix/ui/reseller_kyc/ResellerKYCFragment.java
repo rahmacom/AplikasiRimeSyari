@@ -24,7 +24,7 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentActivity;
 
 import com.google.common.util.concurrent.ListenableFuture;
-import com.rahmacom.rimesyarifix.databinding.FragmentResellerKycBinding;
+import com.rahmacom.rimesyarifix.databinding.FragmentResellerKycCameraBinding;
 
 import org.jetbrains.annotations.NotNull;
 
@@ -44,7 +44,7 @@ public class ResellerKYCFragment extends Fragment {
 
     private static final String TAG = ResellerKYCFragment.class.getSimpleName();
     private static final String FILENAME_FORMAT = "yyyy-MM-dd_HH-mm-ss-SSS";
-    private static final String[] REQUIRED_PERMISSIONS = new String[]{
+    private static final String[] REQUIRED_PERMISSIONS = new String[] {
             "android.permission.CAMERA",
             "android.permission.WRITE_EXTERNAL_STORAGE"
     };
@@ -52,7 +52,7 @@ public class ResellerKYCFragment extends Fragment {
     private static final int REQUEST_CODE_PERMISSIONS = 10;
 
     private ResellerKYCViewModel viewModel;
-    private FragmentResellerKycBinding binding;
+    private FragmentResellerKycCameraBinding binding;
 
     private ImageCapture imageCapture;
     private File outputDir;
@@ -87,7 +87,7 @@ public class ResellerKYCFragment extends Fragment {
             ViewGroup container,
             Bundle savedInstanceState
     ) {
-        binding = FragmentResellerKycBinding.inflate(getLayoutInflater());
+        binding = FragmentResellerKycCameraBinding.inflate(getLayoutInflater());
         return binding.getRoot();
     }
 
@@ -170,7 +170,8 @@ public class ResellerKYCFragment extends Fragment {
                     ContextCompat.getMainExecutor(requireContext()),
                     new ImageCapture.OnImageSavedCallback() {
                         @Override
-                        public void onImageSaved(@NonNull ImageCapture.OutputFileResults outputFileResults) {
+                        public void onImageSaved(
+                                @NonNull ImageCapture.OutputFileResults outputFileResults) {
                             Uri savedUri = Uri.fromFile(photoFile);
                             String message = "Photo captured successfully: " + savedUri;
                             Toast.makeText(activity, message, Toast.LENGTH_SHORT).show();

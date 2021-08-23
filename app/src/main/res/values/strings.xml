@@ -18,4 +18,5 @@
     <string name="reseller_mulai_kyc">Mulai verifikasi KYC</string>
     <string name="register_akun">Belum punya akun?</string>
     <string name="register_akun_click">Daftar</string>
+    <string name="text_tambah_ke_keranjang">Tambah ke keranjang</string>
 </resources>

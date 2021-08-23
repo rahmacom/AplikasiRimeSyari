@@ -1,0 +1,213 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".ui.keranjang_detail.KeranjangDetailFragment">
+
+    <com.google.android.material.appbar.MaterialToolbar
+        android:id="@+id/toolbar_keranjang_detail"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:theme="@style/ThemeOverlay.RimeSyariFix.ToolBar"
+        android:background="@color/white"
+        android:paddingBottom="@dimen/layout_padding" />
+
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingTop="@dimen/layout_padding">
+
+            <TextView
+                android:id="@+id/tv_keranjang_detail_judul"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:letterSpacing="0.05"
+                android:text="judul"
+                android:textAllCaps="true"
+                android:textColor="@color/gray_800"
+                android:textSize="24sp"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toStartOf="@+id/gr_keranjang_detail"
+                app:layout_constraintStart_toStartOf="@+id/gl_keranjang_detail"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/tv_keranjang_detail_deskripsi"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="12dp"
+                android:text="Deskripsi"
+                android:textColor="@color/gray_600"
+                android:textSize="16sp"
+                app:layout_constraintEnd_toStartOf="@+id/gr_keranjang_detail"
+                app:layout_constraintStart_toStartOf="@+id/gl_keranjang_detail"
+                app:layout_constraintTop_toBottomOf="@+id/tv_keranjang_detail_judul" />
+
+            <TextView
+                android:id="@+id/tv_keranjang_detail_alamat_title"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="24dp"
+                android:text="Alamat"
+                android:textAllCaps="true"
+                android:textColor="@color/gray_700"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toStartOf="@+id/gr_keranjang_detail"
+                app:layout_constraintStart_toStartOf="@+id/gl_keranjang_detail"
+                app:layout_constraintTop_toBottomOf="@+id/tv_keranjang_detail_deskripsi" />
+
+            <TextView
+                android:id="@+id/tv_keranjang_detail_alamat"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:text="Jalan Kulintang no. 33 RT 36, Kelurahan Dadi Mulya, Kecamatan Samarinda Ulu, Samarinda, 75123 (depan sanggar rubinha)"
+                android:textColor="@color/gray_600"
+                app:layout_constraintEnd_toStartOf="@+id/gr_keranjang_detail"
+                app:layout_constraintStart_toStartOf="@+id/gl_keranjang_detail"
+                app:layout_constraintTop_toBottomOf="@+id/tv_keranjang_detail_alamat_title" />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rv_keranjang_detail_produk_list"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/tv_keranjang_detail_produk_list_title" />
+
+            <TextView
+                android:id="@+id/tv_keranjang_detail_produk_list_title"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="24dp"
+                android:text="Produk dalam keranjang"
+                android:textColor="@color/gray_700"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toStartOf="@+id/gr_keranjang_detail"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="@+id/gl_keranjang_detail"
+                app:layout_constraintTop_toBottomOf="@+id/divider" />
+
+            <TextView
+                android:id="@+id/tv_keranjang_detail_total_pembelian_title"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:text="Total pembelian"
+                android:textAllCaps="true"
+                android:textColor="@color/gray_700"
+                android:textStyle="bold"
+                app:layout_constraintBottom_toBottomOf="@+id/tv_keranjang_detail_total_harga"
+                app:layout_constraintStart_toStartOf="@+id/gl_keranjang_detail"
+                app:layout_constraintTop_toTopOf="@+id/tv_keranjang_detail_total_harga" />
+
+            <Spinner
+                android:id="@+id/spinner_keranjang_detail_metode_pembayaran"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintBottom_toBottomOf="@+id/tv_keranjang_detail_metode_pembelian_title"
+                app:layout_constraintEnd_toStartOf="@+id/gr_keranjang_detail"
+                app:layout_constraintHorizontal_bias="1.0"
+                app:layout_constraintStart_toEndOf="@+id/tv_keranjang_detail_metode_pembelian_title"
+                app:layout_constraintTop_toTopOf="@+id/tv_keranjang_detail_metode_pembelian_title" />
+
+            <androidx.constraintlayout.widget.Guideline
+                android:id="@+id/gl_keranjang_detail"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                app:layout_constraintGuide_begin="16dp" />
+
+            <androidx.constraintlayout.widget.Guideline
+                android:id="@+id/gr_keranjang_detail"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                app:layout_constraintGuide_end="16dp" />
+
+            <TextView
+                android:id="@+id/tv_keranjang_detail_metode_pembelian_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:text="Metode pembayaran"
+                android:textColor="@color/gray_700"
+                android:textStyle="bold"
+                app:layout_constraintStart_toStartOf="@+id/gl_keranjang_detail"
+                app:layout_constraintTop_toBottomOf="@+id/tv_keranjang_detail_alamat" />
+
+            <View
+                android:id="@+id/divider"
+                android:layout_width="0dp"
+                android:layout_height="1dp"
+                android:layout_marginTop="24dp"
+                android:background="@color/gray_400"
+                app:layout_constraintEnd_toStartOf="@+id/gr_keranjang_detail"
+                app:layout_constraintStart_toStartOf="@+id/gl_keranjang_detail"
+                app:layout_constraintTop_toBottomOf="@+id/tv_keranjang_detail_metode_pembelian_title" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btn_buat_order"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:layout_marginBottom="32dp"
+                android:paddingStart="24dp"
+                android:paddingEnd="24dp"
+                android:text="Buat Order"
+                android:textSize="12sp"
+                android:textStyle="bold"
+                android:letterSpacing="0.2"
+                app:cornerRadius="100dp"
+                app:elevation="2dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@+id/gr_keranjang_detail"
+                app:layout_constraintStart_toStartOf="@+id/gl_keranjang_detail"
+                app:layout_constraintTop_toBottomOf="@+id/tv_keranjang_detail_total_harga" />
+
+            <TextView
+                android:id="@+id/tv_keranjang_detail_total_harga"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:text="Rp 1.250.000"
+                android:textColor="@color/gray_800"
+                android:textSize="18sp"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toStartOf="@+id/gr_keranjang_detail"
+                app:layout_constraintTop_toBottomOf="@+id/tv_keranjang_detail_total_jumlah" />
+
+            <TextView
+                android:id="@+id/tv_keranjang_detail_total_jumlah"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:text="x32"
+                android:textColor="@color/gray_700"
+                app:layout_constraintEnd_toStartOf="@+id/gr_keranjang_detail"
+                app:layout_constraintTop_toBottomOf="@+id/rv_keranjang_detail_produk_list" />
+
+            <TextView
+                android:id="@+id/tv_keranjang_detail_total_jumlah_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Jumlah"
+                android:textAllCaps="true"
+                android:textColor="@color/gray_700"
+                android:textStyle="bold"
+                app:layout_constraintBottom_toBottomOf="@+id/tv_keranjang_detail_total_jumlah"
+                app:layout_constraintStart_toStartOf="@+id/gl_keranjang_detail"
+                app:layout_constraintTop_toTopOf="@+id/tv_keranjang_detail_total_jumlah" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </androidx.core.widget.NestedScrollView>
+
+</LinearLayout>
