@@ -15,10 +15,13 @@ import androidx.navigation.Navigation;
 import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
 
+import com.google.android.material.chip.Chip;
+import com.rahmacom.rimesyarifix.data.entity.Color;
 import com.rahmacom.rimesyarifix.data.entity.Product;
+import com.rahmacom.rimesyarifix.data.entity.Size;
+import com.rahmacom.rimesyarifix.data.vo.Status;
 import com.rahmacom.rimesyarifix.databinding.FragmentProdukBinding;
 import com.rahmacom.rimesyarifix.manager.PreferenceManager;
-import com.rahmacom.rimesyarifix.ui.home.HomeViewModel;
 import com.rahmacom.rimesyarifix.utils.Const;
 import com.rahmacom.rimesyarifix.utils.Helper;
 
@@ -36,11 +39,7 @@ public class ProdukFragment extends Fragment {
     private FotoProdukSliderAdapter adapter;
 
     @Override
-    public View onCreateView(
-            @NonNull LayoutInflater inflater,
-            ViewGroup container,
-            Bundle savedInstanceState
-    ) {
+    public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         binding = FragmentProdukBinding.inflate(getLayoutInflater());
         return binding.getRoot();
     }
@@ -53,16 +52,25 @@ public class ProdukFragment extends Fragment {
 
         setupToolbar();
 
-        int productId = ProdukFragmentArgs.fromBundle(getArguments()).getProductId();
+        int productId = ProdukFragmentArgs.fromBundle(getArguments())
+                .getProductId();
+
         viewModel.setProductId(manager.getString(Const.KEY_TOKEN), productId);
+
         viewModel.viewProduct.observe(getViewLifecycleOwner(), product -> {
             if (product != null) {
-                Log.d("produkFragment", product.getStatus().toString());
+                Log.d("produkFragment", product.getStatus()
+                        .toString());
                 switch (product.getStatus()) {
                     case SUCCESS:
-                        Log.d("produkFragment", product.getData().toString());
-                        setBinding(Objects.requireNonNull(product.getData()));
-                        binding.toolbarFragmentProduk.setTitle(product.getData().getNama());
+                        Log.d("produkFragment", product.getData()
+                                .toString());
+                        setDataBinding(Objects.requireNonNull(product.getData()));
+                        binding.toolbarFragmentProduk.setTitle(product.getData()
+                                .getNama());
+                        binding.btnProdukAction.setOnClickListener(v -> {
+                            onBtnProdukActionClick(product.getData().getId());
+                        });
                         break;
 
                     case EMPTY:
@@ -76,6 +84,7 @@ public class ProdukFragment extends Fragment {
 
                     case UNAUTHORIZED:
                         Log.d("produkFragment", product.getMessage());
+                        break;
                 }
             }
         });
@@ -87,7 +96,7 @@ public class ProdukFragment extends Fragment {
         binding = null;
     }
 
-    private void setBinding(Product product) {
+    private void setDataBinding(Product product) {
         adapter = new FotoProdukSliderAdapter();
         adapter.setImages(product.getImages());
 
@@ -95,12 +104,52 @@ public class ProdukFragment extends Fragment {
         binding.tvProdukNama.setText(product.getNama());
         binding.tvProdukDeskripsi.setText(product.getDeskripsi());
         binding.tvProdukHarga.setText(Helper.convertToRP(product.getHargaCustomer()));
+        binding.tvProdukSukaText.setText(String.valueOf(product.getSuka()));
+        binding.tvProdukRatingText.setText(product.getReviewAvg() + " / 5 (" + product.getReviewCount() + " review)");
+
+        createChips();
     }
 
     private void setupToolbar() {
-        AppBarConfiguration appBarConfiguration =
-                new AppBarConfiguration.Builder(navController.getGraph())
-                        .build();
+        AppBarConfiguration appBarConfiguration = new AppBarConfiguration.Builder(navController.getGraph()).build();
         NavigationUI.setupWithNavController(binding.toolbarFragmentProduk, navController, appBarConfiguration);
+    }
+
+    private void createChips() {
+        viewModel.getProductColors.observe(getViewLifecycleOwner(), colors -> {
+            if (colors.getStatus() == Status.SUCCESS) {
+                for (Color color : colors.getData()) {
+                    Chip chipWarna = new Chip(binding.chipgroupProdukWarna.getContext());
+                    chipWarna.setCheckable(true);
+                    chipWarna.setText(color.getName());
+                    chipWarna.setId(color.getId());
+                    binding.chipgroupProdukWarna.addView(chipWarna);
+                }
+            }
+        });
+
+        viewModel.getProductSizes.observe(getViewLifecycleOwner(), sizes -> {
+            if (sizes.getStatus() == Status.SUCCESS) {
+                for (Size size : sizes.getData()) {
+                    Chip chipUkuran = new Chip(binding.chipgroupProdukUkuran.getContext());
+                    chipUkuran.setCheckable(true);
+                    chipUkuran.setText(size.getName());
+                    chipUkuran.setId(size.getId());
+                    binding.chipgroupProdukUkuran.addView(chipUkuran);
+                }
+            }
+        });
+    }
+
+    private void onBtnProdukActionClick(int productId) {
+        int colorId = binding.chipgroupProdukWarna.getCheckedChipId();
+        int sizeId = binding.chipgroupProdukUkuran.getCheckedChipId();
+
+        ProdukFragmentDirections.ProdukFragmentToProdukDialogFragment action = ProdukFragmentDirections.produkFragmentToProdukDialogFragment();
+        action.setProductId(productId);
+        action.setColorId(colorId);
+        action.setSizeId(sizeId);
+
+        navController.navigate(action);
     }
 }

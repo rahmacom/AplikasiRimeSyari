@@ -1,7 +1,6 @@
 package com.rahmacom.rimesyarifix.ui.login;
 
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,7 +11,6 @@ import androidx.activity.OnBackPressedCallback;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
-import androidx.lifecycle.SavedStateHandle;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.NavController;
 import androidx.navigation.fragment.NavHostFragment;
@@ -32,11 +30,7 @@ public class LoginFragment extends Fragment {
 
     @Nullable
     @Override
-    public View onCreateView(
-            @NonNull LayoutInflater inflater,
-            ViewGroup container,
-            Bundle savedInstanceState
-    ) {
+    public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         binding = FragmentLoginBinding.inflate(inflater, container, false);
         return binding.getRoot();
     }
@@ -57,69 +51,76 @@ public class LoginFragment extends Fragment {
         final EditText etPass = binding.edtLoginPassword;
 
         binding.btnLogin.setOnClickListener(v -> {
-            viewModel.setLogin(
-                    etUser.getText().toString(),
-                    etPass.getText().toString()
-            );
+            viewModel.setLogin(etUser.getText()
+                    .toString(), etPass.getText()
+                    .toString());
             viewModel.login.observe(getViewLifecycleOwner(), login -> {
-                switch (login.getStatus()) {
-                    case SUCCESS:
-                        Toast.makeText(requireContext(), "Login berhasil",
-                                Toast.LENGTH_SHORT).show();
-                        manager.setString(
-                                Const.KEY_TOKEN,
-                                login.getData().getTokenType() + " " + login.getData()
-                                        .getAccessToken());
-                        manager.setString(Const.KEY_TYPE, login.getData().getTokenType());
-                        manager.setInt(Const.KEY_TTL, login.getData().getExpiresIn());
+                if (login.getData() != null) {
+                    switch (login.getStatus()) {
+                        case SUCCESS:
+                            Toast.makeText(requireContext(), "Login berhasil", Toast.LENGTH_SHORT)
+                                    .show();
+                            manager.setString(Const.KEY_TOKEN, login.getData()
+                                    .getTokenType() + " " + login.getData()
+                                    .getAccessToken());
+                            manager.setString(Const.KEY_TYPE, login.getData()
+                                    .getTokenType());
+                            manager.setInt(Const.KEY_TTL, login.getData()
+                                    .getExpiresIn());
 
-                        manager.setString(Const.KEY_NAME, login.getData().getUser().getName());
-                        manager.setString(Const.KEY_JENIS_KELAMIN,
-                                login.getData().getUser().getJenisKelamin());
-                        manager.setString(Const.KEY_ALAMAT,
-                                login.getData().getUser().getShipment().getAlamat());
-                        manager.setString(Const.KEY_NO_TELP, login.getData().getUser().getNoHp());
-                        manager.setString(Const.KEY_NO_WA, login.getData().getUser().getNoWa());
-                        manager.setString(Const.KEY_EMAIL, login.getData().getUser().getEmail());
-                        manager.setString(Const.KEY_ROLE, login.getData().getUser().getRoles().get(0));
+                            manager.setString(Const.KEY_NAMA_LENGKAP, login.getData()
+                                    .getUser()
+                                    .getName());
+                            manager.setString(Const.KEY_JENIS_KELAMIN, login.getData()
+                                    .getUser()
+                                    .getJenisKelamin());
+                            manager.setString(Const.KEY_ALAMAT, login.getData()
+                                    .getUser()
+                                    .getShipment()
+                                    .getAlamat());
+                            manager.setString(Const.KEY_NO_TELP, login.getData()
+                                    .getUser()
+                                    .getNoHp());
+                            manager.setString(Const.KEY_NO_WA, login.getData()
+                                    .getUser()
+                                    .getNoWa());
+                            manager.setString(Const.KEY_EMAIL, login.getData()
+                                    .getUser()
+                                    .getEmail());
+                            manager.setString(Const.KEY_ROLE, login.getData()
+                                    .getUser()
+                                    .getRoles()
+                                    .get(0));
 
-                        navController.navigate(LoginFragmentDirections.loginFragmentToNavHome());
-                        break;
+                            navController.navigate(LoginFragmentDirections.loginFragmentToNavHome());
+                            break;
 
-                    case ERROR:
-                        binding.pbLoginLoading.setVisibility(View.INVISIBLE);
-                        binding.btnLogin.setText("Login");
-                        Toast.makeText(
-                                requireContext(),
-                                "Terjadi error! Silahkan hubungi admin Rime Syari",
-                                Toast.LENGTH_SHORT
-                        ).show();
-                        break;
+                        case ERROR:
+                            binding.pbLoginLoading.setVisibility(View.INVISIBLE);
+                            binding.btnLogin.setText("Login");
+                            Toast.makeText(requireContext(), "Terjadi error! Silahkan hubungi admin Rime Syari", Toast.LENGTH_SHORT)
+                                    .show();
+                            break;
 
-                    case EMPTY:
-                        break;
+                        case EMPTY:
+                            break;
 
-                    case LOADING:
-                        binding.pbLoginLoading.setVisibility(View.VISIBLE);
-                        binding.btnLogin.setText("");
-                        Toast.makeText(
-                                requireContext(),
-                                "Tunggu sebentar...",
-                                Toast.LENGTH_SHORT
-                        ).show();
-                        break;
+                        case LOADING:
+                            binding.pbLoginLoading.setVisibility(View.VISIBLE);
+                            binding.btnLogin.setText("");
+                            Toast.makeText(requireContext(), "Tunggu sebentar...", Toast.LENGTH_SHORT)
+                                    .show();
+                            break;
 
-                    case INVALID:
-                        binding.pbLoginLoading.setVisibility(View.INVISIBLE);
-                        binding.btnLogin.setText("Login");
-                        etUser.setText("");
-                        etPass.setText("");
-                        Toast.makeText(
-                                requireContext(),
-                                "Login gagal! Username atau password salah",
-                                Toast.LENGTH_SHORT
-                        ).show();
-                        break;
+                        case INVALID:
+                            binding.pbLoginLoading.setVisibility(View.INVISIBLE);
+                            binding.btnLogin.setText("Login");
+                            etUser.setText("");
+                            etPass.setText("");
+                            Toast.makeText(requireContext(), "Login gagal! Username atau password salah", Toast.LENGTH_SHORT)
+                                    .show();
+                            break;
+                    }
                 }
             });
         });
@@ -134,7 +135,8 @@ public class LoginFragment extends Fragment {
                 requireActivity().finish();
             }
         };
-        requireActivity().getOnBackPressedDispatcher().addCallback(onBackPressedCallback);
+        requireActivity().getOnBackPressedDispatcher()
+                .addCallback(onBackPressedCallback);
     }
 
     @Override

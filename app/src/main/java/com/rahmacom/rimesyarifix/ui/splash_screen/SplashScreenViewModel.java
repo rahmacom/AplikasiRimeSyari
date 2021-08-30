@@ -17,19 +17,16 @@ import dagger.hilt.android.lifecycle.HiltViewModel;
 @HiltViewModel
 public class SplashScreenViewModel extends ViewModel {
 
-    private AuthRepository authRepository;
     private final SavedStateHandle savedStateHandle;
-
-    private MutableLiveData<String> liveToken = new MutableLiveData<>();
+    private final MutableLiveData<String> liveToken = new MutableLiveData<>();
+    private AuthRepository authRepository;
+    public LiveData<Resource<LoginResponse>> refreshLogin = Transformations.switchMap(liveToken, login -> authRepository.refreshLogin(login));
 
     @Inject
     public SplashScreenViewModel(AuthRepository authRepository, SavedStateHandle savedStateHandle) {
         this.authRepository = authRepository;
         this.savedStateHandle = savedStateHandle;
     }
-
-    public LiveData<Resource<LoginResponse>> refreshLogin = Transformations.switchMap(liveToken,
-            login -> authRepository.refreshLogin(login));
 
     public void setToken(String token) {
         liveToken.setValue(token);

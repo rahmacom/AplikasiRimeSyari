@@ -1,90 +1,100 @@
 package com.rahmacom.rimesyarifix.data.entity;
 
-import java.io.File;
-import java.util.List;
 import com.google.gson.annotations.SerializedName;
 
-public class User{
+import java.io.File;
+import java.util.List;
 
-	@SerializedName("name")
-	private String name;
+public class User {
 
-	@SerializedName("email")
-	private String email;
+    @SerializedName("name")
+    private String name;
 
-	@SerializedName("jenis_kelamin")
-	private String jenisKelamin;
+    @SerializedName("email")
+    private String email;
 
-	@SerializedName("jk")
-	private Character jk;
+    @SerializedName("jenis_kelamin")
+    private String jenisKelamin;
 
-	@SerializedName("tempat_lahir")
-	private String tempatLahir;
+    @SerializedName("jk")
+    private Character jk;
 
-	@SerializedName("tgl_lahir")
-	private String tglLahir;
+    @SerializedName("tempat_lahir")
+    private String tempatLahir;
 
-	@SerializedName("no_hp")
-	private String noHp;
+    @SerializedName("tgl_lahir")
+    private String tglLahir;
 
-	@SerializedName("no_wa")
-	private String noWa;
+    @SerializedName("no_hp")
+    private String noHp;
 
-	@SerializedName("created_at")
-	private String createdAt;
+    @SerializedName("no_wa")
+    private String noWa;
 
-	@SerializedName("avatar")
-	private File avatar;
+    @SerializedName("created_at")
+    private String createdAt;
 
-	@SerializedName("shipments")
-	private List<Shipment> shipments;
+    @SerializedName("avatar")
+    private File avatar;
 
-	@SerializedName("shipment")
-	private Shipment shipment;
+    @SerializedName("shipments")
+    private List<Shipment> shipments;
 
-	@SerializedName("roles")
-	private List<String> roles;
+    @SerializedName("shipment")
+    private Shipment shipment;
 
-	public String getName() {
-		return name;
-	}
+    @SerializedName("roles")
+    private List<String> roles;
 
-	public String getEmail() {
-		return email;
-	}
-	public String getJenisKelamin() {
-		return jenisKelamin;
-	}
-	public String getTempatLahir() {
-		return tempatLahir;
-	}
-	public String getTglLahir() {
-		return tglLahir;
-	}
-	public String getNoHp() {
-		return noHp;
-	}
-	public String getNoWa() {
-		return noWa;
-	}
-	public String getCreatedAt() {
-		return createdAt;
-	}
-	public File getAvatar() {
-		return avatar;
-	}
-	public List<Shipment> getShipments() {
-		return shipments;
-	}
-	public List<String> getRoles() {
-		return roles;
-	}
+    public String getName() {
+        return name;
+    }
 
-	public Character getJk() {
-		return jk;
-	}
+    public String getEmail() {
+        return email;
+    }
 
-	public Shipment getShipment() {
-		return shipment;
-	}
+    public String getJenisKelamin() {
+        return jenisKelamin;
+    }
+
+    public String getTempatLahir() {
+        return tempatLahir;
+    }
+
+    public String getTglLahir() {
+        return tglLahir;
+    }
+
+    public String getNoHp() {
+        return noHp;
+    }
+
+    public String getNoWa() {
+        return noWa;
+    }
+
+    public String getCreatedAt() {
+        return createdAt;
+    }
+
+    public File getAvatar() {
+        return avatar;
+    }
+
+    public List<Shipment> getShipments() {
+        return shipments;
+    }
+
+    public List<String> getRoles() {
+        return roles;
+    }
+
+    public Character getJk() {
+        return jk;
+    }
+
+    public Shipment getShipment() {
+        return shipment;
+    }
 }

@@ -10,7 +10,7 @@
         android:id="@+id/toolbar_fragment_home"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:paddingBottom="@dimen/layout_padding"
+        android:minWidth="?attr/actionBarSize"
         android:theme="@style/ThemeOverlay.RimeSyariFix.ToolBar"
         android:background="@color/white"
         app:layout_anchorGravity="center"
@@ -23,8 +23,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
-        android:layout_marginTop="16dp"
         android:layout_marginEnd="16dp"
+        android:layout_marginBottom="16dp"
         app:cardCornerRadius="8dp"
         app:cardElevation="2dp"
         app:cardMaxElevation="2dp"
@@ -35,7 +35,7 @@
         <androidx.viewpager2.widget.ViewPager2
             android:id="@+id/vp_home_post_slider"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
+            android:layout_height="100dp" />
 
     </androidx.cardview.widget.CardView>
 

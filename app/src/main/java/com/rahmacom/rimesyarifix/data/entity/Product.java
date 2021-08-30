@@ -84,44 +84,88 @@ public class Product {
         return id;
     }
 
+    public void setId(int id) {
+        this.id = id;
+    }
+
     public String getNama() {
         return nama;
+    }
+
+    public void setNama(String nama) {
+        this.nama = nama;
     }
 
     public String getDeskripsi() {
         return deskripsi;
     }
 
+    public void setDeskripsi(String deskripsi) {
+        this.deskripsi = deskripsi;
+    }
+
     public int getHargaCustomer() {
         return hargaCustomer;
+    }
+
+    public void setHargaCustomer(int hargaCustomer) {
+        this.hargaCustomer = hargaCustomer;
     }
 
     public int getHargaReseller() {
         return hargaReseller;
     }
 
+    public void setHargaReseller(int hargaReseller) {
+        this.hargaReseller = hargaReseller;
+    }
+
     public int getResellerMinimum() {
         return resellerMinimum;
+    }
+
+    public void setResellerMinimum(int resellerMinimum) {
+        this.resellerMinimum = resellerMinimum;
     }
 
     public int getProductCategoryId() {
         return productCategoryId;
     }
 
+    public void setProductCategoryId(int productCategoryId) {
+        this.productCategoryId = productCategoryId;
+    }
+
     public int getSuka() {
         return suka;
+    }
+
+    public void setSuka(int suka) {
+        this.suka = suka;
     }
 
     public double getReviewAvg() {
         return reviewAvg;
     }
 
+    public void setReviewAvg(double reviewAvg) {
+        this.reviewAvg = reviewAvg;
+    }
+
     public int getReviewCount() {
         return reviewCount;
     }
 
+    public void setReviewCount(int reviewCount) {
+        this.reviewCount = reviewCount;
+    }
+
     public int getTotalStok() {
         return totalStok;
+    }
+
+    public void setTotalStok(int totalStok) {
+        this.totalStok = totalStok;
     }
 
     public ProductCategory getProductCategory() {
@@ -148,70 +192,8 @@ public class Product {
         return pivot;
     }
 
-    public void setId(int id) {
-        this.id = id;
-    }
-
-    public void setNama(String nama) {
-        this.nama = nama;
-    }
-
-    public void setDeskripsi(String deskripsi) {
-        this.deskripsi = deskripsi;
-    }
-
-    public void setHargaCustomer(int hargaCustomer) {
-        this.hargaCustomer = hargaCustomer;
-    }
-
-    public void setHargaReseller(int hargaReseller) {
-        this.hargaReseller = hargaReseller;
-    }
-
-    public void setResellerMinimum(int resellerMinimum) {
-        this.resellerMinimum = resellerMinimum;
-    }
-
-    public void setProductCategoryId(int productCategoryId) {
-        this.productCategoryId = productCategoryId;
-    }
-
-    public void setSuka(int suka) {
-        this.suka = suka;
-    }
-
-    public void setReviewAvg(double reviewAvg) {
-        this.reviewAvg = reviewAvg;
-    }
-
-    public void setReviewCount(int reviewCount) {
-        this.reviewCount = reviewCount;
-    }
-
-    public void setTotalStok(int totalStok) {
-        this.totalStok = totalStok;
-    }
-
     @Override
     public String toString() {
-        return "Product{" +
-                "id=" + id +
-                ", nama='" + nama + '\'' +
-                ", deskripsi='" + deskripsi + '\'' +
-                ", hargaCustomer=" + hargaCustomer +
-                ", hargaReseller=" + hargaReseller +
-                ", resellerMinimum=" + resellerMinimum +
-                ", productCategoryId=" + productCategoryId +
-                ", suka=" + suka +
-                ", reviewAvg=" + reviewAvg +
-                ", reviewCount=" + reviewCount +
-                ", totalStok=" + totalStok +
-                ", productCategory=" + productCategory +
-                ", productStocks=" + productStocks +
-                ", image=" + image +
-                ", images=" + images +
-                ", testimonies=" + testimonies +
-                ", pivot=" + pivot +
-                '}';
+        return "Product{" + "id=" + id + ", nama='" + nama + '\'' + ", deskripsi='" + deskripsi + '\'' + ", hargaCustomer=" + hargaCustomer + ", hargaReseller=" + hargaReseller + ", resellerMinimum=" + resellerMinimum + ", productCategoryId=" + productCategoryId + ", suka=" + suka + ", reviewAvg=" + reviewAvg + ", reviewCount=" + reviewCount + ", totalStok=" + totalStok + ", productCategory=" + productCategory + ", productStocks=" + productStocks + ", image=" + image + ", images=" + images + ", testimonies=" + testimonies + ", pivot=" + pivot + '}';
     }
 }

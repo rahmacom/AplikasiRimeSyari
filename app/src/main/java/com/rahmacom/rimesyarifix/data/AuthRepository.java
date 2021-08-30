@@ -79,10 +79,7 @@ public class AuthRepository {
         return data;
     }
 
-    public LiveData<Resource<LoginResponse>> updateLogin(String token,
-                                                         String email,
-                                                         String oldPassword,
-                                                         String newPassword) {
+    public LiveData<Resource<LoginResponse>> updateLogin(String token, String email, String oldPassword, String newPassword) {
         MutableLiveData<Resource<LoginResponse>> data = new MutableLiveData<>();
         data.setValue(Resource.loading(null));
 
@@ -322,6 +319,7 @@ public class AuthRepository {
                         break;
                 }
             }
+
             @Override
             public void onFailure(Call<User> call, Throwable t) {
                 data.postValue(Resource.error(t.getMessage(), null));

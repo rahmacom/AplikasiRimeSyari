@@ -12,15 +12,14 @@ import com.rahmacom.rimesyarifix.data.entity.Product;
 import com.rahmacom.rimesyarifix.databinding.ItemHomeProdukGridBinding;
 import com.rahmacom.rimesyarifix.manager.PreferenceManager;
 import com.rahmacom.rimesyarifix.utils.Const;
-import com.rahmacom.rimesyarifix.utils.Helper;
 
 import java.util.ArrayList;
 
 public class DataProdukAdapter extends RecyclerView.Adapter<DataProdukAdapter.ViewHolder> {
 
+    private final ArrayList<Product> listData = new ArrayList<>();
+    private final Context context;
     private ItemHomeProdukGridBinding binding;
-    private ArrayList<Product> listData = new ArrayList<>();
-    private Context context;
     private OnItemClickListener onItemClickListener;
 
     public DataProdukAdapter(Context context) {
@@ -40,11 +39,7 @@ public class DataProdukAdapter extends RecyclerView.Adapter<DataProdukAdapter.Vi
     @NonNull
     @Override
     public DataProdukAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        binding = ItemHomeProdukGridBinding.inflate(
-                LayoutInflater.from(parent.getContext()),
-                parent,
-                false
-        );
+        binding = ItemHomeProdukGridBinding.inflate(LayoutInflater.from(parent.getContext()), parent, false);
         return new ViewHolder(binding);
     }
 
@@ -61,9 +56,13 @@ public class DataProdukAdapter extends RecyclerView.Adapter<DataProdukAdapter.Vi
         return listData.size();
     }
 
+    interface OnItemClickListener {
+        void onItemClick(Product product);
+    }
+
     static class ViewHolder extends RecyclerView.ViewHolder {
-        private ItemHomeProdukGridBinding binding;
-        private PreferenceManager manager = new PreferenceManager(itemView.getContext());
+        private final ItemHomeProdukGridBinding binding;
+        private final PreferenceManager manager = new PreferenceManager(itemView.getContext());
 
         ViewHolder(ItemHomeProdukGridBinding binding) {
             super(binding.getRoot());
@@ -71,8 +70,12 @@ public class DataProdukAdapter extends RecyclerView.Adapter<DataProdukAdapter.Vi
         }
 
         void bind(Product product) {
+            if (manager.keyExists(Const.KEY_ROLE)) {
+                manager.getString(Const.KEY_ROLE);
+            }
+
             binding.tvHomeProdukNama.setText(product.getNama());
-            binding.tvHomeProdukHarga.setText(Helper.convertToRP(product.getHargaCustomer()));
+            binding.tvHomeProdukHarga.setText(String.valueOf(product.getHargaCustomer()));
             binding.tvHomeProdukSuka.setText(String.valueOf(product.getSuka()));
 
             if (product.getTotalStok() > 0) {
@@ -82,12 +85,9 @@ public class DataProdukAdapter extends RecyclerView.Adapter<DataProdukAdapter.Vi
             }
 
             Glide.with(binding.getRoot())
-                    .load(Const.BASE_URL + product.getImage().getPath())
+                    .load(Const.BASE_URL + product.getImage()
+                            .getPath())
                     .into(binding.ivHomeProdukFoto);
         }
-    }
-
-    interface OnItemClickListener {
-        void onItemClick(Product product);
     }
 }

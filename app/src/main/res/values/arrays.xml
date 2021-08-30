@@ -27,12 +27,16 @@
         <item>@drawable/icon_logout</item>
     </integer-array>
 
-    <string-array name="tab_status_order">
+    <string-array name="tab_status_order_berjalan">
         <item>Semua</item>
         <item>Belum diproses</item>
         <item>Sedang diproses</item>
         <item>Sedang dikemas</item>
         <item>Dalam pengiriman</item>
+    </string-array>
+
+    <string-array name="tab_status_order_selesai">
+        <item>Semua</item>
         <item>Selesai</item>
         <item>Ditunda</item>
         <item>Dibatalkan</item>

@@ -37,11 +37,7 @@ public class KeranjangDetailFragment extends Fragment {
     private NavController navController;
 
     @Override
-    public View onCreateView(
-            @NonNull LayoutInflater inflater,
-            ViewGroup container,
-            Bundle savedInstanceState
-    ) {
+    public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         binding = FragmentKeranjangDetailBinding.inflate(inflater, container, false);
         return binding.getRoot();
     }
@@ -54,13 +50,15 @@ public class KeranjangDetailFragment extends Fragment {
 
         setupToolbar();
 
-        int cartId = KeranjangDetailFragmentArgs.fromBundle(getArguments()).getCartId();
+        int cartId = KeranjangDetailFragmentArgs.fromBundle(getArguments())
+                .getCartId();
         viewModel.setCartId(manager.getString(Const.KEY_TOKEN), cartId);
         viewModel.viewCart.observe(getViewLifecycleOwner(), cart -> {
             Log.d("cartDetail", String.valueOf(cart.getStatus()));
             switch (cart.getStatus()) {
                 case SUCCESS:
                     setDataBinding(cart.getData());
+                    break;
                 case ERROR:
                 case EMPTY:
                 case LOADING:
@@ -79,14 +77,14 @@ public class KeranjangDetailFragment extends Fragment {
     }
 
     private void setupToolbar() {
-        AppBarConfiguration appBarConfiguration =
-                new AppBarConfiguration.Builder(navController.getGraph()).build();
+        AppBarConfiguration appBarConfiguration = new AppBarConfiguration.Builder(navController.getGraph()).build();
         NavigationUI.setupWithNavController(binding.toolbarKeranjangDetail, navController, appBarConfiguration);
     }
 
     private void setDataBinding(Cart cart) {
-        binding.tvKeranjangDetailJudul.setText(cart.getJudul());
-        binding.tvKeranjangDetailDeskripsi.setText(cart.getDeskripsi());
+        binding.etKeranjangDetailJudul.setText(cart.getJudul());
+        binding.toolbarKeranjangDetail.setTitle(cart.getJudul());
+        binding.etKeranjangDetailDeskripsi.setText(cart.getDeskripsi());
         binding.tvKeranjangDetailTotalJumlah.setText(cart.getJumlah() + " item");
         binding.tvKeranjangDetailTotalHarga.setText(Helper.convertToRP(cart.getTotal()));
 

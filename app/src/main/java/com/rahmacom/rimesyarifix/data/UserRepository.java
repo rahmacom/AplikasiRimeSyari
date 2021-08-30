@@ -65,6 +65,7 @@ public class UserRepository {
                         break;
                 }
             }
+
             @Override
             public void onFailure(Call<User> call, Throwable t) {
                 data.postValue(Resource.error(t.getMessage(), null));
@@ -78,16 +79,7 @@ public class UserRepository {
         MutableLiveData<Resource<User>> data = new MutableLiveData<>();
         data.setValue(Resource.loading(null));
 
-        Call<User> api = rimeSyariAPI.updateProfile(
-                token,
-                user.getName(),
-                user.getJenisKelamin(),
-                user.getTempatLahir(),
-                user.getTglLahir(),
-                shipment.getAlamat(),
-                shipment.getId(),
-                user.getNoHp(),
-                user.getNoWa());
+        Call<User> api = rimeSyariAPI.updateProfile(token, user.getName(), user.getJenisKelamin(), user.getTempatLahir(), user.getTglLahir(), shipment.getAlamat(), shipment.getId(), user.getNoHp(), user.getNoWa());
 
         api.enqueue(new Callback<User>() {
             @Override
@@ -123,6 +115,7 @@ public class UserRepository {
                         break;
                 }
             }
+
             @Override
             public void onFailure(Call<User> call, Throwable t) {
                 data.postValue(Resource.error(t.getMessage(), null));

@@ -14,8 +14,8 @@ import java.util.ArrayList;
 
 public class BiodataProfilAdapter extends RecyclerView.Adapter<BiodataProfilAdapter.ViewHolder> {
 
+    private final ArrayList<Biodata> listBiodata = new ArrayList<>();
     private ItemProfilBiodataListBinding binding;
-    private ArrayList<Biodata> listBiodata = new ArrayList<>();
 
     public void setLists(ArrayList<Biodata> list) {
         listBiodata.clear();
@@ -26,10 +26,7 @@ public class BiodataProfilAdapter extends RecyclerView.Adapter<BiodataProfilAdap
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull @NotNull ViewGroup parent, int viewType) {
-        binding = ItemProfilBiodataListBinding.inflate(
-                LayoutInflater.from(parent.getContext()),
-                parent,
-                false);
+        binding = ItemProfilBiodataListBinding.inflate(LayoutInflater.from(parent.getContext()), parent, false);
         return new ViewHolder(binding);
     }
 
@@ -45,7 +42,7 @@ public class BiodataProfilAdapter extends RecyclerView.Adapter<BiodataProfilAdap
 
     static class ViewHolder extends RecyclerView.ViewHolder {
 
-        private ItemProfilBiodataListBinding binding;
+        private final ItemProfilBiodataListBinding binding;
 
         public ViewHolder(ItemProfilBiodataListBinding binding) {
             super(binding.getRoot());

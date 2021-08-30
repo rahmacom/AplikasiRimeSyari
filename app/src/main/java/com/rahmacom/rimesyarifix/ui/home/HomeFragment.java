@@ -5,7 +5,6 @@ import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -33,14 +32,10 @@ public class HomeFragment extends Fragment {
 
     private NavController navController;
     private PreferenceManager manager;
-    private DataProdukAdapter adapter;
+    private HomeProdukAdapter adapter;
 
     @Override
-    public View onCreateView(
-            @NonNull LayoutInflater inflater,
-            ViewGroup container,
-            Bundle savedInstanceState
-    ) {
+    public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         binding = FragmentHomeBinding.inflate(inflater, container, false);
         return binding.getRoot();
     }
@@ -62,20 +57,19 @@ public class HomeFragment extends Fragment {
             if (product != null) {
                 switch (product.getStatus()) {
                     case SUCCESS:
-                        ArrayList<Product> products = new ArrayList<>();
-                        products.addAll(product.getData());
+                        ArrayList<Product> products = new ArrayList<>(product.getData());
                         setUpDataProduk(products);
                         adapter.setOnItemClickListener(item -> {
-                            HomeFragmentDirections.NavHomeToProdukFragment action =
-                                    HomeFragmentDirections.navHomeToProdukFragment();
+                            HomeFragmentDirections.NavHomeToProdukFragment action = HomeFragmentDirections.navHomeToProdukFragment();
                             action.setProductId(item.getId());
                             navController.navigate(action);
                         });
+                        break;
 
                     case ERROR:
                     case LOADING:
                     case EMPTY:
-//                    case INVALID:
+                    case INVALID:
                 }
             }
         });
@@ -85,7 +79,7 @@ public class HomeFragment extends Fragment {
     }
 
     private void setUpDataProduk(ArrayList<Product> list) {
-        adapter = new DataProdukAdapter(requireContext());
+        adapter = new HomeProdukAdapter(requireContext());
         adapter.setLists(list);
         GridLayoutManager gridLayoutManager = new GridLayoutManager(getContext(), 2);
 
@@ -96,7 +90,6 @@ public class HomeFragment extends Fragment {
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         if (item.getItemId() == R.id.menu_keranjang) {
-            Toast.makeText(requireContext(), "Hey I'm clicked!", Toast.LENGTH_SHORT).show();
             navController.navigate(HomeFragmentDirections.navHomeToKeranjangFragment());
         }
         return super.onOptionsItemSelected(item);

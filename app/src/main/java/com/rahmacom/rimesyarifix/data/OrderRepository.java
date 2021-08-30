@@ -1,12 +1,10 @@
 package com.rahmacom.rimesyarifix.data;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 
 import com.rahmacom.rimesyarifix.data.entity.Order;
-import com.rahmacom.rimesyarifix.data.entity.Shipment;
 import com.rahmacom.rimesyarifix.data.network.api.RimeSyariAPI;
 import com.rahmacom.rimesyarifix.data.vo.Resource;
 

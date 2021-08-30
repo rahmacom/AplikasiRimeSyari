@@ -17,19 +17,18 @@ import dagger.hilt.android.lifecycle.HiltViewModel;
 @HiltViewModel
 public class KeranjangDetailViewModel extends ViewModel {
 
-    private CartRepository cartRepository;
-    private SavedStateHandle savedStateHandle;
-
     private final MutableLiveData<CartId> liveCartid = new MutableLiveData<>();
+    private final SavedStateHandle savedStateHandle;
+
+    private CartRepository cartRepository;
+
+    public LiveData<Resource<Cart>> viewCart = Transformations.switchMap(liveCartid, cart -> cartRepository.viewCart(cart.token, cart.cartId));
 
     @Inject
     public KeranjangDetailViewModel(CartRepository cartRepository, SavedStateHandle savedStateHandle) {
         this.cartRepository = cartRepository;
         this.savedStateHandle = savedStateHandle;
     }
-
-    public LiveData<Resource<Cart>> viewCart = Transformations.switchMap(liveCartid,
-            cart -> cartRepository.viewCart(cart.token, cart.cartId));
 
     public void setCartId(String token, int cartId) {
         liveCartid.setValue(new CartId(cartId, token));

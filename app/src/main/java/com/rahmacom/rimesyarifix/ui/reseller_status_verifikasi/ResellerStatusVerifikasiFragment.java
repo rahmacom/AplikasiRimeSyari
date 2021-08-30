@@ -20,11 +20,7 @@ public class ResellerStatusVerifikasiFragment extends Fragment {
     }
 
     @Override
-    public View onCreateView(
-            @NonNull LayoutInflater inflater,
-            ViewGroup container,
-            Bundle savedInstanceState
-    ) {
+    public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         binding = FragmentResellerStatusVerifikasiBinding.inflate(getLayoutInflater());
         return binding.getRoot();
     }

@@ -13,8 +13,8 @@ import java.util.ArrayList;
 
 public class ProfilTestimoniAdapter extends RecyclerView.Adapter<ProfilTestimoniAdapter.ViewHolder> {
 
+    private final ArrayList<Testimony> lists = new ArrayList<>();
     private ItemProfilTestimoniListBinding binding;
-    private ArrayList<Testimony> lists = new ArrayList<>();
     private OnItemClickListener onItemClickListener;
 
     public void setLists(ArrayList<Testimony> items) {
@@ -26,28 +26,33 @@ public class ProfilTestimoniAdapter extends RecyclerView.Adapter<ProfilTestimoni
     public void setOnItemClickListener(OnItemClickListener onItemClickListener) {
         this.onItemClickListener = onItemClickListener;
     }
+
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        binding = ItemProfilTestimoniListBinding.inflate(LayoutInflater.from(
-                parent.getContext()),
-                parent,
-                false);
+        binding = ItemProfilTestimoniListBinding.inflate(LayoutInflater.from(parent.getContext()), parent, false);
         return new ViewHolder(binding);
     }
+
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         holder.bind(lists.get(position));
 
         holder.itemView.setOnClickListener(v -> onItemClickListener.onItemClick(lists.get(position)));
     }
+
     @Override
     public int getItemCount() {
         return lists.size();
     }
-    public class ViewHolder extends RecyclerView.ViewHolder {
 
-        private ItemProfilTestimoniListBinding binding;
+    interface OnItemClickListener {
+        void onItemClick(Testimony testimony);
+    }
+
+    static class ViewHolder extends RecyclerView.ViewHolder {
+
+        private final ItemProfilTestimoniListBinding binding;
 
         public ViewHolder(ItemProfilTestimoniListBinding binding) {
             super(binding.getRoot());
@@ -57,9 +62,5 @@ public class ProfilTestimoniAdapter extends RecyclerView.Adapter<ProfilTestimoni
         void bind(Testimony testimony) {
 
         }
-    }
-
-    interface OnItemClickListener {
-        void onItemClick(Testimony testimony);
     }
 }

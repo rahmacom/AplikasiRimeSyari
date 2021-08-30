@@ -20,26 +20,20 @@ import dagger.hilt.android.lifecycle.HiltViewModel;
 @HiltViewModel
 public class LoginViewModel extends ViewModel {
 
-    private AuthRepository authRepository;
-    private SavedStateHandle savedStateHandle;
-
-    private MutableLiveData<Login> credentials = new MutableLiveData<>();
-    private MutableLiveData<String> liveToken = new MutableLiveData<>();
-
+    private final SavedStateHandle savedStateHandle;
+    private final MutableLiveData<Login> credentials = new MutableLiveData<>();
+    private final MutableLiveData<String> liveToken = new MutableLiveData<>();
     public MutableLiveData<String> username = new MutableLiveData<>();
     public MutableLiveData<String> password = new MutableLiveData<>();
+    private AuthRepository authRepository;
+    public final LiveData<Resource<LoginResponse>> login = Transformations.switchMap(credentials, user -> authRepository.login(user.username, user.password));
+    public final LiveData<Resource<User>> profile = Transformations.switchMap(liveToken, token -> authRepository.profile(token));
 
     @Inject
     public LoginViewModel(AuthRepository authRepository, SavedStateHandle savedStateHandle) {
         this.authRepository = authRepository;
         this.savedStateHandle = savedStateHandle;
     }
-
-    public final LiveData<Resource<LoginResponse>> login = Transformations.switchMap(credentials,
-            user -> authRepository.login(user.username, user.password));
-
-    public final LiveData<Resource<User>> profile = Transformations.switchMap(liveToken,
-            token -> authRepository.profile(token));
 
     public void setLiveToken(String token) {
         liveToken.setValue(token);

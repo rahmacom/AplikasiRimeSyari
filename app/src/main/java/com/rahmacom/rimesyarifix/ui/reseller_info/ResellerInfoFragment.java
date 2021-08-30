@@ -11,7 +11,6 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.Navigation;
 
-import com.rahmacom.rimesyarifix.R;
 import com.rahmacom.rimesyarifix.databinding.FragmentResellerInfoBinding;
 
 public class ResellerInfoFragment extends Fragment {
@@ -24,11 +23,7 @@ public class ResellerInfoFragment extends Fragment {
     }
 
     @Override
-    public View onCreateView(
-            @NonNull LayoutInflater inflater,
-            ViewGroup container,
-            Bundle savedInstanceState
-    ) {
+    public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         binding = FragmentResellerInfoBinding.inflate(getLayoutInflater());
         return binding.getRoot();
     }
@@ -38,7 +33,8 @@ public class ResellerInfoFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
         Log.d("InformasiFragment", "This is informasi fragment");
         binding.btnMulaiKycVerifikasi.setOnClickListener(v -> {
-            Navigation.findNavController(view).navigate(ResellerInfoFragmentDirections.resellerInfoFragmentToResellerKYCFragment());
+            Navigation.findNavController(view)
+                    .navigate(ResellerInfoFragmentDirections.resellerInfoFragmentToResellerKYCFragment());
         });
     }
 

@@ -19,10 +19,9 @@ import dagger.hilt.android.lifecycle.HiltViewModel;
 @HiltViewModel
 public class KeranjangViewModel extends ViewModel {
 
-    private CartRepository cartRepository;
     private final SavedStateHandle savedStateHandle;
-
-    private MutableLiveData<String> liveToken = new MutableLiveData<>();
+    private final MutableLiveData<Keranjang> liveKeranjang = new MutableLiveData<>();
+    private CartRepository cartRepository;
 
     @Inject
     public KeranjangViewModel(CartRepository cartRepository, SavedStateHandle savedStateHandle) {
@@ -30,10 +29,42 @@ public class KeranjangViewModel extends ViewModel {
         this.savedStateHandle = savedStateHandle;
     }
 
-    public LiveData<Resource<List<Cart>>> getAllCarts = Transformations.switchMap(liveToken,
-            token -> cartRepository.getAllCarts(token));
+    public final LiveData<Resource<List<Cart>>> getAllCarts =
+            Transformations.switchMap(liveKeranjang,
+                    keranjang -> cartRepository.getAllCarts(keranjang.token));
+
+    public final LiveData<Resource<Cart>> newCart =
+            Transformations.switchMap(liveKeranjang,
+                    keranjang -> cartRepository.createNewCart(
+                            keranjang.token,
+                            keranjang.productId,
+                            keranjang.colorId,
+                            keranjang.sizeId));
 
     public void setLiveToken(String token) {
-        liveToken.setValue(token);
+        Keranjang keranjang = new Keranjang();
+        keranjang.token = token;
+        liveKeranjang.setValue(keranjang);
+    }
+
+    public void setKeranjang(String token, int productId, int colorId, int sizeId) {
+        Keranjang keranjang = new Keranjang(token, productId, colorId, sizeId);
+        liveKeranjang.setValue(keranjang);
+    }
+
+    static class Keranjang {
+        String token;
+        int productId;
+        int colorId;
+        int sizeId;
+
+        public Keranjang(String token, int productId, int colorId, int sizeId) {
+            this.token = token;
+            this.productId = productId;
+            this.colorId = colorId;
+            this.sizeId = sizeId;
+        }
+
+        public Keranjang() { }
     }
 }

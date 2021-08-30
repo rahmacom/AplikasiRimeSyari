@@ -12,9 +12,6 @@ public class ProductsByCategory {
     @Embedded
     public ProductCategory productCategory;
 
-    @Relation(
-            parentColumn = "id",
-            entityColumn = "productCategoryId"
-    )
+    @Relation(parentColumn = "id", entityColumn = "productCategoryId")
     public List<Product> products;
 }

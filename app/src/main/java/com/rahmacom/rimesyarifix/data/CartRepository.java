@@ -129,12 +129,12 @@ public class CartRepository {
         return data;
     }
 
-    public LiveData<Resource<Cart>> createNewCart(String token, Cart cart) {
+    public LiveData<Resource<Cart>> createNewCart(String token, int productId, int colorId, int sizeId) {
         MutableLiveData<Resource<Cart>> data = new MutableLiveData<>();
         data.setValue(Resource.loading(null));
 
-//        Call<Cart> api = rimeSyariAPI.createNewCart(token, cart.getJudul(), cart.getDeskripsi(),
-//                cart.getPi);
+        //        Call<Cart> api = rimeSyariAPI.createNewCart(token, cart.getJudul(), cart.getDeskripsi(),
+        //                cart.getPi);
 
         return data;
     }

@@ -17,19 +17,16 @@ import dagger.hilt.android.lifecycle.HiltViewModel;
 @HiltViewModel
 public class ProfilViewModel extends ViewModel {
 
+    private final SavedStateHandle savedStateHandle;
+    private final MutableLiveData<String> liveToken = new MutableLiveData<>();
     private UserRepository userRepository;
-    private SavedStateHandle savedStateHandle;
-
-    private MutableLiveData<String> liveToken = new MutableLiveData<>();
+    public LiveData<Resource<User>> profile = Transformations.switchMap(liveToken, token -> userRepository.profile(token));
 
     @Inject
     public ProfilViewModel(UserRepository userRepository, SavedStateHandle savedStateHandle) {
         this.userRepository = userRepository;
         this.savedStateHandle = savedStateHandle;
     }
-
-    public LiveData<Resource<User>> profile = Transformations.switchMap(liveToken,
-            token -> userRepository.profile(token));
 
     public void setLiveToken(String token) {
         liveToken.setValue(token);

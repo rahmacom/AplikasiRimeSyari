@@ -32,11 +32,7 @@ public class ProfilFragment extends Fragment {
     private PreferenceManager manager;
 
     @Override
-    public View onCreateView(
-            @NonNull LayoutInflater inflater,
-            ViewGroup container,
-            Bundle savedInstanceState
-    ) {
+    public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         binding = FragmentProfilBinding.inflate(inflater, container, false);
         return binding.getRoot();
     }
@@ -56,10 +52,9 @@ public class ProfilFragment extends Fragment {
 
         binding.rvListAkun.setAdapter(adapter);
         binding.rvListAkun.setLayoutManager(linearLayoutManager);
-        binding.rvListAkun.addItemDecoration(new DividerItemDecoration(requireContext(),
-                linearLayoutManager.getOrientation()));
+        binding.rvListAkun.addItemDecoration(new DividerItemDecoration(requireContext(), linearLayoutManager.getOrientation()));
 
-        binding.tvProfilNamaLengkapUser.setText(manager.getString(Const.KEY_NAME));
+        binding.tvProfilNamaLengkapUser.setText(manager.getString(Const.KEY_NAMA_LENGKAP));
         binding.tvProfilEmailUser.setText(manager.getString(Const.KEY_EMAIL));
     }
 

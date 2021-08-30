@@ -10,12 +10,12 @@ import com.google.gson.annotations.SerializedName;
 public class ProductCategory {
 
     @PrimaryKey
-	@SerializedName("id")
-	private int id;
+    @SerializedName("id")
+    private int id;
 
     @ColumnInfo(name = "name")
-	@SerializedName("name")
-	private String name;
+    @SerializedName("name")
+    private String name;
 
     public int getId() {
         return id;
@@ -35,9 +35,6 @@ public class ProductCategory {
 
     @Override
     public String toString() {
-        return "ProductCategory{" +
-                "id=" + id +
-                ", name='" + name + '\'' +
-                '}';
+        return "ProductCategory{" + "id=" + id + ", name='" + name + '\'' + '}';
     }
 }

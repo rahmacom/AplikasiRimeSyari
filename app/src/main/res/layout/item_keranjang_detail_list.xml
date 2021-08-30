@@ -13,12 +13,12 @@
 
         <ImageView
             android:id="@+id/iv_keranjang_produk_foto"
-            android:layout_width="80dp"
-            android:layout_height="100dp"
+            android:layout_width="100dp"
+            android:layout_height="110dp"
             android:adjustViewBounds="true"
             android:scaleType="centerCrop"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/cb_keranjang_produk_check"
+            app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintVertical_bias="1.0" />
 
@@ -28,13 +28,14 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
             android:layout_marginTop="8dp"
-            android:layout_marginEnd="8dp"
+            android:ellipsize="end"
+            android:fontFamily="@font/rubik_medium"
+            android:maxLines="1"
             android:text="Khimar abaya"
             android:textAllCaps="true"
             android:textColor="@color/gray_700"
-            android:textSize="16sp"
-            android:textStyle="bold"
-            app:layout_constraintEnd_toEndOf="parent"
+            android:textSize="14sp"
+            app:layout_constraintEnd_toStartOf="@+id/cb_keranjang_produk_check"
             app:layout_constraintStart_toEndOf="@+id/iv_keranjang_produk_foto"
             app:layout_constraintTop_toTopOf="parent" />
 
@@ -43,17 +44,19 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
-            android:layout_marginBottom="8dp"
+            android:layout_marginTop="8dp"
             android:text="Rp 110.000"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/iv_keranjang_produk_foto" />
+            android:textColor="@color/gray_500"
+            android:textSize="10sp"
+            app:layout_constraintStart_toEndOf="@+id/iv_keranjang_produk_foto"
+            app:layout_constraintTop_toBottomOf="@+id/tv_keranjang_produk_warna" />
 
         <com.google.android.material.button.MaterialButton
             android:id="@+id/btn_keranjang_produk_tambah"
+            style="?attr/materialButtonOutlinedStyle"
             android:layout_width="24dp"
-            android:layout_height="24dp"
-            android:layout_marginEnd="4dp"
-            android:layout_marginBottom="4dp"
+            android:layout_height="0dp"
+            android:layout_marginEnd="8dp"
             android:insetLeft="0dp"
             android:insetTop="0dp"
             android:insetRight="0dp"
@@ -61,21 +64,23 @@
             android:minWidth="0dp"
             android:minHeight="0dp"
             app:cornerRadius="100dp"
-            app:elevation="1dp"
+            app:elevation="0dp"
             app:icon="@drawable/icon_plus"
             app:iconGravity="textStart"
             app:iconPadding="0dp"
             app:iconSize="12dp"
             app:iconTint="@color/gray_700"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent" />
+            app:layout_constraintBottom_toBottomOf="@+id/tv_keranjang_produk_jumlah"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/tv_keranjang_produk_jumlah"
+            app:strokeColor="@color/gray_400" />
 
         <com.google.android.material.button.MaterialButton
             android:id="@+id/btn_keranjang_produk_kurang"
+            style="?attr/materialButtonOutlinedStyle"
             android:layout_width="24dp"
-            android:layout_height="24dp"
+            android:layout_height="0dp"
             android:layout_marginEnd="8dp"
-            android:layout_marginBottom="4dp"
             android:insetLeft="0dp"
             android:insetTop="0dp"
             android:insetRight="0dp"
@@ -89,8 +94,10 @@
             app:iconPadding="0dp"
             app:iconSize="12dp"
             app:iconTint="@color/gray_700"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toStartOf="@+id/tv_keranjang_produk_jumlah" />
+            app:layout_constraintBottom_toBottomOf="@+id/tv_keranjang_produk_jumlah"
+            app:layout_constraintEnd_toStartOf="@+id/tv_keranjang_produk_jumlah"
+            app:layout_constraintTop_toTopOf="@+id/tv_keranjang_produk_jumlah"
+            app:strokeColor="@color/gray_400" />
 
         <TextView
             android:id="@+id/tv_keranjang_produk_warna"
@@ -101,6 +108,7 @@
             android:text="warna: Lylac"
             android:textColor="@color/gray_500"
             android:textSize="10sp"
+            android:textStyle="italic"
             app:layout_constraintStart_toEndOf="@+id/iv_keranjang_produk_foto"
             app:layout_constraintTop_toBottomOf="@+id/tv_keranjang_produk_nama" />
 
@@ -112,34 +120,53 @@
             android:text="ukuran: XXL"
             android:textColor="@color/gray_500"
             android:textSize="10sp"
+            android:textStyle="italic"
             app:layout_constraintStart_toEndOf="@+id/tv_keranjang_produk_warna"
             app:layout_constraintTop_toTopOf="@+id/tv_keranjang_produk_warna" />
 
         <TextView
             android:id="@+id/tv_keranjang_produk_jumlah"
-            android:layout_width="40dp"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginEnd="8dp"
+            android:layout_marginBottom="8dp"
+            android:fontFamily="@font/rubik_medium"
             android:letterSpacing="0.1"
-            android:text="1"
+            android:text="99"
             android:textAlignment="center"
-            android:textColor="@color/gray_500"
-            android:textSize="12sp"
-            android:textStyle="bold"
-            app:layout_constraintBottom_toBottomOf="@+id/btn_keranjang_produk_tambah"
-            app:layout_constraintEnd_toStartOf="@+id/btn_keranjang_produk_tambah"
-            app:layout_constraintTop_toTopOf="@+id/btn_keranjang_produk_tambah" />
+            android:textColor="@color/gray_600"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/btn_keranjang_produk_tambah" />
 
         <CheckBox
             android:id="@+id/cb_keranjang_produk_check"
             android:layout_width="32dp"
-            android:layout_height="0dp"
-            android:layout_marginStart="4dp"
-            android:buttonTint="@color/gray_600"
+            android:layout_height="32dp"
+            android:background="#00000000"
+            android:buttonTint="@color/gray_400"
+            android:gravity="center"
+            android:insetLeft="0dp"
+            android:insetTop="0dp"
+            android:insetRight="0dp"
+            android:insetBottom="0dp"
+            android:scaleX="0.75"
+            android:scaleY="0.75"
+            android:text="@null"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/tv_keranjang_produk_sub_total"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginBottom="8dp"
+            android:fontFamily="@font/rubik_medium"
+            android:text="Rp 150.000"
+            android:textColor="@color/gray_700"
             android:textSize="12sp"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintStart_toEndOf="@+id/iv_keranjang_produk_foto" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

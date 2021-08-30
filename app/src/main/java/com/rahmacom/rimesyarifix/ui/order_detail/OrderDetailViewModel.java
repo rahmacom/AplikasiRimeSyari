@@ -17,10 +17,10 @@ import dagger.hilt.android.lifecycle.HiltViewModel;
 @HiltViewModel
 public class OrderDetailViewModel extends ViewModel {
 
+    private final SavedStateHandle savedStateHandle;
+    private final MutableLiveData<OrderId> liveOrderId = new MutableLiveData<>();
     private OrderRepository orderRepository;
-    private SavedStateHandle savedStateHandle;
-
-    private MutableLiveData<OrderId> liveOrderId = new MutableLiveData<>();
+    public LiveData<Resource<Order>> viewOrder = Transformations.switchMap(liveOrderId, order -> orderRepository.viewOrder(order.token, order.orderId));
 
     @Inject
     public OrderDetailViewModel(OrderRepository orderRepository, SavedStateHandle savedStateHandle) {
@@ -28,17 +28,14 @@ public class OrderDetailViewModel extends ViewModel {
         this.savedStateHandle = savedStateHandle;
     }
 
-    public LiveData<Resource<Order>> viewOrder = Transformations.switchMap(liveOrderId,
-            order -> orderRepository.viewOrder(order.token, order.orderId));
-
     public void setLiveOrderId(String token, int id) {
         OrderId orderId = new OrderId(id, token);
         liveOrderId.setValue(orderId);
     }
 
     static class OrderId {
-        private int orderId;
-        private String token;
+        private final int orderId;
+        private final String token;
 
         public OrderId(int orderId, String token) {
             this.orderId = orderId;

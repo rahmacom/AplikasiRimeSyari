@@ -1,7 +1,5 @@
 package com.rahmacom.rimesyarifix.data.entity;
 
-import androidx.room.Entity;
-
 import com.google.gson.annotations.SerializedName;
 
 public class Pivot {

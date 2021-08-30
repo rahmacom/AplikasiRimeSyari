@@ -9,7 +9,7 @@ import com.google.gson.annotations.SerializedName;
 @Entity(tableName = "shipments")
 public class Shipment {
 
-	@PrimaryKey
+    @PrimaryKey
     @SerializedName("id")
     private int id;
 
@@ -17,66 +17,60 @@ public class Shipment {
     @SerializedName("alamat")
     private String alamat;
 
-	@ColumnInfo(name = "village_id")
+    @ColumnInfo(name = "village_id")
     @SerializedName("village_id")
     private String villageId;
 
-	@ColumnInfo(name = "kode_pos")
+    @ColumnInfo(name = "kode_pos")
     @SerializedName("kode_pos")
     private String kodePos;
 
-	@ColumnInfo(name = "catatan")
+    @ColumnInfo(name = "catatan")
     @SerializedName("catatan")
     private String catatan;
 
-	public int getId() {
-		return id;
-	}
+    public int getId() {
+        return id;
+    }
 
-	public void setId(int id) {
-		this.id = id;
-	}
+    public void setId(int id) {
+        this.id = id;
+    }
 
-	public String getAlamat() {
-		return alamat;
-	}
+    public String getAlamat() {
+        return alamat;
+    }
 
-	public void setAlamat(String alamat) {
-		this.alamat = alamat;
-	}
+    public void setAlamat(String alamat) {
+        this.alamat = alamat;
+    }
 
-	public String getVillageId() {
-		return villageId;
-	}
+    public String getVillageId() {
+        return villageId;
+    }
 
-	public void setVillageId(String villageId) {
-		this.villageId = villageId;
-	}
+    public void setVillageId(String villageId) {
+        this.villageId = villageId;
+    }
 
-	public String getKodePos() {
-		return kodePos;
-	}
+    public String getKodePos() {
+        return kodePos;
+    }
 
-	public void setKodePos(String kodePos) {
-		this.kodePos = kodePos;
-	}
+    public void setKodePos(String kodePos) {
+        this.kodePos = kodePos;
+    }
 
-	public String getCatatan() {
-		return catatan;
-	}
+    public String getCatatan() {
+        return catatan;
+    }
 
-	public void setCatatan(String catatan) {
-		this.catatan = catatan;
-	}
+    public void setCatatan(String catatan) {
+        this.catatan = catatan;
+    }
 
-	@Override
-	public String toString() {
-		return "Shipment{" +
-				"id=" + id +
-				", alamat='" + alamat + '\'' +
-				", villageId='" + villageId + '\'' +
-				", kodePos='" + kodePos + '\'' +
-				", catatan='" + catatan + '\'' +
-				'}';
-	}
+    @Override
+    public String toString() {
+        return "Shipment{" + "id=" + id + ", alamat='" + alamat + '\'' + ", villageId='" + villageId + '\'' + ", kodePos='" + kodePos + '\'' + ", catatan='" + catatan + '\'' + '}';
+    }
 }

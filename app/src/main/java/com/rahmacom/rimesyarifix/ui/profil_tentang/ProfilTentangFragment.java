@@ -17,11 +17,7 @@ public class ProfilTentangFragment extends Fragment {
     private FragmentProfilTentangBinding binding;
 
     @Override
-    public View onCreateView(
-            @NonNull LayoutInflater inflater,
-            ViewGroup container,
-            Bundle savedInstanceState
-    ) {
+    public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         binding = FragmentProfilTentangBinding.inflate(getLayoutInflater(), container, false);
         return binding.getRoot();
     }

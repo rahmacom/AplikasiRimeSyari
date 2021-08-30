@@ -16,8 +16,8 @@ import java.util.List;
 
 public class FotoProdukSliderAdapter extends RecyclerView.Adapter<FotoProdukSliderAdapter.ViewHolder> {
 
+    private final ArrayList<Image> images = new ArrayList<>();
     private ItemProdukFotoSliderBinding binding;
-    private ArrayList<Image> images = new ArrayList<>();
 
     public void setImages(@NonNull List<Image> items) {
         images.clear();
@@ -28,11 +28,7 @@ public class FotoProdukSliderAdapter extends RecyclerView.Adapter<FotoProdukSlid
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        binding = ItemProdukFotoSliderBinding.inflate(
-                LayoutInflater.from(parent.getContext()),
-                parent,
-                false
-        );
+        binding = ItemProdukFotoSliderBinding.inflate(LayoutInflater.from(parent.getContext()), parent, false);
         return new ViewHolder(binding);
     }
 
@@ -48,7 +44,7 @@ public class FotoProdukSliderAdapter extends RecyclerView.Adapter<FotoProdukSlid
 
     static class ViewHolder extends RecyclerView.ViewHolder {
 
-        private ItemProdukFotoSliderBinding binding;
+        private final ItemProdukFotoSliderBinding binding;
 
         public ViewHolder(@NonNull ItemProdukFotoSliderBinding binding) {
             super(binding.getRoot());

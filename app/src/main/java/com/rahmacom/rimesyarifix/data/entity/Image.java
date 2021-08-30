@@ -9,7 +9,7 @@ import com.google.gson.annotations.SerializedName;
 @Entity(tableName = "images")
 public class Image {
 
-	@PrimaryKey
+    @PrimaryKey
     @SerializedName("id")
     private int id;
 
@@ -17,64 +17,56 @@ public class Image {
     @SerializedName("name")
     private String name;
 
-	@ColumnInfo(name = "mime_type")
+    @ColumnInfo(name = "mime_type")
     @SerializedName("mime_type")
     private String mimeType;
 
-	@ColumnInfo(name = "format")
+    @ColumnInfo(name = "format")
     @SerializedName("format")
     private String format;
 
-	@ColumnInfo(name = "size")
+    @ColumnInfo(name = "size")
     @SerializedName("size")
     private String size;
 
-	@ColumnInfo(name = "path")
+    @ColumnInfo(name = "path")
     @SerializedName("path")
     private String path;
 
-	@ColumnInfo(name = "url")
+    @ColumnInfo(name = "url")
     @SerializedName("url")
     private String url;
 
-	public int getId() {
-		return id;
-	}
+    public int getId() {
+        return id;
+    }
 
-	public String getName() {
-		return name;
-	}
+    public String getName() {
+        return name;
+    }
 
-	public String getMimeType() {
-		return mimeType;
-	}
+    public String getMimeType() {
+        return mimeType;
+    }
 
-	public String getFormat() {
-		return format;
-	}
+    public String getFormat() {
+        return format;
+    }
 
-	public String getSize() {
-		return size;
-	}
+    public String getSize() {
+        return size;
+    }
 
-	public String getPath() {
-		return path;
-	}
+    public String getPath() {
+        return path;
+    }
 
-	public String getUrl() {
-		return url;
-	}
+    public String getUrl() {
+        return url;
+    }
 
-	@Override
-	public String toString() {
-		return "Image{" +
-				"id=" + id +
-				", name='" + name + '\'' +
-				", mimeType='" + mimeType + '\'' +
-				", format='" + format + '\'' +
-				", size='" + size + '\'' +
-				", path='" + path + '\'' +
-				", url='" + url + '\'' +
-				'}';
-	}
+    @Override
+    public String toString() {
+        return "Image{" + "id=" + id + ", name='" + name + '\'' + ", mimeType='" + mimeType + '\'' + ", format='" + format + '\'' + ", size='" + size + '\'' + ", path='" + path + '\'' + ", url='" + url + '\'' + '}';
+    }
 }

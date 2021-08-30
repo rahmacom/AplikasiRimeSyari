@@ -17,21 +17,6 @@ public class Resource<T> {
         this.data = data;
     }
 
-    @NonNull
-    public Status getStatus() {
-        return status;
-    }
-
-    @Nullable
-    public String getMessage() {
-        return message;
-    }
-
-    @Nullable
-    public T getData() {
-        return data;
-    }
-
     public static <T> Resource<T> success(@Nullable T data) {
         return new Resource(Status.SUCCESS, null, data);
     }
@@ -62,5 +47,20 @@ public class Resource<T> {
 
     public static <T> Resource<T> unprocessableEntity(String message, @Nullable T data) {
         return new Resource(Status.UNPROCESSABLE_ENTITY, message, data);
+    }
+
+    @NonNull
+    public Status getStatus() {
+        return status;
+    }
+
+    @Nullable
+    public String getMessage() {
+        return message;
+    }
+
+    @Nullable
+    public T getData() {
+        return data;
     }
 }

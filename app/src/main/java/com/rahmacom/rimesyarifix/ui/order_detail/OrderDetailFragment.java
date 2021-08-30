@@ -1,7 +1,6 @@
 package com.rahmacom.rimesyarifix.ui.order_detail;
 
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -37,11 +36,7 @@ public class OrderDetailFragment extends Fragment {
     private OrderDetailAdapter adapter;
 
     @Override
-    public View onCreateView(
-            @NonNull LayoutInflater inflater,
-            ViewGroup container,
-            Bundle savedInstanceState
-    ) {
+    public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         binding = FragmentOrderDetailBinding.inflate(getLayoutInflater());
         return binding.getRoot();
     }
@@ -56,7 +51,8 @@ public class OrderDetailFragment extends Fragment {
 
         setupToolbar();
 
-        int orderId = OrderDetailFragmentArgs.fromBundle(getArguments()).getOrderId();
+        int orderId = OrderDetailFragmentArgs.fromBundle(getArguments())
+                .getOrderId();
 
         viewModel.setLiveOrderId(manager.getString(Const.KEY_TOKEN), orderId);
         viewModel.viewOrder.observe(getViewLifecycleOwner(), order -> {
@@ -81,18 +77,19 @@ public class OrderDetailFragment extends Fragment {
     }
 
     private void setupToolbar() {
-        AppBarConfiguration appBarConfiguration =
-                new AppBarConfiguration.Builder(navController.getGraph()).build();
+        AppBarConfiguration appBarConfiguration = new AppBarConfiguration.Builder(navController.getGraph()).build();
         NavigationUI.setupWithNavController(binding.toolbarOrderDetail, navController, appBarConfiguration);
     }
 
     private void setDataBinding(Order order) {
         binding.tvOrderDetailNomor.setText(order.getNomor());
-        binding.tvOrderDetailAlamat.setText(order.getShipment().getAlamat());
+        binding.tvOrderDetailAlamat.setText(order.getShipment()
+                .getAlamat());
         binding.tvOrderDetailPesan.setText(order.getPesan());
         binding.tvOrderDetailTotalHarga.setText(Helper.convertToRP(order.getTotal()));
         binding.tvOrderDetailTotalJumlah.setText(String.format("%s item", order.getJumlah()));
-        binding.tvOrderDetailStatus.setText(order.getStatus().getName());
+        binding.tvOrderDetailStatus.setText(order.getStatus()
+                .getName());
 
         setupRecyclerView((ArrayList<Product>) order.getProducts());
     }

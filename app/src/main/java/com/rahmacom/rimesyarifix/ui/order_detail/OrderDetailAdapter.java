@@ -16,7 +16,7 @@ import java.util.ArrayList;
 
 public class OrderDetailAdapter extends RecyclerView.Adapter<OrderDetailAdapter.ViewHolder> {
 
-    private ArrayList<Product> list = new ArrayList<>();
+    private final ArrayList<Product> list = new ArrayList<>();
     private ItemOrderDetailListBinding binding;
     private OnItemClickListener onItemClickListener;
 
@@ -29,13 +29,11 @@ public class OrderDetailAdapter extends RecyclerView.Adapter<OrderDetailAdapter.
     public void setOnItemClickListener(OnItemClickListener onItemClickListener) {
         this.onItemClickListener = onItemClickListener;
     }
+
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        binding = ItemOrderDetailListBinding.inflate(
-                LayoutInflater.from(parent.getContext()),
-                parent,
-                false);
+        binding = ItemOrderDetailListBinding.inflate(LayoutInflater.from(parent.getContext()), parent, false);
         return new ViewHolder(binding);
     }
 
@@ -49,9 +47,13 @@ public class OrderDetailAdapter extends RecyclerView.Adapter<OrderDetailAdapter.
         return list.size();
     }
 
+    interface OnItemClickListener {
+        void onItemClick(Product product);
+    }
+
     static class ViewHolder extends RecyclerView.ViewHolder {
 
-        private ItemOrderDetailListBinding binding;
+        private final ItemOrderDetailListBinding binding;
 
         public ViewHolder(ItemOrderDetailListBinding binding) {
             super(binding.getRoot());
@@ -63,16 +65,17 @@ public class OrderDetailAdapter extends RecyclerView.Adapter<OrderDetailAdapter.
             binding.tvOrderProdukHarga.setText(Helper.convertToRP(product.getHargaCustomer()));
             binding.tvOrderProdukJumlah.setText(String.format("x%d item", product.getPivot()
                     .getJumlah()));
-            binding.tvOrderProdukWarna.setText(product.getPivot().getColor().getName());
-            binding.tvOrderProdukSize.setText(product.getPivot().getSize().getName());
+            binding.tvOrderProdukWarna.setText(product.getPivot()
+                    .getColor()
+                    .getName());
+            binding.tvOrderProdukSize.setText(product.getPivot()
+                    .getSize()
+                    .getName());
 
             Glide.with(binding.getRoot())
-                    .load(Const.BASE_URL + product.getImage().getPath())
+                    .load(Const.BASE_URL + product.getImage()
+                            .getPath())
                     .into(binding.ivOrderProdukFoto);
         }
-    }
-
-    interface OnItemClickListener {
-        void onItemClick(Product product);
     }
 }

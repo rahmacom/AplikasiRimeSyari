@@ -19,7 +19,9 @@ public class ProfilSettingsFragment extends PreferenceFragmentCompat {
 
     @Override
     public View onCreateView(@NonNull @NotNull LayoutInflater inflater, @Nullable @org.jetbrains.annotations.Nullable ViewGroup container, @Nullable @org.jetbrains.annotations.Nullable Bundle savedInstanceState) {
-        Objects.requireNonNull(container).getContext().setTheme(R.style.RimeSyariFix);
+        Objects.requireNonNull(container)
+                .getContext()
+                .setTheme(R.style.RimeSyariFix);
         return super.onCreateView(inflater, container, savedInstanceState);
     }
 

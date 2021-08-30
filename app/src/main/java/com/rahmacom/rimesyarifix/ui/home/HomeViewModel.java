@@ -19,19 +19,16 @@ import dagger.hilt.android.lifecycle.HiltViewModel;
 @HiltViewModel
 public class HomeViewModel extends ViewModel {
 
+    private final SavedStateHandle savedStateHandle;
+    private final MutableLiveData<String> token = new MutableLiveData<>();
     private ProductRepository productRepository;
-    private SavedStateHandle savedStateHandle;
-
-    private MutableLiveData<String> token = new MutableLiveData<>();
+    public final LiveData<Resource<List<Product>>> getAllProducts = Transformations.switchMap(token, getToken -> productRepository.getAllProducts(token.getValue()));
 
     @Inject
     public HomeViewModel(ProductRepository productRepository, SavedStateHandle savedStateHandle) {
         this.productRepository = productRepository;
         this.savedStateHandle = savedStateHandle;
     }
-
-    public final LiveData<Resource<List<Product>>> getAllProducts =
-            Transformations.switchMap(token, getToken -> productRepository.getAllProducts(token.getValue()));
 
     public void setToken(String token) {
         this.token.setValue(token);

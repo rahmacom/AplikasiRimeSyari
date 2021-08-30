@@ -10,96 +10,88 @@ import com.google.gson.annotations.SerializedName;
 @Entity(tableName = "testimonies")
 public class Testimony {
 
-	@PrimaryKey
+    @PrimaryKey
     @SerializedName("id")
     private int id;
 
-	@ColumnInfo(name = "product_id")
+    @ColumnInfo(name = "product_id")
     @SerializedName("product_id")
     private int productId;
 
-	@ColumnInfo(name = "user_id")
+    @ColumnInfo(name = "user_id")
     @SerializedName("user_id")
     private int userId;
 
-	@ColumnInfo(name = "judul")
+    @ColumnInfo(name = "judul")
     @SerializedName("judul")
     private String judul;
 
-	@ColumnInfo(name = "isi")
+    @ColumnInfo(name = "isi")
     @SerializedName("isi")
     private String isi;
 
-	@ColumnInfo(name = "review")
+    @ColumnInfo(name = "review")
     @SerializedName("review")
     private int review;
 
-	@Ignore
+    @Ignore
     @SerializedName("user")
     private User user;
 
-	public int getId() {
-		return id;
-	}
+    public int getId() {
+        return id;
+    }
 
-	public int getProductId() {
-		return productId;
-	}
+    public void setId(int id) {
+        this.id = id;
+    }
 
-	public int getUserId() {
-		return userId;
-	}
+    public int getProductId() {
+        return productId;
+    }
 
-	public String getJudul() {
-		return judul;
-	}
+    public void setProductId(int productId) {
+        this.productId = productId;
+    }
 
-	public String getIsi() {
-		return isi;
-	}
+    public int getUserId() {
+        return userId;
+    }
 
-	public int getReview() {
-		return review;
-	}
+    public void setUserId(int userId) {
+        this.userId = userId;
+    }
 
-	public User getUser() {
-		return user;
-	}
+    public String getJudul() {
+        return judul;
+    }
 
-	public void setId(int id) {
-		this.id = id;
-	}
+    public void setJudul(String judul) {
+        this.judul = judul;
+    }
 
-	public void setProductId(int productId) {
-		this.productId = productId;
-	}
+    public String getIsi() {
+        return isi;
+    }
 
-	public void setUserId(int userId) {
-		this.userId = userId;
-	}
+    public void setIsi(String isi) {
+        this.isi = isi;
+    }
 
-	public void setJudul(String judul) {
-		this.judul = judul;
-	}
+    public int getReview() {
+        return review;
+    }
 
-	public void setIsi(String isi) {
-		this.isi = isi;
-	}
+    public void setReview(int review) {
+        this.review = review;
+    }
 
-	public void setReview(int review) {
-		this.review = review;
-	}
+    public User getUser() {
+        return user;
+    }
 
-	@Override
-	public String toString() {
-		return "Testimony{" +
-				"id=" + id +
-				", productId=" + productId +
-				", userId=" + userId +
-				", judul='" + judul + '\'' +
-				", isi='" + isi + '\'' +
-				", review=" + review +
-				", user=" + user +
-				'}';
-	}
+    @Override
+    public String toString() {
+        return "Testimony{" + "id=" + id + ", productId=" + productId + ", userId=" + userId + ", judul='" + judul + '\'' + ", isi='" + isi + '\'' + ", review=" + review + ", user=" + user + '}';
+    }
 }

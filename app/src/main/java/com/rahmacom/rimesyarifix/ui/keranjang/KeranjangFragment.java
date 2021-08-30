@@ -34,11 +34,7 @@ public class KeranjangFragment extends Fragment {
     private KeranjangListAdapter adapter;
 
     @Override
-    public View onCreateView(
-            @NonNull LayoutInflater inflater,
-            @Nullable ViewGroup container,
-            @Nullable Bundle savedInstanceState
-    ) {
+    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         binding = FragmentKeranjangBinding.inflate(inflater, container, false);
         return binding.getRoot();
     }
@@ -79,8 +75,7 @@ public class KeranjangFragment extends Fragment {
     }
 
     void setupActionBar() {
-        AppBarConfiguration appBarConfiguration =
-                new AppBarConfiguration.Builder(navController.getGraph()).build();
+        AppBarConfiguration appBarConfiguration = new AppBarConfiguration.Builder(navController.getGraph()).build();
         NavigationUI.setupWithNavController(binding.toolbarFragmentKeranjang, navController, appBarConfiguration);
     }
 }

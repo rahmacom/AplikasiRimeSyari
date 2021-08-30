@@ -21,12 +21,10 @@ public class AppModule {
     @Singleton
     @Provides
     public static RimeSyariAPI provideApiService() {
-        final Gson gson = new GsonBuilder()
-                .setDateFormat("yyyy-MM-dd HH:mm:ss")
+        final Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd HH:mm:ss")
                 .create();
 
-        return new Retrofit.Builder()
-                .baseUrl(Const.BASE_API_URL)
+        return new Retrofit.Builder().baseUrl(Const.BASE_API_URL)
                 .addConverterFactory(GsonConverterFactory.create(gson))
                 .build()
                 .create(RimeSyariAPI.class);

@@ -19,21 +19,16 @@ import dagger.hilt.android.lifecycle.HiltViewModel;
 @HiltViewModel
 public class RegisterViewModel extends ViewModel {
 
+    private final SavedStateHandle savedStateHandle;
+    private final MutableLiveData<Register> register = new MutableLiveData<>();
     private AuthRepository authRepository;
-    private SavedStateHandle savedStateHandle;
-
-    private MutableLiveData<Register> register = new MutableLiveData<>();
+    public final LiveData<Resource<LoginResponse>> registerUser = Transformations.switchMap(register, user -> authRepository.register(user.name, user.email, user.password));
 
     @Inject
     public RegisterViewModel(AuthRepository authRepository, SavedStateHandle savedStateHandle) {
         this.authRepository = authRepository;
         this.savedStateHandle = savedStateHandle;
     }
-
-    public final LiveData<Resource<LoginResponse>> registerUser =
-            Transformations.switchMap(register,
-                    user -> authRepository.register(user.name, user.email,
-                            user.password));
 
     public void setRegister(String name, String email, String password, String passwordConfirm) throws Exception {
         Register register = new Register(name, email, password, passwordConfirm);

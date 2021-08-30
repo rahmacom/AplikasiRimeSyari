@@ -19,8 +19,8 @@ import java.util.ArrayList;
 
 public class ProfilMenuAdapter extends RecyclerView.Adapter<ProfilMenuAdapter.ViewHolder> {
 
+    private final ArrayList<Profil> listData = new ArrayList<>();
     private ItemProfilMenuListBinding binding;
-    private ArrayList<Profil> listData = new ArrayList<>();
 
     public void setLists(ArrayList<Profil> list) {
         listData.clear();
@@ -30,14 +30,8 @@ public class ProfilMenuAdapter extends RecyclerView.Adapter<ProfilMenuAdapter.Vi
 
     @NonNull
     @Override
-    public ProfilMenuAdapter.ViewHolder onCreateViewHolder(
-            @NonNull ViewGroup parent, int viewType
-    ) {
-        binding = ItemProfilMenuListBinding.inflate(
-                LayoutInflater.from(parent.getContext()),
-                parent,
-                false
-        );
+    public ProfilMenuAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+        binding = ItemProfilMenuListBinding.inflate(LayoutInflater.from(parent.getContext()), parent, false);
         return new ViewHolder(binding);
     }
 
@@ -52,14 +46,16 @@ public class ProfilMenuAdapter extends RecyclerView.Adapter<ProfilMenuAdapter.Vi
                 preferenceManager.removePreference(Const.KEY_TOKEN);
                 preferenceManager.removePreference(Const.KEY_TTL);
                 preferenceManager.removePreference(Const.KEY_TYPE);
-                Navigation.findNavController(v).navigate(R.id.global_to_loginFragment);
-                Toast.makeText(v.getContext(), "Logged out", Toast.LENGTH_SHORT).show();
+                Navigation.findNavController(v)
+                        .navigate(R.id.global_to_loginFragment);
+                Toast.makeText(v.getContext(), "Logged out", Toast.LENGTH_SHORT)
+                        .show();
             });
         } else {
             holder.binding.ivChevron.setVisibility(View.VISIBLE);
-            holder.itemView.setOnClickListener(v ->
-                    Navigation.findNavController(v).navigate(listData.get(position).getActionId())
-            );
+            holder.itemView.setOnClickListener(v -> Navigation.findNavController(v)
+                    .navigate(listData.get(position)
+                            .getActionId()));
         }
     }
 
@@ -69,7 +65,7 @@ public class ProfilMenuAdapter extends RecyclerView.Adapter<ProfilMenuAdapter.Vi
     }
 
     static class ViewHolder extends RecyclerView.ViewHolder {
-        private ItemProfilMenuListBinding binding;
+        private final ItemProfilMenuListBinding binding;
 
         ViewHolder(@NonNull ItemProfilMenuListBinding binding) {
             super(binding.getRoot());

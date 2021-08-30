@@ -44,114 +44,100 @@ public class Order {
     @SerializedName("products")
     private List<Product> products;
 
-	public int getId() {
-		return id;
-	}
+    public int getId() {
+        return id;
+    }
 
-	public String getNomor() {
-		return nomor;
-	}
+    public void setId(int id) {
+        this.id = id;
+    }
 
-	public String getPesan() {
-		return pesan;
-	}
+    public String getNomor() {
+        return nomor;
+    }
 
-	public int getTotal() {
-		return total;
-	}
+    public void setNomor(String nomor) {
+        this.nomor = nomor;
+    }
 
-	public String getKodeDiskon() {
-		return kodeDiskon;
-	}
+    public String getPesan() {
+        return pesan;
+    }
 
-	public int getBiayaPengiriman() {
-		return biayaPengiriman;
-	}
+    public void setPesan(String pesan) {
+        this.pesan = pesan;
+    }
 
-	public int getBerat() {
-		return berat;
-	}
+    public int getTotal() {
+        return total;
+    }
 
-	public int getJumlah() {
-		return jumlah;
-	}
+    public void setTotal(int total) {
+        this.total = total;
+    }
 
-	public int getStatusId() {
-		return statusId;
-	}
+    public String getKodeDiskon() {
+        return kodeDiskon;
+    }
 
-	public int getShipmentId() {
-		return shipmentId;
-	}
+    public void setKodeDiskon(String kodeDiskon) {
+        this.kodeDiskon = kodeDiskon;
+    }
 
-	public Shipment getShipment() {
-		return shipment;
-	}
+    public int getBiayaPengiriman() {
+        return biayaPengiriman;
+    }
 
-	public Status getStatus() {
-		return status;
-	}
+    public void setBiayaPengiriman(int biayaPengiriman) {
+        this.biayaPengiriman = biayaPengiriman;
+    }
 
-	public List<Product> getProducts() {
-		return products;
-	}
+    public int getBerat() {
+        return berat;
+    }
 
-	public void setId(int id) {
-		this.id = id;
-	}
+    public void setBerat(int berat) {
+        this.berat = berat;
+    }
 
-	public void setNomor(String nomor) {
-		this.nomor = nomor;
-	}
+    public int getJumlah() {
+        return jumlah;
+    }
 
-	public void setPesan(String pesan) {
-		this.pesan = pesan;
-	}
+    public void setJumlah(int jumlah) {
+        this.jumlah = jumlah;
+    }
 
-	public void setTotal(int total) {
-		this.total = total;
-	}
+    public int getStatusId() {
+        return statusId;
+    }
 
-	public void setKodeDiskon(String kodeDiskon) {
-		this.kodeDiskon = kodeDiskon;
-	}
+    public void setStatusId(int statusId) {
+        this.statusId = statusId;
+    }
 
-	public void setBiayaPengiriman(int biayaPengiriman) {
-		this.biayaPengiriman = biayaPengiriman;
-	}
+    public int getShipmentId() {
+        return shipmentId;
+    }
 
-	public void setBerat(int berat) {
-		this.berat = berat;
-	}
+    public void setShipmentId(int shipmentId) {
+        this.shipmentId = shipmentId;
+    }
 
-	public void setJumlah(int jumlah) {
-		this.jumlah = jumlah;
-	}
+    public Shipment getShipment() {
+        return shipment;
+    }
 
-	public void setStatusId(int statusId) {
-		this.statusId = statusId;
-	}
+    public Status getStatus() {
+        return status;
+    }
 
-	public void setShipmentId(int shipmentId) {
-		this.shipmentId = shipmentId;
-	}
+    public List<Product> getProducts() {
+        return products;
+    }
 
-	@Override
-	public String toString() {
-		return "Order{" +
-				"id=" + id +
-				", nomor='" + nomor + '\'' +
-				", pesan='" + pesan + '\'' +
-				", total=" + total +
-				", kodeDiskon='" + kodeDiskon + '\'' +
-				", biayaPengiriman=" + biayaPengiriman +
-				", berat=" + berat +
-				", jumlah=" + jumlah +
-				", statusId=" + statusId +
-				", shipmentId=" + shipmentId +
-				", shipment=" + shipment +
-				", status=" + status +
-				", products=" + products +
-				'}';
-	}
+    @Override
+    public String toString() {
+        return "Order{" + "id=" + id + ", nomor='" + nomor + '\'' + ", pesan='" + pesan + '\'' + ", total=" + total + ", kodeDiskon='" + kodeDiskon + '\'' + ", biayaPengiriman=" + biayaPengiriman + ", berat=" + berat + ", jumlah=" + jumlah + ", statusId=" + statusId + ", shipmentId=" + shipmentId + ", shipment=" + shipment + ", status=" + status + ", products=" + products + '}';
+    }
 }

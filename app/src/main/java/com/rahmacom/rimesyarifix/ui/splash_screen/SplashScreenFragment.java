@@ -24,11 +24,7 @@ public class SplashScreenFragment extends Fragment {
     private PreferenceManager manager;
 
     @Override
-    public View onCreateView(
-            LayoutInflater inflater,
-            ViewGroup container,
-            Bundle savedInstanceState
-    ) {
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         return inflater.inflate(R.layout.fragment_splash_screen, container, false);
     }
 
@@ -52,9 +48,10 @@ public class SplashScreenFragment extends Fragment {
                     viewModel.refreshLogin.observe(getViewLifecycleOwner(), login -> {
                         switch (login.getStatus()) {
                             case SUCCESS:
-                                Log.d("login", login.getData().toString());
-                                manager.setString(Const.KEY_TOKEN,
-                                        "Bearer " + login.getData().getAccessToken());
+                                Log.d("login", login.getData()
+                                        .toString());
+                                manager.setString(Const.KEY_TOKEN, "Bearer " + login.getData()
+                                        .getAccessToken());
                                 navController.navigate(SplashScreenFragmentDirections.splashScreenFragmentToLoginFragment());
                                 break;
 

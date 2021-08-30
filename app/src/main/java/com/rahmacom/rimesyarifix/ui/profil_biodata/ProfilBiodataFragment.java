@@ -35,11 +35,7 @@ public class ProfilBiodataFragment extends Fragment {
     private BiodataProfilAdapter adapter;
 
     @Override
-    public View onCreateView(
-            @NonNull LayoutInflater inflater,
-            @Nullable ViewGroup container,
-            @Nullable Bundle savedInstanceState
-    ) {
+    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         binding = FragmentProfilBiodataBinding.inflate(inflater, container, false);
         return binding.getRoot();
     }
@@ -70,15 +66,14 @@ public class ProfilBiodataFragment extends Fragment {
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(requireContext());
 
         binding.rvBiodataProfil.setLayoutManager(linearLayoutManager);
-        binding.rvBiodataProfil.addItemDecoration(new DividerItemDecoration(requireContext(),
-                linearLayoutManager.getOrientation()));
+        binding.rvBiodataProfil.addItemDecoration(new DividerItemDecoration(requireContext(), linearLayoutManager.getOrientation()));
     }
 
     private ArrayList<Biodata> getUserBiodata() {
         ArrayList<Biodata> items = new ArrayList<>();
         String[] keys = getResources().getStringArray(R.array.list_biodata_profil_judul);
-        String[] value = new String[] {
-                manager.getString(Const.KEY_NAME),
+        String[] value = new String[]{
+                manager.getString(Const.KEY_NAMA_LENGKAP),
                 manager.getString(Const.KEY_JENIS_KELAMIN),
                 manager.getString(Const.KEY_ALAMAT),
                 manager.getString(Const.KEY_NO_TELP),
@@ -96,8 +91,7 @@ public class ProfilBiodataFragment extends Fragment {
     }
 
     private void setupToolbar() {
-        AppBarConfiguration appBarConfiguration =
-                new AppBarConfiguration.Builder(navController.getGraph()).build();
+        AppBarConfiguration appBarConfiguration = new AppBarConfiguration.Builder(navController.getGraph()).build();
         NavigationUI.setupWithNavController(binding.toolbarProfilBiodata, navController, appBarConfiguration);
     }
 }

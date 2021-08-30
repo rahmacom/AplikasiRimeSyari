@@ -1,7 +1,6 @@
 package com.rahmacom.rimesyarifix.ui.keranjang;
 
 import android.view.LayoutInflater;
-import android.view.View;
 import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
@@ -15,8 +14,8 @@ import java.util.ArrayList;
 
 public class KeranjangListAdapter extends RecyclerView.Adapter<KeranjangListAdapter.ViewHolder> {
 
+    private final ArrayList<Cart> carts = new ArrayList<>();
     private ItemKeranjangListBinding binding;
-    private ArrayList<Cart> carts = new ArrayList<>();
     private OnItemClickListener onItemClickListener;
 
     public void setOnItemClickListener(OnItemClickListener onItemClickListener) {
@@ -32,10 +31,7 @@ public class KeranjangListAdapter extends RecyclerView.Adapter<KeranjangListAdap
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        binding = ItemKeranjangListBinding.inflate(
-                LayoutInflater.from(parent.getContext()),
-                parent,
-                false);
+        binding = ItemKeranjangListBinding.inflate(LayoutInflater.from(parent.getContext()), parent, false);
         return new ViewHolder(binding);
     }
 
@@ -51,9 +47,13 @@ public class KeranjangListAdapter extends RecyclerView.Adapter<KeranjangListAdap
         return carts.size();
     }
 
+    interface OnItemClickListener {
+        void onItemClicked(Cart cart);
+    }
+
     static class ViewHolder extends RecyclerView.ViewHolder {
 
-        private ItemKeranjangListBinding binding;
+        private final ItemKeranjangListBinding binding;
 
         public ViewHolder(ItemKeranjangListBinding binding) {
             super(binding.getRoot());
@@ -65,9 +65,5 @@ public class KeranjangListAdapter extends RecyclerView.Adapter<KeranjangListAdap
             binding.tvItemKeranjangJumlah.setText(String.format("%d item", cart.getJumlah()));
             binding.tvItemKeranjangTotal.setText(Helper.convertToRP(cart.getTotal()));
         }
-    }
-
-    interface OnItemClickListener {
-        void onItemClicked(Cart cart);
     }
 }

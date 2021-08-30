@@ -30,11 +30,7 @@ public class RegisterFragment extends Fragment {
     }
 
     @Override
-    public View onCreateView(
-            @NonNull LayoutInflater inflater,
-            ViewGroup container,
-            Bundle savedInstanceState
-    ) {
+    public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         binding = FragmentRegisterBinding.inflate(getLayoutInflater());
         return binding.getRoot();
     }
@@ -56,14 +52,14 @@ public class RegisterFragment extends Fragment {
 
         binding.btnRegisterDaftar.setOnClickListener(v -> {
             try {
-                viewModel.setRegister(
-                        etUser.getText().toString(),
-                        etHp.getText().toString(),
-                        etPassword.getText().toString(),
-                        etPasswordConfirm.getText().toString()
-                );
+                viewModel.setRegister(etUser.getText()
+                        .toString(), etHp.getText()
+                        .toString(), etPassword.getText()
+                        .toString(), etPasswordConfirm.getText()
+                        .toString());
             } catch (Exception e) {
-                Toast.makeText(requireContext(), e.getMessage(), Toast.LENGTH_SHORT).show();
+                Toast.makeText(requireContext(), e.getMessage(), Toast.LENGTH_SHORT)
+                        .show();
             } finally {
                 callRegister();
             }
@@ -74,11 +70,14 @@ public class RegisterFragment extends Fragment {
         viewModel.registerUser.observe(getViewLifecycleOwner(), register -> {
             switch (register.getStatus()) {
                 case SUCCESS:
-                    Toast.makeText(requireContext(), "Registrasi berhasil!", Toast.LENGTH_SHORT).show();
-                    manager.setString(Const.KEY_TOKEN, register.getData().getAccessToken());
-                    manager.setInt(Const.KEY_TTL,
-                            register.getData().getExpiresIn());
-                    manager.setString(Const.KEY_TYPE, register.getData().getTokenType());
+                    Toast.makeText(requireContext(), "Registrasi berhasil!", Toast.LENGTH_SHORT)
+                            .show();
+                    manager.setString(Const.KEY_TOKEN, register.getData()
+                            .getAccessToken());
+                    manager.setInt(Const.KEY_TTL, register.getData()
+                            .getExpiresIn());
+                    manager.setString(Const.KEY_TYPE, register.getData()
+                            .getTokenType());
 
                     navController.navigate(RegisterFragmentDirections.registerFragmentToNavHome());
                     break;
@@ -86,16 +85,16 @@ public class RegisterFragment extends Fragment {
                 case ERROR:
                     binding.btnRegisterDaftar.setText("Daftar");
                     binding.pbRegisterLoading.setVisibility(View.INVISIBLE);
-                    Toast.makeText(requireContext(), "Terjadi error! Silahkan hubungi " +
-                            "admin Rime Syari", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(requireContext(), "Terjadi error! Silahkan hubungi " + "admin Rime Syari", Toast.LENGTH_SHORT)
+                            .show();
                     break;
 
                 case EMPTY:
                     break;
 
                 case LOADING:
-                    Toast.makeText(requireContext(), "Tunggu sebentar...",
-                            Toast.LENGTH_SHORT).show();
+                    Toast.makeText(requireContext(), "Tunggu sebentar...", Toast.LENGTH_SHORT)
+                            .show();
                     binding.pbRegisterLoading.setVisibility(View.VISIBLE);
                     binding.btnRegisterDaftar.setText("");
                     break;

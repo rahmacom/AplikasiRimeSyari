@@ -14,11 +14,10 @@ import com.rahmacom.rimesyarifix.utils.Helper;
 
 import java.util.ArrayList;
 
-public class KeranjangDetailAdapter
-        extends RecyclerView.Adapter<KeranjangDetailAdapter.ViewHolder> {
+public class KeranjangDetailAdapter extends RecyclerView.Adapter<KeranjangDetailAdapter.ViewHolder> {
 
+    private final ArrayList<Product> products = new ArrayList<>();
     private ItemKeranjangDetailListBinding binding;
-    private ArrayList<Product> products = new ArrayList<>();
     private OnItemClickListener onItemClickListener;
 
     public void setLists(ArrayList<Product> items) {
@@ -30,10 +29,7 @@ public class KeranjangDetailAdapter
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        binding = ItemKeranjangDetailListBinding.inflate(
-                LayoutInflater.from(parent.getContext()),
-                parent,
-                false);
+        binding = ItemKeranjangDetailListBinding.inflate(LayoutInflater.from(parent.getContext()), parent, false);
         return new ViewHolder(binding);
     }
 
@@ -41,12 +37,16 @@ public class KeranjangDetailAdapter
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         holder.bind(products.get(position));
 
-//        holder.itemView.setOnClickListener(v -> onItemClickListener.onItemClick(products.get(position)));
+        //        holder.itemView.setOnClickListener(v -> onItemClickListener.onItemClick(products.get(position)));
     }
 
     @Override
     public int getItemCount() {
         return products.size();
+    }
+
+    interface OnItemClickListener {
+        void onItemClick(Product product);
     }
 
     static class ViewHolder extends RecyclerView.ViewHolder {
@@ -60,18 +60,22 @@ public class KeranjangDetailAdapter
 
         void bind(Product product) {
             Glide.with(binding.getRoot())
-                    .load(Const.BASE_URL + product.getImage().getPath())
+                    .load(Const.BASE_URL + product.getImage()
+                            .getPath())
                     .into(binding.ivKeranjangProdukFoto);
 
             binding.tvKeranjangProdukNama.setText(product.getNama());
             binding.tvKeranjangProdukHarga.setText(Helper.convertToRP(product.getHargaCustomer()));
-            binding.tvKeranjangProdukJumlah.setText(String.valueOf(product.getPivot().getJumlah()));
-            binding.tvKeranjangProdukSize.setText("Size " + product.getPivot().getSize().getName());
-            binding.tvKeranjangProdukWarna.setText("Warna " + product.getPivot().getColor().getName());
+            binding.tvKeranjangProdukJumlah.setText(String.valueOf(product.getPivot()
+                    .getJumlah()));
+            binding.tvKeranjangProdukSize.setText("Size: " + product.getPivot()
+                    .getSize()
+                    .getName());
+            binding.tvKeranjangProdukWarna.setText("Warna: " + product.getPivot()
+                    .getColor()
+                    .getName());
+            binding.tvKeranjangProdukSubTotal.setText(Helper.convertToRP(product.getPivot()
+                    .getSubTotal()));
         }
-    }
-
-    interface OnItemClickListener {
-        void onItemClick(Product product);
     }
 }

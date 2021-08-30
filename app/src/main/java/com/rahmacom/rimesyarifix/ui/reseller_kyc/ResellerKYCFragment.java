@@ -44,7 +44,7 @@ public class ResellerKYCFragment extends Fragment {
 
     private static final String TAG = ResellerKYCFragment.class.getSimpleName();
     private static final String FILENAME_FORMAT = "yyyy-MM-dd_HH-mm-ss-SSS";
-    private static final String[] REQUIRED_PERMISSIONS = new String[] {
+    private static final String[] REQUIRED_PERMISSIONS = new String[]{
             "android.permission.CAMERA",
             "android.permission.WRITE_EXTERNAL_STORAGE"
     };
@@ -72,21 +72,19 @@ public class ResellerKYCFragment extends Fragment {
     @Override
     public void onAttach(@NonNull @NotNull Context context) {
         super.onAttach(context);
-        requireActivity().getWindow().addFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN);
+        requireActivity().getWindow()
+                .addFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN);
     }
 
     @Override
     public void onDetach() {
         super.onDetach();
-        requireActivity().getWindow().clearFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN);
+        requireActivity().getWindow()
+                .clearFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN);
     }
 
     @Override
-    public View onCreateView(
-            @NonNull LayoutInflater inflater,
-            ViewGroup container,
-            Bundle savedInstanceState
-    ) {
+    public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         binding = FragmentResellerKycCameraBinding.inflate(getLayoutInflater());
         return binding.getRoot();
     }
@@ -100,11 +98,7 @@ public class ResellerKYCFragment extends Fragment {
         if (isAllPermissionGranted()) {
             startCamera(cameraSelector);
         } else {
-            ActivityCompat.requestPermissions(
-                    activity,
-                    REQUIRED_PERMISSIONS,
-                    REQUEST_CODE_PERMISSIONS
-            );
+            ActivityCompat.requestPermissions(activity, REQUIRED_PERMISSIONS, REQUEST_CODE_PERMISSIONS);
         }
 
         binding.btnTakePhoto.setOnClickListener(v -> takePhoto());
@@ -132,21 +126,14 @@ public class ResellerKYCFragment extends Fragment {
 
     @SuppressWarnings("deprecation")
     @Override
-    public void onRequestPermissionsResult(
-            int requestCode,
-            @NonNull String[] permissions,
-            @NonNull int[] grantResults
-    ) {
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
         if (requestCode == REQUEST_CODE_PERMISSIONS) {
             if (isAllPermissionGranted()) {
                 startCamera(cameraSelector);
             } else {
-                Toast.makeText(
-                        activity,
-                        "Permission not granted by User",
-                        Toast.LENGTH_SHORT
-                ).show();
+                Toast.makeText(activity, "Permission not granted by User", Toast.LENGTH_SHORT)
+                        .show();
 
                 activity.finish();
             }
@@ -156,40 +143,30 @@ public class ResellerKYCFragment extends Fragment {
     private void takePhoto() {
         ImageCapture imgCapture = this.imageCapture;
         if (imgCapture != null) {
-            File photoFile = new File(
-                    outputDir,
-                    new SimpleDateFormat(FILENAME_FORMAT, Locale.US)
-                            .format(System.currentTimeMillis()) + ".jpg"
-            );
+            File photoFile = new File(outputDir, new SimpleDateFormat(FILENAME_FORMAT, Locale.US).format(System.currentTimeMillis()) + ".jpg");
 
-            ImageCapture.OutputFileOptions outputFileOptions =
-                    new ImageCapture.OutputFileOptions.Builder(photoFile).build();
+            ImageCapture.OutputFileOptions outputFileOptions = new ImageCapture.OutputFileOptions.Builder(photoFile).build();
 
-            imgCapture.takePicture(
-                    outputFileOptions,
-                    ContextCompat.getMainExecutor(requireContext()),
-                    new ImageCapture.OnImageSavedCallback() {
-                        @Override
-                        public void onImageSaved(
-                                @NonNull ImageCapture.OutputFileResults outputFileResults) {
-                            Uri savedUri = Uri.fromFile(photoFile);
-                            String message = "Photo captured successfully: " + savedUri;
-                            Toast.makeText(activity, message, Toast.LENGTH_SHORT).show();
-                            Log.d(TAG, message);
-                        }
+            imgCapture.takePicture(outputFileOptions, ContextCompat.getMainExecutor(requireContext()), new ImageCapture.OnImageSavedCallback() {
+                @Override
+                public void onImageSaved(@NonNull ImageCapture.OutputFileResults outputFileResults) {
+                    Uri savedUri = Uri.fromFile(photoFile);
+                    String message = "Photo captured successfully: " + savedUri;
+                    Toast.makeText(activity, message, Toast.LENGTH_SHORT)
+                            .show();
+                    Log.d(TAG, message);
+                }
 
-                        @Override
-                        public void onError(@NonNull @NotNull ImageCaptureException exception) {
-                            Log.e(TAG, "Photo capture failed: ", exception);
-                        }
-                    }
-            );
+                @Override
+                public void onError(@NonNull @NotNull ImageCaptureException exception) {
+                    Log.e(TAG, "Photo capture failed: ", exception);
+                }
+            });
         }
     }
 
     private void startCamera(CameraSelector cameraSelector) {
-        final ListenableFuture<ProcessCameraProvider> cameraProviderFuture =
-                ProcessCameraProvider.getInstance(requireActivity());
+        final ListenableFuture<ProcessCameraProvider> cameraProviderFuture = ProcessCameraProvider.getInstance(requireActivity());
 
         cameraProviderFuture.addListener(() -> {
             ProcessCameraProvider cameraProvider = null;
@@ -207,12 +184,7 @@ public class ResellerKYCFragment extends Fragment {
             try {
                 if (cameraProvider != null) {
                     cameraProvider.unbindAll();
-                    cameraProvider.bindToLifecycle(
-                            activity,
-                            cameraSelector,
-                            preview,
-                            imageCapture
-                    );
+                    cameraProvider.bindToLifecycle(activity, cameraSelector, preview, imageCapture);
                 }
             } catch (Exception e) {
                 Log.e(TAG, "Use case binding failed: ", e);
@@ -222,8 +194,7 @@ public class ResellerKYCFragment extends Fragment {
 
     private boolean isAllPermissionGranted() {
         for (String permission : REQUIRED_PERMISSIONS) {
-            if (ContextCompat.checkSelfPermission(requireContext(), permission)
-                    != PackageManager.PERMISSION_GRANTED) {
+            if (ContextCompat.checkSelfPermission(requireContext(), permission) != PackageManager.PERMISSION_GRANTED) {
                 return false;
             }
         }

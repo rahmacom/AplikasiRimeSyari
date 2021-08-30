@@ -4,18 +4,14 @@ import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.SharedPreferences;
 
-import dagger.hilt.android.qualifiers.ApplicationContext;
-
 public class PreferenceManager {
 
+    public static final int PRIVATE_MODE = 0;
     private static final String PREFERENCE_NAME = "preference_manager";
     private static final String IS_FIRST_TIME_LAUNCH = "is_first_time_launch";
-
-    public static final int PRIVATE_MODE = 0;
-
-    private SharedPreferences preferences;
-    private SharedPreferences.Editor editor;
-    private Context context;
+    private final SharedPreferences preferences;
+    private final SharedPreferences.Editor editor;
+    private final Context context;
 
     @SuppressLint("CommitPrefEdits")
     public PreferenceManager(Context context) {

@@ -1,6 +1,5 @@
-package com.rahmacom.rimesyarifix.ui.order;
+package com.rahmacom.rimesyarifix.ui.order_list;
 
-import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
 
@@ -15,7 +14,7 @@ import java.util.ArrayList;
 
 public class OrderListRecyclerViewAdapter extends RecyclerView.Adapter<OrderListRecyclerViewAdapter.ViewHolder> {
 
-    private ArrayList<Order> list = new ArrayList<>();
+    private final ArrayList<Order> list = new ArrayList<>();
     private OnItemClickListener onItemClickListener;
 
     public void setOnItemClickListener(OnItemClickListener onItemClickListener) {
@@ -36,10 +35,7 @@ public class OrderListRecyclerViewAdapter extends RecyclerView.Adapter<OrderList
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        ItemOrderListBinding binding = ItemOrderListBinding.inflate(
-                LayoutInflater.from(parent.getContext()),
-                parent,
-                false);
+        ItemOrderListBinding binding = ItemOrderListBinding.inflate(LayoutInflater.from(parent.getContext()), parent, false);
         return new ViewHolder(binding);
     }
 
@@ -55,6 +51,10 @@ public class OrderListRecyclerViewAdapter extends RecyclerView.Adapter<OrderList
         return list.size();
     }
 
+    interface OnItemClickListener {
+        void onItemClicked(Order order);
+    }
+
     public static class ViewHolder extends RecyclerView.ViewHolder {
 
         ItemOrderListBinding binding;
@@ -68,11 +68,8 @@ public class OrderListRecyclerViewAdapter extends RecyclerView.Adapter<OrderList
             binding.tvOrderListTitle.setText(order.getNomor());
             binding.tvOrderListTotalItem.setText(order.getJumlah() + " item");
             binding.tvOrderListTotalHarga.setText(Helper.convertToRP(order.getTotal()));
-            binding.tvOrderListStatus.setText(order.getStatus().getName());
+            binding.tvOrderListStatus.setText(order.getStatus()
+                    .getName());
         }
-    }
-
-    interface OnItemClickListener {
-        void onItemClicked(Order order);
     }
 }

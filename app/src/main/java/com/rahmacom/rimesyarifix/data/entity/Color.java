@@ -33,12 +33,8 @@ public class Color {
         return rgbaColor;
     }
 
-	@Override
-	public String toString() {
-		return "Color{" +
-				"id=" + id +
-				", name='" + name + '\'' +
-				", rgbaColor='" + rgbaColor + '\'' +
-				'}';
-	}
+    @Override
+    public String toString() {
+        return "Color{" + "id=" + id + ", name='" + name + '\'' + ", rgbaColor='" + rgbaColor + '\'' + '}';
+    }
 }

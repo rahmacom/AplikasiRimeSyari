@@ -1,10 +1,8 @@
 package com.rahmacom.rimesyarifix.utils;
 
-import java.time.ZonedDateTime;
-
 public class Const {
-    public static final String BASE_URL = "https://rimesyari.myskripsi.xyz/";
-//    public static final String BASE_URL = "http://192.168.1.9/rimesyari/public/";
+    //    public static final String BASE_URL = "https://rimesyari.myskripsi.xyz/";
+    public static final String BASE_URL = "http://192.168.1.15/rimesyari/public/";
     public static final String BASE_API_URL = BASE_URL + "api/";
 
     public static final String KEY_TOKEN = "key_token";
@@ -12,7 +10,7 @@ public class Const {
     public static final String KEY_TTL = "key_ttl";
     public static final String KEY_DATE_STORED = "key_date_stored";
 
-    public static final String KEY_NAME = "rime_syari_key_name";
+    public static final String KEY_NAMA_LENGKAP = "rime_syari_key_nama_lengkap";
     public static final String KEY_JENIS_KELAMIN = "rime_syari_key_jk";
     public static final String KEY_ALAMAT = "rime_syari_key_alamat";
     public static final String KEY_NO_TELP = "rime_syari_key_telp";

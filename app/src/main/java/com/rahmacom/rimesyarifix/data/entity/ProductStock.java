@@ -10,7 +10,7 @@ import com.google.gson.annotations.SerializedName;
 @Entity(tableName = "product_stocks")
 public class ProductStock {
 
-	@PrimaryKey
+    @PrimaryKey
     @SerializedName("id")
     private int id;
 
@@ -18,23 +18,23 @@ public class ProductStock {
     @SerializedName("product_id")
     private int productId;
 
-	@ColumnInfo(name = "color_id")
+    @ColumnInfo(name = "color_id")
     @SerializedName("color_id")
     private int colorId;
 
-	@ColumnInfo(name = "size_id")
+    @ColumnInfo(name = "size_id")
     @SerializedName("size_id")
     private int sizeId;
 
-	@ColumnInfo(name = "stok_ready")
+    @ColumnInfo(name = "stok_ready")
     @SerializedName("stok_ready")
     private int stokReady;
 
-	@Ignore
+    @Ignore
     @SerializedName("color")
     private Color color;
 
-	@Ignore
+    @Ignore
     @SerializedName("size")
     private Size size;
 
@@ -42,20 +42,40 @@ public class ProductStock {
         return id;
     }
 
+    public void setId(int id) {
+        this.id = id;
+    }
+
     public int getProductId() {
         return productId;
+    }
+
+    public void setProductId(int productId) {
+        this.productId = productId;
     }
 
     public int getColorId() {
         return colorId;
     }
 
+    public void setColorId(int colorId) {
+        this.colorId = colorId;
+    }
+
     public int getSizeId() {
         return sizeId;
     }
 
+    public void setSizeId(int sizeId) {
+        this.sizeId = sizeId;
+    }
+
     public int getStokReady() {
         return stokReady;
+    }
+
+    public void setStokReady(int stokReady) {
+        this.stokReady = stokReady;
     }
 
     public Color getColor() {
@@ -66,36 +86,8 @@ public class ProductStock {
         return size;
     }
 
-    public void setId(int id) {
-        this.id = id;
-    }
-
-    public void setProductId(int productId) {
-        this.productId = productId;
-    }
-
-    public void setColorId(int colorId) {
-        this.colorId = colorId;
-    }
-
-    public void setSizeId(int sizeId) {
-        this.sizeId = sizeId;
-    }
-
-    public void setStokReady(int stokReady) {
-        this.stokReady = stokReady;
-    }
-
     @Override
-	public String toString() {
-		return "ProductStock{" +
-				"id=" + id +
-				", productId=" + productId +
-				", colorId=" + colorId +
-				", sizeId=" + sizeId +
-				", stokReady=" + stokReady +
-				", color=" + color +
-				", size=" + size +
-				'}';
-	}
+    public String toString() {
+        return "ProductStock{" + "id=" + id + ", productId=" + productId + ", colorId=" + colorId + ", sizeId=" + sizeId + ", stokReady=" + stokReady + ", color=" + color + ", size=" + size + '}';
+    }
 }
