@@ -60,9 +60,9 @@ public class ProdukDialogFragment extends BottomSheetDialogFragment {
                 switch (carts.getStatus()) {
                     case SUCCESS:
                         setupRecyclerView((ArrayList<Cart>) carts.getData());
-//                        adapter.setOnItemClickListener(cart -> {
-//
-//                        });
+                        adapter.setOnItemClickListener(cart -> {
+
+                        });
                         break;
 
                     case EMPTY:
@@ -109,4 +109,6 @@ public class ProdukDialogFragment extends BottomSheetDialogFragment {
         binding.rvProdukDialogListKeranjang.setLayoutManager(new LinearLayoutManager(requireContext()));
         binding.rvProdukDialogListKeranjang.setHasFixedSize(true);
     }
+
+
 }

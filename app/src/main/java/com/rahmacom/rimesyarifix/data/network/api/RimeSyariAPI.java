@@ -102,7 +102,20 @@ public interface RimeSyariAPI {
             "Content-Type: application/x-www-form-urlencoded",
             "Accept: application/json"
     })
-    Call<Cart> newCart(@Header("Authorization") String token, @Field("judul") String judul, @Field("deskripsi") String deskripsi, @Field("product_id[]") List<Integer> productIds, @Field("color_id[]") List<Integer> colorIds, @Field("size_id[]") List<Integer> sizeIds, @Field("jumlah[]") List<Integer> quantities);
+    Call<Cart> newCart(@Header("Authorization") String token,
+                       @Field("judul") String judul,
+                       @Field("deskripsi") String deskripsi);
+
+    @PATCH("carts/{cart}")
+    @FormUrlEncoded
+    @Headers({
+            "Content-Type: application/x-www-form-urlencoded",
+            "Accept: application/json"
+    })
+    Call<Cart> updateCart(@Header("Authorization") String token,
+                          @Path("cart") int cartId,
+                          @Field("judul") String judul,
+                          @Field("deskripsi") String deskripsi);
 
     @PUT("carts/{cart}")
     @FormUrlEncoded
@@ -110,7 +123,11 @@ public interface RimeSyariAPI {
             "Content-Type: application/x-www-form-urlencoded",
             "Accept: application/json"
     })
-    Call<Cart> updateCart(@Header("Authorization") String token, @Path("cart") int cartId, @Field("judul") String judul, @Field("deskripsi") String deskripsi, @Field("product_id[]") List<Integer> productIds, @Field("color_id[]") List<Integer> colorIds, @Field("size_id[]") List<Integer> sizeIds, @Field("jumlah[]") List<Integer> quantities);
+    Call<Cart> modifyProductCart(@Header("Authorization") String token,
+                                 @Field("product_id[]") int productId,
+                                 @Field("color_id[]") int colorId,
+                                 @Field("size_id[]") int sizeId,
+                                 @Field("jumlah[]") int jumlah);
 
     @DELETE("carts/{cart}")
     @Headers({"Accept: application/json"})
@@ -130,19 +147,15 @@ public interface RimeSyariAPI {
             "Content-Type: application/x-www-form-urlencoded",
             "Accept: application/json"
     })
-    Call<Order> newOrder(@Header("Authorization") String token, @Field("pesan") String pesan, @Field("kode_diskon") String kodeDiskon, @Field("product_id[]") List<Integer> productIds, @Field("color_id[]") List<Integer> colorIds, @Field("size_id[]") List<Integer> sizeIds, @Field("jumlah[]") List<Integer> quantities);
-
-    @PUT("orders/{order}")
-    @FormUrlEncoded
-    @Headers({
-            "Content-Type: application/x-www-form-urlencoded",
-            "Accept: application/json"
-    })
-    Call<Cart> updateOrder(@Header("Authorization") String token, @Path("order") int orderId, @Field("pesan") String pesan, @Field("kode_diskon") String kodeDiskon, @Field("product_id[]") List<Integer> productIds, @Field("color_id[]") List<Integer> colorIds, @Field("size_id[]") List<Integer> sizeIds, @Field("jumlah[]") List<Integer> quantities);
+    Call<Order> newOrder(@Header("Authorization") String token,
+                         @Field("pesan") String pesan,
+                         @Field("kode_diskon") String kodeDiskon,
+                         @Field("user_shipment_id") int userShipmentId);
 
     @GET("testimonies")
     @Headers({"Accept: application/json"})
-    Call<List<Testimony>> getAllTestimonies(@Header("Authorization") String token, @Query("product_id") int productId);
+    Call<List<Testimony>> getAllTestimonies(@Header("Authorization") String token,
+                                            @Query("product_id") int productId);
 
     @POST("testimonies")
     @FormUrlEncoded
@@ -150,7 +163,11 @@ public interface RimeSyariAPI {
             "Content-Type: application/x-www-form-urlencoded",
             "Accept: application/json"
     })
-    Call<Testimony> newTestimony(@Header("Authorization") String token, @Field("judul") String judul, @Field("isi") String isi, @Field("review") int review, @Field("product_id") int productId);
+    Call<Testimony> newTestimony(@Header("Authorization") String token,
+                                 @Field("judul") String judul,
+                                 @Field("isi") String isi,
+                                 @Field("review") int review,
+                                 @Field("product_id") int productId);
 
     @GET("shipments")
     @Headers({"Accept: application/json"})
@@ -158,7 +175,8 @@ public interface RimeSyariAPI {
 
     @GET("shipments/{shipment}")
     @Headers({"Accept: application/json"})
-    Call<Shipment> viewShipmentAddress(@Header("Authorization") String token, @Path("shipment") int shipmentId);
+    Call<Shipment> viewShipmentAddress(@Header("Authorization") String token,
+                                       @Path("shipment") int shipmentId);
 
     @POST("shipments")
     @FormUrlEncoded
@@ -166,15 +184,24 @@ public interface RimeSyariAPI {
             "Content-Type: application/x-www-form-urlencoded",
             "Accept: application/json"
     })
-    Call<Shipment> newShipmentAddress(@Header("Authorization") String token, @Field("alamat") String alamat, @Field("kode_pos") String kodePos, @Field("catatan") String catatan, @Field("village_id") int villageId);
+    Call<Shipment> newShipmentAddress(@Header("Authorization") String token,
+                                      @Field("alamat") String alamat,
+                                      @Field("kode_pos") String kodePos,
+                                      @Field("catatan") String catatan,
+                                      @Field("village_id") int villageId);
 
-    @PUT("shipments/{shipment}")
+    @PATCH("shipments/{shipment}")
     @FormUrlEncoded
     @Headers({
             "Content-Type: application/x-www-form-urlencoded",
             "Accept: application/json"
     })
-    Call<Shipment> updateShipmentAddress(@Header("Authorization") String token, @Path("shipment") int shipmentId, @Field("alamat") String alamat, @Field("kode_pos") String kodePos, @Field("catatan") String catatan, @Field("village_id") int villageId);
+    Call<Shipment> updateShipmentAddress(@Header("Authorization") String token,
+                                         @Path("shipment") int shipmentId,
+                                         @Field("alamat") String alamat,
+                                         @Field("kode_pos") String kodePos,
+                                         @Field("catatan") String catatan,
+                                         @Field("village_id") int villageId);
 
     @GET("shipments/provinces")
     @Headers({"Accept: application/json"})

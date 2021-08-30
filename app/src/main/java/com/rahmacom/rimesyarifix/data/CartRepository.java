@@ -129,12 +129,202 @@ public class CartRepository {
         return data;
     }
 
-    public LiveData<Resource<Cart>> createNewCart(String token, int productId, int colorId, int sizeId) {
+    public LiveData<Resource<Cart>> newCart(String token, Cart cart) {
         MutableLiveData<Resource<Cart>> data = new MutableLiveData<>();
         data.setValue(Resource.loading(null));
 
-        //        Call<Cart> api = rimeSyariAPI.createNewCart(token, cart.getJudul(), cart.getDeskripsi(),
-        //                cart.getPi);
+        Call<Cart> api = rimeSyariAPI.newCart(token, cart.getJudul(), cart.getDeskripsi());
+        api.enqueue(new Callback<Cart>() {
+            @Override
+            public void onResponse(Call<Cart> call, Response<Cart> response) {
+                switch (response.code()) {
+                    case 200:
+                    case 201:
+                        data.postValue(Resource.success(response.body()));
+                        break;
+
+                    case 204:
+                        data.postValue(Resource.empty(null));
+                        break;
+
+                    case 400:
+                        data.postValue(Resource.invalid(response.message()));
+                        break;
+
+                    case 401:
+                        data.postValue(Resource.unauthorized(response.message()));
+                        break;
+
+                    case 403:
+                        data.postValue(Resource.forbidden(response.message()));
+                        break;
+
+                    case 404:
+                    case 405:
+                        data.postValue(Resource.error(response.message(), null));
+                        break;
+
+                    case 422:
+                        data.postValue(Resource.unprocessableEntity(response.message(), null));
+                        break;
+                }
+            }
+
+            @Override
+            public void onFailure(Call<Cart> call, Throwable t) {
+                data.postValue(Resource.error(t.getMessage(), null));
+            }
+        });
+
+        return data;
+    }
+
+    public LiveData<Resource<Cart>> updateCart(String token, int cartId, String judul, String deskripsi) {
+        MutableLiveData<Resource<Cart>> data = new MutableLiveData<>();
+        data.setValue(Resource.loading(null));
+
+        Call<Cart> api = rimeSyariAPI.updateCart(token, cartId, judul, deskripsi);
+        api.enqueue(new Callback<Cart>() {
+            @Override
+            public void onResponse(Call<Cart> call, Response<Cart> response) {
+                switch (response.code()) {
+                    case 200:
+                    case 201:
+                        data.postValue(Resource.success(response.body()));
+                        break;
+
+                    case 204:
+                        data.postValue(Resource.empty(null));
+                        break;
+
+                    case 400:
+                        data.postValue(Resource.invalid(response.message()));
+                        break;
+
+                    case 401:
+                        data.postValue(Resource.unauthorized(response.message()));
+                        break;
+
+                    case 403:
+                        data.postValue(Resource.forbidden(response.message()));
+                        break;
+
+                    case 404:
+                    case 405:
+                        data.postValue(Resource.error(response.message(), null));
+                        break;
+
+                    case 422:
+                        data.postValue(Resource.unprocessableEntity(response.message(), null));
+                        break;
+                }
+            }
+
+            @Override
+            public void onFailure(Call<Cart> call, Throwable t) {
+                data.postValue(Resource.error(t.getMessage(), null));
+            }
+        });
+
+        return data;
+    }
+
+    public LiveData<Resource<Cart>> modifyCartProducts(String token, int productId, int colorId, int sizeId, int jumlah) {
+        MutableLiveData<Resource<Cart>> data = new MutableLiveData<>();
+        data.setValue(Resource.loading(null));
+
+        Call<Cart> api = rimeSyariAPI.modifyProductCart(token, productId, colorId, sizeId, jumlah);
+        api.enqueue(new Callback<Cart>() {
+            @Override
+            public void onResponse(Call<Cart> call, Response<Cart> response) {
+                switch (response.code()) {
+                    case 200:
+                    case 201:
+                        data.postValue(Resource.success(response.body()));
+                        break;
+
+                    case 204:
+                        data.postValue(Resource.empty(null));
+                        break;
+
+                    case 400:
+                        data.postValue(Resource.invalid(response.message()));
+                        break;
+
+                    case 401:
+                        data.postValue(Resource.unauthorized(response.message()));
+                        break;
+
+                    case 403:
+                        data.postValue(Resource.forbidden(response.message()));
+                        break;
+
+                    case 404:
+                    case 405:
+                        data.postValue(Resource.error(response.message(), null));
+                        break;
+
+                    case 422:
+                        data.postValue(Resource.unprocessableEntity(response.message(), null));
+                        break;
+                }
+            }
+
+            @Override
+            public void onFailure(Call<Cart> call, Throwable t) {
+                data.postValue(Resource.error(t.getMessage(), null));
+            }
+        });
+
+        return data;
+    }
+
+    public LiveData<Resource<Cart>> deleteCart(String token, int cartId) {
+        MutableLiveData<Resource<Cart>> data = new MutableLiveData<>();
+        data.setValue(Resource.loading(null));
+
+        Call<Cart> api = rimeSyariAPI.deleteCart(token, cartId);
+        api.enqueue(new Callback<Cart>() {
+            @Override
+            public void onResponse(Call<Cart> call, Response<Cart> response) {
+                switch (response.code()) {
+                    case 200:
+                    case 201:
+                        data.postValue(Resource.success(response.body()));
+                        break;
+
+                    case 204:
+                        data.postValue(Resource.empty(null));
+                        break;
+
+                    case 400:
+                        data.postValue(Resource.invalid(response.message()));
+                        break;
+
+                    case 401:
+                        data.postValue(Resource.unauthorized(response.message()));
+                        break;
+
+                    case 403:
+                        data.postValue(Resource.forbidden(response.message()));
+                        break;
+
+                    case 404:
+                    case 405:
+                        data.postValue(Resource.error(response.message(), null));
+                        break;
+
+                    case 422:
+                        data.postValue(Resource.unprocessableEntity(response.message(), null));
+                        break;
+                }
+            }
+
+            @Override
+            public void onFailure(Call<Cart> call, Throwable t) {
+                data.postValue(Resource.error(t.getMessage(), null));
+            }
+        });
 
         return data;
     }

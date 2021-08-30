@@ -126,4 +126,54 @@ public class OrderRepository {
 
         return data;
     }
+
+    public LiveData<Resource<Order>> newOrder(String token, String pesan, String kodeDiskon, int userShipmentId) {
+        MutableLiveData<Resource<Order>> data = new MutableLiveData<>();
+        data.setValue(Resource.loading(null));
+
+        Call<Order> api = rimeSyariAPI.newOrder(token, pesan, kodeDiskon, userShipmentId);
+        api.enqueue(new Callback<Order>() {
+            @Override
+            public void onResponse(Call<Order> call, Response<Order> response) {
+                switch (response.code()) {
+                    case 200:
+                    case 201:
+                        data.postValue(Resource.success(response.body()));
+                        break;
+
+                    case 204:
+                        data.postValue(Resource.empty(null));
+                        break;
+
+                    case 400:
+                        data.postValue(Resource.invalid(response.message()));
+                        break;
+
+                    case 401:
+                        data.postValue(Resource.unauthorized(response.message()));
+                        break;
+
+                    case 403:
+                        data.postValue(Resource.forbidden(response.message()));
+                        break;
+
+                    case 404:
+                    case 405:
+                        data.postValue(Resource.error(response.message(), null));
+                        break;
+
+                    case 422:
+                        data.postValue(Resource.unprocessableEntity(response.message(), null));
+                        break;
+                }
+            }
+
+            @Override
+            public void onFailure(Call<Order> call, Throwable t) {
+                data.postValue(Resource.error(t.getMessage(), null));
+            }
+        });
+
+        return data;
+    }
 }
