@@ -7,7 +7,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
-import com.rahmacom.rimesyarifix.data.entity.Image;
+import com.rahmacom.rimesyarifix.data.model.Image;
 import com.rahmacom.rimesyarifix.databinding.ItemProdukFotoSliderBinding;
 import com.rahmacom.rimesyarifix.utils.Const;
 

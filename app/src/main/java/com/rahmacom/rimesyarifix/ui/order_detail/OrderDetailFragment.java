@@ -15,8 +15,8 @@ import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
-import com.rahmacom.rimesyarifix.data.entity.Order;
-import com.rahmacom.rimesyarifix.data.entity.Product;
+import com.rahmacom.rimesyarifix.data.model.Order;
+import com.rahmacom.rimesyarifix.data.model.Product;
 import com.rahmacom.rimesyarifix.databinding.FragmentOrderDetailBinding;
 import com.rahmacom.rimesyarifix.manager.PreferenceManager;
 import com.rahmacom.rimesyarifix.utils.Const;
@@ -54,7 +54,8 @@ public class OrderDetailFragment extends Fragment {
         int orderId = OrderDetailFragmentArgs.fromBundle(getArguments())
                 .getOrderId();
 
-        viewModel.setLiveOrderId(manager.getString(Const.KEY_TOKEN), orderId);
+        viewModel.setLiveToken(manager.getString(Const.KEY_TOKEN));
+        viewModel.setLiveOrderId(orderId);
         viewModel.viewOrder.observe(getViewLifecycleOwner(), order -> {
             switch (order.getStatus()) {
                 case SUCCESS:
@@ -83,7 +84,7 @@ public class OrderDetailFragment extends Fragment {
 
     private void setDataBinding(Order order) {
         binding.tvOrderDetailNomor.setText(order.getNomor());
-        binding.tvOrderDetailAlamat.setText(order.getShipment()
+        binding.tvOrderDetailAlamat.setText(order.getUserShipment()
                 .getAlamat());
         binding.tvOrderDetailPesan.setText(order.getPesan());
         binding.tvOrderDetailTotalHarga.setText(Helper.convertToRP(order.getTotal()));

@@ -8,7 +8,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
-import com.rahmacom.rimesyarifix.data.entity.Product;
+import com.rahmacom.rimesyarifix.data.model.Product;
 import com.rahmacom.rimesyarifix.databinding.ItemHomeProdukGridBinding;
 import com.rahmacom.rimesyarifix.manager.PreferenceManager;
 import com.rahmacom.rimesyarifix.utils.Const;
@@ -72,7 +72,7 @@ public class HomeProdukAdapter extends RecyclerView.Adapter<HomeProdukAdapter.Vi
 
         void bind(Product product) {
             binding.tvHomeProdukNama.setText(product.getNama());
-            binding.tvHomeProdukHarga.setText(Helper.convertToRP(product.getHargaCustomer()));
+            binding.tvHomeProdukHarga.setText(Helper.convertToRP(product.getHarga()));
             binding.tvHomeProdukSuka.setText(String.valueOf(product.getSuka()));
 
             if (product.getTotalStok() > 0) {

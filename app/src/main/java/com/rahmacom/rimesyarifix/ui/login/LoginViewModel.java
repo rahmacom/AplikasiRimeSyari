@@ -8,9 +8,8 @@ import androidx.lifecycle.SavedStateHandle;
 import androidx.lifecycle.Transformations;
 import androidx.lifecycle.ViewModel;
 
-import com.rahmacom.rimesyarifix.data.AuthRepository;
-import com.rahmacom.rimesyarifix.data.entity.User;
-import com.rahmacom.rimesyarifix.data.network.response.LoginResponse;
+import com.rahmacom.rimesyarifix.data.MainRepository;
+import com.rahmacom.rimesyarifix.data.network.response.ResponseLogin;
 import com.rahmacom.rimesyarifix.data.vo.Resource;
 
 import javax.inject.Inject;
@@ -20,23 +19,14 @@ import dagger.hilt.android.lifecycle.HiltViewModel;
 @HiltViewModel
 public class LoginViewModel extends ViewModel {
 
-    private final SavedStateHandle savedStateHandle;
     private final MutableLiveData<Login> credentials = new MutableLiveData<>();
-    private final MutableLiveData<String> liveToken = new MutableLiveData<>();
-    public MutableLiveData<String> username = new MutableLiveData<>();
-    public MutableLiveData<String> password = new MutableLiveData<>();
-    private AuthRepository authRepository;
-    public final LiveData<Resource<LoginResponse>> login = Transformations.switchMap(credentials, user -> authRepository.login(user.username, user.password));
-    public final LiveData<Resource<User>> profile = Transformations.switchMap(liveToken, token -> authRepository.profile(token));
+    private MainRepository mainRepository;
+    public final LiveData<Resource<ResponseLogin>> login = Transformations.switchMap(credentials, user ->
+            mainRepository.login(user.email, user.password));
 
     @Inject
-    public LoginViewModel(AuthRepository authRepository, SavedStateHandle savedStateHandle) {
-        this.authRepository = authRepository;
-        this.savedStateHandle = savedStateHandle;
-    }
-
-    public void setLiveToken(String token) {
-        liveToken.setValue(token);
+    public LoginViewModel(MainRepository mainRepository) {
+        this.mainRepository = mainRepository;
     }
 
     public void setLogin(String email, String password) {
@@ -45,16 +35,16 @@ public class LoginViewModel extends ViewModel {
     }
 
     static class Login {
-        String username;
+        String email;
         String password;
 
-        Login(String username, String password) {
-            this.username = username;
+        Login(String email, String password) {
+            this.email = email;
             this.password = password;
         }
 
-        boolean isUsernameValid() {
-            return !TextUtils.isEmpty(username);
+        boolean isEmailValid() {
+            return !TextUtils.isEmpty(email);
         }
 
         boolean isPasswordValid() {

@@ -6,10 +6,10 @@ import androidx.lifecycle.SavedStateHandle;
 import androidx.lifecycle.Transformations;
 import androidx.lifecycle.ViewModel;
 
-import com.rahmacom.rimesyarifix.data.ProductRepository;
-import com.rahmacom.rimesyarifix.data.entity.Color;
-import com.rahmacom.rimesyarifix.data.entity.Product;
-import com.rahmacom.rimesyarifix.data.entity.Size;
+import com.rahmacom.rimesyarifix.data.MainRepository;
+import com.rahmacom.rimesyarifix.data.model.Color;
+import com.rahmacom.rimesyarifix.data.model.Product;
+import com.rahmacom.rimesyarifix.data.model.Size;
 import com.rahmacom.rimesyarifix.data.vo.Resource;
 
 import java.util.List;
@@ -21,30 +21,29 @@ import dagger.hilt.android.lifecycle.HiltViewModel;
 @HiltViewModel
 public class ProdukViewModel extends ViewModel {
 
-    private final SavedStateHandle savedStateHandle;
-    private final MutableLiveData<ProductId> productId = new MutableLiveData<>();
-    private ProductRepository productRepository;
-    public final LiveData<Resource<Product>> viewProduct = Transformations.switchMap(productId, product -> productRepository.viewProduct(product.token, product.id));
-    public final LiveData<Resource<List<Color>>> getProductColors = Transformations.switchMap(productId, product -> productRepository.getProductColors(product.token, product.id));
-    public final LiveData<Resource<List<Size>>> getProductSizes = Transformations.switchMap(productId, product -> productRepository.getProductSizes(product.token, product.id));
+    private final MutableLiveData<String> liveToken = new MutableLiveData<>();
+    private final MutableLiveData<Integer> liveProductId = new MutableLiveData<>();
+    private MainRepository mainRepository;
+
+    public final LiveData<Resource<Product>> viewProduct =
+            Transformations.switchMap(liveProductId, product -> mainRepository.viewProduct(liveToken.getValue(), product));
+
+    public final LiveData<Resource<List<Color>>> getProductColors =
+            Transformations.switchMap(liveProductId, product -> mainRepository.getProductColors(liveToken.getValue(), product));
+
+    public final LiveData<Resource<List<Size>>> getProductSizes =
+            Transformations.switchMap(liveProductId, product -> mainRepository.getProductSizes(liveToken.getValue(), product));
 
     @Inject
-    public ProdukViewModel(ProductRepository productRepository, SavedStateHandle savedStateHandle) {
-        this.productRepository = productRepository;
-        this.savedStateHandle = savedStateHandle;
+    public ProdukViewModel(MainRepository mainRepository) {
+        this.mainRepository = mainRepository;
     }
 
-    public void setProductId(String token, int id) {
-        productId.setValue(new ProductId(token, id));
+    public void setLiveToken(String token) {
+        liveToken.setValue(token);
     }
 
-    static class ProductId {
-        private final String token;
-        private final int id;
-
-        public ProductId(String token, int id) {
-            this.token = token;
-            this.id = id;
-        }
+    public void setProductId(int productId) {
+        liveProductId.setValue(productId);
     }
 }

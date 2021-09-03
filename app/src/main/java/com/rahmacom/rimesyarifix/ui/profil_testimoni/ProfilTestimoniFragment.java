@@ -14,6 +14,7 @@ import androidx.navigation.Navigation;
 
 import com.rahmacom.rimesyarifix.databinding.FragmentProfilTestimoniBinding;
 import com.rahmacom.rimesyarifix.manager.PreferenceManager;
+import com.rahmacom.rimesyarifix.utils.Const;
 
 public class ProfilTestimoniFragment extends Fragment {
 
@@ -34,6 +35,7 @@ public class ProfilTestimoniFragment extends Fragment {
         viewModel = new ViewModelProvider(requireActivity()).get(ProfilTestimoniViewModel.class);
         manager = new PreferenceManager(requireContext());
         navController = Navigation.findNavController(view);
+        viewModel.setLiveToken(manager.getString(Const.KEY_TOKEN));
     }
 
     @Override

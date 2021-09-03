@@ -1,0 +1,260 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <com.google.android.material.appbar.MaterialToolbar
+        android:id="@+id/toolbar_order_new"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:minHeight="?attr/actionBarSize"
+        android:theme="@style/ThemeOverlay.RimeSyariFix.ToolBar"
+        android:background="@color/white"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/ghs_order_new"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_begin="16dp" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/ghe_order_new"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_end="16dp" />
+
+    <TextView
+        android:id="@+id/tv_order_new_pesan_title"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:fontFamily="@font/rubik_medium"
+        android:text="Pesan"
+        android:textColor="@color/gray_600"
+        android:textSize="12sp"
+        app:layout_constraintEnd_toStartOf="@+id/ghe_order_new"
+        app:layout_constraintStart_toStartOf="@+id/ghs_order_new"
+        app:layout_constraintTop_toBottomOf="@+id/toolbar_order_new" />
+
+    <EditText
+        android:id="@+id/et_order_new_pesan"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:ems="10"
+        android:gravity="start|top"
+        android:inputType="textMultiLine"
+        android:lineSpacingExtra="4sp"
+        android:textColor="@color/gray_700"
+        android:textSize="16sp"
+        app:layout_constraintEnd_toStartOf="@+id/ghe_order_new"
+        app:layout_constraintStart_toStartOf="@+id/ghs_order_new"
+        app:layout_constraintTop_toBottomOf="@+id/tv_order_new_pesan_title" />
+
+    <TextView
+        android:id="@+id/tv_order_new_alamat_title"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
+        android:fontFamily="@font/rubik_medium"
+        android:text="Alamat pengiriman"
+        android:textColor="@color/gray_600"
+        android:textSize="12sp"
+        app:layout_constraintEnd_toStartOf="@+id/ghe_order_new"
+        app:layout_constraintStart_toStartOf="@+id/ghs_order_new"
+        app:layout_constraintTop_toBottomOf="@+id/et_order_new_pesan" />
+
+    <TextView
+        android:id="@+id/tv_order_new_alamat"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:lineSpacingExtra="4sp"
+        android:text="Pilih alamat..."
+        android:textColor="@color/gray_700"
+        android:textSize="16sp"
+        app:layout_constraintEnd_toStartOf="@+id/ghe_order_new"
+        app:layout_constraintStart_toStartOf="@+id/ghs_order_new"
+        app:layout_constraintTop_toBottomOf="@+id/tv_order_new_alamat_title" />
+
+    <TextView
+        android:id="@+id/tv_order_new_metode_pembayaran_title"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
+        android:fontFamily="@font/rubik_medium"
+        android:text="Metode Pembayaran"
+        android:textColor="@color/gray_600"
+        android:textSize="12sp"
+        app:layout_constraintEnd_toStartOf="@+id/ghe_order_new"
+        app:layout_constraintStart_toStartOf="@+id/ghs_order_new"
+        app:layout_constraintTop_toBottomOf="@+id/tv_order_new_alamat" />
+
+    <RadioGroup
+        android:id="@+id/cbg_order_new_metode_pembayaran"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        app:layout_constraintEnd_toStartOf="@+id/ghe_order_new"
+        app:layout_constraintStart_toStartOf="@+id/ghs_order_new"
+        app:layout_constraintTop_toBottomOf="@+id/tv_order_new_metode_pembayaran_title" />
+
+    <TextView
+        android:id="@+id/tv_order_new_detail_title"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="32dp"
+        android:fontFamily="@font/rubik_medium"
+        android:text="Ringkasan order"
+        android:textColor="@color/gray_600"
+        android:textSize="16sp"
+        app:layout_constraintEnd_toStartOf="@+id/ghe_order_new"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/ghs_order_new"
+        app:layout_constraintTop_toBottomOf="@+id/et_order_new_kode_diskon" />
+
+    <TextView
+        android:id="@+id/tv_order_new_total_title"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/rubik"
+        android:text="Total"
+        android:textColor="@color/gray_600"
+        android:textSize="12sp"
+        app:layout_constraintBottom_toBottomOf="@+id/tv_order_new_total"
+        app:layout_constraintStart_toStartOf="@+id/ghs_order_new" />
+
+    <TextView
+        android:id="@+id/tv_order_new_biaya_pengiriman_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Biaya Pengiriman"
+        android:textColor="@color/gray_600"
+        android:textSize="12sp"
+        app:layout_constraintBottom_toBottomOf="@+id/tv_order_new_biaya_pengiriman"
+        app:layout_constraintStart_toStartOf="@+id/ghs_order_new" />
+
+    <TextView
+        android:id="@+id/tv_order_new_total"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:text="Rp 350.000"
+        android:textColor="@color/gray_700"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        android:visibility="visible"
+        app:layout_constraintEnd_toStartOf="@+id/ghe_order_new"
+        app:layout_constraintTop_toBottomOf="@+id/tv_order_new_diskon_title"
+        tools:visibility="visible" />
+
+    <TextView
+        android:id="@+id/tv_order_new_biaya_pengiriman"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:text="-"
+        android:textColor="@color/gray_700"
+        android:textSize="12sp"
+        app:layout_constraintEnd_toStartOf="@+id/ghe_order_new"
+        app:layout_constraintTop_toBottomOf="@+id/tv_order_new_subtotal_title" />
+
+    <TextView
+        android:id="@+id/tv_order_new_diskon_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Diskon"
+        android:textColor="@color/gray_600"
+        android:textSize="12sp"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="@+id/tv_order_new_diskon"
+        app:layout_constraintStart_toStartOf="@+id/ghs_order_new"
+        tools:visibility="visible" />
+
+    <TextView
+        android:id="@+id/tv_order_new_diskon"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:text="-"
+        android:textColor="@color/gray_700"
+        android:textSize="12sp"
+        app:layout_constraintEnd_toStartOf="@+id/ghe_order_new"
+        app:layout_constraintTop_toBottomOf="@+id/tv_order_new_biaya_pengiriman_title" />
+
+    <Button
+        android:id="@+id/btn_order_new_pesan_sekarang"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="32dp"
+        android:layout_marginBottom="32dp"
+        android:letterSpacing="0.2"
+        android:paddingStart="24dp"
+        android:paddingEnd="24dp"
+        android:text="Order sekarang"
+        android:textSize="12sp"
+        android:textStyle="bold"
+        app:cornerRadius="100dp"
+        app:elevation="2dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tv_order_new_total"
+        app:layout_constraintVertical_bias="1.0" />
+
+    <TextView
+        android:id="@+id/tv_order_new_subtotal_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Subtotal"
+        android:textColor="@color/gray_600"
+        android:textSize="12sp"
+        app:layout_constraintBottom_toBottomOf="@+id/tv_order_new_subtotal"
+        app:layout_constraintStart_toStartOf="@+id/ghs_order_new" />
+
+    <TextView
+        android:id="@+id/tv_order_new_subtotal"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:text="Rp 300.000"
+        android:textColor="@color/gray_700"
+        android:textSize="12sp"
+        app:layout_constraintEnd_toStartOf="@+id/ghe_order_new"
+        app:layout_constraintTop_toBottomOf="@+id/tv_order_new_detail_title" />
+
+    <TextView
+        android:id="@+id/tv_order_new_kode_diskon_title"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
+        android:fontFamily="@font/rubik_medium"
+        android:text="Punya kode diskon? Masukkan disini"
+        android:textColor="@color/gray_600"
+        android:textSize="12sp"
+        app:layout_constraintEnd_toStartOf="@+id/ghe_order_new"
+        app:layout_constraintStart_toStartOf="@+id/ghs_order_new"
+        app:layout_constraintTop_toBottomOf="@+id/cbg_order_new_metode_pembayaran" />
+
+    <EditText
+        android:id="@+id/et_order_new_kode_diskon"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:ems="10"
+        android:hint="Kode diskon..."
+        android:inputType="textPersonName"
+        android:textColor="@color/gray_700"
+        android:textSize="16sp"
+        app:layout_constraintEnd_toStartOf="@+id/ghe_order_new"
+        app:layout_constraintStart_toStartOf="@+id/ghs_order_new"
+        app:layout_constraintTop_toBottomOf="@+id/tv_order_new_kode_diskon_title" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

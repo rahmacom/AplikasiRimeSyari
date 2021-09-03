@@ -50,6 +50,7 @@ public class ProfilBiodataFragment extends Fragment {
 
         setupToolbar();
         setUpBiodataProfil();
+        viewModel.setLiveToken(manager.getString(Const.KEY_TOKEN));
 
         binding.toolbarProfilBiodata.setTitle("Biodata user");
 
@@ -93,5 +94,9 @@ public class ProfilBiodataFragment extends Fragment {
     private void setupToolbar() {
         AppBarConfiguration appBarConfiguration = new AppBarConfiguration.Builder(navController.getGraph()).build();
         NavigationUI.setupWithNavController(binding.toolbarProfilBiodata, navController, appBarConfiguration);
+    }
+
+    private void getUserAddresses() {
+
     }
 }

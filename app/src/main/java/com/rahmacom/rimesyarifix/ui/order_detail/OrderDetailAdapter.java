@@ -7,7 +7,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
-import com.rahmacom.rimesyarifix.data.entity.Product;
+import com.rahmacom.rimesyarifix.data.model.Product;
 import com.rahmacom.rimesyarifix.databinding.ItemOrderDetailListBinding;
 import com.rahmacom.rimesyarifix.utils.Const;
 import com.rahmacom.rimesyarifix.utils.Helper;
@@ -62,7 +62,7 @@ public class OrderDetailAdapter extends RecyclerView.Adapter<OrderDetailAdapter.
 
         void bind(Product product) {
             binding.tvOrderProdukNama.setText(product.getNama());
-            binding.tvOrderProdukHarga.setText(Helper.convertToRP(product.getHargaCustomer()));
+            binding.tvOrderProdukHarga.setText(Helper.convertToRP(product.getHarga()));
             binding.tvOrderProdukJumlah.setText(String.format("x%d item", product.getPivot()
                     .getJumlah()));
             binding.tvOrderProdukWarna.setText(product.getPivot()
@@ -71,6 +71,7 @@ public class OrderDetailAdapter extends RecyclerView.Adapter<OrderDetailAdapter.
             binding.tvOrderProdukSize.setText(product.getPivot()
                     .getSize()
                     .getName());
+            binding.tvOrderProdukSubtotal.setText(Helper.convertToRP(product.getPivot().getSubTotal()));
 
             Glide.with(binding.getRoot())
                     .load(Const.BASE_URL + product.getImage()

@@ -6,7 +6,7 @@ import android.view.ViewGroup;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.rahmacom.rimesyarifix.data.entity.Order;
+import com.rahmacom.rimesyarifix.data.model.Order;
 import com.rahmacom.rimesyarifix.databinding.ItemOrderListBinding;
 import com.rahmacom.rimesyarifix.utils.Helper;
 

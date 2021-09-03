@@ -6,8 +6,8 @@ import androidx.lifecycle.SavedStateHandle;
 import androidx.lifecycle.Transformations;
 import androidx.lifecycle.ViewModel;
 
-import com.rahmacom.rimesyarifix.data.AuthRepository;
-import com.rahmacom.rimesyarifix.data.network.response.LoginResponse;
+import com.rahmacom.rimesyarifix.data.MainRepository;
+import com.rahmacom.rimesyarifix.data.network.response.ResponseLogin;
 import com.rahmacom.rimesyarifix.data.vo.Resource;
 
 import java.util.Objects;
@@ -19,15 +19,14 @@ import dagger.hilt.android.lifecycle.HiltViewModel;
 @HiltViewModel
 public class RegisterViewModel extends ViewModel {
 
-    private final SavedStateHandle savedStateHandle;
     private final MutableLiveData<Register> register = new MutableLiveData<>();
-    private AuthRepository authRepository;
-    public final LiveData<Resource<LoginResponse>> registerUser = Transformations.switchMap(register, user -> authRepository.register(user.name, user.email, user.password));
+    private MainRepository mainRepository;
+    public final LiveData<Resource<ResponseLogin>> registerUser =
+            Transformations.switchMap(register, user -> mainRepository.register(user.name, user.email, user.password));
 
     @Inject
-    public RegisterViewModel(AuthRepository authRepository, SavedStateHandle savedStateHandle) {
-        this.authRepository = authRepository;
-        this.savedStateHandle = savedStateHandle;
+    public RegisterViewModel(MainRepository mainRepository) {
+        this.mainRepository = mainRepository;
     }
 
     public void setRegister(String name, String email, String password, String passwordConfirm) throws Exception {

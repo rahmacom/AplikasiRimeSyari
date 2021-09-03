@@ -6,7 +6,7 @@ import android.view.ViewGroup;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.rahmacom.rimesyarifix.data.entity.Testimony;
+import com.rahmacom.rimesyarifix.data.model.Testimony;
 import com.rahmacom.rimesyarifix.databinding.ItemProfilTestimoniListBinding;
 
 import java.util.ArrayList;

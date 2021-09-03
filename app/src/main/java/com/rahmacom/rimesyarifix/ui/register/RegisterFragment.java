@@ -52,11 +52,10 @@ public class RegisterFragment extends Fragment {
 
         binding.btnRegisterDaftar.setOnClickListener(v -> {
             try {
-                viewModel.setRegister(etUser.getText()
-                        .toString(), etHp.getText()
-                        .toString(), etPassword.getText()
-                        .toString(), etPasswordConfirm.getText()
-                        .toString());
+                viewModel.setRegister(etUser.getText().toString(),
+                        etHp.getText().toString(),
+                        etPassword.getText().toString(),
+                        etPasswordConfirm.getText().toString());
             } catch (Exception e) {
                 Toast.makeText(requireContext(), e.getMessage(), Toast.LENGTH_SHORT)
                         .show();

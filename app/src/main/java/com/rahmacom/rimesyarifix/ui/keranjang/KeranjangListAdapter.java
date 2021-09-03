@@ -6,7 +6,7 @@ import android.view.ViewGroup;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.rahmacom.rimesyarifix.data.entity.Cart;
+import com.rahmacom.rimesyarifix.data.model.Cart;
 import com.rahmacom.rimesyarifix.databinding.ItemKeranjangListBinding;
 import com.rahmacom.rimesyarifix.utils.Helper;
 

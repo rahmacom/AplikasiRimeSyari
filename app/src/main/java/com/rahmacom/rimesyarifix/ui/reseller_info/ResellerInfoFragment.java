@@ -12,10 +12,11 @@ import androidx.fragment.app.Fragment;
 import androidx.navigation.Navigation;
 
 import com.rahmacom.rimesyarifix.databinding.FragmentResellerInfoBinding;
+import com.rahmacom.rimesyarifix.utils.Const;
 
 public class ResellerInfoFragment extends Fragment {
 
-    private ResellerInfoViewModel mViewModel;
+    private ResellerInfoViewModel viewModel;
     private FragmentResellerInfoBinding binding;
 
     public static ResellerInfoFragment newInstance() {
@@ -31,7 +32,8 @@ public class ResellerInfoFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        Log.d("InformasiFragment", "This is informasi fragment");
+
+//        viewModel.setLiveToken(manager.getString(Const.KEY_TOKEN));
         binding.btnMulaiKycVerifikasi.setOnClickListener(v -> {
             Navigation.findNavController(view)
                     .navigate(ResellerInfoFragmentDirections.resellerInfoFragmentToResellerKYCFragment());

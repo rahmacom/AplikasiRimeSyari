@@ -65,7 +65,7 @@ public class OrderHistoryFragment extends Fragment {
             @Override
             public void onPageSelected(int position) {
                 super.onPageSelected(position);
-                viewModel.setStatusId(manager.getString(Const.KEY_TOKEN), position != 0
+                viewModel.setLiveOrder(position != 0
                         ? position + 4
                         : 0);
             }

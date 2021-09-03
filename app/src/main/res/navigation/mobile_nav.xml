@@ -6,7 +6,7 @@
     app:startDestination="@id/nav_home">
     <fragment
         android:id="@+id/orderHistoryFragment"
-        android:name="com.rahmacom.rimesyarifix.ui.order.OrderHistoryFragment"
+        android:name="com.rahmacom.rimesyarifix.ui.liveOrder.OrderHistoryFragment"
         android:label="Riwayat Order"
         tools:layout="@layout/fragment_order">
         <action
@@ -57,24 +57,37 @@
             app:argType="integer"
             android:defaultValue="-1" />
         <action
-            android:id="@+id/formEditBiodataFragment_to_profilBiodataAlamatFragment"
-            app:destination="@id/profilBiodataAlamatFragment" />
+            android:id="@+id/formEditBiodataFragment_to_formAlamatFragment"
+            app:destination="@id/formAlamatFragment" />
     </fragment>
     <fragment
         android:id="@+id/keranjangDetailFragment"
         android:name="com.rahmacom.rimesyarifix.ui.keranjang_detail.KeranjangDetailFragment"
         android:label="Detail keranjang"
         tools:layout="@layout/fragment_keranjang_detail">
-        <action
-            android:id="@+id/keranjangDetailFragment_to_orderDetailFragment"
-            app:destination="@id/orderDetailFragment" />
-        <action
-            android:id="@+id/keranjangDetailFragment_to_profilBiodataAlamatFragment"
-            app:destination="@id/profilBiodataAlamatFragment" />
         <argument
-            android:name="cart_id"
+            android:name="product_id"
             android:defaultValue="-1"
             app:argType="integer" />
+        <action
+            android:id="@+id/keranjangDetailFragment_to_orderNewFragment"
+            app:destination="@id/orderNewFragment" />
+        <argument
+            android:name="color_id"
+            app:argType="integer"
+            android:defaultValue="-1" />
+        <argument
+            android:name="size_id"
+            app:argType="integer"
+            android:defaultValue="-1" />
+        <argument
+            android:name="viewState"
+            app:argType="integer"
+            android:defaultValue="-1" />
+        <argument
+            android:name="cart_id"
+            app:argType="integer"
+            android:defaultValue="-1" />
     </fragment>
     <fragment
         android:id="@+id/keranjangFragment"
@@ -116,12 +129,15 @@
     <fragment
         android:id="@+id/orderDetailFragment"
         android:name="com.rahmacom.rimesyarifix.ui.order_detail.OrderDetailFragment"
-        android:label="Detail order"
+        android:label="Detail liveOrder"
         tools:layout="@layout/fragment_order_detail">
         <argument
             android:name="order_id"
             app:argType="integer"
             android:defaultValue="-1" />
+        <action
+            android:id="@+id/orderDetailFragment_to_profilBiodataAlamatFragment"
+            app:destination="@id/profilBiodataAlamatFragment" />
     </fragment>
     <fragment
         android:id="@+id/nav_profil"
@@ -165,6 +181,9 @@
         <action
             android:id="@+id/profilBiodataFragment_to_formEditBiodataFragment"
             app:destination="@id/formEditBiodataFragment" />
+        <action
+            android:id="@+id/profilBiodataFragment_to_profilBiodataAlamatFragment"
+            app:destination="@id/profilBiodataAlamatFragment" />
     </fragment>
     <fragment
         android:id="@+id/profilTentangFragment"
@@ -175,7 +194,11 @@
         android:id="@+id/profilTestimoniFragment"
         android:name="com.rahmacom.rimesyarifix.ui.profil_testimoni.ProfilTestimoniFragment"
         android:label="Testimoni"
-        tools:layout="@layout/fragment_profil_testimoni" />
+        tools:layout="@layout/fragment_profil_testimoni" >
+        <action
+            android:id="@+id/profilTestimoniFragment_to_produkFragment"
+            app:destination="@id/produkFragment" />
+    </fragment>
     <fragment
         android:id="@+id/registerFragment"
         android:name="com.rahmacom.rimesyarifix.ui.register.RegisterFragment"
@@ -266,4 +289,62 @@
             app:argType="integer"
             android:defaultValue="-1" />
     </dialog>
+    <fragment
+        android:id="@+id/orderNewFragment"
+        android:name="com.rahmacom.rimesyarifix.ui.order_new.OrderNewFragment"
+        android:label="Buat order baru"
+        tools:layout="@layout/fragment_order_new" >
+        <action
+            android:id="@+id/newOrderFragment_to_orderKonfirmasiFragment"
+            app:destination="@id/orderKonfirmasiFragment" />
+        <action
+            android:id="@+id/action_orderNewFragment_to_profilBiodataAlamatFragment2"
+            app:destination="@id/profilBiodataAlamatFragment" />
+        <argument
+            android:name="user_shipment_id"
+            app:argType="integer"
+            android:defaultValue="-1" />
+        <argument
+            android:name="payment_method_id"
+            app:argType="integer"
+            android:defaultValue="-1" />
+        <argument
+            android:name="cart_id"
+            app:argType="integer"
+            android:defaultValue="-1" />
+        <argument
+            android:name="product_id"
+            app:argType="integer[]"
+            app:nullable="true"
+            android:defaultValue="@null" />
+        <argument
+            android:name="color_id"
+            app:argType="integer[]"
+            app:nullable="true"
+            android:defaultValue="@null" />
+        <argument
+            android:name="size_id"
+            app:argType="integer[]"
+            app:nullable="true"
+            android:defaultValue="@null" />
+        <argument
+            android:name="jumlah"
+            app:argType="integer[]"
+            app:nullable="true"
+            android:defaultValue="@null" />
+        <argument
+            android:name="product_harga"
+            app:argType="integer[]"
+            app:nullable="true"
+            android:defaultValue="@null" />
+    </fragment>
+    <fragment
+        android:id="@+id/orderKonfirmasiFragment"
+        android:name="com.rahmacom.rimesyarifix.ui.order_konfirmasi.OrderKonfirmasiFragment"
+        android:label="fragment_order_konfirmasi"
+        tools:layout="@layout/fragment_order_konfirmasi" >
+        <action
+            android:id="@+id/action_orderKonfirmasiFragment_to_orderDetailFragment"
+            app:destination="@id/orderDetailFragment" />
+    </fragment>
 </navigation>

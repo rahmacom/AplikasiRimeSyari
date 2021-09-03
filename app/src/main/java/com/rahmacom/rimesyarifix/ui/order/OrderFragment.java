@@ -49,6 +49,7 @@ public class OrderFragment extends Fragment {
 
         setupTabPages();
 
+        viewModel.setLiveToken(manager.getString(Const.KEY_TOKEN));
         binding.toolbarFragmentOrder.inflateMenu(R.menu.menu_order);
         binding.toolbarFragmentOrder.setTitle("Order");
         binding.toolbarFragmentOrder.setOnMenuItemClickListener(this::onOptionsItemSelected);
@@ -71,7 +72,7 @@ public class OrderFragment extends Fragment {
             @Override
             public void onPageSelected(int position) {
                 super.onPageSelected(position);
-                viewModel.setStatusId(manager.getString(Const.KEY_TOKEN), position);
+                viewModel.setLiveOrder(position);
             }
         });
     }

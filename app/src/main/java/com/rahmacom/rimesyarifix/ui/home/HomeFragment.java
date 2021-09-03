@@ -15,7 +15,7 @@ import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.GridLayoutManager;
 
 import com.rahmacom.rimesyarifix.R;
-import com.rahmacom.rimesyarifix.data.entity.Product;
+import com.rahmacom.rimesyarifix.data.model.Product;
 import com.rahmacom.rimesyarifix.databinding.FragmentHomeBinding;
 import com.rahmacom.rimesyarifix.manager.PreferenceManager;
 import com.rahmacom.rimesyarifix.utils.Const;
@@ -52,7 +52,7 @@ public class HomeFragment extends Fragment {
             navController.navigate(HomeFragmentDirections.globalToLoginFragment());
         }
 
-        viewModel.setToken(manager.getString(Const.KEY_TOKEN));
+        viewModel.setLiveToken(manager.getString(Const.KEY_TOKEN));
         viewModel.getAllProducts.observe(getViewLifecycleOwner(), product -> {
             if (product != null) {
                 switch (product.getStatus()) {

@@ -43,8 +43,9 @@
                 android:fontFamily="@font/rubik_medium"
                 android:text="Produk dalam keranjang"
                 android:textColor="@color/gray_700"
+                android:textSize="12sp"
                 app:layout_constraintEnd_toStartOf="@+id/gr_keranjang_detail"
-                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintHorizontal_bias="1.0"
                 app:layout_constraintStart_toStartOf="@+id/gl_keranjang_detail"
                 app:layout_constraintTop_toBottomOf="@+id/et_keranjang_detail_deskripsi" />
 
@@ -135,7 +136,8 @@
                 android:fontFamily="@font/rubik_medium"
                 android:text="Deskripsi"
                 android:textAllCaps="false"
-                android:textColor="@color/gray_700"
+                android:textColor="@color/gray_600"
+                android:textSize="12sp"
                 app:layout_constraintEnd_toStartOf="@+id/gr_keranjang_detail"
                 app:layout_constraintHorizontal_bias="1.0"
                 app:layout_constraintStart_toStartOf="@+id/gl_keranjang_detail"
@@ -147,7 +149,8 @@
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/rubik_medium"
                 android:text="Judul"
-                android:textColor="@color/gray_700"
+                android:textColor="@color/gray_600"
+                android:textSize="12sp"
                 app:layout_constraintEnd_toStartOf="@+id/gr_keranjang_detail"
                 app:layout_constraintStart_toStartOf="@+id/gl_keranjang_detail"
                 app:layout_constraintTop_toTopOf="parent" />
@@ -160,8 +163,8 @@
                 android:ems="10"
                 android:inputType="textPersonName"
                 android:text="asdf"
-                android:textColor="@color/gray_600"
-                android:textSize="14sp"
+                android:textColor="@color/gray_800"
+                android:textSize="18sp"
                 app:layout_constraintEnd_toStartOf="@+id/gr_keranjang_detail"
                 app:layout_constraintStart_toStartOf="@+id/gl_keranjang_detail"
                 app:layout_constraintTop_toBottomOf="@+id/tv_keranjang_detail_judul_title" />
@@ -174,8 +177,8 @@
                 android:ems="10"
                 android:gravity="start|top"
                 android:inputType="textMultiLine"
-                android:textColor="@color/gray_600"
-                android:textSize="14sp"
+                android:textColor="@color/gray_800"
+                android:textSize="18sp"
                 app:layout_constraintEnd_toStartOf="@+id/gr_keranjang_detail"
                 app:layout_constraintStart_toStartOf="@+id/gl_keranjang_detail"
                 app:layout_constraintTop_toBottomOf="@+id/tv_keranjang_detail_deskripsi_title" />

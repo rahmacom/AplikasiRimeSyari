@@ -6,7 +6,10 @@ import android.view.ViewGroup;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.lifecycle.ViewModelProvider;
+import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
+import androidx.navigation.ui.NavigationUI;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
@@ -21,11 +24,16 @@ public class ProfilMenuAdapter extends RecyclerView.Adapter<ProfilMenuAdapter.Vi
 
     private final ArrayList<Profil> listData = new ArrayList<>();
     private ItemProfilMenuListBinding binding;
+    private OnItemClickListener onItemClickListener;
 
     public void setLists(ArrayList<Profil> list) {
         listData.clear();
         listData.addAll(list);
         notifyDataSetChanged();
+    }
+
+    public void setOnItemClickListener(OnItemClickListener onItemClickListener) {
+        this.onItemClickListener = onItemClickListener;
     }
 
     @NonNull
@@ -39,24 +47,7 @@ public class ProfilMenuAdapter extends RecyclerView.Adapter<ProfilMenuAdapter.Vi
     public void onBindViewHolder(@NonNull ProfilMenuAdapter.ViewHolder holder, int position) {
         holder.bind(listData.get(position));
 
-        if (position == getItemCount() - 1) {
-            holder.binding.ivChevron.setVisibility(View.INVISIBLE);
-            holder.itemView.setOnClickListener(v -> {
-                PreferenceManager preferenceManager = new PreferenceManager(v.getContext());
-                preferenceManager.removePreference(Const.KEY_TOKEN);
-                preferenceManager.removePreference(Const.KEY_TTL);
-                preferenceManager.removePreference(Const.KEY_TYPE);
-                Navigation.findNavController(v)
-                        .navigate(R.id.global_to_loginFragment);
-                Toast.makeText(v.getContext(), "Logged out", Toast.LENGTH_SHORT)
-                        .show();
-            });
-        } else {
-            holder.binding.ivChevron.setVisibility(View.VISIBLE);
-            holder.itemView.setOnClickListener(v -> Navigation.findNavController(v)
-                    .navigate(listData.get(position)
-                            .getActionId()));
-        }
+        holder.itemView.setOnClickListener(v -> onItemClickListener.onItemClick(holder.binding, position));
     }
 
     @Override
@@ -78,5 +69,9 @@ public class ProfilMenuAdapter extends RecyclerView.Adapter<ProfilMenuAdapter.Vi
                     .load(profil.getDrawableId())
                     .into(binding.ivProfilMenuIcon);
         }
+    }
+
+    interface OnItemClickListener {
+        void onItemClick(ItemProfilMenuListBinding binding, int position);
     }
 }

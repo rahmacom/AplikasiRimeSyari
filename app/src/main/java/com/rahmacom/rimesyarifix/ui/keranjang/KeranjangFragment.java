@@ -15,9 +15,10 @@ import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
-import com.rahmacom.rimesyarifix.data.entity.Cart;
+import com.rahmacom.rimesyarifix.data.model.Cart;
 import com.rahmacom.rimesyarifix.databinding.FragmentKeranjangBinding;
 import com.rahmacom.rimesyarifix.manager.PreferenceManager;
+import com.rahmacom.rimesyarifix.ui.keranjang_detail.KeranjangDetailFragment;
 import com.rahmacom.rimesyarifix.utils.Const;
 
 import java.util.ArrayList;
@@ -55,8 +56,10 @@ public class KeranjangFragment extends Fragment {
                     adapter.setOnItemClickListener(cart -> {
                         KeranjangFragmentDirections.KeranjangFragmentToKeranjangDetailFragment action = KeranjangFragmentDirections.keranjangFragmentToKeranjangDetailFragment();
                         action.setCartId(cart.getId());
+                        action.setViewState(KeranjangDetailFragment.IS_SHOWING);
                         navController.navigate(action);
                     });
+
                 case LOADING:
                 case ERROR:
                 case INVALID:

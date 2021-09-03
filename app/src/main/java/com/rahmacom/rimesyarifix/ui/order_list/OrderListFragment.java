@@ -14,7 +14,7 @@ import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
-import com.rahmacom.rimesyarifix.data.entity.Order;
+import com.rahmacom.rimesyarifix.data.model.Order;
 import com.rahmacom.rimesyarifix.databinding.FragmentOrderListBinding;
 import com.rahmacom.rimesyarifix.manager.PreferenceManager;
 import com.rahmacom.rimesyarifix.ui.order.OrderFragmentDirections;

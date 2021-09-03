@@ -14,17 +14,21 @@ import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
+import androidx.recyclerview.widget.LinearLayoutManager;
 
 import com.google.android.material.chip.Chip;
-import com.rahmacom.rimesyarifix.data.entity.Color;
-import com.rahmacom.rimesyarifix.data.entity.Product;
-import com.rahmacom.rimesyarifix.data.entity.Size;
+import com.rahmacom.rimesyarifix.data.model.Color;
+import com.rahmacom.rimesyarifix.data.model.Product;
+import com.rahmacom.rimesyarifix.data.model.Size;
+import com.rahmacom.rimesyarifix.data.model.Testimony;
 import com.rahmacom.rimesyarifix.data.vo.Status;
 import com.rahmacom.rimesyarifix.databinding.FragmentProdukBinding;
 import com.rahmacom.rimesyarifix.manager.PreferenceManager;
+import com.rahmacom.rimesyarifix.ui.profil_testimoni.ProfilTestimoniAdapter;
 import com.rahmacom.rimesyarifix.utils.Const;
 import com.rahmacom.rimesyarifix.utils.Helper;
 
+import java.util.ArrayList;
 import java.util.Objects;
 
 import dagger.hilt.android.AndroidEntryPoint;
@@ -36,7 +40,8 @@ public class ProdukFragment extends Fragment {
     private ProdukViewModel viewModel;
     private NavController navController;
     private PreferenceManager manager;
-    private FotoProdukSliderAdapter adapter;
+    private FotoProdukSliderAdapter fotoProdukSliderAdapter;
+    private ProfilTestimoniAdapter testimoniAdapter;
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -55,7 +60,8 @@ public class ProdukFragment extends Fragment {
         int productId = ProdukFragmentArgs.fromBundle(getArguments())
                 .getProductId();
 
-        viewModel.setProductId(manager.getString(Const.KEY_TOKEN), productId);
+        viewModel.setLiveToken(manager.getString(Const.KEY_TOKEN));
+        viewModel.setProductId(productId);
 
         viewModel.viewProduct.observe(getViewLifecycleOwner(), product -> {
             if (product != null) {
@@ -97,13 +103,19 @@ public class ProdukFragment extends Fragment {
     }
 
     private void setDataBinding(Product product) {
-        adapter = new FotoProdukSliderAdapter();
-        adapter.setImages(product.getImages());
+        fotoProdukSliderAdapter = new FotoProdukSliderAdapter();
+        fotoProdukSliderAdapter.setImages(product.getImages());
 
-        binding.vpProdukSliderFoto.setAdapter(adapter);
+        testimoniAdapter = new ProfilTestimoniAdapter();
+        testimoniAdapter.setLists((ArrayList<Testimony>) product.getTestimonies());
+        binding.rvTestimoniList.setAdapter(testimoniAdapter);
+        binding.rvTestimoniList.setLayoutManager(new LinearLayoutManager(requireContext()));
+        binding.rvTestimoniList.setHasFixedSize(true);
+
+        binding.vpProdukSliderFoto.setAdapter(fotoProdukSliderAdapter);
         binding.tvProdukNama.setText(product.getNama());
         binding.tvProdukDeskripsi.setText(product.getDeskripsi());
-        binding.tvProdukHarga.setText(Helper.convertToRP(product.getHargaCustomer()));
+        binding.tvProdukHarga.setText(Helper.convertToRP(product.getHarga()));
         binding.tvProdukSukaText.setText(String.valueOf(product.getSuka()));
         binding.tvProdukRatingText.setText(product.getReviewAvg() + " / 5 (" + product.getReviewCount() + " review)");
 

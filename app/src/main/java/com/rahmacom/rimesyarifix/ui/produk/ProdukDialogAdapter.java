@@ -6,7 +6,7 @@ import android.view.ViewGroup;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.rahmacom.rimesyarifix.data.entity.Cart;
+import com.rahmacom.rimesyarifix.data.model.Cart;
 import com.rahmacom.rimesyarifix.databinding.ItemProdukDialogListBinding;
 
 import java.util.ArrayList;
@@ -14,7 +14,7 @@ import java.util.ArrayList;
 public class ProdukDialogAdapter extends RecyclerView.Adapter<ProdukDialogAdapter.ViewHolder> {
 
     private ItemProdukDialogListBinding binding;
-    private ArrayList<Cart> list = new ArrayList<>();
+    private final ArrayList<Cart> list = new ArrayList<>();
     private OnItemClickListener onItemClickListener;
 
     public void setOnItemClickListener(OnItemClickListener onItemClickListener) {
@@ -46,9 +46,13 @@ public class ProdukDialogAdapter extends RecyclerView.Adapter<ProdukDialogAdapte
         return list.size();
     }
 
+    interface OnItemClickListener {
+        void onItemClick(Cart cart);
+    }
+
     static class ViewHolder extends RecyclerView.ViewHolder {
 
-        private ItemProdukDialogListBinding binding;
+        private final ItemProdukDialogListBinding binding;
 
         public ViewHolder(ItemProdukDialogListBinding binding) {
             super(binding.getRoot());
@@ -58,9 +62,5 @@ public class ProdukDialogAdapter extends RecyclerView.Adapter<ProdukDialogAdapte
         void bind(Cart cart) {
             binding.tvItemProdukDialogNama.setText(cart.getJudul());
         }
-    }
-
-    interface OnItemClickListener {
-        void onItemClick(Cart cart);
     }
 }

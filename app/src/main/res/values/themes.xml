@@ -94,14 +94,23 @@
         <item name="colorOnSurface">@color/gray_900</item>
         <item name="alertDialogStyle">@style/Component.RimeSyariFix.Dialog</item>
         <item name="materialAlertDialogTitleTextStyle">@style/Dialog.RimeSyariFix.Title</item>
-        <item name="materialAlertDialogBodyTextStyle">@style/Dialog.RimeSyariFix.Content</item>
-        <item name="buttonBarPositiveButtonStyle">@style/Dialog.RimeSyariFix.Button</item>
-        <item name="buttonBarNeutralButtonStyle">@style/Dialog.RimeSyariFix.Button</item>
+        <item name="buttonBarPositiveButtonStyle">@style/Dialog.RimeSyariFix.PositiveButton</item>
+        <item name="buttonBarNegativeButtonStyle">@style/Dialog.RimeSyariFix.NegativeButton</item>
     </style>
 
     <style name="ThemeOverlay.RimeSyariFix.Button" parent="">
         <item name="colorPrimary">@color/white</item>
         <item name="colorOnPrimary">@color/pink_400</item>
+    </style>
+
+    <style name="ThemeOverlay.RimeSyariFix.DialogPositiveButton" parent="">
+        <item name="colorPrimary">@color/pink_600</item>
+        <item name="android:fontFamily">@font/rubik_medium</item>
+    </style>
+
+    <style name="ThemeOverlay.RimeSyariFix.DialogNegativeButton" parent="">
+        <item name="colorPrimary">@color/gray_400</item>
+        <item name="android:fontFamily">@font/rubik</item>
     </style>
 
     <style name="ThemeOverlay.RimeSyariFix.ExtendedFAB" parent="">
@@ -121,7 +130,7 @@
     <style name="Dialog.RimeSyariFix.Title"
         parent="MaterialAlertDialog.MaterialComponents.Title.Text">
         <item name="android:textColor">@color/gray_900</item>
-        <item name="fontFamily">@font/rubik_medium</item>
+        <item name="android:fontFamily">@font/rubik_medium</item>
     </style>
 
     <style name="Dialog.RimeSyariFix.Content"
@@ -131,9 +140,14 @@
         <item name="fontFamily">@font/rubik</item>
     </style>
 
-    <style name="Dialog.RimeSyariFix.Button"
+    <style name="Dialog.RimeSyariFix.PositiveButton"
         parent="Widget.MaterialComponents.Button.TextButton.Dialog">
-        <item name="materialThemeOverlay">@style/ThemeOverlay.RimeSyariFix.Button</item>
+        <item name="materialThemeOverlay">@style/ThemeOverlay.RimeSyariFix.DialogPositiveButton</item>
+    </style>
+
+    <style name="Dialog.RimeSyariFix.NegativeButton"
+        parent="Widget.MaterialComponents.Button.TextButton.Dialog">
+        <item name="materialThemeOverlay">@style/ThemeOverlay.RimeSyariFix.DialogNegativeButton</item>
     </style>
 
     <style name="Dialog.RimeSyariFix.Shape"
