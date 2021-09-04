@@ -37,7 +37,7 @@ public class OrderNewViewModel extends ViewModel {
             cart -> mainRepository.viewCart(liveToken.getValue(), cart));
 
     public LiveData<Resource<com.rahmacom.rimesyarifix.data.model.Order>> newOrder = Transformations.switchMap(liveOrder,
-            order -> mainRepository.newOrder(liveToken.getValue(), order.pesan, null, order.userShipmentId, order.paymentMethodId, order.productIds, order.colorIds, order.sizeIds, order.quantities));
+            order -> mainRepository.newOrder(liveToken.getValue(), order.pesan, order.kodeDiskon, order.userShipmentId, order.paymentMethodId, order.productIds, order.colorIds, order.sizeIds, order.quantities));
 
     public LiveData<Resource<List<PaymentMethod>>> getAvailablePaymentMethod = Transformations.switchMap(liveToken,
             paymentMethod -> mainRepository.getAvailablePaymentMethods(paymentMethod));
@@ -63,10 +63,10 @@ public class OrderNewViewModel extends ViewModel {
         order.kodeDiskon = kodeDiskon;
         order.userShipmentId = userShipmentId;
         order.paymentMethodId = paymentMethodId;
-        order.productIds.addAll(productIds);
-        order.colorIds.addAll(colorIds);
-        order.sizeIds.addAll(sizeIds);
-        order.quantities.addAll(quantities);
+        order.productIds = productIds;
+        order.colorIds = colorIds;
+        order.sizeIds = sizeIds;
+        order.quantities = quantities;
         liveOrder.setValue(order);
     }
 

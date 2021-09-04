@@ -23,6 +23,7 @@ public class ProdukViewModel extends ViewModel {
 
     private final MutableLiveData<String> liveToken = new MutableLiveData<>();
     private final MutableLiveData<Integer> liveProductId = new MutableLiveData<>();
+    private final MutableLiveData<Integer> liveColorId = new MutableLiveData<>();
     private MainRepository mainRepository;
 
     public final LiveData<Resource<Product>> viewProduct =
@@ -32,7 +33,8 @@ public class ProdukViewModel extends ViewModel {
             Transformations.switchMap(liveProductId, product -> mainRepository.getProductColors(liveToken.getValue(), product));
 
     public final LiveData<Resource<List<Size>>> getProductSizes =
-            Transformations.switchMap(liveProductId, product -> mainRepository.getProductSizes(liveToken.getValue(), product));
+            Transformations.switchMap(liveProductId, product ->
+                    mainRepository.getProductSizes(liveToken.getValue(), product, liveColorId.getValue()));
 
     @Inject
     public ProdukViewModel(MainRepository mainRepository) {
@@ -43,7 +45,11 @@ public class ProdukViewModel extends ViewModel {
         liveToken.setValue(token);
     }
 
-    public void setProductId(int productId) {
+    public void setLiveProductId(int productId) {
         liveProductId.setValue(productId);
+    }
+
+    public void setLiveColorId(int colorId) {
+        liveColorId.setValue(colorId);
     }
 }

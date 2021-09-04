@@ -231,7 +231,7 @@ public interface RimeSyariAPI {
 
     @GET("sizes")
     @Headers({"Accept: application/json"})
-    Call<List<Size>> getProductSizes(@Header("Authorization") String token, @Query("product_id") int productId);
+    Call<List<Size>> getProductSizes(@Header("Authorization") String token, @Query("product_id") int productId, @Query("color_id") int colorId);
 
     @GET("payment_methods")
     @Headers({"Accept: application/json"})

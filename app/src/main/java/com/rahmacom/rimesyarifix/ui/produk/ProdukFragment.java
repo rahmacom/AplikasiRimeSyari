@@ -9,6 +9,7 @@ import android.view.ViewGroup;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
@@ -21,6 +22,7 @@ import com.rahmacom.rimesyarifix.data.model.Color;
 import com.rahmacom.rimesyarifix.data.model.Product;
 import com.rahmacom.rimesyarifix.data.model.Size;
 import com.rahmacom.rimesyarifix.data.model.Testimony;
+import com.rahmacom.rimesyarifix.data.vo.Resource;
 import com.rahmacom.rimesyarifix.data.vo.Status;
 import com.rahmacom.rimesyarifix.databinding.FragmentProdukBinding;
 import com.rahmacom.rimesyarifix.manager.PreferenceManager;
@@ -29,9 +31,12 @@ import com.rahmacom.rimesyarifix.utils.Const;
 import com.rahmacom.rimesyarifix.utils.Helper;
 
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 import java.util.Objects;
 
 import dagger.hilt.android.AndroidEntryPoint;
+import timber.log.Timber;
 
 @AndroidEntryPoint
 public class ProdukFragment extends Fragment {
@@ -61,7 +66,7 @@ public class ProdukFragment extends Fragment {
                 .getProductId();
 
         viewModel.setLiveToken(manager.getString(Const.KEY_TOKEN));
-        viewModel.setProductId(productId);
+        viewModel.setLiveProductId(productId);
 
         viewModel.viewProduct.observe(getViewLifecycleOwner(), product -> {
             if (product != null) {
@@ -140,9 +145,21 @@ public class ProdukFragment extends Fragment {
             }
         });
 
-        viewModel.getProductSizes.observe(getViewLifecycleOwner(), sizes -> {
+        binding.chipgroupProdukWarna.setOnCheckedChangeListener((group, checkedId) -> {
+            Timber.d("color_id: " + String.valueOf(checkedId));
+            binding.chipgroupProdukUkuran.removeAllViewsInLayout();
+            viewModel.setLiveColorId(checkedId);
+            viewModel.getProductSizes.removeObserver(productSizeObserver());
+            viewModel.getProductSizes.observe(getViewLifecycleOwner(), productSizeObserver());
+        });
+    }
+
+    private Observer<Resource<List<Size>>> productSizeObserver() {
+        return sizes -> {
             if (sizes.getStatus() == Status.SUCCESS) {
+                binding.chipgroupProdukUkuran.clearCheck();
                 for (Size size : sizes.getData()) {
+                    Timber.d("data: %s", size.getName());
                     Chip chipUkuran = new Chip(binding.chipgroupProdukUkuran.getContext());
                     chipUkuran.setCheckable(true);
                     chipUkuran.setText(size.getName());
@@ -150,8 +167,10 @@ public class ProdukFragment extends Fragment {
                     binding.chipgroupProdukUkuran.addView(chipUkuran);
                 }
             }
-        });
+        };
     }
+
+
 
     private void onBtnProdukActionClick(int productId) {
         int colorId = binding.chipgroupProdukWarna.getCheckedChipId();

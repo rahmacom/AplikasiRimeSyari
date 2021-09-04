@@ -105,6 +105,7 @@ public class ProdukDialogFragment extends BottomSheetDialogFragment {
         viewModel.addProductToCart.observe(getViewLifecycleOwner(), cart -> {
             switch (cart.getStatus()) {
                 case SUCCESS:
+                    action.setViewState(KeranjangDetailFragment.IS_SHOWING);
                     action.setCartId(cartId);
                     navController.navigate(action);
                     Toast.makeText(requireContext(), "Produk berhasil ditambahkan", Toast.LENGTH_SHORT).show();

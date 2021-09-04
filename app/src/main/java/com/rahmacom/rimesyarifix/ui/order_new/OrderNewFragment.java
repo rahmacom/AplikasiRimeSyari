@@ -23,6 +23,7 @@ import com.rahmacom.rimesyarifix.data.model.Product;
 import com.rahmacom.rimesyarifix.data.vo.Status;
 import com.rahmacom.rimesyarifix.databinding.FragmentOrderNewBinding;
 import com.rahmacom.rimesyarifix.manager.PreferenceManager;
+import com.rahmacom.rimesyarifix.ui.profil_biodata_alamat.ProfilBiodataAlamatFragment;
 import com.rahmacom.rimesyarifix.utils.Const;
 import com.rahmacom.rimesyarifix.utils.Helper;
 
@@ -31,6 +32,7 @@ import java.util.List;
 import java.util.Objects;
 
 import dagger.hilt.android.AndroidEntryPoint;
+import timber.log.Timber;
 
 @AndroidEntryPoint
 public class OrderNewFragment extends Fragment {
@@ -72,6 +74,7 @@ public class OrderNewFragment extends Fragment {
         viewModel.setLiveToken(manager.getString(Const.KEY_TOKEN));
 
         setDataBinding("Jalan Kulintang No. 33 RT 36");
+        setShipmentAddress();
     }
 
     private void setupToolbar() {
@@ -94,8 +97,12 @@ public class OrderNewFragment extends Fragment {
         }
 
         binding.tvOrderNewAlamat.setOnClickListener(v -> {
-            setShipmentAddress();
+            OrderNewFragmentDirections.OrderNewFragmentToProfilBiodataAlamatFragment action = OrderNewFragmentDirections.orderNewFragmentToProfilBiodataAlamatFragment();
+            action.setViewState(ProfilBiodataAlamatFragment.IS_SELECTING);
+            navController.navigate(action);
         });
+
+        binding.btnOrderNewPesanSekarang.setOnClickListener(v -> createOrder());
     }
 
     private void getCart() {
@@ -168,9 +175,11 @@ public class OrderNewFragment extends Fragment {
     private void getShipmentAddress(int shipmentId) {
         viewModel.setLiveUserShipmentId(shipmentId);
         viewModel.getShipmentAddressDetail.observe(getViewLifecycleOwner(), userShipment -> {
+            Timber.d(userShipment.getStatus().toString());
             switch (userShipment.getStatus()) {
                 case SUCCESS:
                     this.userShipmentId = userShipment.getData().getId();
+                    binding.tvOrderNewAlamat.setText(userShipment.getData().getAlamat());
                     break;
 
                 case LOADING:
@@ -190,17 +199,20 @@ public class OrderNewFragment extends Fragment {
                 .getSavedStateHandle()
                 .getLiveData("user_shipment_id");
 
-        liveShipmentId.observe(getViewLifecycleOwner(), this::getShipmentAddress);
+        liveShipmentId.observe(getViewLifecycleOwner(), shipmentId -> {
+            getShipmentAddress(shipmentId);
+        });
     }
 
     private void createOrder() {
         int paymentMethodId = binding.cbgOrderNewMetodePembayaran.getCheckedRadioButtonId();
-        int userShipmentId = args.getUserShipmentId();
+        int userShipmentId = this.userShipmentId;
         String pesan = binding.etOrderNewPesan.getText().toString();
         String kodeDiskon = binding.etOrderNewKodeDiskon.getText().toString();
 
         viewModel.setLiveOrder(pesan, kodeDiskon, userShipmentId, paymentMethodId, productIds, colorIds, sizeIds, quantities);
         viewModel.newOrder.observe(getViewLifecycleOwner(), order -> {
+            Timber.d(order.getStatus().toString());
             switch (order.getStatus()) {
                 case SUCCESS:
                     break;

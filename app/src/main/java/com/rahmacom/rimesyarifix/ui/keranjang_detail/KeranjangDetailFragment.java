@@ -33,6 +33,7 @@ import java.util.Arrays;
 import java.util.List;
 
 import dagger.hilt.android.AndroidEntryPoint;
+import timber.log.Timber;
 
 @AndroidEntryPoint
 public class KeranjangDetailFragment extends Fragment {
@@ -50,11 +51,11 @@ public class KeranjangDetailFragment extends Fragment {
 
     private int state;
 
-    private List<Integer> productIds = new ArrayList<>();
-    private List<Integer> productPrices = new ArrayList<>();
-    private List<Integer> colorIds = new ArrayList<>();
-    private List<Integer> sizeIds = new ArrayList<>();
-    private List<Integer> quantities = new ArrayList<>();
+    private List<Integer> productIds;
+    private List<Integer> productPrices;
+    private List<Integer> colorIds;
+    private List<Integer> sizeIds;
+    private List<Integer> quantities;
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -71,22 +72,11 @@ public class KeranjangDetailFragment extends Fragment {
 
         state = args.getViewState();
         viewModel.setLiveToken(manager.getString(Const.KEY_TOKEN));
+        Timber.d(String.valueOf(args.getCartId()));
 
         setupToolbar();
         setToolbarViewState(state);
         showCartDetail(args.getCartId());
-    }
-
-    @Override
-    public void onDestroy() {
-        super.onDestroy();
-        binding = null;
-
-        productIds.clear();
-        colorIds.clear();
-        sizeIds.clear();
-        quantities.clear();
-        productPrices.clear();
     }
 
     @Override
@@ -99,7 +89,7 @@ public class KeranjangDetailFragment extends Fragment {
                 }
 
                 if (args.getViewState() == IS_SHOWING) {
-                    Log.d("update", String.valueOf(args.getViewState()));
+                    Timber.d(String.valueOf(args.getViewState()));
                     updateCart();
                     return true;
                 }
@@ -128,6 +118,12 @@ public class KeranjangDetailFragment extends Fragment {
         List<Product> products = cart.getProducts();
         setupRecyclerView((ArrayList<Product>) products);
 
+        productIds = new ArrayList<>();
+        productPrices = new ArrayList<>();
+        colorIds = new ArrayList<>();
+        sizeIds = new ArrayList<>();
+        quantities = new ArrayList<>();
+
         for (Product product : products) {
             productIds.add(product.getId());
             productPrices.add(product.getHarga());
@@ -135,6 +131,12 @@ public class KeranjangDetailFragment extends Fragment {
             sizeIds.add(product.getPivot().getSizeId());
             quantities.add(product.getPivot().getJumlah());
         }
+
+        Timber.d("productIds: %s", productIds.toArray());
+        Timber.d("productPricess: %s", productPrices.toArray());
+        Timber.d("colorIds: %s", colorIds.toArray());
+        Timber.d("sizeIds: %s", sizeIds.toArray());
+        Timber.d("quantities: %s", quantities.toArray());
 
         binding.btnKeranjangDetailBuatOrder.setOnClickListener(v -> {
             createOrder();
@@ -146,7 +148,7 @@ public class KeranjangDetailFragment extends Fragment {
                 quantities.set(position, jumlah);
                 setToolbarViewState(IS_UPDATING);
 
-                Log.d("getChecked", Arrays.toString(adapter.getCheckedProducts().toArray()));
+                Timber.d(Arrays.toString(adapter.getCheckedProducts().toArray()));
             } else {
                 setToolbarViewState(IS_SHOWING);
             }
@@ -216,6 +218,7 @@ public class KeranjangDetailFragment extends Fragment {
                 case SUCCESS:
                     Toast.makeText(requireContext(), "Keranjang berhasil dibuat", Toast.LENGTH_SHORT).show();
                     setDataBinding(cart.getData());
+                    setToolbarViewState(IS_SHOWING);
                     break;
 
                 case LOADING:
@@ -242,6 +245,7 @@ public class KeranjangDetailFragment extends Fragment {
                 case SUCCESS:
                     Toast.makeText(requireContext(), "Keranjang berhasil diupdate", Toast.LENGTH_SHORT).show();
                     setDataBinding(cart.getData());
+                    setToolbarViewState(IS_SHOWING);
                     break;
 
                 case LOADING:
@@ -254,11 +258,6 @@ public class KeranjangDetailFragment extends Fragment {
                     break;
             }
         });
-
-        productIds.clear();
-        colorIds.clear();
-        sizeIds.clear();
-        quantities.clear();
     }
 
     private TextWatcher watchEditTexts() {

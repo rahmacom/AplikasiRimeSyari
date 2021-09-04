@@ -40,7 +40,7 @@
         android:label="Ubah Alamat"
         tools:layout="@layout/fragment_form_profil_biodata_alamat" >
         <argument
-            android:name="shipment_id"
+            android:name="user_shipment_id"
             app:argType="integer"
             android:defaultValue="-1" />
     </fragment>
@@ -57,8 +57,8 @@
             app:argType="integer"
             android:defaultValue="-1" />
         <action
-            android:id="@+id/formEditBiodataFragment_to_formAlamatFragment"
-            app:destination="@id/formAlamatFragment" />
+            android:id="@+id/action_formEditBiodataFragment_to_profilBiodataAlamatFragment"
+            app:destination="@id/profilBiodataAlamatFragment" />
     </fragment>
     <fragment
         android:id="@+id/keranjangDetailFragment"
@@ -268,6 +268,10 @@
         <action
             android:id="@+id/profilBiodataAlamatFragment_to_formAlamatFragment"
             app:destination="@id/formAlamatFragment" />
+        <argument
+            android:name="viewState"
+            app:argType="integer"
+            android:defaultValue="-1" />
     </fragment>
     <dialog
         android:id="@+id/produkDialogFragment"
@@ -295,10 +299,10 @@
         android:label="Buat order baru"
         tools:layout="@layout/fragment_order_new" >
         <action
-            android:id="@+id/newOrderFragment_to_orderKonfirmasiFragment"
+            android:id="@+id/orderNewFragment_to_orderKonfirmasiFragment"
             app:destination="@id/orderKonfirmasiFragment" />
         <action
-            android:id="@+id/action_orderNewFragment_to_profilBiodataAlamatFragment2"
+            android:id="@+id/orderNewFragment_to_profilBiodataAlamatFragment"
             app:destination="@id/profilBiodataAlamatFragment" />
         <argument
             android:name="user_shipment_id"
