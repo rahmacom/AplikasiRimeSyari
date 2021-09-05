@@ -5,7 +5,6 @@ import com.rahmacom.rimesyarifix.data.model.Color;
 import com.rahmacom.rimesyarifix.data.model.District;
 import com.rahmacom.rimesyarifix.data.model.Order;
 import com.rahmacom.rimesyarifix.data.model.PaymentMethod;
-import com.rahmacom.rimesyarifix.data.model.Post;
 import com.rahmacom.rimesyarifix.data.model.Product;
 import com.rahmacom.rimesyarifix.data.model.Province;
 import com.rahmacom.rimesyarifix.data.model.Regency;
@@ -237,12 +236,4 @@ public interface RimeSyariAPI {
     @GET("payment_methods")
     @Headers({"Accept: application/json"})
     Call<List<PaymentMethod>> getAvailablePaymentMethods(@Header("Authorization") String token);
-
-    @GET("posts")
-    @Headers({"Accept: application/json"})
-    Call<List<Post>> getLatestPosts(@Header("Authorization") String token);
-
-    @GET("posts/{post}")
-    @Headers({"Accept: application/json"})
-    Call<Post> viewPost(@Header("Authorization") String token, @Path("post") int postId);
 }

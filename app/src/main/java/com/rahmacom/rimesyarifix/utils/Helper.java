@@ -4,11 +4,8 @@ import java.sql.Timestamp;
 import java.text.DecimalFormat;
 import java.text.DecimalFormatSymbols;
 import java.text.NumberFormat;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Date;
 import java.util.List;
 import java.util.Locale;
 
@@ -49,19 +46,5 @@ public class Helper {
         }
 
         return intArray;
-    }
-
-    public static String toDate(String timestamp) {
-        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss'Z'");
-        Date parse = null;
-        try {
-            parse =  format.parse(timestamp);
-            format.applyPattern("E, dd-MM-yyyy");
-            return format.format(parse);
-        } catch (ParseException e) {
-            e.printStackTrace();
-        }
-
-        return null;
     }
 }

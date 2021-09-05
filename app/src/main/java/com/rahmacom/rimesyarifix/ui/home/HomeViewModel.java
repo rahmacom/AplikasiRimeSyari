@@ -7,7 +7,6 @@ import androidx.lifecycle.Transformations;
 import androidx.lifecycle.ViewModel;
 
 import com.rahmacom.rimesyarifix.data.MainRepository;
-import com.rahmacom.rimesyarifix.data.model.Post;
 import com.rahmacom.rimesyarifix.data.model.Product;
 import com.rahmacom.rimesyarifix.data.vo.Resource;
 
@@ -22,15 +21,12 @@ public class HomeViewModel extends ViewModel {
 
     private final MutableLiveData<String> liveToken = new MutableLiveData<>();
     private MainRepository mainRepository;
-
+    public final LiveData<Resource<List<Product>>> getAllProducts = Transformations.switchMap(liveToken, getToken -> mainRepository.getAllProducts(liveToken.getValue()));
 
     @Inject
     public HomeViewModel(MainRepository mainRepository) {
         this.mainRepository = mainRepository;
     }
-
-    public final LiveData<Resource<List<Product>>> getAllProducts = Transformations.switchMap(liveToken, getToken -> mainRepository.getAllProducts(liveToken.getValue()));
-    public final LiveData<Resource<List<Post>>> getLatestPosts = Transformations.switchMap(liveToken, posts -> mainRepository.getLatestPosts(posts));
 
     public void setLiveToken(String liveToken) {
         this.liveToken.setValue(liveToken);
