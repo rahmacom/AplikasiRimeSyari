@@ -94,9 +94,6 @@ public class ProfilBiodataFragment extends Fragment {
     private void setupToolbar() {
         AppBarConfiguration appBarConfiguration = new AppBarConfiguration.Builder(navController.getGraph()).build();
         NavigationUI.setupWithNavController(binding.toolbarProfilBiodata, navController, appBarConfiguration);
-    }
-
-    private void getUserAddresses() {
-
+        binding.toolbarProfilBiodata.inflateMenu(R.menu.menu_profil_biodata);
     }
 }

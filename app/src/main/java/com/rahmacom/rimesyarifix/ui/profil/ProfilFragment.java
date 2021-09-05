@@ -104,14 +104,10 @@ public class ProfilFragment extends Fragment {
                     break;
 
                 case 3:
-                    navController.navigate(ProfilFragmentDirections.navProfilToProfilSettingsFragment());
-                    break;
-
-                case 4:
                     navController.navigate(ProfilFragmentDirections.navProfilToProfilTentangFragment());
                     break;
 
-                case 5:
+                case 4:
                     logout();
                     break;
             }
@@ -124,6 +120,17 @@ public class ProfilFragment extends Fragment {
                 manager.removePreference(Const.KEY_TOKEN);
                 manager.removePreference(Const.KEY_TYPE);
                 manager.removePreference(Const.KEY_TTL);
+                manager.removePreference(Const.KEY_NIK);
+                manager.removePreference(Const.KEY_NAMA_LENGKAP);
+                manager.removePreference(Const.KEY_JENIS_KELAMIN);
+                manager.removePreference(Const.KEY_EMAIL);
+                manager.removePreference(Const.KEY_TEMPAT_LAHIR);
+                manager.removePreference(Const.KEY_TGL_LAHIR);
+                manager.removePreference(Const.KEY_ALAMAT);
+                manager.removePreference(Const.KEY_NO_TELP);
+                manager.removePreference(Const.KEY_NO_WA);
+                manager.removePreference(Const.KEY_ROLE);
+                manager.removePreference(Const.KEY_AVATAR);
 
                 navController.navigate(ProfilFragmentDirections.globalToLoginFragment());
             }

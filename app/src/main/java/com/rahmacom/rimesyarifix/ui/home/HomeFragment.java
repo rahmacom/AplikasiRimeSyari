@@ -57,6 +57,15 @@ public class HomeFragment extends Fragment {
         viewModel.setLiveToken(manager.getString(Const.KEY_TOKEN));
         getAllProducts();
         getLatestPosts();
+        refreshProfile();
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        if (item.getItemId() == R.id.menu_keranjang) {
+            navController.navigate(HomeFragmentDirections.navHomeToKeranjangFragment());
+        }
+        return super.onOptionsItemSelected(item);
     }
 
     private void getAllProducts() {
@@ -125,11 +134,33 @@ public class HomeFragment extends Fragment {
         binding.rvHomeProdukGrid.setLayoutManager(gridLayoutManager);
     }
 
-    @Override
-    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
-        if (item.getItemId() == R.id.menu_keranjang) {
-            navController.navigate(HomeFragmentDirections.navHomeToKeranjangFragment());
-        }
-        return super.onOptionsItemSelected(item);
+    private void refreshProfile() {
+        viewModel.getUserProfile.observe(getViewLifecycleOwner(), user -> {
+            switch (user.getStatus()) {
+                case SUCCESS:
+                    manager.setString(Const.KEY_NAMA_LENGKAP, user.getData().getNamaLengkap());
+                    manager.setString(Const.KEY_EMAIL, user.getData().getEmail());
+                    manager.setString(Const.KEY_JENIS_KELAMIN, user.getData().getJenisKelamin());
+                    manager.setString(Const.KEY_ALAMAT, user.getData().getAlamat());
+                    manager.setString(Const.KEY_TEMPAT_LAHIR, user.getData().getTempatLahir());
+                    manager.setString(Const.KEY_TGL_LAHIR, user.getData().getTglLahir());
+                    manager.setString(Const.KEY_NO_TELP, user.getData().getNoHp());
+                    manager.setString(Const.KEY_NO_WA, user.getData().getNoWa());
+                    manager.setString(Const.KEY_ROLE, user.getData().getRoles().get(0));
+                    if (user.getData().getAvatar() != null) {
+                        manager.setString(Const.KEY_AVATAR, user.getData().getAvatar().getPath());
+                    }
+                    break;
+
+                case EMPTY:
+                case LOADING:
+                case ERROR:
+                case INVALID:
+                case UNAUTHORIZED:
+                case FORBIDDEN:
+                case UNPROCESSABLE_ENTITY:
+                    break;
+            }
+        });
     }
 }

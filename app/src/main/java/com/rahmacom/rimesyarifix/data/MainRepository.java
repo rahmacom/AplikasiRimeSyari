@@ -30,6 +30,7 @@ import javax.inject.Singleton;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
+import timber.log.Timber;
 
 @Singleton
 public class MainRepository {
@@ -356,7 +357,6 @@ public class MainRepository {
         Call<User> api = rimeSyariAPI.updateProfile(
                 token,
                 user.getNamaLengkap(),
-                user.getJenisKelamin(),
                 user.getTempatLahir(),
                 user.getTglLahir(),
                 user.getAlamat(),

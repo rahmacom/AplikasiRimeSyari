@@ -218,7 +218,8 @@ public class KeranjangDetailFragment extends Fragment {
                 case SUCCESS:
                     Toast.makeText(requireContext(), "Keranjang berhasil dibuat", Toast.LENGTH_SHORT).show();
                     setDataBinding(cart.getData());
-                    setToolbarViewState(IS_SHOWING);
+                    state = IS_SHOWING;
+                    setToolbarViewState(state);
                     break;
 
                 case LOADING:
@@ -245,7 +246,8 @@ public class KeranjangDetailFragment extends Fragment {
                 case SUCCESS:
                     Toast.makeText(requireContext(), "Keranjang berhasil diupdate", Toast.LENGTH_SHORT).show();
                     setDataBinding(cart.getData());
-                    setToolbarViewState(IS_SHOWING);
+                    state = IS_SHOWING;
+                    setToolbarViewState(state);
                     break;
 
                 case LOADING:
@@ -269,7 +271,8 @@ public class KeranjangDetailFragment extends Fragment {
 
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
-                setToolbarViewState(IS_UPDATING);
+                state = IS_UPDATING;
+                setToolbarViewState(state);
             }
 
             @Override
