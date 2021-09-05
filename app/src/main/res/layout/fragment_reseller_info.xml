@@ -22,7 +22,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
-        android:text="1. Melengkapi data diri "
+        android:text="1. Melengkapi data diri di profil"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView21" />
 
@@ -31,7 +31,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
-        android:text="2. Verifikasi KYC (Know Your Customer)"
+        android:text="2. Verifikasi Foto Wajah Asli. Pastikan foto wajah di ambil dengan gambar yang jelas dan tidak buram"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView22" />
 
@@ -40,7 +40,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
-        android:text="3. Verifikasi KYC dilakukan dengan mengunggah foto KTP asli, foto selfi wajah, dan foto wajah beserta ktp"
+        android:text="3. Verifikasi Foto KTP. Patikan foto KTP di ambil dengan gambar yang jelas dan tidak buram"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView23" />
 

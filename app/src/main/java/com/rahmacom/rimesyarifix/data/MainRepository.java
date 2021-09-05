@@ -29,7 +29,6 @@ import javax.inject.Singleton;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
-import timber.log.Timber;
 
 @Singleton
 public class MainRepository {
@@ -990,23 +989,12 @@ public class MainRepository {
         MutableLiveData<Resource<Order>> data = new MutableLiveData<>();
         data.setValue(Resource.loading(null));
 
-        Timber.d("token: %s", token);
-        Timber.d("pesan: %s", pesan);
-        Timber.d("kode_diskon: %s", kodeDiskon);
-        Timber.d("user_shipment_id: %s", String.valueOf(userShipmentId));
-        Timber.d("payment_method_id: %s", String.valueOf(paymentMethodId));
-        Timber.d("product_id[]: %s", Arrays.toString(productIds.toArray()));
-        Timber.d("color_id[]: %s", Arrays.toString(colorIds.toArray()));
-        Timber.d("size_id[]: %s", Arrays.toString(sizeIds.toArray()));
-        Timber.d("jumlah[]: %s", Arrays.toString(quantities.toArray()));
 
         Call<Order> api = rimeSyariAPI.newOrder(token, pesan, kodeDiskon, userShipmentId, paymentMethodId, productIds, colorIds, sizeIds, quantities);
         api.enqueue(new Callback<Order>() {
             @Override
             public void onResponse(Call<Order> call, Response<Order> response) {
-                Timber.d(response.message());
-                Timber.d(response.raw().request().method());
-                Timber.d(call.request().toString());
+
                 switch (response.code()) {
                     case 200:
                     case 201:
@@ -1036,13 +1024,6 @@ public class MainRepository {
 
                     case 422:
                         data.postValue(Resource.unprocessableEntity(response.message(), null));
-                        Timber.d(response.errorBody().contentType().toString());
-                        try {
-                            Timber.d(response.errorBody().string());
-                        } catch (IOException e) {
-                            e.printStackTrace();
-                        }
-                        break;
                 }
             }
 
@@ -1226,7 +1207,6 @@ public class MainRepository {
                     case 200:
                     case 201:
                         data.postValue(Resource.success(response.body()));
-                        Timber.d("data: "+ Arrays.toString(response.body().toArray()));
                         break;
 
                     case 204:
