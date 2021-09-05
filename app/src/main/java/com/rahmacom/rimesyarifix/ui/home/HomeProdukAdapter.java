@@ -81,10 +81,12 @@ public class HomeProdukAdapter extends RecyclerView.Adapter<HomeProdukAdapter.Vi
                 binding.tvHomeProdukStokTersedia.setText("Stok habis!");
             }
 
-            Glide.with(binding.getRoot())
-                    .load(Const.BASE_URL + product.getImage()
-                            .getPath())
-                    .into(binding.ivHomeProdukFoto);
+            if (product.getImage() != null) {
+                Glide.with(binding.getRoot())
+                        .load(Const.BASE_URL + product.getImage()
+                                .getPath())
+                        .into(binding.ivHomeProdukFoto);
+            }
         }
     }
 }

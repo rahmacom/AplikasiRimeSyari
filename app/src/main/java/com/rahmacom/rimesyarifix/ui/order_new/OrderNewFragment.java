@@ -199,9 +199,7 @@ public class OrderNewFragment extends Fragment {
                 .getSavedStateHandle()
                 .getLiveData("user_shipment_id");
 
-        liveShipmentId.observe(getViewLifecycleOwner(), shipmentId -> {
-            getShipmentAddress(shipmentId);
-        });
+        liveShipmentId.observe(getViewLifecycleOwner(), this::getShipmentAddress);
     }
 
     private void createOrder() {
@@ -215,11 +213,11 @@ public class OrderNewFragment extends Fragment {
             Timber.d(order.getStatus().toString());
             switch (order.getStatus()) {
                 case SUCCESS:
+
                     break;
+
                 case EMPTY:
-                    break;
                 case ERROR:
-                    break;
                 case UNPROCESSABLE_ENTITY:
                     break;
             }

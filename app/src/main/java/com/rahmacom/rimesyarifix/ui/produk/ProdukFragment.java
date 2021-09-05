@@ -8,6 +8,7 @@ import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.core.text.HtmlCompat;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
@@ -119,7 +120,7 @@ public class ProdukFragment extends Fragment {
 
         binding.vpProdukSliderFoto.setAdapter(fotoProdukSliderAdapter);
         binding.tvProdukNama.setText(product.getNama());
-        binding.tvProdukDeskripsi.setText(product.getDeskripsi());
+        binding.tvProdukDeskripsi.setText(HtmlCompat.fromHtml(product.getDeskripsi(), HtmlCompat.FROM_HTML_MODE_COMPACT));
         binding.tvProdukHarga.setText(Helper.convertToRP(product.getHarga()));
         binding.tvProdukSukaText.setText(String.valueOf(product.getSuka()));
         binding.tvProdukRatingText.setText(product.getReviewAvg() + " / 5 (" + product.getReviewCount() + " review)");
@@ -147,7 +148,6 @@ public class ProdukFragment extends Fragment {
 
         binding.chipgroupProdukWarna.setOnCheckedChangeListener((group, checkedId) -> {
             Timber.d("color_id: " + String.valueOf(checkedId));
-            binding.chipgroupProdukUkuran.removeAllViewsInLayout();
             viewModel.setLiveColorId(checkedId);
             viewModel.getProductSizes.removeObserver(productSizeObserver());
             viewModel.getProductSizes.observe(getViewLifecycleOwner(), productSizeObserver());
@@ -158,6 +158,7 @@ public class ProdukFragment extends Fragment {
         return sizes -> {
             if (sizes.getStatus() == Status.SUCCESS) {
                 binding.chipgroupProdukUkuran.clearCheck();
+                binding.chipgroupProdukUkuran.removeAllViews();
                 for (Size size : sizes.getData()) {
                     Timber.d("data: %s", size.getName());
                     Chip chipUkuran = new Chip(binding.chipgroupProdukUkuran.getContext());
@@ -169,8 +170,6 @@ public class ProdukFragment extends Fragment {
             }
         };
     }
-
-
 
     private void onBtnProdukActionClick(int productId) {
         int colorId = binding.chipgroupProdukWarna.getCheckedChipId();

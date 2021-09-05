@@ -20,6 +20,7 @@ import com.rahmacom.rimesyarifix.manager.PreferenceManager;
 import com.rahmacom.rimesyarifix.utils.Const;
 
 import dagger.hilt.android.AndroidEntryPoint;
+import timber.log.Timber;
 
 @AndroidEntryPoint
 public class LoginFragment extends Fragment {
@@ -57,6 +58,7 @@ public class LoginFragment extends Fragment {
             );
 
             viewModel.login.observe(getViewLifecycleOwner(), login -> {
+                Timber.d(login.getStatus().toString());
                 switch (login.getStatus()) {
                     case SUCCESS:
                         Toast.makeText(requireContext(), "Login berhasil", Toast.LENGTH_SHORT)
