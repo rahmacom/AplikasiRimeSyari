@@ -10,6 +10,7 @@ import com.rahmacom.rimesyarifix.data.model.Cart;
 import com.rahmacom.rimesyarifix.data.model.Color;
 import com.rahmacom.rimesyarifix.data.model.Order;
 import com.rahmacom.rimesyarifix.data.model.PaymentMethod;
+import com.rahmacom.rimesyarifix.data.model.Post;
 import com.rahmacom.rimesyarifix.data.model.Product;
 import com.rahmacom.rimesyarifix.data.model.Size;
 import com.rahmacom.rimesyarifix.data.model.User;
@@ -1566,6 +1567,106 @@ public class MainRepository {
 
             @Override
             public void onFailure(Call<List<PaymentMethod>> call, Throwable t) {
+                data.postValue(Resource.error(t.getMessage(), null));
+            }
+        });
+
+        return data;
+    }
+
+    public LiveData<Resource<List<Post>>> getLatestPosts(String token) {
+        MutableLiveData<Resource<List<Post>>> data = new MutableLiveData<>();
+        data.setValue(Resource.loading(null));
+
+        Call<List<Post>> api = rimeSyariAPI.getLatestPosts(token);
+        api.enqueue(new Callback<List<Post>>() {
+            @Override
+            public void onResponse(Call<List<Post>> call, Response<List<Post>> response) {
+                switch (response.code()) {
+                    case 200:
+                    case 201:
+                        data.postValue(Resource.success(response.body()));
+                        break;
+
+                    case 204:
+                        data.postValue(Resource.empty(null));
+                        break;
+
+                    case 400:
+                        data.postValue(Resource.invalid(response.message()));
+                        break;
+
+                    case 401:
+                        data.postValue(Resource.unauthorized(response.message()));
+                        break;
+
+                    case 403:
+                        data.postValue(Resource.forbidden(response.message()));
+                        break;
+
+                    case 404:
+                    case 405:
+                        data.postValue(Resource.error(response.message(), null));
+                        break;
+
+                    case 422:
+                        data.postValue(Resource.unprocessableEntity(response.message(), null));
+                        break;
+                }
+            }
+
+            @Override
+            public void onFailure(Call<List<Post>> call, Throwable t) {
+                data.postValue(Resource.error(t.getMessage(), null));
+            }
+        });
+
+        return data;
+    }
+
+    public LiveData<Resource<Post>> viewPost(String token, int postId) {
+        MutableLiveData<Resource<Post>> data = new MutableLiveData<>();
+        data.postValue(Resource.loading(null));
+
+        Call<Post> api = rimeSyariAPI.viewPost(token, postId);
+        api.enqueue(new Callback<Post>() {
+            @Override
+            public void onResponse(Call<Post> call, Response<Post> response) {
+                switch (response.code()) {
+                    case 200:
+                    case 201:
+                        data.postValue(Resource.success(response.body()));
+                        break;
+
+                    case 204:
+                        data.postValue(Resource.empty(null));
+                        break;
+
+                    case 400:
+                        data.postValue(Resource.invalid(response.message()));
+                        break;
+
+                    case 401:
+                        data.postValue(Resource.unauthorized(response.message()));
+                        break;
+
+                    case 403:
+                        data.postValue(Resource.forbidden(response.message()));
+                        break;
+
+                    case 404:
+                    case 405:
+                        data.postValue(Resource.error(response.message(), null));
+                        break;
+
+                    case 422:
+                        data.postValue(Resource.unprocessableEntity(response.message(), null));
+                        break;
+                }
+            }
+
+            @Override
+            public void onFailure(Call<Post> call, Throwable t) {
                 data.postValue(Resource.error(t.getMessage(), null));
             }
         });

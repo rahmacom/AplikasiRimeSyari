@@ -6,7 +6,7 @@
     app:startDestination="@id/nav_home">
     <fragment
         android:id="@+id/orderHistoryFragment"
-        android:name="com.rahmacom.rimesyarifix.ui.liveOrder.OrderHistoryFragment"
+        android:name="com.rahmacom.rimesyarifix.ui.order.OrderHistoryFragment"
         android:label="Riwayat Order"
         tools:layout="@layout/fragment_order">
         <action
@@ -29,6 +29,9 @@
         <action
             android:id="@+id/nav_home_to_produkFragment"
             app:destination="@id/produkFragment" />
+        <action
+            android:id="@+id/nav_home_to_postinganFragment"
+            app:destination="@id/postinganFragment" />
     </fragment>
     <fragment
         android:id="@+id/profilSettingsFragment"
@@ -129,12 +132,12 @@
     <fragment
         android:id="@+id/orderDetailFragment"
         android:name="com.rahmacom.rimesyarifix.ui.order_detail.OrderDetailFragment"
-        android:label="Detail liveOrder"
+        android:label="Detail order"
         tools:layout="@layout/fragment_order_detail">
         <argument
             android:name="order_id"
-            app:argType="integer"
-            android:defaultValue="-1" />
+            android:defaultValue="-1"
+            app:argType="integer" />
         <action
             android:id="@+id/orderDetailFragment_to_profilBiodataAlamatFragment"
             app:destination="@id/profilBiodataAlamatFragment" />
@@ -350,5 +353,15 @@
         <action
             android:id="@+id/action_orderKonfirmasiFragment_to_orderDetailFragment"
             app:destination="@id/orderDetailFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/postinganFragment"
+        android:name="com.rahmacom.rimesyarifix.ui.postingan.PostinganFragment"
+        android:label="fragment_postingan"
+        tools:layout="@layout/fragment_postingan" >
+        <argument
+            android:name="post_id"
+            app:argType="integer"
+            android:defaultValue="-1" />
     </fragment>
 </navigation>
