@@ -15,6 +15,7 @@ import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.GridLayoutManager;
 
 import com.rahmacom.rimesyarifix.R;
+import com.rahmacom.rimesyarifix.data.model.Post;
 import com.rahmacom.rimesyarifix.data.model.Product;
 import com.rahmacom.rimesyarifix.databinding.FragmentHomeBinding;
 import com.rahmacom.rimesyarifix.manager.PreferenceManager;
@@ -33,6 +34,7 @@ public class HomeFragment extends Fragment {
     private NavController navController;
     private PreferenceManager manager;
     private HomeProdukAdapter adapter;
+    private HomePostAdapter postAdapter;
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -53,6 +55,11 @@ public class HomeFragment extends Fragment {
         }
 
         viewModel.setLiveToken(manager.getString(Const.KEY_TOKEN));
+        getAllProducts();
+        getLatestPosts();
+    }
+
+    private void getAllProducts() {
         viewModel.getAllProducts.observe(getViewLifecycleOwner(), product -> {
             if (product != null) {
                 switch (product.getStatus()) {
@@ -76,6 +83,37 @@ public class HomeFragment extends Fragment {
 
         binding.toolbarFragmentHome.inflateMenu(R.menu.menu_home);
         binding.toolbarFragmentHome.setOnMenuItemClickListener(this::onOptionsItemSelected);
+    }
+
+    private void getLatestPosts() {
+        viewModel.getLatestPosts.observe(getViewLifecycleOwner(), posts -> {
+            switch (posts.getStatus()) {
+                case SUCCESS:
+                    setupPostBanner((ArrayList<Post>) posts.getData());
+                    break;
+
+                case LOADING:
+                case EMPTY:
+                case ERROR:
+                case INVALID:
+                case UNAUTHORIZED:
+                case FORBIDDEN:
+                case UNPROCESSABLE_ENTITY:
+                    break;
+            }
+        });
+    }
+
+    private void setupPostBanner(ArrayList<Post> items) {
+        postAdapter = new HomePostAdapter();
+        postAdapter.setList(items);
+
+        binding.vpHomePostSlider.setAdapter(postAdapter);
+        postAdapter.setOnItemClickListener(post -> {
+            HomeFragmentDirections.NavHomeToPostinganFragment action = HomeFragmentDirections.navHomeToPostinganFragment();
+            action.setPostId(post.getId());
+            navController.navigate(action);
+        });
     }
 
     private void setUpDataProduk(ArrayList<Product> list) {
