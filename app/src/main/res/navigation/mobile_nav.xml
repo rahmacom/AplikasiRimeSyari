@@ -34,10 +34,6 @@
             app:destination="@id/postinganFragment" />
     </fragment>
     <fragment
-        android:id="@+id/profilSettingsFragment"
-        android:name="com.rahmacom.rimesyarifix.ui.profil_settings.ProfilSettingsFragment"
-        android:label="Pengaturan" />
-    <fragment
         android:id="@+id/formAlamatFragment"
         android:name="com.rahmacom.rimesyarifix.ui.form_profil_biodata_alamat.FormProfilBiodataAlamatFragment"
         android:label="Ubah Alamat"
@@ -89,6 +85,10 @@
             android:defaultValue="-1" />
         <argument
             android:name="cart_id"
+            app:argType="integer"
+            android:defaultValue="-1" />
+        <argument
+            android:name="jumlah"
             app:argType="integer"
             android:defaultValue="-1" />
     </fragment>
@@ -153,9 +153,6 @@
         <action
             android:id="@+id/nav_profil_to_profilTestimoniFragment"
             app:destination="@id/profilTestimoniFragment" />
-        <action
-            android:id="@+id/nav_profil_to_profilSettingsFragment"
-            app:destination="@id/profilSettingsFragment" />
         <action
             android:id="@+id/nav_profil_to_profilTentangFragment"
             app:destination="@id/profilTentangFragment" />
@@ -279,20 +276,24 @@
     <dialog
         android:id="@+id/produkDialogFragment"
         android:name="com.rahmacom.rimesyarifix.ui.produk.ProdukDialogFragment"
-        android:label="ProdukDialogFragment" >
+        android:label="Pilih Keranjang">
         <action
             android:id="@+id/produkDialogFragment_to_keranjangDetailFragment"
             app:destination="@id/keranjangDetailFragment" />
         <argument
             android:name="color_id"
-            app:argType="integer"
-            android:defaultValue="-1" />
+            android:defaultValue="-1"
+            app:argType="integer" />
         <argument
             android:name="size_id"
-            app:argType="integer"
-            android:defaultValue="-1" />
+            android:defaultValue="-1"
+            app:argType="integer" />
         <argument
             android:name="product_id"
+            android:defaultValue="-1"
+            app:argType="integer" />
+        <argument
+            android:name="jumlah"
             app:argType="integer"
             android:defaultValue="-1" />
     </dialog>
@@ -348,20 +349,24 @@
     <fragment
         android:id="@+id/orderKonfirmasiFragment"
         android:name="com.rahmacom.rimesyarifix.ui.order_konfirmasi.OrderKonfirmasiFragment"
-        android:label="fragment_order_konfirmasi"
-        tools:layout="@layout/fragment_order_konfirmasi" >
+        android:label="Konfirmasi order"
+        tools:layout="@layout/fragment_order_konfirmasi">
         <action
             android:id="@+id/action_orderKonfirmasiFragment_to_orderDetailFragment"
             app:destination="@id/orderDetailFragment" />
+        <argument
+            android:name="order_id"
+            android:defaultValue="-1"
+            app:argType="integer" />
     </fragment>
     <fragment
         android:id="@+id/postinganFragment"
         android:name="com.rahmacom.rimesyarifix.ui.postingan.PostinganFragment"
-        android:label="fragment_postingan"
-        tools:layout="@layout/fragment_postingan" >
+        android:label="Postingan terbaru"
+        tools:layout="@layout/fragment_postingan">
         <argument
             android:name="post_id"
-            app:argType="integer"
-            android:defaultValue="-1" />
+            android:defaultValue="-1"
+            app:argType="integer" />
     </fragment>
 </navigation>

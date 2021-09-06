@@ -18,16 +18,27 @@ import java.util.concurrent.atomic.AtomicInteger;
 
 public class KeranjangDetailAdapter extends RecyclerView.Adapter<KeranjangDetailAdapter.ViewHolder> {
 
-    private final ArrayList<Product> products = new ArrayList<>();
+    private ArrayList<Product> list;
     private ItemKeranjangDetailListBinding binding;
     private OnProductItemChangedListener onProductItemChangedListener;
 
     private final ArrayList<Integer> checkedProducts = new ArrayList<>();
 
     public void setLists(ArrayList<Product> items) {
-        products.clear();
-        products.addAll(items);
+        this.list = items;
         notifyDataSetChanged();
+    }
+
+    public void removeItem(Product product) {
+        int position = list.indexOf(product);
+        list.remove(position);
+        notifyItemRemoved(position);
+    }
+
+    public void removeItem(int position) {
+        list.remove(position);
+        notifyItemRemoved(position);
+        notifyItemRangeChanged(position, list.size());
     }
 
     public void setOnProductItemChangedListener(OnProductItemChangedListener onProductItemChangedListener) {
@@ -47,7 +58,7 @@ public class KeranjangDetailAdapter extends RecyclerView.Adapter<KeranjangDetail
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-        Product product = products.get(position);
+        Product product = list.get(position);
         holder.bind(product);
 
         AtomicInteger jumlah = new AtomicInteger(product.getPivot().getJumlah());
@@ -77,7 +88,7 @@ public class KeranjangDetailAdapter extends RecyclerView.Adapter<KeranjangDetail
 
     @Override
     public int getItemCount() {
-        return products.size();
+        return list.size();
     }
 
     static class ViewHolder extends RecyclerView.ViewHolder {

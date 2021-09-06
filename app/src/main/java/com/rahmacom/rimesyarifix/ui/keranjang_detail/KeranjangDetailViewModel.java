@@ -9,6 +9,7 @@ import androidx.lifecycle.ViewModel;
 
 import com.rahmacom.rimesyarifix.data.MainRepository;
 import com.rahmacom.rimesyarifix.data.model.Cart;
+import com.rahmacom.rimesyarifix.data.model.Product;
 import com.rahmacom.rimesyarifix.data.vo.Resource;
 
 import java.util.Arrays;
@@ -26,6 +27,9 @@ public class KeranjangDetailViewModel extends ViewModel {
 
     private MainRepository mainRepository;
 
+    public LiveData<Resource<Product>> getProduct = Transformations.switchMap(liveKeranjang, cart ->
+            mainRepository.viewProduct(liveToken.getValue(), cart.id));
+
     public LiveData<Resource<Cart>> viewCart = Transformations.switchMap(liveKeranjang, cart ->
             mainRepository.viewCart(liveToken.getValue(), cart.id));
 
@@ -34,6 +38,9 @@ public class KeranjangDetailViewModel extends ViewModel {
 
     public LiveData<Resource<Cart>> updateCart = Transformations.switchMap(liveKeranjang, cart ->
             mainRepository.updateCart(liveToken.getValue(), cart.id, cart.judul, cart.deskripsi));
+
+    public LiveData<Resource<Cart>> removeCart = Transformations.switchMap(liveKeranjang, cart ->
+            mainRepository.deleteCart(liveToken.getValue(), cart.id));
 
     public LiveData<Resource<Cart>> updateCartWithDetails = Transformations.switchMap(liveKeranjang, cart ->
             mainRepository.updateCartWithDetails(liveToken.getValue(), cart.id, cart.judul, cart.deskripsi, cart.productIds, cart.colorIds, cart.sizeIds, cart.quantities));

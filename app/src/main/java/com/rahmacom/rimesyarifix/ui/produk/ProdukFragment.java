@@ -32,7 +32,6 @@ import com.rahmacom.rimesyarifix.utils.Const;
 import com.rahmacom.rimesyarifix.utils.Helper;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
 
@@ -71,17 +70,18 @@ public class ProdukFragment extends Fragment {
 
         viewModel.viewProduct.observe(getViewLifecycleOwner(), product -> {
             if (product != null) {
-                Log.d("produkFragment", product.getStatus()
-                        .toString());
+                Timber.d(product.getStatus().toString());
                 switch (product.getStatus()) {
                     case SUCCESS:
-                        Log.d("produkFragment", product.getData()
-                                .toString());
                         setDataBinding(Objects.requireNonNull(product.getData()));
                         binding.toolbarFragmentProduk.setTitle(product.getData()
                                 .getNama());
                         binding.btnProdukAction.setOnClickListener(v -> {
-                            onBtnProdukActionClick(product.getData().getId());
+                            int jumlah = 1;
+                            if (Objects.equals(manager.getString(Const.KEY_ROLE), "reseller")) {
+                                jumlah = product.getData().getResellerMinimum();
+                            }
+                            onBtnProdukActionClick(product.getData().getId(), jumlah);
                         });
                         break;
 
@@ -89,13 +89,9 @@ public class ProdukFragment extends Fragment {
                         break;
 
                     case ERROR:
-                        break;
-
                     case LOADING:
-                        break;
-
                     case UNAUTHORIZED:
-                        Log.d("produkFragment", product.getMessage());
+                        Timber.d(product.getMessage());
                         break;
                 }
             }
@@ -147,7 +143,7 @@ public class ProdukFragment extends Fragment {
         });
 
         binding.chipgroupProdukWarna.setOnCheckedChangeListener((group, checkedId) -> {
-            Timber.d("color_id: " + String.valueOf(checkedId));
+            Timber.d("color_id: %s", String.valueOf(checkedId));
             viewModel.setLiveColorId(checkedId);
             viewModel.getProductSizes.removeObserver(productSizeObserver());
             viewModel.getProductSizes.observe(getViewLifecycleOwner(), productSizeObserver());
@@ -171,7 +167,7 @@ public class ProdukFragment extends Fragment {
         };
     }
 
-    private void onBtnProdukActionClick(int productId) {
+    private void onBtnProdukActionClick(int productId, int jumlah) {
         int colorId = binding.chipgroupProdukWarna.getCheckedChipId();
         int sizeId = binding.chipgroupProdukUkuran.getCheckedChipId();
 
@@ -179,6 +175,7 @@ public class ProdukFragment extends Fragment {
         action.setProductId(productId);
         action.setColorId(colorId);
         action.setSizeId(sizeId);
+        action.setJumlah(jumlah);
 
         navController.navigate(action);
     }

@@ -198,6 +198,7 @@ public interface RimeSyariAPI {
                                           @Field("alamat") String alamat,
                                           @Field("kode_pos") String kodePos,
                                           @Field("catatan") String catatan,
+                                          @Field("is_default") boolean isDefault,
                                           @Field("village_id") int villageId);
 
     @PATCH("user_shipments/{user_shipment}")

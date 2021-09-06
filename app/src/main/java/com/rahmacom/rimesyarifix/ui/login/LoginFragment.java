@@ -59,6 +59,7 @@ public class LoginFragment extends Fragment {
 
             viewModel.login.observe(getViewLifecycleOwner(), login -> {
                 Timber.d(login.getStatus().toString());
+                Timber.d(login.getMessage());
                 switch (login.getStatus()) {
                     case SUCCESS:
                         Toast.makeText(requireContext(), "Login berhasil", Toast.LENGTH_SHORT)

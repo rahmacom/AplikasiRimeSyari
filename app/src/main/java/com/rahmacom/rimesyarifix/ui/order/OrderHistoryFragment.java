@@ -51,7 +51,7 @@ public class OrderHistoryFragment extends Fragment {
 
     private void setupToolbar() {
         AppBarConfiguration appBarConfiguration = new AppBarConfiguration.Builder(navController.getGraph()).build();
-        NavigationUI.setupWithNavController(binding.toolbarFragmentOrder, navController, appBarConfiguration);
+        NavigationUI.setupWithNavController(binding.toolbarOrder, navController, appBarConfiguration);
     }
 
     private void setupTabPages() {
