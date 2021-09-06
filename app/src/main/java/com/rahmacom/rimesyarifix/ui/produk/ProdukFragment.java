@@ -8,6 +8,7 @@ import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.core.text.HtmlCompat;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
@@ -31,7 +32,6 @@ import com.rahmacom.rimesyarifix.utils.Const;
 import com.rahmacom.rimesyarifix.utils.Helper;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
 
@@ -70,17 +70,18 @@ public class ProdukFragment extends Fragment {
 
         viewModel.viewProduct.observe(getViewLifecycleOwner(), product -> {
             if (product != null) {
-                Log.d("produkFragment", product.getStatus()
-                        .toString());
+                Timber.d(product.getStatus().toString());
                 switch (product.getStatus()) {
                     case SUCCESS:
-                        Log.d("produkFragment", product.getData()
-                                .toString());
                         setDataBinding(Objects.requireNonNull(product.getData()));
                         binding.toolbarFragmentProduk.setTitle(product.getData()
                                 .getNama());
                         binding.btnProdukAction.setOnClickListener(v -> {
-                            onBtnProdukActionClick(product.getData().getId());
+                            int jumlah = 1;
+                            if (Objects.equals(manager.getString(Const.KEY_ROLE), "reseller")) {
+                                jumlah = product.getData().getResellerMinimum();
+                            }
+                            onBtnProdukActionClick(product.getData().getId(), jumlah);
                         });
                         break;
 
@@ -88,13 +89,9 @@ public class ProdukFragment extends Fragment {
                         break;
 
                     case ERROR:
-                        break;
-
                     case LOADING:
-                        break;
-
                     case UNAUTHORIZED:
-                        Log.d("produkFragment", product.getMessage());
+                        Timber.d(product.getMessage());
                         break;
                 }
             }
@@ -119,7 +116,7 @@ public class ProdukFragment extends Fragment {
 
         binding.vpProdukSliderFoto.setAdapter(fotoProdukSliderAdapter);
         binding.tvProdukNama.setText(product.getNama());
-        binding.tvProdukDeskripsi.setText(product.getDeskripsi());
+        binding.tvProdukDeskripsi.setText(HtmlCompat.fromHtml(product.getDeskripsi(), HtmlCompat.FROM_HTML_MODE_COMPACT));
         binding.tvProdukHarga.setText(Helper.convertToRP(product.getHarga()));
         binding.tvProdukSukaText.setText(String.valueOf(product.getSuka()));
         binding.tvProdukRatingText.setText(product.getReviewAvg() + " / 5 (" + product.getReviewCount() + " review)");
@@ -146,8 +143,7 @@ public class ProdukFragment extends Fragment {
         });
 
         binding.chipgroupProdukWarna.setOnCheckedChangeListener((group, checkedId) -> {
-            Timber.d("color_id: " + String.valueOf(checkedId));
-            binding.chipgroupProdukUkuran.removeAllViewsInLayout();
+            Timber.d("color_id: %s", String.valueOf(checkedId));
             viewModel.setLiveColorId(checkedId);
             viewModel.getProductSizes.removeObserver(productSizeObserver());
             viewModel.getProductSizes.observe(getViewLifecycleOwner(), productSizeObserver());
@@ -158,6 +154,7 @@ public class ProdukFragment extends Fragment {
         return sizes -> {
             if (sizes.getStatus() == Status.SUCCESS) {
                 binding.chipgroupProdukUkuran.clearCheck();
+                binding.chipgroupProdukUkuran.removeAllViews();
                 for (Size size : sizes.getData()) {
                     Timber.d("data: %s", size.getName());
                     Chip chipUkuran = new Chip(binding.chipgroupProdukUkuran.getContext());
@@ -170,9 +167,7 @@ public class ProdukFragment extends Fragment {
         };
     }
 
-
-
-    private void onBtnProdukActionClick(int productId) {
+    private void onBtnProdukActionClick(int productId, int jumlah) {
         int colorId = binding.chipgroupProdukWarna.getCheckedChipId();
         int sizeId = binding.chipgroupProdukUkuran.getCheckedChipId();
 
@@ -180,6 +175,7 @@ public class ProdukFragment extends Fragment {
         action.setProductId(productId);
         action.setColorId(colorId);
         action.setSizeId(sizeId);
+        action.setJumlah(jumlah);
 
         navController.navigate(action);
     }

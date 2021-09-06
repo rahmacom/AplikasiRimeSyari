@@ -78,17 +78,6 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tv_form_edit_alamat_kode_pos_text" />
 
-    <MultiAutoCompleteTextView
-        android:id="@+id/tv_form_edit_alamat_desa_kelurahan_text"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="16dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tv_form_edit_alamat_desa_kelurahan_title" />
-
     <Button
         android:id="@+id/btn_simpan"
         android:layout_width="wrap_content"
@@ -106,11 +95,10 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
-        android:layout_marginTop="24dp"
         android:text="Catatan"
         android:textColor="@color/gray_600"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tv_form_edit_alamat_desa_kelurahan_text" />
+        tools:layout_editor_absoluteY="358dp" />
 
     <EditText
         android:id="@+id/tv_form_edit_alamat_catatan_text"
@@ -138,5 +126,15 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tv_form_edit_alamat_catatan_text" />
+
+    <AutoCompleteTextView
+        android:id="@+id/et_form_profil_biodata_alamat_autocomplete"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="16dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/tv_form_edit_alamat_desa_kelurahan_title"
+        app:layout_constraintTop_toBottomOf="@+id/tv_form_edit_alamat_desa_kelurahan_title" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

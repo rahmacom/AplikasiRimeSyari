@@ -30,7 +30,7 @@
         app:layout_constraintTop_toBottomOf="@+id/toolbar_fragment_form_profil_biodata">
 
         <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/et_form_form_profil_biodata_edit_profil_nama_lengkap"
+            android:id="@+id/et_form_profil_biodata_nama_lengkap"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:hint="Nama Lengkap" />
@@ -51,7 +51,7 @@
         app:layout_constraintTop_toBottomOf="@+id/tl_form_form_profil_biodata_edit_profil_nama_lengkap">
 
         <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/et_form_form_profil_biodata_edit_profil_tempat_lahir"
+            android:id="@+id/et_form_profil_biodata_tempat_lahir"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:hint="Tempat Lahir" />
@@ -72,7 +72,7 @@
         app:layout_constraintTop_toBottomOf="@+id/tl_form_form_profil_biodata_edit_profil_tempat_lahir">
 
         <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/et_form_form_profil_biodata_edit_profil_tgl_lahir"
+            android:id="@+id/et_form_profil_biodata_tgl_lahir"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:hint="Tanggal Lahir" />
@@ -93,7 +93,7 @@
         app:layout_constraintTop_toBottomOf="@+id/tl_form_form_profil_biodata_edit_profil_tgl_lahir">
 
         <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/et_form_form_profil_biodata_edit_profil_no_hp"
+            android:id="@+id/et_form_profil_biodata_no_hp"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:hint="Nomor Handphone" />
@@ -114,7 +114,7 @@
         app:layout_constraintTop_toBottomOf="@+id/tl_form_form_profil_biodata_edit_profil_no_hp">
 
         <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/et_form_form_profil_biodata_edit_profil_no_wa"
+            android:id="@+id/et_form_profil_biodata_no_wa"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:hint="Nomor WhatsApp" />
@@ -145,7 +145,7 @@
         app:layout_constraintTop_toBottomOf="@+id/tl_form_profil_biodata_edit_profil_no_wa">
 
         <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/et_form_edit_biodata_alamat"
+            android:id="@+id/et_form_profil_biodata_alamat"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="Alamat" />

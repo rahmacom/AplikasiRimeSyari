@@ -40,7 +40,7 @@
         <entry key="..\:/Backup/Cloud Backup/MEGASync/Projects/Android/kotlin/RimeSyariFix/app/src/main/res/layout/fragment_form_edit_alamat.xml" value="0.22552083333333334" />
         <entry key="..\:/Backup/Cloud Backup/MEGASync/Projects/Android/kotlin/RimeSyariFix/app/src/main/res/layout/fragment_form_edit_biodata.xml" value="0.33" />
         <entry key="..\:/Backup/Cloud Backup/MEGASync/Projects/Android/kotlin/RimeSyariFix/app/src/main/res/layout/fragment_form_profil_biodata.xml" value="0.5" />
-        <entry key="..\:/Backup/Cloud Backup/MEGASync/Projects/Android/kotlin/RimeSyariFix/app/src/main/res/layout/fragment_form_profil_biodata_alamat.xml" value="0.22552083333333334" />
+        <entry key="..\:/Backup/Cloud Backup/MEGASync/Projects/Android/kotlin/RimeSyariFix/app/src/main/res/layout/fragment_form_profil_biodata_alamat.xml" value="0.5" />
         <entry key="..\:/Backup/Cloud Backup/MEGASync/Projects/Android/kotlin/RimeSyariFix/app/src/main/res/layout/fragment_home.xml" value="0.33" />
         <entry key="..\:/Backup/Cloud Backup/MEGASync/Projects/Android/kotlin/RimeSyariFix/app/src/main/res/layout/fragment_keranjang.xml" value="0.22" />
         <entry key="..\:/Backup/Cloud Backup/MEGASync/Projects/Android/kotlin/RimeSyariFix/app/src/main/res/layout/fragment_keranjang_checkout.xml" value="0.13949275362318841" />
@@ -52,30 +52,31 @@
         <entry key="..\:/Backup/Cloud Backup/MEGASync/Projects/Android/kotlin/RimeSyariFix/app/src/main/res/layout/fragment_order.xml" value="0.22" />
         <entry key="..\:/Backup/Cloud Backup/MEGASync/Projects/Android/kotlin/RimeSyariFix/app/src/main/res/layout/fragment_order_detail.xml" value="0.40625" />
         <entry key="..\:/Backup/Cloud Backup/MEGASync/Projects/Android/kotlin/RimeSyariFix/app/src/main/res/layout/fragment_order_list.xml" value="0.22552083333333334" />
-        <entry key="..\:/Backup/Cloud Backup/MEGASync/Projects/Android/kotlin/RimeSyariFix/app/src/main/res/layout/fragment_order_new.xml" value="0.46926536731634183" />
+        <entry key="..\:/Backup/Cloud Backup/MEGASync/Projects/Android/kotlin/RimeSyariFix/app/src/main/res/layout/fragment_order_new.xml" value="0.25" />
         <entry key="..\:/Backup/Cloud Backup/MEGASync/Projects/Android/kotlin/RimeSyariFix/app/src/main/res/layout/fragment_order_pengiriman.xml" value="0.1539855072463768" />
-        <entry key="..\:/Backup/Cloud Backup/MEGASync/Projects/Android/kotlin/RimeSyariFix/app/src/main/res/layout/fragment_postingan.xml" value="0.33" />
-        <entry key="..\:/Backup/Cloud Backup/MEGASync/Projects/Android/kotlin/RimeSyariFix/app/src/main/res/layout/fragment_produk.xml" value="0.23098201936376211" />
+        <entry key="..\:/Backup/Cloud Backup/MEGASync/Projects/Android/kotlin/RimeSyariFix/app/src/main/res/layout/fragment_postingan.xml" value="0.17341040462427745" />
+        <entry key="..\:/Backup/Cloud Backup/MEGASync/Projects/Android/kotlin/RimeSyariFix/app/src/main/res/layout/fragment_produk.xml" value="0.33" />
         <entry key="..\:/Backup/Cloud Backup/MEGASync/Projects/Android/kotlin/RimeSyariFix/app/src/main/res/layout/fragment_produk_dialog.xml" value="0.47164591977869985" />
         <entry key="..\:/Backup/Cloud Backup/MEGASync/Projects/Android/kotlin/RimeSyariFix/app/src/main/res/layout/fragment_profil.xml" value="0.33" />
-        <entry key="..\:/Backup/Cloud Backup/MEGASync/Projects/Android/kotlin/RimeSyariFix/app/src/main/res/layout/fragment_profil_biodata.xml" value="0.22" />
-        <entry key="..\:/Backup/Cloud Backup/MEGASync/Projects/Android/kotlin/RimeSyariFix/app/src/main/res/layout/fragment_profil_biodata_alamat.xml" value="0.22552083333333334" />
+        <entry key="..\:/Backup/Cloud Backup/MEGASync/Projects/Android/kotlin/RimeSyariFix/app/src/main/res/layout/fragment_profil_biodata.xml" value="0.33" />
+        <entry key="..\:/Backup/Cloud Backup/MEGASync/Projects/Android/kotlin/RimeSyariFix/app/src/main/res/layout/fragment_profil_biodata_alamat.xml" value="0.33" />
         <entry key="..\:/Backup/Cloud Backup/MEGASync/Projects/Android/kotlin/RimeSyariFix/app/src/main/res/layout/fragment_profil_tentang.xml" value="0.22552083333333334" />
         <entry key="..\:/Backup/Cloud Backup/MEGASync/Projects/Android/kotlin/RimeSyariFix/app/src/main/res/layout/fragment_profil_testimoni.xml" value="0.22552083333333334" />
         <entry key="..\:/Backup/Cloud Backup/MEGASync/Projects/Android/kotlin/RimeSyariFix/app/src/main/res/layout/fragment_register.xml" value="0.25" />
         <entry key="..\:/Backup/Cloud Backup/MEGASync/Projects/Android/kotlin/RimeSyariFix/app/src/main/res/layout/fragment_reseller_daftar.xml" value="0.11145833333333334" />
+        <entry key="..\:/Backup/Cloud Backup/MEGASync/Projects/Android/kotlin/RimeSyariFix/app/src/main/res/layout/fragment_reseller_info.xml" value="0.33" />
         <entry key="..\:/Backup/Cloud Backup/MEGASync/Projects/Android/kotlin/RimeSyariFix/app/src/main/res/layout/fragment_reseller_kyc.xml" value="0.27247579529737204" />
         <entry key="..\:/Backup/Cloud Backup/MEGASync/Projects/Android/kotlin/RimeSyariFix/app/src/main/res/layout/fragment_reseller_kyc_camera.xml" value="0.22552083333333334" />
         <entry key="..\:/Backup/Cloud Backup/MEGASync/Projects/Android/kotlin/RimeSyariFix/app/src/main/res/layout/fragment_splash_screen.xml" value="0.2" />
         <entry key="..\:/Backup/Cloud Backup/MEGASync/Projects/Android/kotlin/RimeSyariFix/app/src/main/res/layout/item_checkout.xml" value="0.33" />
         <entry key="..\:/Backup/Cloud Backup/MEGASync/Projects/Android/kotlin/RimeSyariFix/app/src/main/res/layout/item_chip.xml" value="0.22552083333333334" />
         <entry key="..\:/Backup/Cloud Backup/MEGASync/Projects/Android/kotlin/RimeSyariFix/app/src/main/res/layout/item_data_profil.xml" value="0.25" />
-        <entry key="..\:/Backup/Cloud Backup/MEGASync/Projects/Android/kotlin/RimeSyariFix/app/src/main/res/layout/item_form_alamat_list.xml" value="0.36907216494845363" />
+        <entry key="..\:/Backup/Cloud Backup/MEGASync/Projects/Android/kotlin/RimeSyariFix/app/src/main/res/layout/item_form_alamat_list.xml" value="0.5" />
         <entry key="..\:/Backup/Cloud Backup/MEGASync/Projects/Android/kotlin/RimeSyariFix/app/src/main/res/layout/item_foto_slider.xml" value="0.22552083333333334" />
         <entry key="..\:/Backup/Cloud Backup/MEGASync/Projects/Android/kotlin/RimeSyariFix/app/src/main/res/layout/item_home_banner_slider.xml" value="0.22552083333333334" />
         <entry key="..\:/Backup/Cloud Backup/MEGASync/Projects/Android/kotlin/RimeSyariFix/app/src/main/res/layout/item_home_post_slider.xml" value="0.22552083333333334" />
         <entry key="..\:/Backup/Cloud Backup/MEGASync/Projects/Android/kotlin/RimeSyariFix/app/src/main/res/layout/item_home_produk.xml" value="0.6859083191850595" />
-        <entry key="..\:/Backup/Cloud Backup/MEGASync/Projects/Android/kotlin/RimeSyariFix/app/src/main/res/layout/item_home_produk_grid.xml" value="0.46926536731634183" />
+        <entry key="..\:/Backup/Cloud Backup/MEGASync/Projects/Android/kotlin/RimeSyariFix/app/src/main/res/layout/item_home_produk_grid.xml" value="0.1437371663244353" />
         <entry key="..\:/Backup/Cloud Backup/MEGASync/Projects/Android/kotlin/RimeSyariFix/app/src/main/res/layout/item_keranjang.xml" value="0.17617753623188406" />
         <entry key="..\:/Backup/Cloud Backup/MEGASync/Projects/Android/kotlin/RimeSyariFix/app/src/main/res/layout/item_keranjang_detail_list.xml" value="0.75" />
         <entry key="..\:/Backup/Cloud Backup/MEGASync/Projects/Android/kotlin/RimeSyariFix/app/src/main/res/layout/item_keranjang_list.xml" value="0.4671232876712329" />
@@ -92,6 +93,7 @@
         <entry key="..\:/Backup/Cloud Backup/MEGASync/Projects/Android/kotlin/RimeSyariFix/app/src/main/res/layout/item_produk_testimoni_list.xml" value="0.22552083333333334" />
         <entry key="..\:/Backup/Cloud Backup/MEGASync/Projects/Android/kotlin/RimeSyariFix/app/src/main/res/layout/item_profil.xml" value="0.14492753623188406" />
         <entry key="..\:/Backup/Cloud Backup/MEGASync/Projects/Android/kotlin/RimeSyariFix/app/src/main/res/layout/item_profil_biodata.xml" value="0.67" />
+        <entry key="..\:/Backup/Cloud Backup/MEGASync/Projects/Android/kotlin/RimeSyariFix/app/src/main/res/layout/item_profil_biodata_alamat_list.xml" value="0.22552083333333334" />
         <entry key="..\:/Backup/Cloud Backup/MEGASync/Projects/Android/kotlin/RimeSyariFix/app/src/main/res/layout/item_profil_biodata_list.xml" value="0.4740740740740741" />
         <entry key="..\:/Backup/Cloud Backup/MEGASync/Projects/Android/kotlin/RimeSyariFix/app/src/main/res/layout/item_profil_list.xml" value="0.22552083333333334" />
         <entry key="..\:/Backup/Cloud Backup/MEGASync/Projects/Android/kotlin/RimeSyariFix/app/src/main/res/layout/item_profil_menu_list.xml" value="0.67" />
@@ -103,9 +105,12 @@
         <entry key="..\:/Backup/Cloud Backup/MEGASync/Projects/Android/kotlin/RimeSyariFix/app/src/main/res/menu/menu_keranjang.xml" value="0.22552083333333334" />
         <entry key="..\:/Backup/Cloud Backup/MEGASync/Projects/Android/kotlin/RimeSyariFix/app/src/main/res/menu/menu_keranjang_detail.xml" value="0.22552083333333334" />
         <entry key="..\:/Backup/Cloud Backup/MEGASync/Projects/Android/kotlin/RimeSyariFix/app/src/main/res/menu/menu_keranjang_detail_new.xml" value="0.22552083333333334" />
+        <entry key="..\:/Backup/Cloud Backup/MEGASync/Projects/Android/kotlin/RimeSyariFix/app/src/main/res/menu/menu_keranjang_detail_update.xml" value="0.22552083333333334" />
         <entry key="..\:/Backup/Cloud Backup/MEGASync/Projects/Android/kotlin/RimeSyariFix/app/src/main/res/menu/menu_main.xml" value="0.22552083333333334" />
         <entry key="..\:/Backup/Cloud Backup/MEGASync/Projects/Android/kotlin/RimeSyariFix/app/src/main/res/menu/menu_order.xml" value="0.22552083333333334" />
         <entry key="..\:/Backup/Cloud Backup/MEGASync/Projects/Android/kotlin/RimeSyariFix/app/src/main/res/menu/menu_order_detail.xml" value="0.22552083333333334" />
+        <entry key="..\:/Backup/Cloud Backup/MEGASync/Projects/Android/kotlin/RimeSyariFix/app/src/main/res/menu/menu_profil_alamat.xml" value="0.1" />
+        <entry key="..\:/Backup/Cloud Backup/MEGASync/Projects/Android/kotlin/RimeSyariFix/app/src/main/res/menu/menu_profil_biodata.xml" value="0.22552083333333334" />
       </map>
     </option>
   </component>

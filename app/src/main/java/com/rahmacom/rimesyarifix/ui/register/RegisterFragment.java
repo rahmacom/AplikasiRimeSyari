@@ -72,6 +72,7 @@ public class RegisterFragment extends Fragment {
                     Toast.makeText(requireContext(), "Registrasi berhasil!", Toast.LENGTH_SHORT)
                             .show();
                     manager.setString(Const.KEY_TOKEN, register.getData()
+                            .getTokenType() + " " + register.getData()
                             .getAccessToken());
                     manager.setInt(Const.KEY_TTL, register.getData()
                             .getExpiresIn());

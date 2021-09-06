@@ -50,9 +50,9 @@ public class OrderFragment extends Fragment {
         setupTabPages();
 
         viewModel.setLiveToken(manager.getString(Const.KEY_TOKEN));
-        binding.toolbarFragmentOrder.inflateMenu(R.menu.menu_order);
-        binding.toolbarFragmentOrder.setTitle("Order");
-        binding.toolbarFragmentOrder.setOnMenuItemClickListener(this::onOptionsItemSelected);
+        binding.toolbarOrder.inflateMenu(R.menu.menu_order);
+        binding.toolbarOrder.setTitle("Order");
+        binding.toolbarOrder.setOnMenuItemClickListener(this::onOptionsItemSelected);
     }
 
     @Override

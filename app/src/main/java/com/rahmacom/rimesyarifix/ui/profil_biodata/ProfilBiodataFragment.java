@@ -2,6 +2,7 @@ package com.rahmacom.rimesyarifix.ui.profil_biodata;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 
@@ -59,6 +60,16 @@ public class ProfilBiodataFragment extends Fragment {
         });
     }
 
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        if (item.getItemId() == R.id.menu_profil_biodata_shipment) {
+            navController.navigate(ProfilBiodataFragmentDirections.profilBiodataFragmentToProfilBiodataAlamatFragment());
+            return true;
+        }
+
+        return super.onOptionsItemSelected(item);
+    }
+
     private void setUpBiodataProfil() {
         adapter.setLists(getUserBiodata());
         binding.rvBiodataProfil.setAdapter(adapter);
@@ -94,9 +105,7 @@ public class ProfilBiodataFragment extends Fragment {
     private void setupToolbar() {
         AppBarConfiguration appBarConfiguration = new AppBarConfiguration.Builder(navController.getGraph()).build();
         NavigationUI.setupWithNavController(binding.toolbarProfilBiodata, navController, appBarConfiguration);
-    }
-
-    private void getUserAddresses() {
-
+        binding.toolbarProfilBiodata.inflateMenu(R.menu.menu_profil_biodata);
+        binding.toolbarProfilBiodata.setOnMenuItemClickListener(this::onOptionsItemSelected);
     }
 }

@@ -51,7 +51,7 @@ public class ProdukDialogFragment extends BottomSheetDialogFragment {
         int productId = args.getProductId();
         int colorId = args.getColorId();
         int sizeId = args.getSizeId();
-        int jumlah = 1;
+        int jumlah = args.getJumlah();
 
         viewModel.setLiveToken(manager.getString(Const.KEY_TOKEN));
         viewModel.getAllCarts.observe(getViewLifecycleOwner(), carts -> {
@@ -73,7 +73,7 @@ public class ProdukDialogFragment extends BottomSheetDialogFragment {
             }
         });
 
-        binding.btnProdukDialogKeranjangBaru.setOnClickListener(v -> newCart(productId, colorId, sizeId));
+        binding.btnProdukDialogKeranjangBaru.setOnClickListener(v -> newCart(productId, colorId, sizeId, jumlah));
     }
 
     @Override
@@ -91,11 +91,12 @@ public class ProdukDialogFragment extends BottomSheetDialogFragment {
         binding.rvProdukDialogListKeranjang.setHasFixedSize(true);
     }
 
-    private void newCart(int productId, int colorId, int sizeId) {
+    private void newCart(int productId, int colorId, int sizeId, int jumlah) {
         action.setViewState(KeranjangDetailFragment.IS_CREATING);
         action.setProductId(productId);
         action.setColorId(colorId);
         action.setSizeId(sizeId);
+        action.setJumlah(jumlah);
 
         navController.navigate(action);
     }

@@ -30,6 +30,7 @@ import javax.inject.Singleton;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
+import timber.log.Timber;
 
 @Singleton
 public class MainRepository {
@@ -57,6 +58,7 @@ public class MainRepository {
         api.enqueue(new Callback<ResponseLogin>() {
             @Override
             public void onResponse(Call<ResponseLogin> call, Response<ResponseLogin> response) {
+                Timber.d(response.message());
                 switch (response.code()) {
                     case 200:
                     case 201:
@@ -356,7 +358,6 @@ public class MainRepository {
         Call<User> api = rimeSyariAPI.updateProfile(
                 token,
                 user.getNamaLengkap(),
-                user.getJenisKelamin(),
                 user.getTempatLahir(),
                 user.getTglLahir(),
                 user.getAlamat(),
@@ -1404,11 +1405,11 @@ public class MainRepository {
         return data;
     }
 
-    public LiveData<Resource<UserShipment>> newShipmentAddress(String token, String alamat, String kodePos, String catatan, int villageId) {
+    public LiveData<Resource<UserShipment>> newShipmentAddress(String token, String alamat, String kodePos, String catatan, boolean isDefault, int villageId) {
         MutableLiveData<Resource<UserShipment>> data = new MutableLiveData<>();
         data.setValue(Resource.loading(null));
 
-        Call<UserShipment> api = rimeSyariAPI.newShipmentAddress(token, alamat, kodePos, catatan, villageId);
+        Call<UserShipment> api = rimeSyariAPI.newShipmentAddress(token, alamat, kodePos, catatan, isDefault, villageId);
         api.enqueue(new Callback<UserShipment>() {
             @Override
             public void onResponse(Call<UserShipment> call, Response<UserShipment> response) {

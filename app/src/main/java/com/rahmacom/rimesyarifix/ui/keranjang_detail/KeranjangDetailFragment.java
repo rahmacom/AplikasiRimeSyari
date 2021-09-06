@@ -13,16 +13,21 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
+import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.rahmacom.rimesyarifix.R;
 import com.rahmacom.rimesyarifix.data.model.Cart;
 import com.rahmacom.rimesyarifix.data.model.Product;
+import com.rahmacom.rimesyarifix.data.vo.Resource;
+import com.rahmacom.rimesyarifix.data.vo.Status;
 import com.rahmacom.rimesyarifix.databinding.FragmentKeranjangDetailBinding;
 import com.rahmacom.rimesyarifix.manager.PreferenceManager;
 import com.rahmacom.rimesyarifix.utils.Const;
@@ -83,12 +88,12 @@ public class KeranjangDetailFragment extends Fragment {
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         switch (item.getItemId()) {
             case R.id.menu_keranjang_simpan:
-                if (args.getViewState() == IS_CREATING) {
+                if (state == IS_CREATING) {
                     newCart();
                     return true;
                 }
 
-                if (args.getViewState() == IS_SHOWING) {
+                if (state == IS_UPDATING) {
                     Timber.d(String.valueOf(args.getViewState()));
                     updateCart();
                     return true;
@@ -112,7 +117,7 @@ public class KeranjangDetailFragment extends Fragment {
     private void setDataBinding(Cart cart) {
         binding.etKeranjangDetailJudul.setText(cart.getJudul());
         binding.etKeranjangDetailDeskripsi.setText(cart.getDeskripsi());
-        binding.tvKeranjangDetailTotalJumlah.setText(String.valueOf(cart.getJumlah()));
+        binding.tvKeranjangDetailTotalJumlah.setText(cart.getJumlah() + " item");
         binding.tvKeranjangDetailTotalHarga.setText(Helper.convertToRP(cart.getTotal()));
 
         List<Product> products = cart.getProducts();
@@ -132,21 +137,36 @@ public class KeranjangDetailFragment extends Fragment {
             quantities.add(product.getPivot().getJumlah());
         }
 
-        Timber.d("productIds: %s", productIds.toArray());
-        Timber.d("productPricess: %s", productPrices.toArray());
-        Timber.d("colorIds: %s", colorIds.toArray());
-        Timber.d("sizeIds: %s", sizeIds.toArray());
-        Timber.d("quantities: %s", quantities.toArray());
+        new ItemTouchHelper(new ItemTouchHelper.SimpleCallback(0, ItemTouchHelper.LEFT | ItemTouchHelper.RIGHT) {
+            @Override
+            public boolean onMove(@NonNull RecyclerView recyclerView, @NonNull RecyclerView.ViewHolder viewHolder, @NonNull RecyclerView.ViewHolder target) {
+                return false;
+            }
 
-        binding.btnKeranjangDetailBuatOrder.setOnClickListener(v -> {
-            createOrder();
-        });
+            @Override
+            public void onSwiped(@NonNull RecyclerView.ViewHolder viewHolder, int direction) {
+                int position = viewHolder.getLayoutPosition();
+
+                productIds.remove(position);
+                colorIds.remove(position);
+                sizeIds.remove(position);
+                productPrices.remove(position);
+                quantities.remove(position);
+                adapter.removeItem(position);
+                binding.rvKeranjangDetailProdukList.swapAdapter(adapter, true);
+                state = IS_UPDATING;
+                setToolbarViewState(state);
+            }
+        }).attachToRecyclerView(binding.rvKeranjangDetailProdukList);
+
+        binding.btnKeranjangDetailBuatOrder.setOnClickListener(v -> createOrder());
 
         adapter.setOnProductItemChangedListener((product, jumlah) -> {
             if (product.getPivot().getJumlah() != jumlah) {
                 int position = products.indexOf(product);
                 quantities.set(position, jumlah);
-                setToolbarViewState(IS_UPDATING);
+                state = IS_UPDATING;
+                setToolbarViewState(state);
 
                 Timber.d(Arrays.toString(adapter.getCheckedProducts().toArray()));
             } else {
@@ -209,16 +229,20 @@ public class KeranjangDetailFragment extends Fragment {
         int productId = args.getProductId();
         int colorId = args.getColorId();
         int sizeId = args.getSizeId();
-        int jumlah = 1;
+        int jumlah = args.getJumlah();
+
+        getProduct(productId);
 
         viewModel.setLiveKeranjang(judul, deskripsi, productId, colorId, sizeId, jumlah);
         viewModel.newCart.observe(getViewLifecycleOwner(), cart -> {
-            Log.d("newCart", cart.getStatus().toString());
+            Timber.d(cart.getStatus().toString());
+            Timber.d(cart.getMessage());
             switch (cart.getStatus()) {
                 case SUCCESS:
                     Toast.makeText(requireContext(), "Keranjang berhasil dibuat", Toast.LENGTH_SHORT).show();
                     setDataBinding(cart.getData());
-                    setToolbarViewState(IS_SHOWING);
+                    state = IS_SHOWING;
+                    setToolbarViewState(state);
                     break;
 
                 case LOADING:
@@ -231,6 +255,19 @@ public class KeranjangDetailFragment extends Fragment {
                     break;
             }
         });
+    }
+
+    private void getProduct(int productId) {
+        viewModel.setLiveKeranjang(productId);
+        Observer<Resource<Product>> observer = productResource -> {
+            if (productResource.getStatus() == Status.SUCCESS) {
+                Product product = productResource.getData();
+                binding.tvKeranjangDetailTotalHarga.setText(Helper.convertToRP(product.getHarga()));
+                binding.tvKeranjangDetailTotalJumlah.setText(String.valueOf(1) + " item");
+            }
+        };
+        viewModel.getProduct.observe(getViewLifecycleOwner(), observer);
+        viewModel.getProduct.removeObserver(observer);
     }
 
     private void updateCart() {
@@ -245,7 +282,8 @@ public class KeranjangDetailFragment extends Fragment {
                 case SUCCESS:
                     Toast.makeText(requireContext(), "Keranjang berhasil diupdate", Toast.LENGTH_SHORT).show();
                     setDataBinding(cart.getData());
-                    setToolbarViewState(IS_SHOWING);
+                    state = IS_SHOWING;
+                    setToolbarViewState(state);
                     break;
 
                 case LOADING:
@@ -260,6 +298,10 @@ public class KeranjangDetailFragment extends Fragment {
         });
     }
 
+    private void deleteCart() {
+        viewModel.setLiveKeranjang(args.getCartId());
+    }
+
     private TextWatcher watchEditTexts() {
         return new TextWatcher() {
             @Override
@@ -269,7 +311,8 @@ public class KeranjangDetailFragment extends Fragment {
 
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
-                setToolbarViewState(IS_UPDATING);
+                state = IS_UPDATING;
+                setToolbarViewState(state);
             }
 
             @Override

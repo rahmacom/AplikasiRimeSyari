@@ -8,15 +8,16 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.rahmacom.rimesyarifix.data.model.UserShipment;
-import com.rahmacom.rimesyarifix.databinding.ItemFormAlamatListBinding;
+import com.rahmacom.rimesyarifix.databinding.ItemProfilBiodataAlamatListBinding;
 
 import java.util.ArrayList;
 
 public class ProfilBiodataAlamatAdapter extends RecyclerView.Adapter<ProfilBiodataAlamatAdapter.ViewHolder> {
 
-    private ItemFormAlamatListBinding binding;
+    private ItemProfilBiodataAlamatListBinding binding;
     private ArrayList<UserShipment> list = new ArrayList<>();
     private OnItemClickListener onItemClickListener;
+    private OnItemLongClickListener onItemLongClickListener;
 
     public void setList(ArrayList<UserShipment> list) {
         this.list.clear();
@@ -28,10 +29,14 @@ public class ProfilBiodataAlamatAdapter extends RecyclerView.Adapter<ProfilBioda
         this.onItemClickListener = onItemClickListener;
     }
 
+    public void setOnLongItemClickListener(OnItemLongClickListener onItemLongClickListener) {
+        this.onItemLongClickListener = onItemLongClickListener;
+    }
+
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        binding = ItemFormAlamatListBinding.inflate(
+        binding = ItemProfilBiodataAlamatListBinding.inflate(
                 LayoutInflater.from(parent.getContext()),
                 parent,
                 false);
@@ -43,6 +48,11 @@ public class ProfilBiodataAlamatAdapter extends RecyclerView.Adapter<ProfilBioda
         holder.bind(list.get(position));
 
         holder.itemView.setOnClickListener(v -> onItemClickListener.onItemClick(list.get(position)));
+
+        holder.itemView.setOnLongClickListener(v -> {
+            onItemLongClickListener.onLongItemClick(v, list.get(position));
+            return true;
+        });
     }
 
     @Override
@@ -51,9 +61,9 @@ public class ProfilBiodataAlamatAdapter extends RecyclerView.Adapter<ProfilBioda
     }
 
     static class ViewHolder extends RecyclerView.ViewHolder {
-        ItemFormAlamatListBinding binding;
+        ItemProfilBiodataAlamatListBinding binding;
 
-        public ViewHolder(ItemFormAlamatListBinding binding) {
+        public ViewHolder(ItemProfilBiodataAlamatListBinding binding) {
             super(binding.getRoot());
             this.binding = binding;
         }
@@ -66,5 +76,9 @@ public class ProfilBiodataAlamatAdapter extends RecyclerView.Adapter<ProfilBioda
 
     interface OnItemClickListener {
         void onItemClick(UserShipment userShipment);
+    }
+
+    interface OnItemLongClickListener {
+        void onLongItemClick(View view, UserShipment userShipment);
     }
 }

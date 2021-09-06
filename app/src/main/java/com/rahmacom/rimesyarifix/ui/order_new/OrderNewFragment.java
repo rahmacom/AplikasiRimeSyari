@@ -115,8 +115,6 @@ public class OrderNewFragment extends Fragment {
                     break;
 
                 case EMPTY:
-                    break;
-
                 case ERROR:
                     Toast.makeText(requireContext(), "Terjadi error! Silahkan coba lagi", Toast.LENGTH_SHORT).show();
                     Log.e("cartError", cart.getStatus().toString() + ": " + cart.getMessage());
@@ -199,9 +197,7 @@ public class OrderNewFragment extends Fragment {
                 .getSavedStateHandle()
                 .getLiveData("user_shipment_id");
 
-        liveShipmentId.observe(getViewLifecycleOwner(), shipmentId -> {
-            getShipmentAddress(shipmentId);
-        });
+        liveShipmentId.observe(getViewLifecycleOwner(), this::getShipmentAddress);
     }
 
     private void createOrder() {
@@ -212,14 +208,20 @@ public class OrderNewFragment extends Fragment {
 
         viewModel.setLiveOrder(pesan, kodeDiskon, userShipmentId, paymentMethodId, productIds, colorIds, sizeIds, quantities);
         viewModel.newOrder.observe(getViewLifecycleOwner(), order -> {
-            Timber.d(order.getStatus().toString());
             switch (order.getStatus()) {
                 case SUCCESS:
+                    Toast.makeText(requireContext(), "Order berhasil dibuat!", Toast.LENGTH_SHORT).show();
+                    OrderNewFragmentDirections.OrderNewFragmentToOrderKonfirmasiFragment action = OrderNewFragmentDirections.orderNewFragmentToOrderKonfirmasiFragment();
+                    action.setOrderId(order.getData().getId());
+                    navController.navigate(action);
+
                     break;
+                case LOADING:
                 case EMPTY:
-                    break;
                 case ERROR:
-                    break;
+                case INVALID:
+                case UNAUTHORIZED:
+                case FORBIDDEN:
                 case UNPROCESSABLE_ENTITY:
                     break;
             }

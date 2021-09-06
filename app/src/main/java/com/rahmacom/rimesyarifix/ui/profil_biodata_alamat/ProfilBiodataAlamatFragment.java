@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.PopupMenu;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -11,9 +12,12 @@ import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
+import androidx.navigation.ui.AppBarConfiguration;
+import androidx.navigation.ui.NavigationUI;
 import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
+import com.rahmacom.rimesyarifix.R;
 import com.rahmacom.rimesyarifix.data.model.UserShipment;
 import com.rahmacom.rimesyarifix.databinding.FragmentProfilBiodataAlamatBinding;
 import com.rahmacom.rimesyarifix.manager.PreferenceManager;
@@ -56,7 +60,14 @@ public class ProfilBiodataAlamatFragment extends Fragment {
         Timber.d(String.valueOf(state));
 
         viewModel.setLiveToken(manager.getString(Const.KEY_TOKEN));
+        setupToolbar();
         getShipmentAddresses();
+    }
+
+    private void setupToolbar() {
+        AppBarConfiguration appBarConfiguration = new AppBarConfiguration.Builder(navController.getGraph()).build();
+        NavigationUI.setupWithNavController(binding.toolbarProfilBiodataAlamat, navController, appBarConfiguration);
+        binding.toolbarProfilBiodataAlamat.setTitle("Alamat yang disimpan");
     }
 
     private void setupRecyclerView(ArrayList<UserShipment> items) {
@@ -76,6 +87,27 @@ public class ProfilBiodataAlamatFragment extends Fragment {
                 updateShipmentAddress(userShipment.getId());
             }
         });
+
+        if (state != IS_SELECTING) {
+            adapter.setOnLongItemClickListener((view, userShipment) -> {
+                PopupMenu menu = new PopupMenu(requireContext(), view);
+                menu.getMenuInflater().inflate(R.menu.menu_profil_alamat, menu.getMenu());
+
+                menu.setOnMenuItemClickListener(item -> {
+                    switch (item.getItemId()) {
+                        case R.id.menu_profil_alamat_default:
+                            return true;
+
+                        case R.id.menu_profil_alamat_edit:
+                            return true;
+                    }
+
+                    return false;
+                });
+
+                menu.show();
+            });
+        }
     }
 
     private void setShipmentAddressForNewOrder(int userShipmentId) {
@@ -104,6 +136,10 @@ public class ProfilBiodataAlamatFragment extends Fragment {
                     break;
             }
         });
+    }
+
+    private void setAsDefaultShipmentAddress(int userShipmentId) {
+
     }
 
     private void updateShipmentAddress(int userShipmentId) {

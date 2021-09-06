@@ -17,6 +17,7 @@ import java.util.List;
 import javax.inject.Inject;
 
 import dagger.hilt.android.lifecycle.HiltViewModel;
+import timber.log.Timber;
 
 @HiltViewModel
 public class ProdukViewModel extends ViewModel {
@@ -33,8 +34,8 @@ public class ProdukViewModel extends ViewModel {
             Transformations.switchMap(liveProductId, product -> mainRepository.getProductColors(liveToken.getValue(), product));
 
     public final LiveData<Resource<List<Size>>> getProductSizes =
-            Transformations.switchMap(liveProductId, product ->
-                    mainRepository.getProductSizes(liveToken.getValue(), product, liveColorId.getValue()));
+            Transformations.switchMap(liveColorId, product ->
+                    mainRepository.getProductSizes(liveToken.getValue(), liveProductId.getValue(), product));
 
     @Inject
     public ProdukViewModel(MainRepository mainRepository) {
@@ -51,5 +52,6 @@ public class ProdukViewModel extends ViewModel {
 
     public void setLiveColorId(int colorId) {
         liveColorId.setValue(colorId);
+        Timber.d("color_id: " + liveColorId.getValue());
     }
 }
