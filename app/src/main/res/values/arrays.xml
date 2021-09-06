@@ -13,7 +13,7 @@
         <item>@id/nav_profil_to_resellerInfoFragment</item>
         <item>@id/nav_profil_to_profilTestimoniFragment</item>
         <item>@id/nav_profil_to_profilTentangFragment</item>
-        <item />
+        <item/>
     </integer-array>
 
     <integer-array name="list_profil_menu_icon">
