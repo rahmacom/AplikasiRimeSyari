@@ -33,8 +33,13 @@ public class ProdukViewModel extends ViewModel {
             Transformations.switchMap(liveProductId, product -> mainRepository.productColors(liveToken.getValue(), product));
 
     public final LiveData<Resource<List<Size>>> getProductSizes =
-            Transformations.switchMap(liveColorId, product ->
-                    mainRepository.productSizes(liveToken.getValue(), liveProductId.getValue(), product));
+            Transformations.switchMap(liveColorId, product -> mainRepository.productSizes(liveToken.getValue(), liveProductId.getValue(), product));
+
+    public final LiveData<Resource<Integer>> likeProduct = Transformations.switchMap(liveProductId, productId ->
+            mainRepository.likeProduct(liveToken.getValue(), productId));
+
+    public final LiveData<Resource<Integer>> dislikeProduct = Transformations.switchMap(liveProductId, productId ->
+            mainRepository.dislikeProduct(liveToken.getValue(), productId));
 
     @Inject
     public ProdukViewModel(MainRepository mainRepository) {

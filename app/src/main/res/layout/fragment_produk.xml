@@ -91,7 +91,7 @@
                 android:background="?android:attr/listDivider"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/imageView" />
+                app:layout_constraintTop_toBottomOf="@+id/iv_produk_suka" />
 
             <TextView
                 android:id="@+id/tv_title_produk_warna"
@@ -188,9 +188,9 @@
                 android:text="Rating:"
                 android:textColor="@color/gray_500"
                 android:textSize="12sp"
-                app:layout_constraintBottom_toBottomOf="@+id/imageView3"
-                app:layout_constraintStart_toEndOf="@+id/imageView3"
-                app:layout_constraintTop_toTopOf="@+id/imageView3" />
+                app:layout_constraintBottom_toBottomOf="@+id/iv_produk_rating"
+                app:layout_constraintStart_toEndOf="@+id/iv_produk_rating"
+                app:layout_constraintTop_toTopOf="@+id/iv_produk_rating" />
 
             <TextView
                 android:id="@+id/tv_produk_rating_text"
@@ -211,9 +211,9 @@
                 android:text="Suka:"
                 android:textColor="@color/gray_500"
                 android:textSize="12sp"
-                app:layout_constraintBottom_toBottomOf="@+id/imageView"
+                app:layout_constraintBottom_toBottomOf="@+id/iv_produk_suka"
                 app:layout_constraintStart_toStartOf="@+id/tv_produk_rating_title"
-                app:layout_constraintTop_toTopOf="@+id/imageView" />
+                app:layout_constraintTop_toTopOf="@+id/iv_produk_suka" />
 
             <TextView
                 android:id="@+id/tv_produk_suka_text"
@@ -228,7 +228,7 @@
                 app:layout_constraintTop_toTopOf="@+id/tv_produk_suka_title" />
 
             <ImageView
-                android:id="@+id/imageView"
+                android:id="@+id/iv_produk_suka"
                 android:layout_width="16dp"
                 android:layout_height="16dp"
                 android:layout_marginStart="16dp"
@@ -237,10 +237,10 @@
                 android:scaleX="0.8"
                 android:scaleY="0.8"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/imageView3" />
+                app:layout_constraintTop_toBottomOf="@+id/iv_produk_rating" />
 
             <ImageView
-                android:id="@+id/imageView3"
+                android:id="@+id/iv_produk_rating"
                 android:layout_width="16dp"
                 android:layout_height="16dp"
                 android:layout_marginTop="16dp"

@@ -1,15 +1,17 @@
 package com.rahmacom.rimesyarifix.ui.produk;
 
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.core.content.ContextCompat;
 import androidx.core.text.HtmlCompat;
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.LiveData;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.NavController;
@@ -19,6 +21,7 @@ import androidx.navigation.ui.NavigationUI;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
 import com.google.android.material.chip.Chip;
+import com.rahmacom.rimesyarifix.R;
 import com.rahmacom.rimesyarifix.data.model.Color;
 import com.rahmacom.rimesyarifix.data.model.Product;
 import com.rahmacom.rimesyarifix.data.model.Size;
@@ -45,8 +48,6 @@ public class ProdukFragment extends Fragment {
     private ProdukViewModel viewModel;
     private NavController navController;
     private PreferenceManager manager;
-    private FotoProdukSliderAdapter fotoProdukSliderAdapter;
-    private ProfilTestimoniAdapter testimoniAdapter;
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -105,10 +106,10 @@ public class ProdukFragment extends Fragment {
     }
 
     private void setDataBinding(Product product) {
-        fotoProdukSliderAdapter = new FotoProdukSliderAdapter();
+        FotoProdukSliderAdapter fotoProdukSliderAdapter = new FotoProdukSliderAdapter();
         fotoProdukSliderAdapter.setImages(product.getImages());
 
-        testimoniAdapter = new ProfilTestimoniAdapter();
+        ProfilTestimoniAdapter testimoniAdapter = new ProfilTestimoniAdapter();
         testimoniAdapter.setLists((ArrayList<Testimony>) product.getTestimonies());
         binding.rvTestimoniList.setAdapter(testimoniAdapter);
         binding.rvTestimoniList.setLayoutManager(new LinearLayoutManager(requireContext()));
@@ -126,6 +127,8 @@ public class ProdukFragment extends Fragment {
             action.setProductId(product.getId());
             navController.navigate(action);
         });
+
+        binding.ivProdukSuka.setOnClickListener(v -> likeProduct(product.isLiked()));
 
         createChips();
     }
@@ -184,5 +187,40 @@ public class ProdukFragment extends Fragment {
         action.setJumlah(jumlah);
 
         navController.navigate(action);
+    }
+
+    private void likeProduct(boolean liked) {
+        LiveData<Resource<Integer>> liveData = null;
+        if (liked) {
+            liveData = viewModel.likeProduct;
+        } else {
+            liveData = viewModel.dislikeProduct;
+        }
+
+        liveData.observe(getViewLifecycleOwner(), integer -> {
+            switch (integer.getStatus()) {
+                case SUCCESS:
+                    if (liked) {
+                        binding.ivProdukSuka.setColorFilter(ContextCompat.getColor(requireContext(), R.color.gray_600));
+                    } else {
+                        binding.ivProdukSuka.setColorFilter(ContextCompat.getColor(requireContext(), R.color.pink_400));
+                    }
+                    binding.tvProdukSukaText.setText(String.valueOf(integer.getData()));
+                    break;
+
+                case LOADING:
+                case EMPTY:
+                case ERROR:
+                    Toast.makeText(requireContext(), "Terjadi error! Silahkan coba lagi", Toast.LENGTH_SHORT).show();
+                    break;
+
+                case INVALID:
+                case UNAUTHORIZED:
+                case FORBIDDEN:
+                case UNPROCESSABLE_ENTITY:
+                    Toast.makeText(requireContext(), "Tidak dapat memproses permintaan. Silahkan coba lagi", Toast.LENGTH_SHORT).show();
+                    break;
+            }
+        });
     }
 }
