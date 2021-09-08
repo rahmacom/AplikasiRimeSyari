@@ -9,17 +9,21 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
+import androidx.navigation.NavController;
+import androidx.navigation.Navigation;
+import androidx.navigation.ui.AppBarConfiguration;
+import androidx.navigation.ui.NavigationUI;
 
 import com.rahmacom.rimesyarifix.databinding.FragmentFormProfilBiodataAlamatBinding;
-import com.rahmacom.rimesyarifix.databinding.FragmentProfilBiodataAlamatBinding;
 import com.rahmacom.rimesyarifix.manager.PreferenceManager;
-import com.rahmacom.rimesyarifix.utils.Const;
 
 public class FormProfilBiodataAlamatFragment extends Fragment {
 
     private FormProfilBiodataAlamatViewModel viewModel;
     private FragmentFormProfilBiodataAlamatBinding binding;
     private PreferenceManager manager;
+    private NavController navController;
+    private FormProfilBiodataAlamatFragmentArgs args;
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -32,5 +36,18 @@ public class FormProfilBiodataAlamatFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
         viewModel = new ViewModelProvider(requireActivity()).get(FormProfilBiodataAlamatViewModel.class);
         manager = new PreferenceManager(requireContext());
+        navController = Navigation.findNavController(view);
+        args = FormProfilBiodataAlamatFragmentArgs.fromBundle(getArguments());
+
+        setupToolbar();
+    }
+
+    private void setupToolbar() {
+        AppBarConfiguration appBarConfiguration = new AppBarConfiguration.Builder(navController.getGraph()).build();
+        NavigationUI.setupWithNavController(binding.toolbarFormEditAlamat, navController, appBarConfiguration);
+    }
+
+    private void setDataBinding() {
+
     }
 }

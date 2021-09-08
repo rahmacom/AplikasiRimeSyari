@@ -126,7 +126,7 @@ public class HomeFragment extends Fragment {
     }
 
     private void setUpDataProduk(ArrayList<Product> list) {
-        adapter = new HomeProdukAdapter(requireContext());
+        adapter = new HomeProdukAdapter();
         adapter.setLists(list);
         GridLayoutManager gridLayoutManager = new GridLayoutManager(getContext(), 2);
 

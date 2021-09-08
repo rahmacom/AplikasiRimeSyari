@@ -2,7 +2,6 @@ package com.rahmacom.rimesyarifix.ui.order_new;
 
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
-import androidx.lifecycle.SavedStateHandle;
 import androidx.lifecycle.Transformations;
 import androidx.lifecycle.ViewModel;
 
@@ -40,7 +39,7 @@ public class OrderNewViewModel extends ViewModel {
             order -> mainRepository.newOrder(liveToken.getValue(), order.pesan, order.kodeDiskon, order.userShipmentId, order.paymentMethodId, order.productIds, order.colorIds, order.sizeIds, order.quantities));
 
     public LiveData<Resource<List<PaymentMethod>>> getAvailablePaymentMethod = Transformations.switchMap(liveToken,
-            paymentMethod -> mainRepository.getAvailablePaymentMethods(paymentMethod));
+            paymentMethod -> mainRepository.availablePaymentMethods(paymentMethod));
 
     public LiveData<Resource<UserShipment>> getShipmentAddressDetail = Transformations.switchMap(liveUserShipmentId,
             userShipmentId -> mainRepository.viewShipmentAddress(liveToken.getValue(), userShipmentId));

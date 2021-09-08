@@ -172,6 +172,9 @@
         <action
             android:id="@+id/produkFragment_to_produkDialogFragment"
             app:destination="@id/produkDialogFragment" />
+        <action
+            android:id="@+id/produkFragment_to_produkTestimoniFragment"
+            app:destination="@id/produkTestimoniFragment" />
     </fragment>
     <fragment
         android:id="@+id/profilBiodataFragment"
@@ -265,13 +268,13 @@
         android:name="com.rahmacom.rimesyarifix.ui.profil_biodata_alamat.ProfilBiodataAlamatFragment"
         android:label="Alamat Tersimpan"
         tools:layout="@layout/fragment_profil_biodata_alamat">
-        <action
-            android:id="@+id/profilBiodataAlamatFragment_to_formAlamatFragment"
-            app:destination="@id/formAlamatFragment" />
         <argument
             android:name="viewState"
             app:argType="integer"
             android:defaultValue="-1" />
+        <action
+            android:id="@+id/profilBiodataAlamatFragment_to_formAlamatFragment"
+            app:destination="@id/formAlamatFragment" />
     </fragment>
     <dialog
         android:id="@+id/produkDialogFragment"
@@ -368,5 +371,14 @@
             android:name="post_id"
             android:defaultValue="-1"
             app:argType="integer" />
+    </fragment>
+    <fragment
+        android:id="@+id/produkTestimoniFragment"
+        android:name="com.rahmacom.rimesyarifix.ui.produk_testimoni.ProdukTestimoniFragment"
+        android:label="fragment_produk_testimoni"
+        tools:layout="@layout/fragment_produk_testimoni" >
+        <argument android:name="product_id"
+            app:argType="integer"
+            android:defaultValue="-1" />
     </fragment>
 </navigation>

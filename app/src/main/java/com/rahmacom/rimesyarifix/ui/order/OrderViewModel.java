@@ -2,7 +2,6 @@ package com.rahmacom.rimesyarifix.ui.order;
 
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
-import androidx.lifecycle.SavedStateHandle;
 import androidx.lifecycle.Transformations;
 import androidx.lifecycle.ViewModel;
 
@@ -25,9 +24,9 @@ public class OrderViewModel extends ViewModel {
     private MainRepository mainRepository;
 
     public LiveData<Resource<List<Order>>> getAllOrders = Transformations.switchMap(liveOrder, order ->
-            mainRepository.getAllOrders(liveToken.getValue(), order.statusId));
+            mainRepository.allOrders(liveToken.getValue(), order.statusId));
     public LiveData<Resource<List<UserShipment>>> getUserShipmentAddresses = Transformations.switchMap(liveToken, token ->
-            mainRepository.getShipmentAddresses(token));
+            mainRepository.shipmentAddresses(token));
 
     @Inject
     public OrderViewModel(MainRepository mainRepository) {

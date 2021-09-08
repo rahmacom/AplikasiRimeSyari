@@ -121,6 +121,12 @@ public class ProdukFragment extends Fragment {
         binding.tvProdukSukaText.setText(String.valueOf(product.getSuka()));
         binding.tvProdukRatingText.setText(product.getReviewAvg() + " / 5 (" + product.getReviewCount() + " review)");
 
+        binding.tvProdukRatingText.setOnClickListener(v -> {
+            ProdukFragmentDirections.ProdukFragmentToProdukTestimoniFragment action = ProdukFragmentDirections.produkFragmentToProdukTestimoniFragment();
+            action.setProductId(product.getId());
+            navController.navigate(action);
+        });
+
         createChips();
     }
 

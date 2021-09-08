@@ -2,7 +2,6 @@ package com.rahmacom.rimesyarifix.ui.produk;
 
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
-import androidx.lifecycle.SavedStateHandle;
 import androidx.lifecycle.Transformations;
 import androidx.lifecycle.ViewModel;
 
@@ -31,11 +30,11 @@ public class ProdukViewModel extends ViewModel {
             Transformations.switchMap(liveProductId, product -> mainRepository.viewProduct(liveToken.getValue(), product));
 
     public final LiveData<Resource<List<Color>>> getProductColors =
-            Transformations.switchMap(liveProductId, product -> mainRepository.getProductColors(liveToken.getValue(), product));
+            Transformations.switchMap(liveProductId, product -> mainRepository.productColors(liveToken.getValue(), product));
 
     public final LiveData<Resource<List<Size>>> getProductSizes =
             Transformations.switchMap(liveColorId, product ->
-                    mainRepository.getProductSizes(liveToken.getValue(), liveProductId.getValue(), product));
+                    mainRepository.productSizes(liveToken.getValue(), liveProductId.getValue(), product));
 
     @Inject
     public ProdukViewModel(MainRepository mainRepository) {

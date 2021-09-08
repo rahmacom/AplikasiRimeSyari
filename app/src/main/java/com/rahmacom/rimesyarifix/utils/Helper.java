@@ -31,14 +31,13 @@ public class Helper {
     }
 
     public static List<Integer> convertToList(int[] array) {
-        Integer[] ints = new Integer[array.length];
+        Integer[] integers = new Integer[array.length];
+
         for (int i = 0; i < array.length; i++) {
-            ints[i] = array[i];
+            integers[i] = array[i];
         }
 
-        List<Integer> integers = Arrays.asList(ints);
-
-        return integers;
+        return Arrays.asList(integers);
     }
 
     public static int[] convertToIntArray(List<Integer> collection) {
@@ -54,6 +53,7 @@ public class Helper {
     public static String toDate(String timestamp) {
         SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss'Z'");
         Date parse = null;
+
         try {
             parse =  format.parse(timestamp);
             format.applyPattern("E, dd-MM-yyyy");

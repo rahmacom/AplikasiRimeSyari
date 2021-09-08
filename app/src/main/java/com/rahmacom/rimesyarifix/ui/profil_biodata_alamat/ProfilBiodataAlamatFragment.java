@@ -99,6 +99,9 @@ public class ProfilBiodataAlamatFragment extends Fragment {
                             return true;
 
                         case R.id.menu_profil_alamat_edit:
+                            ProfilBiodataAlamatFragmentDirections.ProfilBiodataAlamatFragmentToFormAlamatFragment action = ProfilBiodataAlamatFragmentDirections.profilBiodataAlamatFragmentToFormAlamatFragment();
+                            action.setUserShipmentId(userShipment.getId());
+                            navController.navigate(action);
                             return true;
                     }
 

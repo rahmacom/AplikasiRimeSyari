@@ -13,6 +13,9 @@ public class ResponseLogin {
     @SerializedName("expires_in")
     private int expiresIn;
 
+    @SerializedName("expires_until")
+    private int expiresUntil;
+
     public String getAccessToken() {
         return accessToken;
     }
@@ -23,5 +26,9 @@ public class ResponseLogin {
 
     public int getExpiresIn() {
         return expiresIn;
+    }
+
+    public int getExpiresUntil() {
+        return expiresUntil;
     }
 }

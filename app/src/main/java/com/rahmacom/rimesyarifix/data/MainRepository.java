@@ -13,6 +13,7 @@ import com.rahmacom.rimesyarifix.data.model.PaymentMethod;
 import com.rahmacom.rimesyarifix.data.model.Post;
 import com.rahmacom.rimesyarifix.data.model.Product;
 import com.rahmacom.rimesyarifix.data.model.Size;
+import com.rahmacom.rimesyarifix.data.model.Testimony;
 import com.rahmacom.rimesyarifix.data.model.User;
 import com.rahmacom.rimesyarifix.data.model.UserShipment;
 import com.rahmacom.rimesyarifix.data.network.api.RimeSyariAPI;
@@ -22,7 +23,6 @@ import com.rahmacom.rimesyarifix.data.vo.Resource;
 import java.io.IOException;
 import java.util.Arrays;
 import java.util.List;
-import java.util.Objects;
 
 import javax.inject.Inject;
 import javax.inject.Singleton;
@@ -52,12 +52,12 @@ public class MainRepository {
 
     public LiveData<Resource<ResponseLogin>> login(String email, String password) {
         MutableLiveData<Resource<ResponseLogin>> data = new MutableLiveData<>();
-        data.setValue(Resource.loading(null));
+        data.postValue(Resource.loading(null));
 
         Call<ResponseLogin> api = rimeSyariAPI.login(email, password);
         api.enqueue(new Callback<ResponseLogin>() {
             @Override
-            public void onResponse(Call<ResponseLogin> call, Response<ResponseLogin> response) {
+            public void onResponse(@NonNull Call<ResponseLogin> call, @NonNull Response<ResponseLogin> response) {
                 Timber.d(response.message());
                 switch (response.code()) {
                     case 200:
@@ -93,7 +93,7 @@ public class MainRepository {
             }
 
             @Override
-            public void onFailure(Call<ResponseLogin> call, Throwable t) {
+            public void onFailure(@NonNull Call<ResponseLogin> call, @NonNull Throwable t) {
                 data.postValue(Resource.error(t.getMessage(), null));
             }
         });
@@ -103,12 +103,12 @@ public class MainRepository {
 
     public LiveData<Resource<ResponseLogin>> updateLogin(String token, String email, String oldPassword, String newPassword) {
         MutableLiveData<Resource<ResponseLogin>> data = new MutableLiveData<>();
-        data.setValue(Resource.loading(null));
+        data.postValue(Resource.loading(null));
 
         Call<ResponseLogin> api = rimeSyariAPI.updateLogin(token, email, oldPassword, newPassword);
         api.enqueue(new Callback<ResponseLogin>() {
             @Override
-            public void onResponse(Call<ResponseLogin> call, Response<ResponseLogin> response) {
+            public void onResponse(@NonNull Call<ResponseLogin> call, @NonNull Response<ResponseLogin> response) {
                 switch (response.code()) {
                     case 200:
                     case 201:
@@ -153,7 +153,7 @@ public class MainRepository {
 
     public LiveData<Resource<ResponseLogin>> refreshLogin(String token) {
         MutableLiveData<Resource<ResponseLogin>> data = new MutableLiveData<>();
-        data.setValue(Resource.loading(null));
+        data.postValue(Resource.loading(null));
 
         Call<ResponseLogin> api = rimeSyariAPI.refresh(token);
         api.enqueue(new Callback<ResponseLogin>() {
@@ -203,12 +203,13 @@ public class MainRepository {
 
     public LiveData<Resource<ResponseLogin>> register(String name, String email, String password) {
         MutableLiveData<Resource<ResponseLogin>> data = new MutableLiveData<>();
-        data.setValue(Resource.loading(null));
+        data.postValue(Resource.loading(null));
 
         Call<ResponseLogin> api = rimeSyariAPI.register(name, email, password);
         api.enqueue(new Callback<ResponseLogin>() {
             @Override
             public void onResponse(Call<ResponseLogin> call, Response<ResponseLogin> response) {
+                Timber.d(response.message());
                 switch (response.code()) {
                     case 200:
                     case 201:
@@ -238,6 +239,11 @@ public class MainRepository {
 
                     case 422:
                         data.postValue(Resource.unprocessableEntity(response.message(), null));
+                        try {
+                            Timber.d(response.errorBody().string());
+                        } catch (IOException e) {
+                            e.printStackTrace();
+                        }
                         break;
                 }
             }
@@ -253,7 +259,7 @@ public class MainRepository {
 
     public LiveData<Resource<ResponseLogin>> logout(String token) {
         MutableLiveData<Resource<ResponseLogin>> data = new MutableLiveData<>();
-        data.setValue(Resource.loading(null));
+        data.postValue(Resource.loading(null));
 
         Call<ResponseLogin> api = rimeSyariAPI.logout(token);
         api.enqueue(new Callback<ResponseLogin>() {
@@ -303,7 +309,7 @@ public class MainRepository {
 
     public LiveData<Resource<User>> profile(String token) {
         MutableLiveData<Resource<User>> data = new MutableLiveData<>();
-        data.setValue(Resource.loading(null));
+        data.postValue(Resource.loading(null));
 
         Call<User> api = rimeSyariAPI.profile(token);
         api.enqueue(new Callback<User>() {
@@ -353,7 +359,7 @@ public class MainRepository {
 
     public LiveData<Resource<User>> updateProfile(String token, User user) {
         MutableLiveData<Resource<User>> data = new MutableLiveData<>();
-        data.setValue(Resource.loading(null));
+        data.postValue(Resource.loading(null));
 
         Call<User> api = rimeSyariAPI.updateProfile(
                 token,
@@ -887,14 +893,14 @@ public class MainRepository {
      * ---------------------------------------------------------------------------------------------
      */
 
-    public LiveData<Resource<List<Order>>> getAllOrders(String token, int statusId) {
+    public LiveData<Resource<List<Order>>> allOrders(String token, int statusId) {
         MutableLiveData<Resource<List<Order>>> data = new MutableLiveData<>();
-        data.setValue(Resource.loading(null));
+        data.postValue(Resource.loading(null));
 
-        Call<List<Order>> api = rimeSyariAPI.getAllOrders(token, statusId);
+        Call<List<Order>> api = rimeSyariAPI.allOrders(token, statusId);
         api.enqueue(new Callback<List<Order>>() {
             @Override
-            public void onResponse(Call<List<Order>> call, Response<List<Order>> response) {
+            public void onResponse(@NonNull Call<List<Order>> call, @NonNull Response<List<Order>> response) {
                 switch (response.code()) {
                     case 200:
                     case 201:
@@ -929,7 +935,7 @@ public class MainRepository {
             }
 
             @Override
-            public void onFailure(Call<List<Order>> call, Throwable t) {
+            public void onFailure(@NonNull Call<List<Order>> call, @NonNull Throwable t) {
                 data.postValue(Resource.error(t.getMessage(), null));
             }
         });
@@ -939,7 +945,7 @@ public class MainRepository {
 
     public LiveData<Resource<Order>> viewOrder(String token, int orderId) {
         MutableLiveData<Resource<Order>> data = new MutableLiveData<>();
-        data.setValue(Resource.loading(null));
+        data.postValue(Resource.loading(null));
 
         Call<Order> api = rimeSyariAPI.viewOrder(token, orderId);
         api.enqueue(new Callback<Order>() {
@@ -989,7 +995,7 @@ public class MainRepository {
 
     public LiveData<Resource<Order>> newOrder(String token, String pesan, String kodeDiskon, int userShipmentId, int paymentMethodId, List<Integer> productIds, List<Integer> colorIds, List<Integer> sizeIds, List<Integer> quantities) {
         MutableLiveData<Resource<Order>> data = new MutableLiveData<>();
-        data.setValue(Resource.loading(null));
+        data.postValue(Resource.loading(null));
 
 
         Call<Order> api = rimeSyariAPI.newOrder(token, pesan, kodeDiskon, userShipmentId, paymentMethodId, productIds, colorIds, sizeIds, quantities);
@@ -1038,23 +1044,14 @@ public class MainRepository {
         return data;
     }
 
-    /*
-     * ---------------------------------------------------------------------------------------------
-     *
-     * PRODUK
-     *
-     * ---------------------------------------------------------------------------------------------
-     */
+    public LiveData<Resource<List<PaymentMethod>>> availablePaymentMethods(String token) {
+        MutableLiveData<Resource<List<PaymentMethod>>> data = new MutableLiveData<>();
+        data.postValue(Resource.loading(null));
 
-    public LiveData<Resource<List<Product>>> getAllProducts(String token) {
-        MutableLiveData<Resource<List<Product>>> data = new MutableLiveData<>();
-        data.setValue(Resource.loading(null));
-
-        Call<List<Product>> api = rimeSyariAPI.getAllProducts(token);
-        api.enqueue(new Callback<List<Product>>() {
-
+        Call<List<PaymentMethod>> api = rimeSyariAPI.availablePaymentMethods(token);
+        api.enqueue(new Callback<List<PaymentMethod>>() {
             @Override
-            public void onResponse(Call<List<Product>> call, Response<List<Product>> response) {
+            public void onResponse(@NonNull Call<List<PaymentMethod>> call, @NonNull Response<List<PaymentMethod>> response) {
                 switch (response.code()) {
                     case 200:
                     case 201:
@@ -1089,7 +1086,66 @@ public class MainRepository {
             }
 
             @Override
-            public void onFailure(Call<List<Product>> call, Throwable t) {
+            public void onFailure(@NonNull Call<List<PaymentMethod>> call, @NonNull Throwable t) {
+                data.postValue(Resource.error(t.getMessage(), null));
+            }
+        });
+
+        return data;
+    }
+
+    /*
+     * ---------------------------------------------------------------------------------------------
+     *
+     * PRODUK
+     *
+     * ---------------------------------------------------------------------------------------------
+     */
+
+    public LiveData<Resource<List<Product>>> allProducts(String token) {
+        MutableLiveData<Resource<List<Product>>> data = new MutableLiveData<>();
+        data.postValue(Resource.loading(null));
+
+        Call<List<Product>> api = rimeSyariAPI.allProducts(token);
+        api.enqueue(new Callback<List<Product>>() {
+
+            @Override
+            public void onResponse(@NonNull Call<List<Product>> call, @NonNull Response<List<Product>> response) {
+                switch (response.code()) {
+                    case 200:
+                    case 201:
+                        data.postValue(Resource.success(response.body()));
+                        break;
+
+                    case 204:
+                        data.postValue(Resource.empty(null));
+                        break;
+
+                    case 400:
+                        data.postValue(Resource.invalid(response.message()));
+                        break;
+
+                    case 401:
+                        data.postValue(Resource.unauthorized(response.message()));
+                        break;
+
+                    case 403:
+                        data.postValue(Resource.forbidden(response.message()));
+                        break;
+
+                    case 404:
+                    case 405:
+                        data.postValue(Resource.error(response.message(), null));
+                        break;
+
+                    case 422:
+                        data.postValue(Resource.unprocessableEntity(response.message(), null));
+                        break;
+                }
+            }
+
+            @Override
+            public void onFailure(@NonNull Call<List<Product>> call, @NonNull Throwable t) {
                 data.postValue(Resource.error(t.getMessage(), null));
             }
         });
@@ -1099,12 +1155,12 @@ public class MainRepository {
 
     public LiveData<Resource<Product>> viewProduct(String token, int id) {
         MutableLiveData<Resource<Product>> data = new MutableLiveData<>();
-        data.setValue(Resource.loading(null));
+        data.postValue(Resource.loading(null));
 
         Call<Product> api = rimeSyariAPI.viewProduct(token, id);
         api.enqueue(new Callback<Product>() {
             @Override
-            public void onResponse(Call<Product> call, Response<Product> response) {
+            public void onResponse(@NonNull Call<Product> call, @NonNull Response<Product> response) {
                 switch (response.code()) {
                     case 200:
                     case 201:
@@ -1139,7 +1195,7 @@ public class MainRepository {
             }
 
             @Override
-            public void onFailure(Call<Product> call, Throwable t) {
+            public void onFailure(@NonNull Call<Product> call, @NonNull Throwable t) {
                 data.postValue(Resource.error(t.getMessage(), null));
             }
         });
@@ -1147,14 +1203,14 @@ public class MainRepository {
         return data;
     }
 
-    public LiveData<Resource<List<Color>>> getProductColors(String token, int productId) {
+    public LiveData<Resource<List<Color>>> productColors(String token, int productId) {
         MutableLiveData<Resource<List<Color>>> data = new MutableLiveData<>();
-        data.setValue(Resource.loading(null));
+        data.postValue(Resource.loading(null));
 
-        Call<List<Color>> api = rimeSyariAPI.getProductColors(token, productId);
+        Call<List<Color>> api = rimeSyariAPI.productColors(token, productId);
         api.enqueue(new Callback<List<Color>>() {
             @Override
-            public void onResponse(Call<List<Color>> call, Response<List<Color>> response) {
+            public void onResponse(@NonNull Call<List<Color>> call, @NonNull Response<List<Color>> response) {
                 switch (response.code()) {
                     case 200:
                     case 201:
@@ -1189,7 +1245,7 @@ public class MainRepository {
             }
 
             @Override
-            public void onFailure(Call<List<Color>> call, Throwable t) {
+            public void onFailure(@NonNull Call<List<Color>> call, @NonNull Throwable t) {
                 data.postValue(Resource.error(t.getMessage(), null));
             }
         });
@@ -1197,14 +1253,14 @@ public class MainRepository {
         return data;
     }
 
-    public LiveData<Resource<List<Size>>> getProductSizes(String token, int productId, int colorId) {
+    public LiveData<Resource<List<Size>>> productSizes(String token, int productId, int colorId) {
         MutableLiveData<Resource<List<Size>>> data = new MutableLiveData<>();
-        data.setValue(Resource.loading(null));
+        data.postValue(Resource.loading(null));
 
-        Call<List<Size>> api = rimeSyariAPI.getProductSizes(token, productId, colorId);
+        Call<List<Size>> api = rimeSyariAPI.productSizes(token, productId, colorId);
         api.enqueue(new Callback<List<Size>>() {
             @Override
-            public void onResponse(Call<List<Size>> call, Response<List<Size>> response) {
+            public void onResponse(@NonNull Call<List<Size>> call, @NonNull Response<List<Size>> response) {
                 switch (response.code()) {
                     case 200:
                     case 201:
@@ -1239,7 +1295,7 @@ public class MainRepository {
             }
 
             @Override
-            public void onFailure(Call<List<Size>> call, Throwable t) {
+            public void onFailure(@NonNull Call<List<Size>> call, @NonNull Throwable t) {
                 data.postValue(Resource.error(t.getMessage(), null));
             }
         });
@@ -1255,14 +1311,14 @@ public class MainRepository {
      * ---------------------------------------------------------------------------------------------
      */
 
-    public LiveData<Resource<List<UserShipment>>> getShipmentAddresses(String token) {
+    public LiveData<Resource<List<UserShipment>>> shipmentAddresses(String token) {
         MutableLiveData<Resource<List<UserShipment>>> data = new MutableLiveData<>();
-        data.setValue(Resource.loading(null));
+        data.postValue(Resource.loading(null));
 
-        Call<List<UserShipment>> api = rimeSyariAPI.getShipmentAddresses(token);
+        Call<List<UserShipment>> api = rimeSyariAPI.shipmentAddresses(token);
         api.enqueue(new Callback<List<UserShipment>>() {
             @Override
-            public void onResponse(Call<List<UserShipment>> call, Response<List<UserShipment>> response) {
+            public void onResponse(@NonNull Call<List<UserShipment>> call, @NonNull Response<List<UserShipment>> response) {
                 switch (response.code()) {
                     case 200:
                     case 201:
@@ -1297,7 +1353,7 @@ public class MainRepository {
             }
 
             @Override
-            public void onFailure(Call<List<UserShipment>> call, Throwable t) {
+            public void onFailure(@NonNull Call<List<UserShipment>> call, @NonNull Throwable t) {
                 data.postValue(Resource.error(t.getMessage(), null));
             }
         });
@@ -1305,14 +1361,14 @@ public class MainRepository {
         return data;
     }
 
-    public LiveData<Resource<UserShipment>> getDefaultUserShipmentAddress(String token) {
+    public LiveData<Resource<UserShipment>> defaultShipmentAddress(String token) {
         MutableLiveData<Resource<UserShipment>> data = new MutableLiveData<>();
         data.postValue(Resource.loading(null));
 
-        Call<UserShipment> api = rimeSyariAPI.getDefaultShipmentAddress(token);
+        Call<UserShipment> api = rimeSyariAPI.defaultShipmentAddress(token);
         api.enqueue(new Callback<UserShipment>() {
             @Override
-            public void onResponse(Call<UserShipment> call, Response<UserShipment> response) {
+            public void onResponse(@NonNull Call<UserShipment> call, @NonNull Response<UserShipment> response) {
                 switch (response.code()) {
                     case 200:
                     case 201:
@@ -1347,7 +1403,7 @@ public class MainRepository {
             }
 
             @Override
-            public void onFailure(Call<UserShipment> call, Throwable t) {
+            public void onFailure(@NonNull Call<UserShipment> call, @NonNull Throwable t) {
                 data.postValue(Resource.error(t.getMessage(), null));
             }
         });
@@ -1357,7 +1413,7 @@ public class MainRepository {
 
     public LiveData<Resource<UserShipment>> viewShipmentAddress(String token, int shipmentId) {
         MutableLiveData<Resource<UserShipment>> data = new MutableLiveData<>();
-        data.setValue(Resource.loading(null));
+        data.postValue(Resource.loading(null));
 
         Call<UserShipment> api = rimeSyariAPI.viewShipmentAddress(token, shipmentId);
         api.enqueue(new Callback<UserShipment>() {
@@ -1407,7 +1463,7 @@ public class MainRepository {
 
     public LiveData<Resource<UserShipment>> newShipmentAddress(String token, String alamat, String kodePos, String catatan, boolean isDefault, int villageId) {
         MutableLiveData<Resource<UserShipment>> data = new MutableLiveData<>();
-        data.setValue(Resource.loading(null));
+        data.postValue(Resource.loading(null));
 
         Call<UserShipment> api = rimeSyariAPI.newShipmentAddress(token, alamat, kodePos, catatan, isDefault, villageId);
         api.enqueue(new Callback<UserShipment>() {
@@ -1457,7 +1513,7 @@ public class MainRepository {
 
     public LiveData<Resource<UserShipment>> updateShipmentAddress(String token, int shipmentId, String alamat, String kodePos, String catatan, boolean isDefault, int villageId) {
         MutableLiveData<Resource<UserShipment>> data = new MutableLiveData<>();
-        data.setValue(Resource.loading(null));
+        data.postValue(Resource.loading(null));
 
         Call<UserShipment> api = rimeSyariAPI.updateShipmentAddress(token, shipmentId, alamat, kodePos, catatan, isDefault, villageId);
         api.enqueue(new Callback<UserShipment>() {
@@ -1505,59 +1561,17 @@ public class MainRepository {
         return data;
     }
 
-    public LiveData<Resource<List<PaymentMethod>>> getAvailablePaymentMethods(String token) {
-        MutableLiveData<Resource<List<PaymentMethod>>> data = new MutableLiveData<>();
-        data.setValue(Resource.loading(null));
-
-        Call<List<PaymentMethod>> api = rimeSyariAPI.getAvailablePaymentMethods(token);
-        api.enqueue(new Callback<List<PaymentMethod>>() {
-            @Override
-            public void onResponse(Call<List<PaymentMethod>> call, Response<List<PaymentMethod>> response) {
-                switch (response.code()) {
-                    case 200:
-                    case 201:
-                        data.postValue(Resource.success(response.body()));
-                        break;
-
-                    case 204:
-                        data.postValue(Resource.empty(null));
-                        break;
-
-                    case 400:
-                        data.postValue(Resource.invalid(response.message()));
-                        break;
-
-                    case 401:
-                        data.postValue(Resource.unauthorized(response.message()));
-                        break;
-
-                    case 403:
-                        data.postValue(Resource.forbidden(response.message()));
-                        break;
-
-                    case 404:
-                    case 405:
-                        data.postValue(Resource.error(response.message(), null));
-                        break;
-
-                    case 422:
-                        data.postValue(Resource.unprocessableEntity(response.message(), null));
-                        break;
-                }
-            }
-
-            @Override
-            public void onFailure(Call<List<PaymentMethod>> call, Throwable t) {
-                data.postValue(Resource.error(t.getMessage(), null));
-            }
-        });
-
-        return data;
-    }
+    /*
+     * ---------------------------------------------------------------------------------------------
+     *
+     * POSTINGAN
+     *
+     * ---------------------------------------------------------------------------------------------
+     */
 
     public LiveData<Resource<List<Post>>> getLatestPosts(String token) {
         MutableLiveData<Resource<List<Post>>> data = new MutableLiveData<>();
-        data.setValue(Resource.loading(null));
+        data.postValue(Resource.loading(null));
 
         Call<List<Post>> api = rimeSyariAPI.getLatestPosts(token);
         api.enqueue(new Callback<List<Post>>() {
@@ -1648,6 +1662,114 @@ public class MainRepository {
 
             @Override
             public void onFailure(Call<Post> call, Throwable t) {
+                data.postValue(Resource.error(t.getMessage(), null));
+            }
+        });
+
+        return data;
+    }
+
+    /*
+     * ---------------------------------------------------------------------------------------------
+     *
+     * TESTIMONI
+     *
+     * ---------------------------------------------------------------------------------------------
+     */
+
+    public LiveData<Resource<List<Testimony>>> userTestimonies(String token) {
+        MutableLiveData<Resource<List<Testimony>>> data = new MutableLiveData<>();
+        data.postValue(Resource.loading(null));
+
+        Call<List<Testimony>> api = rimeSyariAPI.userTestimonies(token);
+        api.enqueue(new Callback<List<Testimony>>() {
+            @Override
+            public void onResponse(Call<List<Testimony>> call, Response<List<Testimony>> response) {
+                switch (response.code()) {
+                    case 200:
+                    case 201:
+                        data.postValue(Resource.success(response.body()));
+                        break;
+
+                    case 204:
+                        data.postValue(Resource.empty(null));
+                        break;
+
+                    case 400:
+                        data.postValue(Resource.invalid(response.message()));
+                        break;
+
+                    case 401:
+                        data.postValue(Resource.unauthorized(response.message()));
+                        break;
+
+                    case 403:
+                        data.postValue(Resource.forbidden(response.message()));
+                        break;
+
+                    case 404:
+                    case 405:
+                        data.postValue(Resource.error(response.message(), null));
+                        break;
+
+                    case 422:
+                        data.postValue(Resource.unprocessableEntity(response.message(), null));
+                        break;
+                }
+            }
+
+            @Override
+            public void onFailure(Call<List<Testimony>> call, Throwable t) {
+                data.postValue(Resource.error(t.getMessage(), null));
+            }
+        });
+
+        return data;
+    }
+
+    public LiveData<Resource<Testimony>> newTestimony(String token, String isi, int rating, int productId) {
+        MutableLiveData<Resource<Testimony>> data = new MutableLiveData<>();
+        data.postValue(Resource.loading(null));
+
+        Call<Testimony> api = rimeSyariAPI.newTestimony(token, isi, rating, productId);
+        api.enqueue(new Callback<Testimony>() {
+            @Override
+            public void onResponse(Call<Testimony> call, Response<Testimony> response) {
+                switch (response.code()) {
+                    case 200:
+                    case 201:
+                        data.postValue(Resource.success(response.body()));
+                        break;
+
+                    case 204:
+                        data.postValue(Resource.empty(null));
+                        break;
+
+                    case 400:
+                        data.postValue(Resource.invalid(response.message()));
+                        break;
+
+                    case 401:
+                        data.postValue(Resource.unauthorized(response.message()));
+                        break;
+
+                    case 403:
+                        data.postValue(Resource.forbidden(response.message()));
+                        break;
+
+                    case 404:
+                    case 405:
+                        data.postValue(Resource.error(response.message(), null));
+                        break;
+
+                    case 422:
+                        data.postValue(Resource.unprocessableEntity(response.message(), null));
+                        break;
+                }
+            }
+
+            @Override
+            public void onFailure(Call<Testimony> call, Throwable t) {
                 data.postValue(Resource.error(t.getMessage(), null));
             }
         });

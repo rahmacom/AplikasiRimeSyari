@@ -19,13 +19,8 @@ import java.util.ArrayList;
 public class HomeProdukAdapter extends RecyclerView.Adapter<HomeProdukAdapter.ViewHolder> {
 
     private final ArrayList<Product> listData = new ArrayList<>();
-    private final Context context;
     private ItemHomeProdukGridBinding binding;
     private OnItemClickListener onItemClickListener;
-
-    public HomeProdukAdapter(Context context) {
-        this.context = context;
-    }
 
     public void setOnItemClickListener(OnItemClickListener onItemClickListener) {
         this.onItemClickListener = onItemClickListener;

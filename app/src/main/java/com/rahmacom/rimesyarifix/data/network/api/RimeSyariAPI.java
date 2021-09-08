@@ -68,11 +68,19 @@ public interface RimeSyariAPI {
 
     @GET("products")
     @Headers({"Accept: application/json"})
-    Call<List<Product>> getAllProducts(@Header("Authorization") String token);
+    Call<List<Product>> allProducts(@Header("Authorization") String token);
 
     @GET("products/{product}")
     @Headers({"Accept: application/json"})
     Call<Product> viewProduct(@Header("Authorization") String token, @Path("product") int productId);
+
+    @POST("products/{product}/likes")
+    @Headers({"Accept: application/json"})
+    Call<Integer> likeProduct(@Header("Authorization") String token, @Path("product") int productId);
+
+    @DELETE("products/{product}/likes")
+    @Headers({"Accept: application/json"})
+    Call<Integer> dislikeProduct(@Header("Authorization") String token, @Path("product") int productId);
 
     @GET("carts")
     @Headers({"Accept: application/json"})
@@ -145,7 +153,7 @@ public interface RimeSyariAPI {
 
     @GET("orders")
     @Headers({"Accept: application/json"})
-    Call<List<Order>> getAllOrders(@Header("Authorization") String token, @Query("status_id") int statusId);
+    Call<List<Order>> allOrders(@Header("Authorization") String token, @Query("status_id") int statusId);
 
     @GET("orders/{order}")
     @Headers({"Accept: application/json"})
@@ -166,21 +174,19 @@ public interface RimeSyariAPI {
 
     @GET("testimonies")
     @Headers({"Accept: application/json"})
-    Call<List<Testimony>> getAllTestimonies(@Header("Authorization") String token,
-                                            @Query("product_id") int productId);
+    Call<List<Testimony>> userTestimonies(@Header("Authorization") String token);
 
     @POST("testimonies")
     @FormUrlEncoded
     @Headers({"Accept: application/json"})
     Call<Testimony> newTestimony(@Header("Authorization") String token,
-                                 @Field("judul") String judul,
                                  @Field("isi") String isi,
-                                 @Field("review") int review,
+                                 @Field("rating") int rating,
                                  @Field("product_id") int productId);
 
     @GET("user_shipments")
     @Headers({"Accept: application/json"})
-    Call<List<UserShipment>> getShipmentAddresses(@Header("Authorization") String token);
+    Call<List<UserShipment>> shipmentAddresses(@Header("Authorization") String token);
 
     @GET("user_shipments/{user_shipment}")
     @Headers({"Accept: application/json"})
@@ -189,7 +195,7 @@ public interface RimeSyariAPI {
 
     @GET("user_shipments/default")
     @Headers({"Accept: application/json"})
-    Call<UserShipment> getDefaultShipmentAddress(@Header("Authorization") String token);
+    Call<UserShipment> defaultShipmentAddress(@Header("Authorization") String token);
 
     @POST("user_shipments")
     @FormUrlEncoded
@@ -230,15 +236,15 @@ public interface RimeSyariAPI {
 
     @GET("colors")
     @Headers({"Accept: application/json"})
-    Call<List<Color>> getProductColors(@Header("Authorization") String token, @Query("product_id") int productId);
+    Call<List<Color>> productColors(@Header("Authorization") String token, @Query("product_id") int productId);
 
     @GET("sizes")
     @Headers({"Accept: application/json"})
-    Call<List<Size>> getProductSizes(@Header("Authorization") String token, @Query("product_id") int productId, @Query("color_id") int colorId);
+    Call<List<Size>> productSizes(@Header("Authorization") String token, @Query("product_id") int productId, @Query("color_id") int colorId);
 
     @GET("payment_methods")
     @Headers({"Accept: application/json"})
-    Call<List<PaymentMethod>> getAvailablePaymentMethods(@Header("Authorization") String token);
+    Call<List<PaymentMethod>> availablePaymentMethods(@Header("Authorization") String token);
 
     @GET("posts")
     @Headers({"Accept: application/json"})

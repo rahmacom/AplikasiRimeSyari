@@ -2,7 +2,6 @@ package com.rahmacom.rimesyarifix.ui.home;
 
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
-import androidx.lifecycle.SavedStateHandle;
 import androidx.lifecycle.Transformations;
 import androidx.lifecycle.ViewModel;
 
@@ -30,7 +29,7 @@ public class HomeViewModel extends ViewModel {
         this.mainRepository = mainRepository;
     }
 
-    public final LiveData<Resource<List<Product>>> getAllProducts = Transformations.switchMap(liveToken, token -> mainRepository.getAllProducts(token));
+    public final LiveData<Resource<List<Product>>> getAllProducts = Transformations.switchMap(liveToken, token -> mainRepository.allProducts(token));
     public final LiveData<Resource<List<Post>>> getLatestPosts = Transformations.switchMap(liveToken, token -> mainRepository.getLatestPosts(token));
     public final LiveData<Resource<User>> getUserProfile = Transformations.switchMap(liveToken, token -> mainRepository.profile(token));
 

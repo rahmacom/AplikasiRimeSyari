@@ -7,7 +7,7 @@
     tools:context=".ui.form_profil_biodata_alamat.FormProfilBiodataAlamatFragment">
 
     <com.google.android.material.appbar.MaterialToolbar
-        android:id="@+id/toolbar_fragment_form_edit_alamat"
+        android:id="@+id/toolbar_form_profil_biodata_alamat"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginBottom="@dimen/layout_padding"
@@ -17,18 +17,18 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:id="@+id/tv_form_edit_alamat_title"
+        android:id="@+id/tv_form_profil_biodata_alamat_title"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
         android:layout_marginTop="16dp"
-        android:text="Alamat lengkap"
+        android:text="Alamat"
         android:textColor="@color/gray_600"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/toolbar_fragment_form_edit_alamat" />
+        app:layout_constraintTop_toBottomOf="@+id/toolbar_form_profil_biodata_alamat" />
 
     <EditText
-        android:id="@+id/tv_form_edit_alamat_text"
+        android:id="@+id/tv_form_profil_biodata_alamat"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
@@ -40,10 +40,10 @@
         android:minHeight="48dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tv_form_edit_alamat_title" />
+        app:layout_constraintTop_toBottomOf="@+id/tv_form_profil_biodata_alamat_title" />
 
     <TextView
-        android:id="@+id/tv_form_edit_alamat_kode_pos_title"
+        android:id="@+id/tv_form_profil_biodata_alamat_kode_pos_title"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
@@ -51,10 +51,10 @@
         android:text="Kode Pos"
         android:textColor="@color/gray_600"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tv_form_edit_alamat_text" />
+        app:layout_constraintTop_toBottomOf="@+id/tv_form_profil_biodata_alamat" />
 
-    <EditText
-        android:id="@+id/tv_form_edit_alamat_kode_pos_text"
+    <AutoCompleteTextView
+        android:id="@+id/tv_form_profil_biodata_alamat_kode_pos"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
@@ -65,10 +65,10 @@
         android:minHeight="48dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tv_form_edit_alamat_kode_pos_title" />
+        app:layout_constraintTop_toBottomOf="@+id/tv_form_profil_biodata_alamat_kode_pos_title" />
 
     <TextView
-        android:id="@+id/tv_form_edit_alamat_desa_kelurahan_title"
+        android:id="@+id/tv_form_profil_biodata_alamat_desa_kelurahan_title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
@@ -76,10 +76,10 @@
         android:text="Desa/Kelurahan"
         android:textColor="@color/gray_600"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tv_form_edit_alamat_kode_pos_text" />
+        app:layout_constraintTop_toBottomOf="@+id/tv_form_profil_biodata_alamat_kode_pos" />
 
     <Button
-        android:id="@+id/btn_simpan"
+        android:id="@+id/btn_form_profil_biodata_alamat_simpan"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
@@ -91,7 +91,7 @@
         app:layout_constraintStart_toStartOf="parent" />
 
     <TextView
-        android:id="@+id/tv_form_edit_alamat_catatan_title"
+        android:id="@+id/tv_form_profil_biodata_alamat_catatan_title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
@@ -101,9 +101,10 @@
         tools:layout_editor_absoluteY="358dp" />
 
     <EditText
-        android:id="@+id/tv_form_edit_alamat_catatan_text"
+        android:id="@+id/tv_form_profil_biodata_alamat_catatan_text"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:minHeight="48dp"
         android:layout_marginStart="16dp"
         android:layout_marginTop="8dp"
         android:layout_marginEnd="16dp"
@@ -112,10 +113,10 @@
         android:inputType="textMultiLine"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tv_form_edit_alamat_catatan_title" />
+        app:layout_constraintTop_toBottomOf="@+id/tv_form_profil_biodata_alamat_catatan_title" />
 
     <CheckBox
-        android:id="@+id/cb_form_edit_alamat_set_default"
+        android:id="@+id/cb_form_profil_biodata_alamat_set_default"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
@@ -125,16 +126,17 @@
         android:textColor="@color/gray_800"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tv_form_edit_alamat_catatan_text" />
+        app:layout_constraintTop_toBottomOf="@+id/tv_form_profil_biodata_alamat_catatan_text" />
 
     <AutoCompleteTextView
-        android:id="@+id/et_form_profil_biodata_alamat_autocomplete"
+        android:id="@+id/et_form_profil_biodata_alamat_desa_kelurahan"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
         android:layout_marginEnd="16dp"
+        android:minHeight="48dp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="@+id/tv_form_edit_alamat_desa_kelurahan_title"
-        app:layout_constraintTop_toBottomOf="@+id/tv_form_edit_alamat_desa_kelurahan_title" />
+        app:layout_constraintStart_toStartOf="@+id/tv_form_profil_biodata_alamat_desa_kelurahan_title"
+        app:layout_constraintTop_toBottomOf="@+id/tv_form_profil_biodata_alamat_desa_kelurahan_title" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

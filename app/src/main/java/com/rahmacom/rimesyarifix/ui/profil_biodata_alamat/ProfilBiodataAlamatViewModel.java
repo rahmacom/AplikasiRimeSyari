@@ -27,7 +27,7 @@ public class ProfilBiodataAlamatViewModel extends ViewModel {
     }
 
     public LiveData<Resource<List<UserShipment>>> getUserShipmentAddresses = Transformations.switchMap(liveToken,
-            token -> mainRepository.getShipmentAddresses(token));
+            token -> mainRepository.shipmentAddresses(token));
 
     public void setLiveToken(String token) {
         liveToken.setValue(token);

@@ -1,8 +1,10 @@
 package com.rahmacom.rimesyarifix.utils;
 
 public class Const {
-    public static final String BASE_URL = "http://politani.myskripsi.xyz/";
-//    public static final String BASE_URL = "http://192.168.1.16/rime/public/";
+//    public static final String BASE_URL = "http://politani.myskripsi.xyz/";
+    public static final String BASE_URL = "http://rimesyari.myskripsi.xyz/";
+//    public static final String BASE_URL = "http://192.168.1.19/rime/public/";
+//    public static final String BASE_URL = "http://192.168.1.15/rime/public/";
     public static final String BASE_API_URL = BASE_URL + "api/";
 
     public static final String KEY_TOKEN = "key_token";

@@ -18,6 +18,8 @@ import com.rahmacom.rimesyarifix.databinding.FragmentRegisterBinding;
 import com.rahmacom.rimesyarifix.manager.PreferenceManager;
 import com.rahmacom.rimesyarifix.utils.Const;
 
+import timber.log.Timber;
+
 public class RegisterFragment extends Fragment {
 
     private FragmentRegisterBinding binding;
@@ -67,6 +69,7 @@ public class RegisterFragment extends Fragment {
 
     private void callRegister() {
         viewModel.registerUser.observe(getViewLifecycleOwner(), register -> {
+            Timber.d(register.getMessage());
             switch (register.getStatus()) {
                 case SUCCESS:
                     Toast.makeText(requireContext(), "Registrasi berhasil!", Toast.LENGTH_SHORT)
