@@ -16,6 +16,7 @@ import com.rahmacom.rimesyarifix.data.model.Size;
 import com.rahmacom.rimesyarifix.data.model.Testimony;
 import com.rahmacom.rimesyarifix.data.model.User;
 import com.rahmacom.rimesyarifix.data.model.UserShipment;
+import com.rahmacom.rimesyarifix.data.model.Village;
 import com.rahmacom.rimesyarifix.data.network.api.RimeSyariAPI;
 import com.rahmacom.rimesyarifix.data.network.response.ResponseLogin;
 import com.rahmacom.rimesyarifix.data.vo.Resource;
@@ -624,14 +625,6 @@ public class MainRepository {
     }
 
     public LiveData<Resource<Cart>> updateCartWithDetails(String token, int cartId, String judul, String deskripsi, List<Integer> productIds, List<Integer> colorIds, List<Integer> sizeIds, List<Integer> quantities) {
-
-        Log.d("updateCartWithDetails", judul);
-        Log.d("updateCartWithDetails", deskripsi);
-        Log.d("updateCartWithDetails", "productIds: " + Arrays.toString(productIds.toArray()));
-        Log.d("updateCartWithDetails", "colorIds: " + Arrays.toString(colorIds.toArray()));
-        Log.d("updateCartWithDetails", "sizeIds: " + Arrays.toString(sizeIds.toArray()));
-        Log.d("updateCartWithDetails", "jumlah: " + Arrays.toString(quantities.toArray()));
-
         MutableLiveData<Resource<Cart>> data = new MutableLiveData<>();
         data.postValue(Resource.loading(null));
 
@@ -639,6 +632,7 @@ public class MainRepository {
         api.enqueue(new Callback<Cart>() {
             @Override
             public void onResponse(Call<Cart> call, Response<Cart> response) {
+                Timber.d(response.message());
                 switch (response.code()) {
                     case 200:
                     case 201:
@@ -1561,7 +1555,7 @@ public class MainRepository {
         return data;
     }
 
-    public LiveData<Resource<UserShipment>> newShipmentAddress(String token, String alamat, String kodePos, String catatan, boolean isDefault, int villageId) {
+    public LiveData<Resource<UserShipment>> newShipmentAddress(String token, String alamat, String kodePos, String catatan, boolean isDefault, long villageId) {
         MutableLiveData<Resource<UserShipment>> data = new MutableLiveData<>();
         data.postValue(Resource.loading(null));
 
@@ -1611,7 +1605,7 @@ public class MainRepository {
         return data;
     }
 
-    public LiveData<Resource<UserShipment>> updateShipmentAddress(String token, int shipmentId, String alamat, String kodePos, String catatan, boolean isDefault, int villageId) {
+    public LiveData<Resource<UserShipment>> updateShipmentAddress(String token, int shipmentId, String alamat, String kodePos, String catatan, boolean isDefault, long villageId) {
         MutableLiveData<Resource<UserShipment>> data = new MutableLiveData<>();
         data.postValue(Resource.loading(null));
 
@@ -1619,6 +1613,7 @@ public class MainRepository {
         api.enqueue(new Callback<UserShipment>() {
             @Override
             public void onResponse(Call<UserShipment> call, Response<UserShipment> response) {
+
                 switch (response.code()) {
                     case 200:
                     case 201:
@@ -1648,6 +1643,11 @@ public class MainRepository {
 
                     case 422:
                         data.postValue(Resource.unprocessableEntity(response.message(), null));
+                        try {
+                            Timber.d(response.errorBody().string());
+                        } catch (IOException e) {
+                            e.printStackTrace();
+                        }
                         break;
                 }
             }
@@ -1762,6 +1762,106 @@ public class MainRepository {
 
             @Override
             public void onFailure(Call<Post> call, Throwable t) {
+                data.postValue(Resource.error(t.getMessage(), null));
+            }
+        });
+
+        return data;
+    }
+
+    public LiveData<Resource<List<Village>>> getVillages(String token) {
+        MutableLiveData<Resource<List<Village>>> data = new MutableLiveData<>();
+        data.postValue(Resource.loading(null));
+
+        Call<List<Village>> api = rimeSyariAPI.getAllVillages(token);
+        api.enqueue(new Callback<List<Village>>() {
+            @Override
+            public void onResponse(Call<List<Village>> call, Response<List<Village>> response) {
+                switch (response.code()) {
+                    case 200:
+                    case 201:
+                        data.postValue(Resource.success(response.body()));
+                        break;
+
+                    case 204:
+                        data.postValue(Resource.empty(null));
+                        break;
+
+                    case 400:
+                        data.postValue(Resource.invalid(response.message()));
+                        break;
+
+                    case 401:
+                        data.postValue(Resource.unauthorized(response.message()));
+                        break;
+
+                    case 403:
+                        data.postValue(Resource.forbidden(response.message()));
+                        break;
+
+                    case 404:
+                    case 405:
+                        data.postValue(Resource.error(response.message(), null));
+                        break;
+
+                    case 422:
+                        data.postValue(Resource.unprocessableEntity(response.message(), null));
+                        break;
+                }
+            }
+
+            @Override
+            public void onFailure(Call<List<Village>> call, Throwable t) {
+                data.postValue(Resource.error(t.getMessage(), null));
+            }
+        });
+
+        return data;
+    }
+
+    public LiveData<Resource<List<Village>>> searchVillages(String token, String query) {
+        MutableLiveData<Resource<List<Village>>> data = new MutableLiveData<>();
+        data.postValue(Resource.loading(null));
+
+        Call<List<Village>> api = rimeSyariAPI.searchVillages(token, query);
+        api.enqueue(new Callback<List<Village>>() {
+            @Override
+            public void onResponse(Call<List<Village>> call, Response<List<Village>> response) {
+                switch (response.code()) {
+                    case 200:
+                    case 201:
+                        data.postValue(Resource.success(response.body()));
+                        break;
+
+                    case 204:
+                        data.postValue(Resource.empty(null));
+                        break;
+
+                    case 400:
+                        data.postValue(Resource.invalid(response.message()));
+                        break;
+
+                    case 401:
+                        data.postValue(Resource.unauthorized(response.message()));
+                        break;
+
+                    case 403:
+                        data.postValue(Resource.forbidden(response.message()));
+                        break;
+
+                    case 404:
+                    case 405:
+                        data.postValue(Resource.error(response.message(), null));
+                        break;
+
+                    case 422:
+                        data.postValue(Resource.unprocessableEntity(response.message(), null));
+                        break;
+                }
+            }
+
+            @Override
+            public void onFailure(Call<List<Village>> call, Throwable t) {
                 data.postValue(Resource.error(t.getMessage(), null));
             }
         });

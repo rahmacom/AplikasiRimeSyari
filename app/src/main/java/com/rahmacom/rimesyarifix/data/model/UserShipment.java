@@ -22,6 +22,9 @@ public class UserShipment {
     @SerializedName("village_id")
     private long villageId;
 
+    @SerializedName("desa_kel")
+    private String desaKel;
+
     @SerializedName("village")
     private Village village;
 
@@ -71,5 +74,13 @@ public class UserShipment {
 
     public Village getVillage() {
         return village;
+    }
+
+    public String getDesaKel() {
+        return desaKel;
+    }
+
+    public void setDesaKel(String desaKel) {
+        this.desaKel = desaKel;
     }
 }

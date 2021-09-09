@@ -7,7 +7,10 @@ import androidx.lifecycle.ViewModel;
 
 import com.rahmacom.rimesyarifix.data.MainRepository;
 import com.rahmacom.rimesyarifix.data.model.UserShipment;
+import com.rahmacom.rimesyarifix.data.model.Village;
 import com.rahmacom.rimesyarifix.data.vo.Resource;
+
+import java.util.List;
 
 import javax.inject.Inject;
 
@@ -30,7 +33,13 @@ public class FormProfilBiodataAlamatViewModel extends ViewModel {
         liveToken.setValue(token);
     }
 
-    public void setLiveAlamat(int id, String address, String kodePos, String catatan, boolean isDefault, int villageId) {
+    public void setLiveAlamat(int id) {
+        Alamat alamat = new Alamat();
+        alamat.id = id;
+        liveAlamat.setValue(alamat);
+    }
+
+    public void setLiveAlamat(int id, String address, String kodePos, String catatan, boolean isDefault, long villageId) {
         Alamat alamat = new Alamat();
         alamat.id = id;
         alamat.alamat = address;
@@ -42,11 +51,24 @@ public class FormProfilBiodataAlamatViewModel extends ViewModel {
         liveAlamat.setValue(alamat);
     }
 
+    public void setLiveVillage(String query) {
+        liveVillage.setValue(query);
+    }
+
     public final LiveData<Resource<UserShipment>> newShipmentAddress = Transformations.switchMap(liveAlamat, alamat ->
             mainRepository.newShipmentAddress(liveToken.getValue(), alamat.alamat, alamat.kodePos, alamat.catatan, alamat.isDefault, alamat.villageId));
 
+    public final LiveData<Resource<UserShipment>> viewShipmentAddress = Transformations.switchMap(liveAlamat, alamat ->
+            mainRepository.viewShipmentAddress(liveToken.getValue(), alamat.id));
+
     public final LiveData<Resource<UserShipment>> updateShipmentAddress = Transformations.switchMap(liveAlamat, alamat ->
             mainRepository.updateShipmentAddress(liveToken.getValue(), alamat.id, alamat.alamat, alamat.kodePos, alamat.catatan, alamat.isDefault, alamat.villageId));
+
+    public final LiveData<Resource<List<Village>>> getVillages = Transformations.switchMap(liveToken, token ->
+            mainRepository.getVillages(token));
+
+    public final LiveData<Resource<List<Village>>> searchVillages = Transformations.switchMap(liveVillage, village ->
+            mainRepository.searchVillages(liveToken.getValue(), village));
 
     static class Alamat {
         int id;
@@ -54,6 +76,6 @@ public class FormProfilBiodataAlamatViewModel extends ViewModel {
         String kodePos;
         String catatan;
         boolean isDefault;
-        int villageId;
+        long villageId;
     }
 }

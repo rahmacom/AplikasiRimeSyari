@@ -205,7 +205,7 @@ public interface RimeSyariAPI {
                                           @Field("kode_pos") String kodePos,
                                           @Field("catatan") String catatan,
                                           @Field("is_default") boolean isDefault,
-                                          @Field("village_id") int villageId);
+                                          @Field("village_id") long villageId);
 
     @PATCH("user_shipments/{user_shipment}")
     @FormUrlEncoded
@@ -216,23 +216,31 @@ public interface RimeSyariAPI {
                                              @Field("kode_pos") String kodePos,
                                              @Field("catatan") String catatan,
                                              @Field("is_default") boolean isDefault,
-                                             @Field("village_id") int villageId);
+                                             @Field("village_id") long villageId);
 
     @GET("shipments/provinces")
     @Headers({"Accept: application/json"})
-    Call<List<Province>> getAllProvinces(@Header("Authorization") String token, @Query("id") int id, @Query("regency_id") int regencyId, @Query("district_id") int districtId, @Query("village_id") int villageId);
+    Call<List<Province>> getAllProvinces(@Header("Authorization") String token, @Query("q") String query, @Query("id") int id, @Query("regency_id") int regencyId, @Query("district_id") int districtId, @Query("village_id") int villageId);
 
     @GET("shipments/regencies")
     @Headers({"Accept: application/json"})
-    Call<List<Regency>> getAllRegencies(@Header("Authorization") String token, @Query("id") int id, @Query("province_id") int provinceId, @Query("district_id") int districtId, @Query("village_id") int villageId);
+    Call<List<Regency>> getAllRegencies(@Header("Authorization") String token, @Query("q") String query, @Query("id") int id, @Query("province_id") int provinceId, @Query("district_id") int districtId, @Query("village_id") int villageId);
 
     @GET("shipments/districts")
     @Headers({"Accept: application/json"})
-    Call<List<District>> getAllDistricts(@Header("Authorization") String token, @Query("id") int id, @Query("province_id") int provinceId, @Query("regency_id") int regencyId, @Query("village_id") int villageId);
+    Call<List<District>> getAllDistricts(@Header("Authorization") String token, @Query("q") String query, @Query("id") int id, @Query("province_id") int provinceId, @Query("regency_id") int regencyId, @Query("village_id") int villageId);
 
-    @GET("shipments/districts")
+    @GET("shipments/villages")
     @Headers({"Accept: application/json"})
-    Call<List<Village>> getAllVillages(@Header("Authorization") String token, @Query("id") int id, @Query("province_id") int provinceId, @Query("regency_id") int regencyId, @Query("district_id") int districtId);
+    Call<List<Village>> getAllVillages(@Header("Authorization") String token);
+
+    @GET("shipments/villages")
+    @Headers({"Accept: application/json"})
+    Call<List<Village>> getVillages(@Header("Authorization") String token, @Query("id") int id, @Query("province_id") int provinceId, @Query("regency_id") int regencyId, @Query("district_id") int districtId);
+
+    @GET("shipments/villages")
+    @Headers({"Accept: application/json"})
+    Call<List<Village>> searchVillages(@Header("Authorization") String token, @Query("q") String query);
 
     @GET("colors")
     @Headers({"Accept: application/json"})

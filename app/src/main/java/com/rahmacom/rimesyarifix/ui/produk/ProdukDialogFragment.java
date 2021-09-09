@@ -24,6 +24,8 @@ import com.rahmacom.rimesyarifix.utils.Const;
 
 import java.util.ArrayList;
 
+import timber.log.Timber;
+
 public class ProdukDialogFragment extends BottomSheetDialogFragment {
 
     private DialogFragmentProdukBinding binding;
@@ -104,6 +106,8 @@ public class ProdukDialogFragment extends BottomSheetDialogFragment {
     private void updateCart(int cartId, int productId, int colorId, int sizeId, int jumlah) {
         viewModel.setLiveKeranjang(cartId, productId, colorId, sizeId, jumlah);
         viewModel.addProductToCart.observe(getViewLifecycleOwner(), cart -> {
+            Timber.d(cart.getStatus().toString());
+            Timber.d(cart.getMessage());
             switch (cart.getStatus()) {
                 case SUCCESS:
                     action.setViewState(KeranjangDetailFragment.IS_SHOWING);
@@ -113,23 +117,11 @@ public class ProdukDialogFragment extends BottomSheetDialogFragment {
                     break;
 
                 case EMPTY:
-                    break;
-
                 case ERROR:
-                    break;
-
                 case INVALID:
-                    break;
-
                 case LOADING:
-                    break;
-
                 case UNAUTHORIZED:
-                    break;
-
                 case FORBIDDEN:
-                    break;
-
                 case UNPROCESSABLE_ENTITY:
                     break;
             }

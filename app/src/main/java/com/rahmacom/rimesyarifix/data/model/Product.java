@@ -30,6 +30,9 @@ public class Product {
     @SerializedName("liked")
     private boolean liked;
 
+    @SerializedName("likes_count")
+    private int likesCount;
+
     @SerializedName("review_avg")
     private double reviewAvg;
 
@@ -119,6 +122,14 @@ public class Product {
 
     public void setLiked(boolean liked) {
         this.liked = liked;
+    }
+
+    public int getLikesCount() {
+        return likesCount;
+    }
+
+    public void setLikesCount(int likesCount) {
+        this.likesCount = likesCount;
     }
 
     public double getReviewAvg() {

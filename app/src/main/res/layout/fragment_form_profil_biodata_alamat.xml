@@ -8,9 +8,12 @@
 
     <com.google.android.material.appbar.MaterialToolbar
         android:id="@+id/toolbar_form_profil_biodata_alamat"
-        android:layout_width="0dp"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginBottom="@dimen/layout_padding"
+        android:minHeight="?attr/actionBarSize"
+        android:background="@color/white"
+        app:layout_anchorGravity="center"
         android:theme="@style/ThemeOverlay.RimeSyariFix.ToolBar"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -28,7 +31,7 @@
         app:layout_constraintTop_toBottomOf="@+id/toolbar_form_profil_biodata_alamat" />
 
     <EditText
-        android:id="@+id/tv_form_profil_biodata_alamat"
+        android:id="@+id/et_form_profil_biodata_alamat_edit"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
@@ -51,10 +54,10 @@
         android:text="Kode Pos"
         android:textColor="@color/gray_600"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tv_form_profil_biodata_alamat" />
+        app:layout_constraintTop_toBottomOf="@+id/et_form_profil_biodata_alamat_edit" />
 
-    <AutoCompleteTextView
-        android:id="@+id/tv_form_profil_biodata_alamat_kode_pos"
+    <EditText
+        android:id="@+id/et_form_profil_biodata_alamat_kode_pos_edit"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
@@ -76,7 +79,7 @@
         android:text="Desa/Kelurahan"
         android:textColor="@color/gray_600"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tv_form_profil_biodata_alamat_kode_pos" />
+        app:layout_constraintTop_toBottomOf="@+id/et_form_profil_biodata_alamat_kode_pos_edit" />
 
     <Button
         android:id="@+id/btn_form_profil_biodata_alamat_simpan"
@@ -95,13 +98,14 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
         android:text="Catatan"
         android:textColor="@color/gray_600"
         app:layout_constraintStart_toStartOf="parent"
-        tools:layout_editor_absoluteY="358dp" />
+        app:layout_constraintTop_toBottomOf="@+id/autoet_form_profil_biodata_alamat_desa_kelurahan" />
 
     <EditText
-        android:id="@+id/tv_form_profil_biodata_alamat_catatan_text"
+        android:id="@+id/et_form_profil_biodata_alamat_catatan_edit"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:minHeight="48dp"
@@ -126,10 +130,10 @@
         android:textColor="@color/gray_800"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tv_form_profil_biodata_alamat_catatan_text" />
+        app:layout_constraintTop_toBottomOf="@+id/et_form_profil_biodata_alamat_catatan_edit" />
 
     <AutoCompleteTextView
-        android:id="@+id/et_form_profil_biodata_alamat_desa_kelurahan"
+        android:id="@+id/autoet_form_profil_biodata_alamat_desa_kelurahan"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"

@@ -8,6 +8,11 @@
         <item>Logout</item>
     </string-array>
 
+    <string-array name="jenis_kelamin">
+        <item>Laki-laki</item>
+        <item>Perempuan</item>
+    </string-array>
+
     <integer-array name="list_profil_menu_action">
         <item>@id/nav_profil_to_profilBiodataFragment</item>
         <item>@id/nav_profil_to_resellerInfoFragment</item>

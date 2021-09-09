@@ -119,7 +119,7 @@ public class ProdukFragment extends Fragment {
         binding.tvProdukNama.setText(product.getNama());
         binding.tvProdukDeskripsi.setText(HtmlCompat.fromHtml(product.getDeskripsi(), HtmlCompat.FROM_HTML_MODE_COMPACT));
         binding.tvProdukHarga.setText(Helper.convertToRP(product.getHarga()));
-        binding.tvProdukSukaText.setText(String.valueOf(product.getSuka()));
+        binding.tvProdukSukaText.setText(String.valueOf(product.getLikesCount()));
         binding.tvProdukRatingText.setText(product.getReviewAvg() + " / 5 (" + product.getReviewCount() + " review)");
 
         binding.tvProdukRatingText.setOnClickListener(v -> {
@@ -128,8 +128,13 @@ public class ProdukFragment extends Fragment {
             navController.navigate(action);
         });
 
-        binding.ivProdukSuka.setOnClickListener(v -> likeProduct(product.isLiked()));
+        binding.ivProdukSuka.setOnClickListener(v -> {
+            likeProduct(product.isLiked());
+            product.setLiked(!product.isLiked());
+        });
 
+        binding.chipgroupProdukUkuran.removeAllViews();
+        binding.chipgroupProdukWarna.removeAllViews();
         createChips();
     }
 
