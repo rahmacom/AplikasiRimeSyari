@@ -64,7 +64,7 @@ public interface RimeSyariAPI {
     @FormUrlEncoded
     @Headers({"Accept: application/json"})
 //    Call<User> updateProfile(@Header("Authorization") String token, @Field("nama_lengkap") String name, @Field("jenis_kelamin") String jenisKelamin, @Field("tempat_lahir") String tempatLahir, @Field("tgl_lahir") String tglLahir, @Field("alamat") String alamat, @Field("no_hp") String noHP, @Field("no_wa") String noWA);
-    Call<User> updateProfile(@Header("Authorization") String token, @Field("nama_lengkap") String name, @Field("tempat_lahir") String tempatLahir, @Field("tgl_lahir") String tglLahir, @Field("alamat") String alamat, @Field("no_hp") String noHP, @Field("no_wa") String noWA);
+    Call<User> updateProfile(@Header("Authorization") String token, @Field("nama_lengkap") String name, @Field("jk") char jk, @Field("tempat_lahir") String tempatLahir, @Field("tgl_lahir") String tglLahir, @Field("alamat") String alamat, @Field("no_hp") String noHP, @Field("no_wa") String noWA);
 
     @GET("products")
     @Headers({"Accept: application/json"})

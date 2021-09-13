@@ -365,6 +365,7 @@ public class MainRepository {
         Call<User> api = rimeSyariAPI.updateProfile(
                 token,
                 user.getNamaLengkap(),
+                user.getJk(),
                 user.getTempatLahir(),
                 user.getTglLahir(),
                 user.getAlamat(),
@@ -397,6 +398,12 @@ public class MainRepository {
                         break;
 
                     case 404:
+                    case 500:
+                        try {
+                            Timber.e(response.errorBody().string());
+                        } catch (IOException e) {
+                            e.printStackTrace();
+                        }
                         data.postValue(Resource.error(response.message(), null));
                         break;
 

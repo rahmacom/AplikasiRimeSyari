@@ -26,6 +26,7 @@ import com.rahmacom.rimesyarifix.manager.PreferenceManager;
 import com.rahmacom.rimesyarifix.utils.Const;
 
 import java.util.ArrayList;
+import java.util.Objects;
 
 import timber.log.Timber;
 
@@ -152,4 +153,6 @@ public class FormProfilBiodataAlamatFragment extends Fragment {
             }
         });
     }
+
+
 }

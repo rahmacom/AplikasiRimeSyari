@@ -68,6 +68,10 @@ public class ProfilBiodataAlamatFragment extends Fragment {
         AppBarConfiguration appBarConfiguration = new AppBarConfiguration.Builder(navController.getGraph()).build();
         NavigationUI.setupWithNavController(binding.toolbarProfilBiodataAlamat, navController, appBarConfiguration);
         binding.toolbarProfilBiodataAlamat.setTitle("Alamat yang disimpan");
+
+        if (state != IS_SELECTING) {
+            binding.toolbarProfilBiodataAlamat.inflateMenu(R.menu.menu_profil_biodata_alamat_toolbar);
+        }
     }
 
     private void setupRecyclerView(ArrayList<UserShipment> items) {
@@ -91,7 +95,7 @@ public class ProfilBiodataAlamatFragment extends Fragment {
         if (state != IS_SELECTING) {
             adapter.setOnLongItemClickListener((view, userShipment) -> {
                 PopupMenu menu = new PopupMenu(requireContext(), view);
-                menu.getMenuInflater().inflate(R.menu.menu_profil_alamat, menu.getMenu());
+                menu.getMenuInflater().inflate(R.menu.menu_profil_biodata_alamat_floating, menu.getMenu());
 
                 menu.setOnMenuItemClickListener(item -> {
                     switch (item.getItemId()) {

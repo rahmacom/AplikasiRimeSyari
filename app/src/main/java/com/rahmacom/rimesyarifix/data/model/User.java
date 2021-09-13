@@ -14,6 +14,9 @@ public class User {
     @SerializedName("jenis_kelamin")
     private String jenisKelamin;
 
+    @SerializedName("jk")
+    private char jk;
+
     @SerializedName("alamat")
     private String alamat;
 
@@ -63,6 +66,14 @@ public class User {
 
     public void setJenisKelamin(String jenisKelamin) {
         this.jenisKelamin = jenisKelamin;
+    }
+
+    public char getJk() {
+        return jk;
+    }
+
+    public void setJk(char jk) {
+        this.jk = jk;
     }
 
     public String getAlamat() {

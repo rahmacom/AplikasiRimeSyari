@@ -25,16 +25,17 @@ public class FormProfilBiodataViewModel extends ViewModel {
         this.mainRepository = mainRepository;
     }
 
-    public final LiveData<Resource<User>> updateProfile = Transformations.switchMap(liveToken, token ->
-            mainRepository.updateProfile(token, liveUser.getValue()));
+    public final LiveData<Resource<User>> updateProfile = Transformations.switchMap(liveUser, user ->
+            mainRepository.updateProfile(liveToken.getValue(), user));
 
     public void setLiveToken(String token) {
         liveToken.setValue(token);
     }
 
-    public void setLiveUser(String namaLengkap, String tempatLahir, String tglLahir, String noHP, String noWA, String alamat) {
+    public void setLiveUser(String namaLengkap, Character jk,  String tempatLahir, String tglLahir, String noHP, String noWA, String alamat) {
         User user = new User();
         user.setNamaLengkap(namaLengkap);
+        user.setJk(jk);
         user.setTempatLahir(tempatLahir);
         user.setTglLahir(tglLahir);
         user.setNoHp(noHP);
