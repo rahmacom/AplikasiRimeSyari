@@ -119,7 +119,6 @@ public class ProfilFragment extends Fragment {
             if (logout.getStatus() == Status.SUCCESS) {
                 manager.removePreference(Const.KEY_TOKEN);
                 manager.removePreference(Const.KEY_TYPE);
-                manager.removePreference(Const.KEY_TTL);
                 manager.removePreference(Const.KEY_NIK);
                 manager.removePreference(Const.KEY_NAMA_LENGKAP);
                 manager.removePreference(Const.KEY_JENIS_KELAMIN);

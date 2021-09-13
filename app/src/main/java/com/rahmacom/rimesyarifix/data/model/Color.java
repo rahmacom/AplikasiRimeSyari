@@ -13,15 +13,27 @@ public class Color {
     @SerializedName("rgba_color")
     private String rgbaColor;
 
-    public int getId() {
-        return id;
-    }
+	public int getId() {
+		return id;
+	}
 
-    public String getName() {
-        return name;
-    }
+	public void setId(int id) {
+		this.id = id;
+	}
 
-    public String getRgbaColor() {
-        return rgbaColor;
-    }
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	public String getRgbaColor() {
+		return rgbaColor;
+	}
+
+	public void setRgbaColor(String rgbaColor) {
+		this.rgbaColor = rgbaColor;
+	}
 }

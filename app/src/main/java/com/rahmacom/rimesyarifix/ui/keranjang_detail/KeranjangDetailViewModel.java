@@ -1,7 +1,5 @@
 package com.rahmacom.rimesyarifix.ui.keranjang_detail;
 
-import android.util.Log;
-
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.Transformations;
@@ -12,7 +10,6 @@ import com.rahmacom.rimesyarifix.data.model.Cart;
 import com.rahmacom.rimesyarifix.data.model.Product;
 import com.rahmacom.rimesyarifix.data.vo.Resource;
 
-import java.util.Arrays;
 import java.util.List;
 
 import javax.inject.Inject;

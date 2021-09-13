@@ -69,9 +69,6 @@ public class LoginFragment extends Fragment {
                                 .getAccessToken());
                         manager.setString(Const.KEY_TYPE, login.getData()
                                 .getTokenType());
-                        manager.setInt(Const.KEY_TTL, login.getData()
-                                .getExpiresIn());
-                        manager.setInt(Const.KEY_DATE_STORED, login.getData().getExpiresUntil());
 
                         navController.navigate(LoginFragmentDirections.loginFragmentToNavHome());
                         break;

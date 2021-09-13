@@ -64,6 +64,7 @@ public class KeranjangListAdapter extends RecyclerView.Adapter<KeranjangListAdap
             binding.tvItemKeranjangJudul.setText(cart.getJudul());
             binding.tvItemKeranjangJumlah.setText(String.format("%d item", cart.getJumlah()));
             binding.tvItemKeranjangTotal.setText(Helper.convertToRP(cart.getTotal()));
+            binding.tvItemKeranjangTanggal.setText(Helper.toDate(cart.getLastUpdated()));
         }
     }
 }

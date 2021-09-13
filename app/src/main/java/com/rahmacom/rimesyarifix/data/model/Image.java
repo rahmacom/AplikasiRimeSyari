@@ -17,7 +17,7 @@ public class Image {
     private String format;
 
     @SerializedName("size")
-    private String size;
+    private int size;
 
     @SerializedName("path")
     private String path;
@@ -25,59 +25,59 @@ public class Image {
     @SerializedName("url")
     private String url;
 
-    public int getId() {
-        return id;
-    }
+	public int getId() {
+		return id;
+	}
 
-    public void setId(int id) {
-        this.id = id;
-    }
+	public void setId(int id) {
+		this.id = id;
+	}
 
-    public String getName() {
-        return name;
-    }
+	public String getName() {
+		return name;
+	}
 
-    public void setName(String name) {
-        this.name = name;
-    }
+	public void setName(String name) {
+		this.name = name;
+	}
 
-    public String getMimeType() {
-        return mimeType;
-    }
+	public String getMimeType() {
+		return mimeType;
+	}
 
-    public void setMimeType(String mimeType) {
-        this.mimeType = mimeType;
-    }
+	public void setMimeType(String mimeType) {
+		this.mimeType = mimeType;
+	}
 
-    public String getFormat() {
-        return format;
-    }
+	public String getFormat() {
+		return format;
+	}
 
-    public void setFormat(String format) {
-        this.format = format;
-    }
+	public void setFormat(String format) {
+		this.format = format;
+	}
 
-    public String getSize() {
-        return size;
-    }
+	public int getSize() {
+		return size;
+	}
 
-    public void setSize(String size) {
-        this.size = size;
-    }
+	public void setSize(int size) {
+		this.size = size;
+	}
 
-    public String getPath() {
-        return path;
-    }
+	public String getPath() {
+		return path;
+	}
 
-    public void setPath(String path) {
-        this.path = path;
-    }
+	public void setPath(String path) {
+		this.path = path;
+	}
 
-    public String getUrl() {
-        return url;
-    }
+	public String getUrl() {
+		return url;
+	}
 
-    public void setUrl(String url) {
-        this.url = url;
-    }
+	public void setUrl(String url) {
+		this.url = url;
+	}
 }

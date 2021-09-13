@@ -2,82 +2,71 @@ package com.rahmacom.rimesyarifix.data.model;
 
 import com.google.gson.annotations.SerializedName;
 
-public class Pivot {
+public class Pivot{
 
-    @SerializedName("color_id")
-    private int colorId;
+	@SerializedName("color_id")
+	private int colorId;
 
-    @SerializedName("size_id")
-    private int sizeId;
+	@SerializedName("size")
+	private Size size;
 
-    @SerializedName("jumlah")
-    private int jumlah;
+	@SerializedName("jumlah")
+	private int jumlah;
 
-    @SerializedName("sub_total")
-    private int subTotal;
+	@SerializedName("color")
+	private Color color;
 
-    @SerializedName("diskon")
-    private int diskon;
+	@SerializedName("sub_total")
+	private int subTotal;
 
-    @SerializedName("color")
-    private Color color;
+	@SerializedName("size_id")
+	private int sizeId;
 
-    @SerializedName("size")
-    private Size size;
+	public int getColorId() {
+		return colorId;
+	}
 
-    public int getColorId() {
-        return colorId;
-    }
+	public void setColorId(int colorId) {
+		this.colorId = colorId;
+	}
 
-    public void setColorId(int colorId) {
-        this.colorId = colorId;
-    }
+	public Size getSize() {
+		return size;
+	}
 
-    public int getSizeId() {
-        return sizeId;
-    }
+	public void setSize(Size size) {
+		this.size = size;
+	}
 
-    public void setSizeId(int sizeId) {
-        this.sizeId = sizeId;
-    }
+	public int getJumlah() {
+		return jumlah;
+	}
 
-    public int getJumlah() {
-        return jumlah;
-    }
+	public void setJumlah(int jumlah) {
+		this.jumlah = jumlah;
+	}
 
-    public void setJumlah(int jumlah) {
-        this.jumlah = jumlah;
-    }
+	public Color getColor() {
+		return color;
+	}
 
-    public int getSubTotal() {
-        return subTotal;
-    }
+	public void setColor(Color color) {
+		this.color = color;
+	}
 
-    public void setSubTotal(int subTotal) {
-        this.subTotal = subTotal;
-    }
+	public int getSubTotal() {
+		return subTotal;
+	}
 
-    public int getDiskon() {
-        return diskon;
-    }
+	public void setSubTotal(int subTotal) {
+		this.subTotal = subTotal;
+	}
 
-    public void setDiskon(int diskon) {
-        this.diskon = diskon;
-    }
+	public int getSizeId() {
+		return sizeId;
+	}
 
-    public Color getColor() {
-        return color;
-    }
-
-    public void setColor(Color color) {
-        this.color = color;
-    }
-
-    public Size getSize() {
-        return size;
-    }
-
-    public void setSize(Size size) {
-        this.size = size;
-    }
+	public void setSizeId(int sizeId) {
+		this.sizeId = sizeId;
+	}
 }

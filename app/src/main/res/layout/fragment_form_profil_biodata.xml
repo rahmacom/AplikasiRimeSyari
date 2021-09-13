@@ -16,159 +16,191 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/tl_form_form_profil_biodata_edit_profil_nama_lengkap"
-        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="16dp"
-        android:layout_marginEnd="16dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/toolbar_fragment_form_profil_biodata">
-
-        <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/et_form_profil_biodata_nama_lengkap"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:hint="Nama Lengkap" />
-
-    </com.google.android.material.textfield.TextInputLayout>
-
-    <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/tl_form_form_profil_biodata_edit_profil_tempat_lahir"
-        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="16dp"
-        android:layout_marginEnd="16dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tl_form_profil_biodata_jenis_kelamin">
-
-        <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/et_form_profil_biodata_tempat_lahir"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:hint="Tempat Lahir" />
-
-    </com.google.android.material.textfield.TextInputLayout>
-
-    <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/tl_form_form_profil_biodata_edit_profil_tgl_lahir"
-        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="16dp"
-        android:layout_marginEnd="16dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tl_form_form_profil_biodata_edit_profil_tempat_lahir">
-
-        <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/et_form_profil_biodata_tgl_lahir"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:hint="Tanggal Lahir" />
-
-    </com.google.android.material.textfield.TextInputLayout>
-
-    <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/tl_form_form_profil_biodata_edit_profil_no_hp"
-        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="16dp"
-        android:layout_marginEnd="16dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tl_form_form_profil_biodata_edit_profil_tgl_lahir">
-
-        <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/et_form_profil_biodata_no_hp"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:hint="Nomor Handphone" />
-
-    </com.google.android.material.textfield.TextInputLayout>
-
-    <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/tl_form_profil_biodata_edit_profil_no_wa"
-        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="16dp"
-        android:layout_marginEnd="16dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tl_form_form_profil_biodata_edit_profil_no_hp">
-
-        <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/et_form_profil_biodata_no_wa"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:hint="Nomor WhatsApp" />
-
-    </com.google.android.material.textfield.TextInputLayout>
-
-    <Button
-        android:id="@+id/btn_form_profil_biodata_selesai"
+    <TextView
+        android:id="@+id/tv_form_profil_biodata_nama_lengkap_title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="32dp"
-        android:text="Selesai"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        android:layout_marginTop="16dp"
+        android:text="Nama Lengkap"
+        android:textColor="@color/gray_600"
+        android:textSize="12sp"
+        app:layout_constraintStart_toStartOf="@+id/et_form_profil_biodata_nik"
+        app:layout_constraintTop_toBottomOf="@+id/et_form_profil_biodata_nik" />
 
-    <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/tl_form_profil_edit_biodata_alamat"
-        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+    <EditText
+        android:id="@+id/et_form_profil_biodata_nama_lengkap"
         android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="16dp"
+        android:ems="10"
+        android:inputType="textPersonName"
+        android:text="Name"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/tv_form_profil_biodata_nama_lengkap_title"
+        app:layout_constraintTop_toBottomOf="@+id/tv_form_profil_biodata_nama_lengkap_title" />
+
+    <TextView
+        android:id="@+id/tv_form_profil_biodata_jenis_kelamin_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:text="Jenis Kelamin"
+        android:textColor="@color/gray_600"
+        android:textSize="12sp"
+        app:layout_constraintStart_toStartOf="@+id/et_form_profil_biodata_nama_lengkap"
+        app:layout_constraintTop_toBottomOf="@+id/et_form_profil_biodata_nama_lengkap" />
+
+    <Spinner
+        android:id="@+id/spinner_form_profil_biodata_jenis_kelamin"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="16dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/tv_form_profil_biodata_jenis_kelamin_title"
+        app:layout_constraintTop_toBottomOf="@+id/tv_form_profil_biodata_jenis_kelamin_title" />
+
+    <TextView
+        android:id="@+id/tv_form_profil_biodata_tempat_lahir_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:text="Tempat Lahir"
+        android:textColor="@color/gray_600"
+        android:textSize="12sp"
+        app:layout_constraintStart_toStartOf="@+id/spinner_form_profil_biodata_jenis_kelamin"
+        app:layout_constraintTop_toBottomOf="@+id/spinner_form_profil_biodata_jenis_kelamin" />
+
+    <EditText
+        android:id="@+id/et_form_profil_biodata_tempat_lahir"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="16dp"
+        android:ems="10"
+        android:inputType="textPersonName"
+        android:text="Name"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/tv_form_profil_biodata_tempat_lahir_title"
+        app:layout_constraintTop_toBottomOf="@+id/tv_form_profil_biodata_tempat_lahir_title" />
+
+    <TextView
+        android:id="@+id/tv_form_profil_biodata_tgl_lahir_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:text="Tanggal Lahir"
+        android:textColor="@color/gray_600"
+        android:textSize="12sp"
+        app:layout_constraintStart_toStartOf="@+id/et_form_profil_biodata_tempat_lahir"
+        app:layout_constraintTop_toBottomOf="@+id/et_form_profil_biodata_tempat_lahir" />
+
+    <EditText
+        android:id="@+id/et_form_profil_biodata_tgl_lahir"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="16dp"
+        android:ems="10"
+        android:inputType="date"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/tv_form_profil_biodata_tgl_lahir_title"
+        app:layout_constraintTop_toBottomOf="@+id/tv_form_profil_biodata_tgl_lahir_title" />
+
+    <TextView
+        android:id="@+id/tv_form_profil_biodata_alamat_user_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:text="Alamat"
+        android:textColor="@color/gray_600"
+        android:textSize="12sp"
+        app:layout_constraintStart_toStartOf="@+id/et_form_profil_biodata_tgl_lahir"
+        app:layout_constraintTop_toBottomOf="@+id/et_form_profil_biodata_tgl_lahir" />
+
+    <EditText
+        android:id="@+id/et_form_profil_biodata_alamat_user"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="16dp"
+        android:ems="10"
+        android:gravity="start|top"
+        android:inputType="textMultiLine"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/tv_form_profil_biodata_alamat_user_title"
+        app:layout_constraintTop_toBottomOf="@+id/tv_form_profil_biodata_alamat_user_title" />
+
+    <TextView
+        android:id="@+id/tv_form_profil_biodata_no_telp_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:text="No. Telpon"
+        android:textColor="@color/gray_600"
+        android:textSize="12sp"
+        app:layout_constraintStart_toStartOf="@+id/et_form_profil_biodata_alamat_user"
+        app:layout_constraintTop_toBottomOf="@+id/et_form_profil_biodata_alamat_user" />
+
+    <EditText
+        android:id="@+id/et_form_profil_biodata_no_telp"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="16dp"
+        android:ems="10"
+        android:inputType="phone"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/tv_form_profil_biodata_no_telp_title"
+        app:layout_constraintTop_toBottomOf="@+id/tv_form_profil_biodata_no_telp_title" />
+
+    <TextView
+        android:id="@+id/tv_form_profil_biodata_whatsapp_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:text="Whatsapp"
+        android:textColor="@color/gray_600"
+        android:textSize="12sp"
+        app:layout_constraintStart_toStartOf="@+id/et_form_profil_biodata_no_telp"
+        app:layout_constraintTop_toBottomOf="@+id/et_form_profil_biodata_no_telp" />
+
+    <EditText
+        android:id="@+id/et_form_profil_biodata_whatsapp"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="16dp"
+        android:ems="10"
+        android:inputType="phone"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/tv_form_profil_biodata_whatsapp_title"
+        app:layout_constraintTop_toBottomOf="@+id/tv_form_profil_biodata_whatsapp_title" />
+
+    <TextView
+        android:id="@+id/tv_form_profil_biodata_nik_title"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
         android:layout_marginTop="16dp"
-        android:layout_marginEnd="16dp"
-        app:boxBackgroundMode="outline"
-        app:layout_constraintEnd_toEndOf="parent"
+        android:text="NIK"
+        android:textColor="@color/gray_600"
+        android:textSize="12sp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tl_form_profil_biodata_edit_profil_no_wa">
+        app:layout_constraintTop_toBottomOf="@+id/toolbar_fragment_form_profil_biodata" />
 
-        <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/et_form_profil_biodata_alamat"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="Alamat" />
-    </com.google.android.material.textfield.TextInputLayout>
-
-    <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/tl_form_profil_biodata_jenis_kelamin"
-        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+    <EditText
+        android:id="@+id/et_form_profil_biodata_nik"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="8dp"
         android:layout_marginEnd="16dp"
-        app:boxBackgroundMode="outline"
+        android:ems="10"
+        android:inputType="textPersonName"
+        android:text="Name"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tl_form_form_profil_biodata_edit_profil_nama_lengkap">
-
-        <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/et_form_profil_biodata_jenis_kelamin"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="Jenis Kelamin" />
-    </com.google.android.material.textfield.TextInputLayout>
+        app:layout_constraintStart_toStartOf="@+id/tv_form_profil_biodata_nik_title"
+        app:layout_constraintTop_toBottomOf="@+id/tv_form_profil_biodata_nik_title" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

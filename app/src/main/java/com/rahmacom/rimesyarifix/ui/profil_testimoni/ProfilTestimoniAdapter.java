@@ -6,6 +6,7 @@ import android.view.ViewGroup;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.bumptech.glide.Glide;
 import com.rahmacom.rimesyarifix.data.model.Testimony;
 import com.rahmacom.rimesyarifix.databinding.ItemProfilTestimoniListBinding;
 
@@ -60,7 +61,18 @@ public class ProfilTestimoniAdapter extends RecyclerView.Adapter<ProfilTestimoni
         }
 
         void bind(Testimony testimony) {
+            String nama = testimony.getUser().getNamaLengkap();
+            if (nama == null) {
+                nama = testimony.getUser().getEmail();
+            }
 
+            binding.tvProfilTestimoniNama.setText(nama);
+            binding.tvProfilTestimoniIsi.setText(testimony.getIsi());
+            binding.tvProfilTestimoniRating.setText(testimony.getReview());
+
+            Glide.with(binding.getRoot())
+                    .load(testimony.getUser().getAvatar())
+                    .into(binding.ivProfilTestimoniAvatar);
         }
     }
 }

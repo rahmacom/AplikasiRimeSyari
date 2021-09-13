@@ -77,10 +77,6 @@ public class RegisterFragment extends Fragment {
                     manager.setString(Const.KEY_TOKEN, register.getData()
                             .getTokenType() + " " + register.getData()
                             .getAccessToken());
-                    manager.setInt(Const.KEY_TTL, register.getData()
-                            .getExpiresIn());
-                    manager.setString(Const.KEY_TYPE, register.getData()
-                            .getTokenType());
 
                     navController.navigate(RegisterFragmentDirections.registerFragmentToNavHome());
                     break;

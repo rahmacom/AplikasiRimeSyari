@@ -6,7 +6,6 @@ import android.content.SharedPreferences;
 
 public class PreferenceManager {
 
-    public static final int PRIVATE_MODE = 0;
     private static final String PREFERENCE_NAME = "preference_manager";
     private static final String IS_FIRST_TIME_LAUNCH = "is_first_time_launch";
     private final SharedPreferences preferences;
@@ -16,7 +15,7 @@ public class PreferenceManager {
     @SuppressLint("CommitPrefEdits")
     public PreferenceManager(Context context) {
         this.context = context;
-        preferences = context.getSharedPreferences(PREFERENCE_NAME, PRIVATE_MODE);
+        preferences = context.getSharedPreferences(PREFERENCE_NAME, Context.MODE_PRIVATE);
         editor = preferences.edit();
     }
 

@@ -57,20 +57,18 @@ public class FormProfilBiodataFragment extends Fragment {
         binding.etFormProfilBiodataNamaLengkap.setText(nama);
         binding.etFormProfilBiodataTempatLahir.setText(tempatLahir);
         binding.etFormProfilBiodataTglLahir.setText(tglLahir);
-        binding.etFormProfilBiodataNoHp.setText(noHp);
-        binding.etFormProfilBiodataNoWa.setText(noWa);
-        binding.etFormProfilBiodataAlamat.setText(alamat);
-
-        binding.btnFormProfilBiodataSelesai.setOnClickListener(v -> updateProfile());
+        binding.etFormProfilBiodataNoTelp.setText(noHp);
+        binding.etFormProfilBiodataWhatsapp.setText(noWa);
+        binding.etFormProfilBiodataAlamatUser.setText(alamat);
     }
 
     private void updateProfile() {
         String nama = binding.etFormProfilBiodataNamaLengkap.getText().toString();
         String tempatLahir = binding.etFormProfilBiodataTempatLahir.getText().toString();
         String tglLahir = binding.etFormProfilBiodataTglLahir.getText().toString();
-        String alamat = binding.etFormProfilBiodataAlamat.getText().toString();
-        String noHp = binding.etFormProfilBiodataNoHp.getText().toString();
-        String noWa = binding.etFormProfilBiodataNoWa.getText().toString();
+        String alamat = binding.etFormProfilBiodataAlamatUser.getText().toString();
+        String noHp = binding.etFormProfilBiodataNoTelp.getText().toString();
+        String noWa = binding.etFormProfilBiodataWhatsapp.getText().toString();
 
         viewModel.setLiveUser(nama, tempatLahir, tglLahir, noHp, noWa, alamat);
         viewModel.updateProfile.observe(getViewLifecycleOwner(), user -> {
