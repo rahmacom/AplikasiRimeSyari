@@ -68,11 +68,13 @@ public class ProfilTestimoniAdapter extends RecyclerView.Adapter<ProfilTestimoni
 
             binding.tvProfilTestimoniNama.setText(nama);
             binding.tvProfilTestimoniIsi.setText(testimony.getIsi());
-            binding.tvProfilTestimoniRating.setText(testimony.getReview());
+            binding.tvProfilTestimoniRating.setText(String.valueOf(testimony.getReview()));
 
-            Glide.with(binding.getRoot())
-                    .load(testimony.getUser().getAvatar())
-                    .into(binding.ivProfilTestimoniAvatar);
+            if (testimony.getUser().getAvatar() != null) {
+                Glide.with(binding.getRoot())
+                        .load(testimony.getUser().getAvatar())
+                        .into(binding.ivProfilTestimoniAvatar);
+            }
         }
     }
 }
