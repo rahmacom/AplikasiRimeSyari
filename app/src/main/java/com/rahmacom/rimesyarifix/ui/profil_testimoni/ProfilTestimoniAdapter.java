@@ -16,16 +16,11 @@ public class ProfilTestimoniAdapter extends RecyclerView.Adapter<ProfilTestimoni
 
     private final ArrayList<Testimony> lists = new ArrayList<>();
     private ItemProfilTestimoniListBinding binding;
-    private OnItemClickListener onItemClickListener;
 
     public void setLists(ArrayList<Testimony> items) {
         lists.clear();
         lists.addAll(items);
         notifyDataSetChanged();
-    }
-
-    public void setOnItemClickListener(OnItemClickListener onItemClickListener) {
-        this.onItemClickListener = onItemClickListener;
     }
 
     @NonNull
@@ -38,17 +33,11 @@ public class ProfilTestimoniAdapter extends RecyclerView.Adapter<ProfilTestimoni
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         holder.bind(lists.get(position));
-
-        holder.itemView.setOnClickListener(v -> onItemClickListener.onItemClick(lists.get(position)));
     }
 
     @Override
     public int getItemCount() {
         return lists.size();
-    }
-
-    interface OnItemClickListener {
-        void onItemClick(Testimony testimony);
     }
 
     static class ViewHolder extends RecyclerView.ViewHolder {
@@ -68,7 +57,7 @@ public class ProfilTestimoniAdapter extends RecyclerView.Adapter<ProfilTestimoni
 
             binding.tvProfilTestimoniNama.setText(nama);
             binding.tvProfilTestimoniIsi.setText(testimony.getIsi());
-            binding.tvProfilTestimoniRating.setText(String.valueOf(testimony.getReview()));
+            binding.tvProfilTestimoniRating.setText(testimony.getReview() + " star");
 
             if (testimony.getUser().getAvatar() != null) {
                 Glide.with(binding.getRoot())

@@ -5,6 +5,9 @@ import com.google.gson.annotations.SerializedName;
 import java.util.List;
 
 public class User {
+    @SerializedName("nik")
+    private String nik;
+
     @SerializedName("nama_lengkap")
     private String namaLengkap;
 
@@ -43,6 +46,14 @@ public class User {
 
     @SerializedName("roles")
     private List<String> roles;
+
+    public String getNik() {
+        return nik;
+    }
+
+    public void setNik(String nik) {
+        this.nik = nik;
+    }
 
     public String getNamaLengkap() {
         return namaLengkap;

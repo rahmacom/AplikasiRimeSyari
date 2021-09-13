@@ -58,6 +58,10 @@
         <action
             android:id="@+id/action_formEditBiodataFragment_to_profilBiodataAlamatFragment"
             app:destination="@id/profilBiodataAlamatFragment" />
+        <argument
+            android:name="state"
+            app:argType="integer"
+            android:defaultValue="-1" />
     </fragment>
     <fragment
         android:id="@+id/keranjangDetailFragment"
