@@ -101,6 +101,7 @@ public class KeranjangDetailFragment extends Fragment {
                 return false;
 
             case R.id.menu_keranjang_hapus:
+                deleteCart();
                 return true;
         }
         return super.onOptionsItemSelected(item);
