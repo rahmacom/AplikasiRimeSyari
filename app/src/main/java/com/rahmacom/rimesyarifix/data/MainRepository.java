@@ -1205,6 +1205,7 @@ public class MainRepository {
         api.enqueue(new Callback<List<Color>>() {
             @Override
             public void onResponse(@NonNull Call<List<Color>> call, @NonNull Response<List<Color>> response) {
+                Timber.d(response.message());
                 switch (response.code()) {
                     case 200:
                     case 201:

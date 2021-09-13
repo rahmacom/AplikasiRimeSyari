@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "425846980268",
+    "project_id": "rime-syari-2950e",
+    "storage_bucket": "rime-syari-2950e.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:425846980268:android:c97783dd7cb597c3b32909",
+        "android_client_info": {
+          "package_name": "com.rahmacom.rimesyarifix"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "425846980268-7uurfa7f31ri0ejh2hddktvsp0jamjvf.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB8LAKrLjfpNjb88G5Kb-QzaeosedeUdJ0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "425846980268-7uurfa7f31ri0ejh2hddktvsp0jamjvf.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

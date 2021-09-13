@@ -77,7 +77,6 @@ public class KeranjangDetailFragment extends Fragment {
 
         state = args.getViewState();
         viewModel.setLiveToken(manager.getString(Const.KEY_TOKEN));
-        Timber.d(String.valueOf(args.getCartId()));
 
         setupToolbar();
         setToolbarViewState(state);
@@ -105,6 +104,18 @@ public class KeranjangDetailFragment extends Fragment {
                 return true;
         }
         return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    public void onPause() {
+        super.onPause();
+        clear();
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        clear();
     }
 
     private void setupToolbar() {
@@ -300,6 +311,24 @@ public class KeranjangDetailFragment extends Fragment {
 
     private void deleteCart() {
         viewModel.setLiveKeranjang(args.getCartId());
+        viewModel.removeCart.observe(getViewLifecycleOwner(), cart -> {
+            switch (cart.getStatus()) {
+                case SUCCESS:
+                    navController.popBackStack();
+                    Toast.makeText(requireContext(), "Keranjang berhasil dihapus!", Toast.LENGTH_SHORT).show();
+                    break;
+
+                case LOADING:
+                case EMPTY:
+                case ERROR:
+                case INVALID:
+                case UNAUTHORIZED:
+                case FORBIDDEN:
+                case UNPROCESSABLE_ENTITY:
+                    break;
+            }
+        });
+
     }
 
     private TextWatcher watchEditTexts() {
@@ -334,5 +363,17 @@ public class KeranjangDetailFragment extends Fragment {
         action.setProductHarga(Helper.convertToIntArray(productPrices));
 
         navController.navigate(action);
+    }
+
+    private void clear() {
+        binding.etKeranjangDetailJudul.setText("");
+        binding.etKeranjangDetailDeskripsi.setText("");
+        binding.toolbarKeranjangDetail.getMenu().clear();
+        productIds.clear();
+        productPrices.clear();
+        colorIds.clear();
+        sizeIds.clear();
+        quantities.clear();
+        adapter.clearItems();
     }
 }

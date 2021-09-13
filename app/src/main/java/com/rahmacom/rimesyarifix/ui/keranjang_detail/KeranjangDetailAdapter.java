@@ -41,6 +41,11 @@ public class KeranjangDetailAdapter extends RecyclerView.Adapter<KeranjangDetail
         notifyItemRangeChanged(position, list.size());
     }
 
+    public void clearItems() {
+        this.list.clear();
+        notifyDataSetChanged();
+    }
+
     public void setOnProductItemChangedListener(OnProductItemChangedListener onProductItemChangedListener) {
         this.onProductItemChangedListener = onProductItemChangedListener;
     }
