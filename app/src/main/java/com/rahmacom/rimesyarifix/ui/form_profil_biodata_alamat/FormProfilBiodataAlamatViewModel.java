@@ -51,6 +51,17 @@ public class FormProfilBiodataAlamatViewModel extends ViewModel {
         liveAlamat.setValue(alamat);
     }
 
+    public void setLiveAlamat(String address, String kodePos, String catatan, boolean isDefault, long villageId) {
+        Alamat alamat = new Alamat();
+        alamat.alamat = address;
+        alamat.kodePos = kodePos;
+        alamat.catatan = catatan;
+        alamat.isDefault = isDefault;
+        alamat.villageId = villageId;
+
+        liveAlamat.setValue(alamat);
+    }
+
     public void setLiveVillage(String query) {
         liveVillage.setValue(query);
     }

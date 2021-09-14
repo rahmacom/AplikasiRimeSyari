@@ -204,7 +204,7 @@ public interface RimeSyariAPI {
                                           @Field("alamat") String alamat,
                                           @Field("kode_pos") String kodePos,
                                           @Field("catatan") String catatan,
-                                          @Field("is_default") boolean isDefault,
+                                          @Field("is_default") int isDefault,
                                           @Field("village_id") long villageId);
 
     @PATCH("user_shipments/{user_shipment}")
@@ -215,7 +215,7 @@ public interface RimeSyariAPI {
                                              @Field("alamat") String alamat,
                                              @Field("kode_pos") String kodePos,
                                              @Field("catatan") String catatan,
-                                             @Field("is_default") boolean isDefault,
+                                             @Field("is_default") int isDefault,
                                              @Field("village_id") long villageId);
 
     @DELETE("user_shipments/{user_shipment}")

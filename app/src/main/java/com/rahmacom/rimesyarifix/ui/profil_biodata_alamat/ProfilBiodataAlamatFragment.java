@@ -102,34 +102,33 @@ public class ProfilBiodataAlamatFragment extends Fragment {
             }
         });
 
-        if (state != IS_SELECTING) {
-            adapter.setOnLongItemClickListener((view, userShipment) -> {
-                PopupMenu menu = new PopupMenu(requireContext(), view);
-                menu.getMenuInflater().inflate(R.menu.menu_profil_biodata_alamat_floating, menu.getMenu());
+        adapter.setOnLongItemClickListener((view, userShipment) -> {
+            PopupMenu menu = new PopupMenu(requireContext(), view);
+            menu.getMenuInflater().inflate(R.menu.menu_profil_biodata_alamat_floating, menu.getMenu());
 
-                menu.setOnMenuItemClickListener(item -> {
-                    switch (item.getItemId()) {
-                        case R.id.menu_profil_biodata_alamat_set_as_default:
-                            setAsDefaultShipmentAddress(userShipment.getId());
-                            return true;
+            menu.setOnMenuItemClickListener(item -> {
+                switch (item.getItemId()) {
+                    case R.id.menu_profil_biodata_alamat_set_as_default:
+                        setAsDefaultShipmentAddress(userShipment.getId());
+                        return true;
 
-                        case R.id.menu_profil_alamat_edit:
-                            ProfilBiodataAlamatFragmentDirections.ProfilBiodataAlamatFragmentToFormAlamatFragment action = ProfilBiodataAlamatFragmentDirections.profilBiodataAlamatFragmentToFormAlamatFragment();
-                            action.setUserShipmentId(userShipment.getId());
-                            navController.navigate(action);
-                            return true;
+                    case R.id.menu_profil_alamat_edit:
+                        ProfilBiodataAlamatFragmentDirections.ProfilBiodataAlamatFragmentToFormAlamatFragment action = ProfilBiodataAlamatFragmentDirections.profilBiodataAlamatFragmentToFormAlamatFragment();
+                        action.setUserShipmentId(userShipment.getId());
+                        action.setState(FormProfilBiodataAlamatFragment.IS_UPDATING);
+                        navController.navigate(action);
+                        return true;
 
-                        case R.id.menu_profil_biodata_alamat_remove:
-                            removeShipmentAddress(userShipment.getId());
-                            return true;
-                    }
+                    case R.id.menu_profil_biodata_alamat_remove:
+                        removeShipmentAddress(userShipment.getId());
+                        return true;
+                }
 
-                    return false;
-                });
-
-                menu.show();
+                return false;
             });
-        }
+
+            menu.show();
+        });
     }
 
     private void setShipmentAddressForNewOrder(int userShipmentId) {
@@ -173,6 +172,7 @@ public class ProfilBiodataAlamatFragment extends Fragment {
     private void updateShipmentAddress(int userShipmentId) {
         ProfilBiodataAlamatFragmentDirections.ProfilBiodataAlamatFragmentToFormAlamatFragment action = ProfilBiodataAlamatFragmentDirections.profilBiodataAlamatFragmentToFormAlamatFragment();
         action.setUserShipmentId(userShipmentId);
+        action.setState(FormProfilBiodataAlamatFragment.IS_UPDATING);
         navController.navigate(action);
     }
 

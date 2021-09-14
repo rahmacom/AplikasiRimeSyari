@@ -57,7 +57,7 @@ public class ProfilTestimoniAdapter extends RecyclerView.Adapter<ProfilTestimoni
 
             binding.tvProfilTestimoniNama.setText(nama);
             binding.tvProfilTestimoniIsi.setText(testimony.getIsi());
-            binding.tvProfilTestimoniRating.setText(testimony.getReview() + " star");
+            binding.tvProfilTestimoniRating.setText(testimony.getRating() + " star");
 
             if (testimony.getUser().getAvatar() != null) {
                 Glide.with(binding.getRoot())

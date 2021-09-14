@@ -1,7 +1,6 @@
 package com.rahmacom.rimesyarifix.ui.form_profil_biodata_alamat;
 
 import android.os.Bundle;
-import android.util.ArrayMap;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -23,9 +22,6 @@ import com.rahmacom.rimesyarifix.databinding.FragmentFormProfilBiodataAlamatBind
 import com.rahmacom.rimesyarifix.manager.PreferenceManager;
 import com.rahmacom.rimesyarifix.utils.Const;
 
-import java.util.ArrayList;
-import java.util.Map;
-
 import timber.log.Timber;
 
 public class FormProfilBiodataAlamatFragment extends Fragment {
@@ -35,9 +31,10 @@ public class FormProfilBiodataAlamatFragment extends Fragment {
     private PreferenceManager manager;
     private NavController navController;
     private FormProfilBiodataAlamatFragmentArgs args;
+    private ArrayAdapter<Village> adapter;
 
-    public static final int IS_UPDATING = 2;
     public static final int IS_CREATING = 1;
+    public static final int IS_UPDATING = 2;
 
     private long villageId = 0;
     private int state;
@@ -62,6 +59,9 @@ public class FormProfilBiodataAlamatFragment extends Fragment {
         viewModel.setLiveToken(manager.getString(Const.KEY_TOKEN));
 
         binding.autoetFormProfilBiodataAlamatDesaKelurahan.setThreshold(2);
+        binding.autoetFormProfilBiodataAlamatDesaKelurahan.setOnItemClickListener((parent, v, position, id) -> {
+            villageId = adapter.getItem(position).getId();
+        });
         getVillages();
         binding.btnFormProfilBiodataAlamatSimpan.setOnClickListener(v -> saveAddress());
 
@@ -92,7 +92,6 @@ public class FormProfilBiodataAlamatFragment extends Fragment {
                     setDataBinding(shipmentDetail.getData());
                     break;
 
-                case LOADING:
                 case EMPTY:
                 case ERROR:
                 case INVALID:
@@ -109,11 +108,10 @@ public class FormProfilBiodataAlamatFragment extends Fragment {
         viewModel.getVillages.observe(getViewLifecycleOwner(), village -> {
             switch(village.getStatus()) {
                 case SUCCESS:
-                    ArrayAdapter<Village> adapter = new ArrayAdapter<>(requireContext(), android.R.layout.simple_list_item_1, village.getData());
+                    adapter = new ArrayAdapter<>(requireContext(), android.R.layout.simple_list_item_1, village.getData());
                     binding.autoetFormProfilBiodataAlamatDesaKelurahan.setAdapter(adapter);
                     break;
 
-                case LOADING:
                 case EMPTY:
                 case ERROR:
                 case INVALID:
@@ -131,10 +129,16 @@ public class FormProfilBiodataAlamatFragment extends Fragment {
         String catatan = binding.etFormProfilBiodataAlamatCatatanEdit.getText().toString();
         boolean isDefault = binding.cbFormProfilBiodataAlamatSetDefault.isChecked();
 
-        viewModel.setLiveAlamat(args.getUserShipmentId(), alamat, kodePos, catatan, isDefault, villageId);
+        Timber.d("{ alamat: " + alamat + ", kode_pos: " + kodePos + ", catatan: " + catatan + ", is_default: " + isDefault + " }");
+
+        if (state == IS_CREATING) {
+            viewModel.setLiveAlamat(alamat, kodePos, catatan, isDefault, villageId);
+        } else {
+            viewModel.setLiveAlamat(args.getUserShipmentId(), alamat, kodePos, catatan, isDefault, villageId);
+        }
         viewModel.updateShipmentAddress.observe(getViewLifecycleOwner(), shipment -> {
-            Timber.d(shipment.getStatus().toString());
-            Timber.d(shipment.getMessage());
+            Timber.d("saveAddress: %s", shipment.getStatus().toString());
+            Timber.d("saveAddress: %s", shipment.getMessage());
             switch (shipment.getStatus()) {
                 case SUCCESS:
                     Toast.makeText(requireContext(), "Alamat berhasil disimpan", Toast.LENGTH_SHORT).show();

@@ -1611,7 +1611,7 @@ public class MainRepository {
         MutableLiveData<Resource<UserShipment>> data = new MutableLiveData<>();
         data.postValue(Resource.loading(null));
 
-        Call<UserShipment> api = rimeSyariAPI.newShipmentAddress(token, alamat, kodePos, catatan, isDefault, villageId);
+        Call<UserShipment> api = rimeSyariAPI.newShipmentAddress(token, alamat, kodePos, catatan, (isDefault) ? 1 : 0, villageId);
         api.enqueue(new Callback<UserShipment>() {
             @Override
             public void onResponse(Call<UserShipment> call, Response<UserShipment> response) {
@@ -1661,7 +1661,15 @@ public class MainRepository {
         MutableLiveData<Resource<UserShipment>> data = new MutableLiveData<>();
         data.postValue(Resource.loading(null));
 
-        Call<UserShipment> api = rimeSyariAPI.updateShipmentAddress(token, shipmentId, alamat, kodePos, catatan, isDefault, villageId);
+        Timber.d(token);
+        Timber.d(String.valueOf(shipmentId));
+        Timber.d(alamat);
+        Timber.d(kodePos);
+        Timber.d(catatan);
+        Timber.d(String.valueOf(isDefault));
+        Timber.d(String.valueOf(villageId));
+
+        Call<UserShipment> api = rimeSyariAPI.updateShipmentAddress(token, shipmentId, alamat, kodePos, catatan, (isDefault) ? 1 : 0, villageId);
         api.enqueue(new Callback<UserShipment>() {
             @Override
             public void onResponse(Call<UserShipment> call, Response<UserShipment> response) {

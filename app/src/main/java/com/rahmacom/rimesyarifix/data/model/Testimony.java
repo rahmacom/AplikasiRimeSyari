@@ -19,8 +19,8 @@ public class Testimony {
     @SerializedName("isi")
     private String isi;
 
-    @SerializedName("review")
-    private int review;
+    @SerializedName("rating")
+    private int rating;
 
     @SerializedName("user")
     private User user;
@@ -65,12 +65,12 @@ public class Testimony {
         this.isi = isi;
     }
 
-    public int getReview() {
-        return review;
+    public int getRating() {
+        return rating;
     }
 
-    public void setReview(int review) {
-        this.review = review;
+    public void setRating(int rating) {
+        this.rating = rating;
     }
 
     public User getUser() {
