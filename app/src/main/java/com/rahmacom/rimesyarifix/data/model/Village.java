@@ -36,4 +36,9 @@ public class Village {
     public void setDistrict(District district) {
         this.district = district;
     }
+
+    @Override
+    public String toString() {
+        return name;
+    }
 }

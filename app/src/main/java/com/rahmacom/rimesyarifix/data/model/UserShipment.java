@@ -32,6 +32,10 @@ public class UserShipment {
         return id;
     }
 
+    public void setId(int id) {
+        this.id = id;
+    }
+
     public String getAlamat() {
         return alamat;
     }
@@ -74,6 +78,10 @@ public class UserShipment {
 
     public Village getVillage() {
         return village;
+    }
+
+    public void setVillage(Village village) {
+        this.village = village;
     }
 
     public String getDesaKel() {

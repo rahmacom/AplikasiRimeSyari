@@ -23,7 +23,6 @@ public class HomeViewModel extends ViewModel {
     private final MutableLiveData<String> liveToken = new MutableLiveData<>();
     private MainRepository mainRepository;
 
-
     @Inject
     public HomeViewModel(MainRepository mainRepository) {
         this.mainRepository = mainRepository;

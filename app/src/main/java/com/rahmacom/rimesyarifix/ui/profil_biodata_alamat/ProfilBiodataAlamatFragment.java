@@ -2,6 +2,7 @@ package com.rahmacom.rimesyarifix.ui.profil_biodata_alamat;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.PopupMenu;
@@ -21,6 +22,7 @@ import com.rahmacom.rimesyarifix.R;
 import com.rahmacom.rimesyarifix.data.model.UserShipment;
 import com.rahmacom.rimesyarifix.databinding.FragmentProfilBiodataAlamatBinding;
 import com.rahmacom.rimesyarifix.manager.PreferenceManager;
+import com.rahmacom.rimesyarifix.ui.form_profil_biodata_alamat.FormProfilBiodataAlamatFragment;
 import com.rahmacom.rimesyarifix.utils.Const;
 
 import java.util.ArrayList;
@@ -64,14 +66,22 @@ public class ProfilBiodataAlamatFragment extends Fragment {
         getShipmentAddresses();
     }
 
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        if (item.getItemId() == R.id.menu_profil_biodata_alamat_add) {
+            newShipmentAddress();
+            return true;
+        }
+        return super.onOptionsItemSelected(item);
+    }
+
     private void setupToolbar() {
         AppBarConfiguration appBarConfiguration = new AppBarConfiguration.Builder(navController.getGraph()).build();
         NavigationUI.setupWithNavController(binding.toolbarProfilBiodataAlamat, navController, appBarConfiguration);
         binding.toolbarProfilBiodataAlamat.setTitle("Alamat yang disimpan");
 
-        if (state != IS_SELECTING) {
-            binding.toolbarProfilBiodataAlamat.inflateMenu(R.menu.menu_profil_biodata_alamat_toolbar);
-        }
+        binding.toolbarProfilBiodataAlamat.inflateMenu(R.menu.menu_profil_biodata_alamat_toolbar);
+        binding.toolbarProfilBiodataAlamat.setOnMenuItemClickListener(this::onOptionsItemSelected);
     }
 
     private void setupRecyclerView(ArrayList<UserShipment> items) {
@@ -99,13 +109,18 @@ public class ProfilBiodataAlamatFragment extends Fragment {
 
                 menu.setOnMenuItemClickListener(item -> {
                     switch (item.getItemId()) {
-                        case R.id.menu_profil_alamat_default:
+                        case R.id.menu_profil_biodata_alamat_set_as_default:
+                            setAsDefaultShipmentAddress(userShipment.getId());
                             return true;
 
                         case R.id.menu_profil_alamat_edit:
                             ProfilBiodataAlamatFragmentDirections.ProfilBiodataAlamatFragmentToFormAlamatFragment action = ProfilBiodataAlamatFragmentDirections.profilBiodataAlamatFragmentToFormAlamatFragment();
                             action.setUserShipmentId(userShipment.getId());
                             navController.navigate(action);
+                            return true;
+
+                        case R.id.menu_profil_biodata_alamat_remove:
+                            removeShipmentAddress(userShipment.getId());
                             return true;
                     }
 
@@ -127,7 +142,7 @@ public class ProfilBiodataAlamatFragment extends Fragment {
     }
 
     private void getShipmentAddresses() {
-        viewModel.getUserShipmentAddresses.observe(getViewLifecycleOwner(), userShipment -> {
+        viewModel.userShipmentAddresses.observe(getViewLifecycleOwner(), userShipment -> {
             switch (userShipment.getStatus()) {
                 case SUCCESS:
                     setupRecyclerView((ArrayList<UserShipment>) userShipment.getData());
@@ -149,9 +164,19 @@ public class ProfilBiodataAlamatFragment extends Fragment {
 
     }
 
+    private void newShipmentAddress() {
+        ProfilBiodataAlamatFragmentDirections.ProfilBiodataAlamatFragmentToFormAlamatFragment action = ProfilBiodataAlamatFragmentDirections.profilBiodataAlamatFragmentToFormAlamatFragment();
+        action.setState(FormProfilBiodataAlamatFragment.IS_CREATING);
+        navController.navigate(action);
+    }
+
     private void updateShipmentAddress(int userShipmentId) {
         ProfilBiodataAlamatFragmentDirections.ProfilBiodataAlamatFragmentToFormAlamatFragment action = ProfilBiodataAlamatFragmentDirections.profilBiodataAlamatFragmentToFormAlamatFragment();
         action.setUserShipmentId(userShipmentId);
         navController.navigate(action);
+    }
+
+    private void removeShipmentAddress(int userShipmentId) {
+
     }
 }

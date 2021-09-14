@@ -25,6 +25,5 @@ public class ProfilTentangFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        Log.d("TentangFragment", "This is tentang fragment");
     }
 }

@@ -16,6 +16,7 @@
     <action
         android:id="@+id/global_to_loginFragment"
         app:destination="@id/loginFragment"
+        app:launchSingleTop="true"
         app:popUpTo="@id/loginFragment"
         app:popUpToInclusive="true" />
     <fragment
@@ -40,6 +41,10 @@
         tools:layout="@layout/fragment_form_profil_biodata_alamat" >
         <argument
             android:name="user_shipment_id"
+            app:argType="integer"
+            android:defaultValue="-1" />
+        <argument
+            android:name="state"
             app:argType="integer"
             android:defaultValue="-1" />
     </fragment>

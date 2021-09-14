@@ -218,6 +218,14 @@ public interface RimeSyariAPI {
                                              @Field("is_default") boolean isDefault,
                                              @Field("village_id") long villageId);
 
+    @DELETE("user_shipments/{user_shipment}")
+    @Headers({"Accept: application/json"})
+    Call<UserShipment> removeShipmentAddress(@Header("Authorization") String token, @Path("user_shipment") int shipmentId);
+
+    @PATCH("user_shipment/{user_shipment}")
+    @Headers({"Accept: application/json"})
+    Call<UserShipment> setAsDefaultShipmentAddress(@Header("Authorization") String token, @Path("user_shipment") int shipmentId);
+
     @GET("shipments/provinces")
     @Headers({"Accept: application/json"})
     Call<List<Province>> getAllProvinces(@Header("Authorization") String token, @Query("q") String query, @Query("id") int id, @Query("regency_id") int regencyId, @Query("district_id") int districtId, @Query("village_id") int villageId);

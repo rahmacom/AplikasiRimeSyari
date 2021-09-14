@@ -116,23 +116,21 @@ public class ProfilFragment extends Fragment {
 
     private void logout() {
         viewModel.logout.observe(getViewLifecycleOwner(), logout -> {
-            if (logout.getStatus() == Status.SUCCESS) {
-                manager.removePreference(Const.KEY_TOKEN);
-                manager.removePreference(Const.KEY_TYPE);
-                manager.removePreference(Const.KEY_NIK);
-                manager.removePreference(Const.KEY_NAMA_LENGKAP);
-                manager.removePreference(Const.KEY_JENIS_KELAMIN);
-                manager.removePreference(Const.KEY_EMAIL);
-                manager.removePreference(Const.KEY_TEMPAT_LAHIR);
-                manager.removePreference(Const.KEY_TGL_LAHIR);
-                manager.removePreference(Const.KEY_ALAMAT);
-                manager.removePreference(Const.KEY_NO_TELP);
-                manager.removePreference(Const.KEY_NO_WA);
-                manager.removePreference(Const.KEY_ROLE);
-                manager.removePreference(Const.KEY_AVATAR);
+            manager.removePreference(Const.KEY_TOKEN);
+            manager.removePreference(Const.KEY_TYPE);
+            manager.removePreference(Const.KEY_NIK);
+            manager.removePreference(Const.KEY_NAMA_LENGKAP);
+            manager.removePreference(Const.KEY_JENIS_KELAMIN);
+            manager.removePreference(Const.KEY_EMAIL);
+            manager.removePreference(Const.KEY_TEMPAT_LAHIR);
+            manager.removePreference(Const.KEY_TGL_LAHIR);
+            manager.removePreference(Const.KEY_ALAMAT);
+            manager.removePreference(Const.KEY_NO_TELP);
+            manager.removePreference(Const.KEY_NO_WA);
+            manager.removePreference(Const.KEY_ROLE);
+            manager.removePreference(Const.KEY_AVATAR);
 
-                navController.navigate(ProfilFragmentDirections.globalToLoginFragment());
-            }
+            navController.navigate(ProfilFragmentDirections.globalToLoginFragment());
         });
     }
 }

@@ -102,20 +102,7 @@ public class LoginFragment extends Fragment {
             });
         });
 
-        binding.tvRegisterLink.setOnClickListener(v -> {
-            navController.navigate(LoginFragmentDirections.loginFragmentToRegisterFragment());
-        });
-
-        OnBackPressedCallback onBackPressedCallback = new OnBackPressedCallback(true) {
-            @Override
-            public void handleOnBackPressed() {
-                requireActivity().finish();
-            }
-        };
-
-        requireActivity()
-                .getOnBackPressedDispatcher()
-                .addCallback(onBackPressedCallback);
+        binding.tvRegisterLink.setOnClickListener(v -> navController.navigate(LoginFragmentDirections.loginFragmentToRegisterFragment()));
     }
 
     @Override

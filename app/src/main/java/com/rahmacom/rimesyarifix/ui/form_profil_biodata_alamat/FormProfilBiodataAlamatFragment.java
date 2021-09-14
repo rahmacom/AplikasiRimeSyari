@@ -1,12 +1,10 @@
 package com.rahmacom.rimesyarifix.ui.form_profil_biodata_alamat;
 
 import android.os.Bundle;
-import android.text.Editable;
-import android.text.TextWatcher;
+import android.util.ArrayMap;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Toast;
 
@@ -26,7 +24,7 @@ import com.rahmacom.rimesyarifix.manager.PreferenceManager;
 import com.rahmacom.rimesyarifix.utils.Const;
 
 import java.util.ArrayList;
-import java.util.Objects;
+import java.util.Map;
 
 import timber.log.Timber;
 
@@ -38,7 +36,11 @@ public class FormProfilBiodataAlamatFragment extends Fragment {
     private NavController navController;
     private FormProfilBiodataAlamatFragmentArgs args;
 
+    public static final int IS_UPDATING = 2;
+    public static final int IS_CREATING = 1;
+
     private long villageId = 0;
+    private int state;
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -54,11 +56,20 @@ public class FormProfilBiodataAlamatFragment extends Fragment {
         navController = Navigation.findNavController(view);
         args = FormProfilBiodataAlamatFragmentArgs.fromBundle(getArguments());
 
+        state = args.getState();
+
         viewModel.setLiveAlamat(args.getUserShipmentId());
         viewModel.setLiveToken(manager.getString(Const.KEY_TOKEN));
 
+        binding.autoetFormProfilBiodataAlamatDesaKelurahan.setThreshold(2);
+        getVillages();
+        binding.btnFormProfilBiodataAlamatSimpan.setOnClickListener(v -> saveAddress());
+
         setupToolbar();
-        getShipmentDetail();
+
+        if (state == IS_UPDATING) {
+            getShipmentDetail();
+        }
     }
 
     private void setupToolbar() {
@@ -72,9 +83,6 @@ public class FormProfilBiodataAlamatFragment extends Fragment {
         binding.etFormProfilBiodataAlamatKodePosEdit.setText(userShipment.getKodePos());
         binding.cbFormProfilBiodataAlamatSetDefault.setChecked(userShipment.isDefault());
         binding.autoetFormProfilBiodataAlamatDesaKelurahan.setText(userShipment.getVillage().getName());
-        binding.autoetFormProfilBiodataAlamatDesaKelurahan.setThreshold(4);
-        getVillages();
-        binding.btnFormProfilBiodataAlamatSimpan.setOnClickListener(v -> saveAddress());
     }
 
     private void getShipmentDetail() {
@@ -99,20 +107,10 @@ public class FormProfilBiodataAlamatFragment extends Fragment {
 
     private void getVillages() {
         viewModel.getVillages.observe(getViewLifecycleOwner(), village -> {
-            Timber.d(village.getStatus().toString());
-            Timber.d(village.getMessage());
             switch(village.getStatus()) {
                 case SUCCESS:
-                    ArrayList<String> list = new ArrayList<>();
-                    for (Village item : village.getData()) {
-                        list.add(item.getName());
-                    }
-
-                    ArrayAdapter<String> adapter = new ArrayAdapter<>(requireContext(), android.R.layout.simple_list_item_1, list);
+                    ArrayAdapter<Village> adapter = new ArrayAdapter<>(requireContext(), android.R.layout.simple_list_item_1, village.getData());
                     binding.autoetFormProfilBiodataAlamatDesaKelurahan.setAdapter(adapter);
-                    binding.autoetFormProfilBiodataAlamatDesaKelurahan.setOnItemClickListener((parent, view, position, id) -> {
-                        villageId = village.getData().get(position).getId();
-                    });
                     break;
 
                 case LOADING:
@@ -135,13 +133,14 @@ public class FormProfilBiodataAlamatFragment extends Fragment {
 
         viewModel.setLiveAlamat(args.getUserShipmentId(), alamat, kodePos, catatan, isDefault, villageId);
         viewModel.updateShipmentAddress.observe(getViewLifecycleOwner(), shipment -> {
+            Timber.d(shipment.getStatus().toString());
+            Timber.d(shipment.getMessage());
             switch (shipment.getStatus()) {
                 case SUCCESS:
                     Toast.makeText(requireContext(), "Alamat berhasil disimpan", Toast.LENGTH_SHORT).show();
                     navController.popBackStack();
                     break;
 
-                case LOADING:
                 case EMPTY:
                 case ERROR:
                 case INVALID:
@@ -153,6 +152,4 @@ public class FormProfilBiodataAlamatFragment extends Fragment {
             }
         });
     }
-
-
 }
