@@ -28,6 +28,7 @@ import com.rahmacom.rimesyarifix.utils.Const;
 import com.rahmacom.rimesyarifix.utils.Helper;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
 
@@ -72,8 +73,12 @@ public class OrderNewFragment extends Fragment {
 
         setupToolbar();
         viewModel.setLiveToken(manager.getString(Const.KEY_TOKEN));
+        if (manager.keyExists(Const.KEY_USER_SHIPMENT_ID)) {
+            userShipmentId = manager.getInt(Const.KEY_USER_SHIPMENT_ID);
+            getShipmentAddress(manager.getInt(Const.KEY_USER_SHIPMENT_ID));
+        }
 
-        setDataBinding("Jalan Kulintang No. 33 RT 36");
+        setDataBinding();
         setShipmentAddress();
     }
 
@@ -83,18 +88,11 @@ public class OrderNewFragment extends Fragment {
         NavigationUI.setupWithNavController(binding.toolbarOrderNew, navController, appBarConfiguration);
     }
 
-    private void setDataBinding(String alamat) {
-        binding.tvOrderNewAlamat.setText(alamat);
+    private void setDataBinding() {
         binding.tvOrderNewTotal.setText(Helper.convertToRP(cartSubTotal));
         setPaymentMethod();
 
-        if (args.getCartId() > -1) {
-            getCart();
-        }
-
-        if (args.getProductId() != null) {
-            getPreOrderDetails();
-        }
+        getPreOrderDetails();
 
         binding.tvOrderNewAlamat.setOnClickListener(v -> {
             OrderNewFragmentDirections.OrderNewFragmentToProfilBiodataAlamatFragment action = OrderNewFragmentDirections.orderNewFragmentToProfilBiodataAlamatFragment();
@@ -105,49 +103,20 @@ public class OrderNewFragment extends Fragment {
         binding.btnOrderNewPesanSekarang.setOnClickListener(v -> createOrder());
     }
 
-    private void getCart() {
-        int cartId = args.getCartId();
-        viewModel.viewCart.observe(getViewLifecycleOwner(), cart -> {
-            switch (cart.getStatus()) {
-                case SUCCESS:
-                    cartSubTotal = cart.getData().getTotal();
-                    convertToFields(cart.getData().getProducts());
-                    break;
-
-                case EMPTY:
-                case ERROR:
-                    Toast.makeText(requireContext(), "Terjadi error! Silahkan coba lagi", Toast.LENGTH_SHORT).show();
-                    Log.e("cartError", cart.getStatus().toString() + ": " + cart.getMessage());
-                    break;
-
-                case UNPROCESSABLE_ENTITY:
-                    break;
-            }
-        });
-    }
-
-    private void convertToFields(List<Product> items) {
-        productIds = new ArrayList<>();
-        colorIds = new ArrayList<>();
-        sizeIds = new ArrayList<>();
-        quantities = new ArrayList<>();
-
-        for (Product product : items) {
-            productIds.add(product.getId());
-            colorIds.add(product.getPivot().getColorId());
-            sizeIds.add(product.getPivot().getSizeId());
-            quantities.add(product.getPivot().getJumlah());
-        }
-    }
-
     private void getPreOrderDetails() {
         cartSubTotal = 0;
 
-        productIds = Helper.convertToList(Objects.requireNonNull(args.getProductId()));
-        productPrices = Helper.convertToList(Objects.requireNonNull(args.getProductHarga()));
-        colorIds = Helper.convertToList(Objects.requireNonNull(args.getColorId()));
-        sizeIds = Helper.convertToList(Objects.requireNonNull(args.getSizeId()));
-        quantities = Helper.convertToList(Objects.requireNonNull(args.getJumlah()));
+        productIds = Helper.convertToList(Objects.requireNonNull(args.getProductIds()));
+        productPrices = Helper.convertToList(Objects.requireNonNull(args.getProductPrices()));
+        colorIds = Helper.convertToList(Objects.requireNonNull(args.getColorIds()));
+        sizeIds = Helper.convertToList(Objects.requireNonNull(args.getSizeIds()));
+        quantities = Helper.convertToList(Objects.requireNonNull(args.getQuantities()));
+
+        Timber.d("product_id[]: %s", Arrays.toString(args.getProductIds()));
+        Timber.d("product_harga[]: %s", Arrays.toString(args.getProductPrices()));
+        Timber.d("color_id[]: %s", Arrays.toString(args.getColorIds()));
+        Timber.d("size_id[]: %s", Arrays.toString(args.getSizeIds()));
+        Timber.d("jumlah[]: %s", Arrays.toString(args.getQuantities()));
 
         for (int i = 0; i < quantities.size(); i++) {
             int subTotal = productPrices.get(i) * quantities.get(i);
@@ -155,11 +124,13 @@ public class OrderNewFragment extends Fragment {
         }
 
         binding.tvOrderNewSubtotal.setText(Helper.convertToRP(cartSubTotal));
+        binding.tvOrderNewTotal.setText(Helper.convertToRP(cartSubTotal));
     }
 
     private void setPaymentMethod() {
         viewModel.getAvailablePaymentMethod.observe(getViewLifecycleOwner(), paymentMethod -> {
             if (paymentMethod.getStatus() == Status.SUCCESS) {
+                binding.cbgOrderNewMetodePembayaran.removeAllViews();
                 for (PaymentMethod pm : paymentMethod.getData()) {
                     RadioButton rb = new RadioButton(requireContext());
                     rb.setText(pm.getName());
@@ -177,7 +148,13 @@ public class OrderNewFragment extends Fragment {
             switch (userShipment.getStatus()) {
                 case SUCCESS:
                     this.userShipmentId = userShipment.getData().getId();
-                    binding.tvOrderNewAlamat.setText(userShipment.getData().getAlamat());
+                    String alamat = userShipment.getData().getAlamat() + " "
+                            + userShipment.getData().getVillage().getName() + ", Kec. "
+                            + userShipment.getData().getVillage().getDistrict().getName() + ", "
+                            + userShipment.getData().getVillage().getDistrict().getRegency().getName() + ", "
+                            + userShipment.getData().getVillage().getDistrict().getRegency().getProvince().getName();
+
+                    binding.tvOrderNewAlamat.setText(alamat);
                     break;
 
                 case LOADING:
@@ -208,6 +185,8 @@ public class OrderNewFragment extends Fragment {
 
         viewModel.setLiveOrder(pesan, kodeDiskon, userShipmentId, paymentMethodId, productIds, colorIds, sizeIds, quantities);
         viewModel.newOrder.observe(getViewLifecycleOwner(), order -> {
+            Timber.d("Status: %s", order.getStatus().toString());
+            Timber.d("Message: %s", order.getMessage());
             switch (order.getStatus()) {
                 case SUCCESS:
                     Toast.makeText(requireContext(), "Order berhasil dibuat!", Toast.LENGTH_SHORT).show();
@@ -222,7 +201,11 @@ public class OrderNewFragment extends Fragment {
                 case INVALID:
                 case UNAUTHORIZED:
                 case FORBIDDEN:
+                    break;
+
                 case UNPROCESSABLE_ENTITY:
+                    Toast.makeText(requireContext(), "Tidak dapat memproses order. Silahkan cek ulang produk yang dibeli dan pastikan produk masih tersedia.", Toast.LENGTH_SHORT).show();
+                    navController.popBackStack();
                     break;
             }
         });

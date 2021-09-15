@@ -34,7 +34,7 @@
             android:text="Khimar abaya"
             android:textAllCaps="true"
             android:textColor="@color/gray_700"
-            android:textSize="14sp"
+            android:textSize="16sp"
             app:layout_constraintEnd_toStartOf="@+id/cb_keranjang_produk_check"
             app:layout_constraintStart_toEndOf="@+id/iv_keranjang_produk_foto"
             app:layout_constraintTop_toTopOf="parent" />
@@ -46,8 +46,8 @@
             android:layout_marginStart="8dp"
             android:layout_marginTop="8dp"
             android:text="Rp 110.000"
-            android:textColor="@color/gray_500"
-            android:textSize="10sp"
+            android:textColor="@color/gray_600"
+            android:textSize="12sp"
             app:layout_constraintStart_toEndOf="@+id/iv_keranjang_produk_foto"
             app:layout_constraintTop_toBottomOf="@+id/tv_keranjang_produk_warna" />
 
@@ -107,7 +107,7 @@
             android:layout_marginTop="8dp"
             android:text="warna: Lylac"
             android:textColor="@color/gray_500"
-            android:textSize="10sp"
+            android:textSize="12sp"
             android:textStyle="italic"
             app:layout_constraintStart_toEndOf="@+id/iv_keranjang_produk_foto"
             app:layout_constraintTop_toBottomOf="@+id/tv_keranjang_produk_nama" />
@@ -119,7 +119,7 @@
             android:layout_marginStart="8dp"
             android:text="ukuran: XXL"
             android:textColor="@color/gray_500"
-            android:textSize="10sp"
+            android:textSize="12sp"
             android:textStyle="italic"
             app:layout_constraintStart_toEndOf="@+id/tv_keranjang_produk_warna"
             app:layout_constraintTop_toTopOf="@+id/tv_keranjang_produk_warna" />

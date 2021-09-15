@@ -11,12 +11,13 @@
         tools:layout="@layout/fragment_order">
         <action
             android:id="@+id/nav_order_to_orderDetailFragment"
+            app:enterAnim="?android:attr/windowEnterAnimation"
+            app:exitAnim="?android:attr/windowExitAnimation"
             app:destination="@id/orderDetailFragment" />
     </fragment>
     <action
         android:id="@+id/global_to_loginFragment"
         app:destination="@id/loginFragment"
-        app:launchSingleTop="true"
         app:popUpTo="@id/loginFragment"
         app:popUpToInclusive="true" />
     <fragment
@@ -238,18 +239,21 @@
         <action
             android:id="@+id/resellerInfoFragment_to_resellerKYCFragment"
             app:destination="@id/resellerKYCFragment" />
+        <action
+            android:id="@+id/resellerInfoFragment_to_resellerStatusVerifikasiFragment"
+            app:destination="@id/resellerStatusVerifikasiFragment" />
     </fragment>
     <fragment
         android:id="@+id/resellerKYCFragment"
         android:name="com.rahmacom.rimesyarifix.ui.reseller_kyc.ResellerKYCFragment"
         tools:layout="@layout/fragment_reseller_kyc_camera">
-        <action
-            android:id="@+id/resellerKYCFragment_to_resellerStatusVerifikasiFragment"
-            app:destination="@id/resellerStatusVerifikasiFragment" />
         <argument
             android:name="user_verification_id"
             app:argType="integer"
             android:defaultValue="-1" />
+        <action
+            android:id="@+id/resellerKYCFragment_to_resellerKYCPreviewFragment"
+            app:destination="@id/resellerKYCPreviewFragment" />
     </fragment>
     <fragment
         android:id="@+id/resellerStatusVerifikasiFragment"
@@ -260,6 +264,9 @@
             android:name="user_verification_id"
             app:argType="integer"
             android:defaultValue="-1" />
+        <action
+            android:id="@+id/resellerStatusVerifikasiFragment_to_resellerKYCFragment"
+            app:destination="@id/resellerKYCFragment" />
     </fragment>
     <fragment
         android:id="@+id/splashScreenFragment"
@@ -291,7 +298,8 @@
         android:label="Pilih Keranjang">
         <action
             android:id="@+id/produkDialogFragment_to_keranjangDetailFragment"
-            app:destination="@id/keranjangDetailFragment" />
+            app:destination="@id/keranjangDetailFragment"
+            app:popUpToInclusive="false" />
         <argument
             android:name="color_id"
             android:defaultValue="-1"
@@ -333,27 +341,27 @@
             app:argType="integer"
             android:defaultValue="-1" />
         <argument
-            android:name="product_id"
+            android:name="productIds"
             app:argType="integer[]"
             app:nullable="true"
             android:defaultValue="@null" />
         <argument
-            android:name="color_id"
+            android:name="colorIds"
             app:argType="integer[]"
             app:nullable="true"
             android:defaultValue="@null" />
         <argument
-            android:name="size_id"
+            android:name="sizeIds"
             app:argType="integer[]"
             app:nullable="true"
             android:defaultValue="@null" />
         <argument
-            android:name="jumlah"
+            android:name="quantities"
             app:argType="integer[]"
             app:nullable="true"
             android:defaultValue="@null" />
         <argument
-            android:name="product_harga"
+            android:name="productPrices"
             app:argType="integer[]"
             app:nullable="true"
             android:defaultValue="@null" />
@@ -370,6 +378,10 @@
             android:name="order_id"
             android:defaultValue="-1"
             app:argType="integer" />
+        <argument
+            android:name="payment_method_id"
+            app:argType="integer"
+            android:defaultValue="-1" />
     </fragment>
     <fragment
         android:id="@+id/postinganFragment"
@@ -389,5 +401,14 @@
         <argument android:name="product_id"
             app:argType="integer"
             android:defaultValue="-1" />
+    </fragment>
+    <fragment
+        android:id="@+id/resellerKYCPreviewFragment"
+        android:name="com.rahmacom.rimesyarifix.ui.reseller_kyc_preview.ResellerKYCPreviewFragment"
+        android:label="fragment_reseller_kyc_preview"
+        tools:layout="@layout/fragment_reseller_kyc_preview" >
+        <action
+            android:id="@+id/resellerKYCPreviewFragment_to_resellerStatusVerifikasiFragment"
+            app:destination="@id/resellerStatusVerifikasiFragment" />
     </fragment>
 </navigation>

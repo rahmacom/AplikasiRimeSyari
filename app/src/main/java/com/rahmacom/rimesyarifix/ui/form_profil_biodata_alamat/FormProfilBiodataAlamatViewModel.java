@@ -6,6 +6,9 @@ import androidx.lifecycle.Transformations;
 import androidx.lifecycle.ViewModel;
 
 import com.rahmacom.rimesyarifix.data.MainRepository;
+import com.rahmacom.rimesyarifix.data.model.District;
+import com.rahmacom.rimesyarifix.data.model.Province;
+import com.rahmacom.rimesyarifix.data.model.Regency;
 import com.rahmacom.rimesyarifix.data.model.UserShipment;
 import com.rahmacom.rimesyarifix.data.model.Village;
 import com.rahmacom.rimesyarifix.data.vo.Resource;
@@ -22,7 +25,9 @@ public class FormProfilBiodataAlamatViewModel extends ViewModel {
     private MainRepository mainRepository;
     private MutableLiveData<String> liveToken = new MutableLiveData<>();
     private MutableLiveData<Alamat> liveAlamat = new MutableLiveData<>();
-    private MutableLiveData<String> liveVillage = new MutableLiveData<>();
+    private MutableLiveData<String> liveDistrict = new MutableLiveData<>();
+    private MutableLiveData<String> liveRegency = new MutableLiveData<>();
+    private MutableLiveData<String> liveProvince = new MutableLiveData<>();
 
     @Inject
     public FormProfilBiodataAlamatViewModel(MainRepository mainRepository) {
@@ -39,54 +44,77 @@ public class FormProfilBiodataAlamatViewModel extends ViewModel {
         liveAlamat.setValue(alamat);
     }
 
-    public void setLiveAlamat(int id, String address, String kodePos, String catatan, boolean isDefault, long villageId) {
+    public void setLiveAlamat(int id, String address, String kodePos, String catatan, boolean isDefault, String village, String district, String regency, String province) {
         Alamat alamat = new Alamat();
         alamat.id = id;
         alamat.alamat = address;
         alamat.kodePos = kodePos;
         alamat.catatan = catatan;
         alamat.isDefault = isDefault;
-        alamat.villageId = villageId;
+        alamat.village = village;
+        alamat.district = district;
+        alamat.regency = regency;
+        alamat.province = province;
 
         liveAlamat.setValue(alamat);
     }
 
-    public void setLiveAlamat(String address, String kodePos, String catatan, boolean isDefault, long villageId) {
+    public void setLiveAlamat(String address, String kodePos, String catatan, boolean isDefault, String village, String district, String regency, String province) {
         Alamat alamat = new Alamat();
         alamat.alamat = address;
         alamat.kodePos = kodePos;
         alamat.catatan = catatan;
         alamat.isDefault = isDefault;
-        alamat.villageId = villageId;
+        alamat.village = village;
+        alamat.district = district;
+        alamat.regency = regency;
+        alamat.province = province;
 
         liveAlamat.setValue(alamat);
     }
 
-    public void setLiveVillage(String query) {
-        liveVillage.setValue(query);
+    public void setLiveDistrict(String query) {
+        liveDistrict.setValue(query);
+    }
+
+    public void setLiveRegency(String query) {
+        liveRegency.setValue(query);
+    }
+
+    public void setLiveProvince(String query) {
+        liveProvince.setValue(query);
     }
 
     public final LiveData<Resource<UserShipment>> newShipmentAddress = Transformations.switchMap(liveAlamat, alamat ->
-            mainRepository.newShipmentAddress(liveToken.getValue(), alamat.alamat, alamat.kodePos, alamat.catatan, alamat.isDefault, alamat.villageId));
+            mainRepository.newShipmentAddress(liveToken.getValue(), alamat.alamat, alamat.kodePos, alamat.catatan, alamat.isDefault, alamat.village, alamat.district, alamat.regency, alamat.province));
 
     public final LiveData<Resource<UserShipment>> viewShipmentAddress = Transformations.switchMap(liveAlamat, alamat ->
             mainRepository.viewShipmentAddress(liveToken.getValue(), alamat.id));
 
     public final LiveData<Resource<UserShipment>> updateShipmentAddress = Transformations.switchMap(liveAlamat, alamat ->
-            mainRepository.updateShipmentAddress(liveToken.getValue(), alamat.id, alamat.alamat, alamat.kodePos, alamat.catatan, alamat.isDefault, alamat.villageId));
+            mainRepository.updateShipmentAddress(liveToken.getValue(), alamat.id, alamat.alamat, alamat.kodePos, alamat.catatan, alamat.isDefault, alamat.village, alamat.district, alamat.regency, alamat.province));
 
-    public final LiveData<Resource<List<Village>>> getVillages = Transformations.switchMap(liveToken, token ->
-            mainRepository.getVillages(token));
+    public final LiveData<Resource<List<Province>>> getProvinces = Transformations.switchMap(liveToken, token ->
+            mainRepository.getProvinces(token));
 
-    public final LiveData<Resource<List<Village>>> searchVillages = Transformations.switchMap(liveVillage, village ->
-            mainRepository.searchVillages(liveToken.getValue(), village));
+    public final LiveData<Resource<List<Regency>>> getRegencies = Transformations.switchMap(liveProvince, province ->
+            mainRepository.getRegencies(liveToken.getValue(), province));
+
+    public final LiveData<Resource<List<District>>> getDistricts = Transformations.switchMap(liveRegency, regency ->
+            mainRepository.getDistricts(liveToken.getValue(), regency));
+
+    public final LiveData<Resource<List<Village>>> getVillages = Transformations.switchMap(liveDistrict, district ->
+            mainRepository.getVillages(liveToken.getValue(), district));
 
     static class Alamat {
         int id;
         String alamat;
         String kodePos;
         String catatan;
+        String village;
+        String district;
+        String regency;
+        String province;
         boolean isDefault;
-        long villageId;
     }
 }

@@ -13,6 +13,7 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.NavController;
+import androidx.navigation.NavOptions;
 import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -116,21 +117,38 @@ public class ProfilFragment extends Fragment {
 
     private void logout() {
         viewModel.logout.observe(getViewLifecycleOwner(), logout -> {
-            manager.removePreference(Const.KEY_TOKEN);
-            manager.removePreference(Const.KEY_TYPE);
-            manager.removePreference(Const.KEY_NIK);
-            manager.removePreference(Const.KEY_NAMA_LENGKAP);
-            manager.removePreference(Const.KEY_JENIS_KELAMIN);
-            manager.removePreference(Const.KEY_EMAIL);
-            manager.removePreference(Const.KEY_TEMPAT_LAHIR);
-            manager.removePreference(Const.KEY_TGL_LAHIR);
-            manager.removePreference(Const.KEY_ALAMAT);
-            manager.removePreference(Const.KEY_NO_TELP);
-            manager.removePreference(Const.KEY_NO_WA);
-            manager.removePreference(Const.KEY_ROLE);
-            manager.removePreference(Const.KEY_AVATAR);
+            switch (logout.getStatus()) {
+                case SUCCESS:
+                    manager.removePreference(Const.KEY_TOKEN);
+                    manager.removePreference(Const.KEY_TYPE);
+                    manager.removePreference(Const.KEY_NIK);
+                    manager.removePreference(Const.KEY_NAMA_LENGKAP);
+                    manager.removePreference(Const.KEY_JENIS_KELAMIN);
+                    manager.removePreference(Const.KEY_EMAIL);
+                    manager.removePreference(Const.KEY_TEMPAT_LAHIR);
+                    manager.removePreference(Const.KEY_TGL_LAHIR);
+                    manager.removePreference(Const.KEY_ALAMAT);
+                    manager.removePreference(Const.KEY_NO_TELP);
+                    manager.removePreference(Const.KEY_NO_WA);
+                    manager.removePreference(Const.KEY_ROLE);
+                    manager.removePreference(Const.KEY_AVATAR);
 
-            navController.navigate(ProfilFragmentDirections.globalToLoginFragment());
+                    Toast.makeText(requireContext(), "Berhasil logout", Toast.LENGTH_SHORT).show();
+                    getParentFragmentManager().getFragments().clear();
+
+                    navController.navigate(ProfilFragmentDirections.globalToLoginFragment());
+                case LOADING:
+                    break;
+
+                case EMPTY:
+                case ERROR:
+                case INVALID:
+                case UNAUTHORIZED:
+                case FORBIDDEN:
+                case UNPROCESSABLE_ENTITY:
+                    Toast.makeText(requireContext(), "Terjadi error! Silahkan hubungi admin atau restart aplikasi", Toast.LENGTH_SHORT).show();
+                    break;
+            }
         });
     }
 }

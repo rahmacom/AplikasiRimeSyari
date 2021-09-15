@@ -15,6 +15,7 @@ import com.rahmacom.rimesyarifix.databinding.MainActivityBinding;
 import java.util.Objects;
 
 import dagger.hilt.android.AndroidEntryPoint;
+import timber.log.Timber;
 
 @AndroidEntryPoint
 public class MainActivity extends AppCompatActivity {
@@ -49,5 +50,11 @@ public class MainActivity extends AppCompatActivity {
 
         // NavigationUI.setupActionBarWithNavController(this, navController, mAppBarConfig);
         NavigationUI.setupWithNavController(binding.navView, navController);
+    }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        Timber.d("onBackPressed called");
     }
 }

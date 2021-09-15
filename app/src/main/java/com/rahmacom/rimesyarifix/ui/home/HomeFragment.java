@@ -5,6 +5,7 @@ import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -24,6 +25,7 @@ import com.rahmacom.rimesyarifix.utils.Const;
 import java.util.ArrayList;
 
 import dagger.hilt.android.AndroidEntryPoint;
+import timber.log.Timber;
 
 @AndroidEntryPoint
 public class HomeFragment extends Fragment {
@@ -50,7 +52,7 @@ public class HomeFragment extends Fragment {
         navController = Navigation.findNavController(view);
         manager = new PreferenceManager(requireContext());
 
-        if (!manager.keyExists(Const.KEY_TOKEN) || manager.getString(Const.KEY_TOKEN) == null) {
+        if (!manager.keyExists(Const.KEY_TOKEN)) {
             navController.navigate(HomeFragmentDirections.globalToLoginFragment());
         }
 
@@ -138,6 +140,7 @@ public class HomeFragment extends Fragment {
         viewModel.getUserProfile.observe(getViewLifecycleOwner(), user -> {
             switch (user.getStatus()) {
                 case SUCCESS:
+                    manager.setString(Const.KEY_NIK, user.getData().getNik());
                     manager.setString(Const.KEY_NAMA_LENGKAP, user.getData().getNamaLengkap());
                     manager.setString(Const.KEY_EMAIL, user.getData().getEmail());
                     manager.setString(Const.KEY_JENIS_KELAMIN, user.getData().getJenisKelamin());
@@ -148,12 +151,11 @@ public class HomeFragment extends Fragment {
                     manager.setString(Const.KEY_NO_WA, user.getData().getNoWa());
                     manager.setString(Const.KEY_ROLE, user.getData().getRoles().get(0));
                     if (user.getData().getAvatar() != null) {
-                        manager.setString(Const.KEY_AVATAR, user.getData().getAvatar().getPath());
+                        manager.setString(Const.KEY_AVATAR, Const.BASE_URL + user.getData().getAvatar().getPath());
                     }
                     break;
 
                 case EMPTY:
-                case LOADING:
                 case ERROR:
                 case INVALID:
                 case UNAUTHORIZED:

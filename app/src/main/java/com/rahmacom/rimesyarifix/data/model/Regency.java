@@ -36,4 +36,9 @@ public class Regency {
     public void setProvince(Province province) {
         this.province = province;
     }
+
+    @Override
+    public String toString() {
+        return name;
+    }
 }

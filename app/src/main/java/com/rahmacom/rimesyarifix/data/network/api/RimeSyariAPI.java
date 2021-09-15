@@ -3,6 +3,7 @@ package com.rahmacom.rimesyarifix.data.network.api;
 import com.rahmacom.rimesyarifix.data.model.Cart;
 import com.rahmacom.rimesyarifix.data.model.Color;
 import com.rahmacom.rimesyarifix.data.model.District;
+import com.rahmacom.rimesyarifix.data.model.Image;
 import com.rahmacom.rimesyarifix.data.model.Order;
 import com.rahmacom.rimesyarifix.data.model.PaymentMethod;
 import com.rahmacom.rimesyarifix.data.model.Post;
@@ -13,11 +14,13 @@ import com.rahmacom.rimesyarifix.data.model.Size;
 import com.rahmacom.rimesyarifix.data.model.Testimony;
 import com.rahmacom.rimesyarifix.data.model.User;
 import com.rahmacom.rimesyarifix.data.model.UserShipment;
+import com.rahmacom.rimesyarifix.data.model.UserVerification;
 import com.rahmacom.rimesyarifix.data.model.Village;
 import com.rahmacom.rimesyarifix.data.network.response.ResponseLogin;
 
 import java.util.List;
 
+import okhttp3.MultipartBody;
 import retrofit2.Call;
 import retrofit2.http.DELETE;
 import retrofit2.http.Field;
@@ -25,8 +28,11 @@ import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.GET;
 import retrofit2.http.Header;
 import retrofit2.http.Headers;
+import retrofit2.http.Multipart;
 import retrofit2.http.PATCH;
 import retrofit2.http.POST;
+import retrofit2.http.PUT;
+import retrofit2.http.Part;
 import retrofit2.http.Path;
 import retrofit2.http.Query;
 
@@ -205,7 +211,10 @@ public interface RimeSyariAPI {
                                           @Field("kode_pos") String kodePos,
                                           @Field("catatan") String catatan,
                                           @Field("is_default") int isDefault,
-                                          @Field("village_id") long villageId);
+                                          @Field("village") String village,
+                                          @Field("district") String district,
+                                          @Field("regency") String regency,
+                                          @Field("province") String province);
 
     @PATCH("user_shipments/{user_shipment}")
     @FormUrlEncoded
@@ -216,7 +225,10 @@ public interface RimeSyariAPI {
                                              @Field("kode_pos") String kodePos,
                                              @Field("catatan") String catatan,
                                              @Field("is_default") int isDefault,
-                                             @Field("village_id") long villageId);
+                                             @Field("village") String village,
+                                             @Field("district") String district,
+                                             @Field("regency") String regency,
+                                             @Field("province") String province);
 
     @DELETE("user_shipments/{user_shipment}")
     @Headers({"Accept: application/json"})
@@ -228,27 +240,19 @@ public interface RimeSyariAPI {
 
     @GET("shipments/provinces")
     @Headers({"Accept: application/json"})
-    Call<List<Province>> getAllProvinces(@Header("Authorization") String token, @Query("q") String query, @Query("id") int id, @Query("regency_id") int regencyId, @Query("district_id") int districtId, @Query("village_id") int villageId);
+    Call<List<Province>> getProvinces(@Header("Authorization") String token);
 
     @GET("shipments/regencies")
     @Headers({"Accept: application/json"})
-    Call<List<Regency>> getAllRegencies(@Header("Authorization") String token, @Query("q") String query, @Query("id") int id, @Query("province_id") int provinceId, @Query("district_id") int districtId, @Query("village_id") int villageId);
+    Call<List<Regency>> getRegencies(@Header("Authorization") String token, @Query("province") String province);
 
     @GET("shipments/districts")
     @Headers({"Accept: application/json"})
-    Call<List<District>> getAllDistricts(@Header("Authorization") String token, @Query("q") String query, @Query("id") int id, @Query("province_id") int provinceId, @Query("regency_id") int regencyId, @Query("village_id") int villageId);
+    Call<List<District>> getDistricts(@Header("Authorization") String token, @Query("regency") String regency);
 
     @GET("shipments/villages")
     @Headers({"Accept: application/json"})
-    Call<List<Village>> getAllVillages(@Header("Authorization") String token);
-
-    @GET("shipments/villages")
-    @Headers({"Accept: application/json"})
-    Call<List<Village>> getVillages(@Header("Authorization") String token, @Query("id") int id, @Query("province_id") int provinceId, @Query("regency_id") int regencyId, @Query("district_id") int districtId);
-
-    @GET("shipments/villages")
-    @Headers({"Accept: application/json"})
-    Call<List<Village>> searchVillages(@Header("Authorization") String token, @Query("q") String query);
+    Call<List<Village>> getVillages(@Header("Authorization") String token, @Query("district") String district);
 
     @GET("colors")
     @Headers({"Accept: application/json"})
@@ -269,4 +273,26 @@ public interface RimeSyariAPI {
     @GET("posts/{post}")
     @Headers({"Accept: application/json"})
     Call<Post> viewPost(@Header("Authorization") String token, @Path("post") int postId);
+
+    @POST("verifications/verify")
+    @FormUrlEncoded
+    @Headers({"Accept: application/json"})
+    Call<UserVerification> checkIfUserIsElligible(@Header("Authorization") String token);
+
+    @POST("verifications/image")
+    @Multipart
+    @Headers({"Accept: application/json"})
+    Call<UserVerification> uploadVerificationImage(@Header("Authorization") String token,
+                                       @Query("image_type") int type,
+                                       @Part("path") MultipartBody.Part path);
+
+    @GET("verifications/status")
+    @Headers({"Accept: application/json"})
+    Call<UserVerification> verificationStatus(@Header("Authorization") String token);
+
+    @POST("profile/upload")
+    @Multipart
+    @Headers({"Accept: application/json"})
+    Call<Image> uploadAvatar(@Header("Authorization") String token,
+                             @Part("path") MultipartBody.Part path);
 }

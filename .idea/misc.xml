@@ -3,20 +3,39 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Backup/Cloud Backup/MEGASync/Projects/Android/AplikasiRimeSyari/app/src/main/res/drawable-v24/ic_launcher_foreground.xml" value="0.2361111111111111" />
+        <entry key="..\:/Backup/Cloud Backup/MEGASync/Projects/Android/AplikasiRimeSyari/app/src/main/res/drawable/ic_baseline_account_circle_24.xml" value="0.2361111111111111" />
+        <entry key="..\:/Backup/Cloud Backup/MEGASync/Projects/Android/AplikasiRimeSyari/app/src/main/res/drawable/ic_baseline_camera_24.xml" value="0.2361111111111111" />
+        <entry key="..\:/Backup/Cloud Backup/MEGASync/Projects/Android/AplikasiRimeSyari/app/src/main/res/drawable/ic_baseline_flip_camera_ios_24.xml" value="0.2361111111111111" />
+        <entry key="..\:/Backup/Cloud Backup/MEGASync/Projects/Android/AplikasiRimeSyari/app/src/main/res/drawable/ic_launcher_background.xml" value="0.2361111111111111" />
+        <entry key="..\:/Backup/Cloud Backup/MEGASync/Projects/Android/AplikasiRimeSyari/app/src/main/res/drawable/ic_launcher_foreground.xml" value="0.2361111111111111" />
         <entry key="..\:/Backup/Cloud Backup/MEGASync/Projects/Android/AplikasiRimeSyari/app/src/main/res/layout/fragment_form_profil_biodata.xml" value="0.33" />
         <entry key="..\:/Backup/Cloud Backup/MEGASync/Projects/Android/AplikasiRimeSyari/app/src/main/res/layout/fragment_form_profil_biodata_alamat.xml" value="0.33" />
         <entry key="..\:/Backup/Cloud Backup/MEGASync/Projects/Android/AplikasiRimeSyari/app/src/main/res/layout/fragment_home.xml" value="0.20277777777777778" />
+        <entry key="..\:/Backup/Cloud Backup/MEGASync/Projects/Android/AplikasiRimeSyari/app/src/main/res/layout/fragment_keranjang_detail.xml" value="0.25" />
         <entry key="..\:/Backup/Cloud Backup/MEGASync/Projects/Android/AplikasiRimeSyari/app/src/main/res/layout/fragment_order.xml" value="0.1109375" />
+        <entry key="..\:/Backup/Cloud Backup/MEGASync/Projects/Android/AplikasiRimeSyari/app/src/main/res/layout/fragment_order_detail.xml" value="0.5" />
+        <entry key="..\:/Backup/Cloud Backup/MEGASync/Projects/Android/AplikasiRimeSyari/app/src/main/res/layout/fragment_order_konfirmasi.xml" value="0.33" />
         <entry key="..\:/Backup/Cloud Backup/MEGASync/Projects/Android/AplikasiRimeSyari/app/src/main/res/layout/fragment_order_list.xml" value="0.1109375" />
+        <entry key="..\:/Backup/Cloud Backup/MEGASync/Projects/Android/AplikasiRimeSyari/app/src/main/res/layout/fragment_order_new.xml" value="0.22552083333333334" />
+        <entry key="..\:/Backup/Cloud Backup/MEGASync/Projects/Android/AplikasiRimeSyari/app/src/main/res/layout/fragment_produk.xml" value="0.22552083333333334" />
+        <entry key="..\:/Backup/Cloud Backup/MEGASync/Projects/Android/AplikasiRimeSyari/app/src/main/res/layout/fragment_produk_testimoni.xml" value="0.22552083333333334" />
+        <entry key="..\:/Backup/Cloud Backup/MEGASync/Projects/Android/AplikasiRimeSyari/app/src/main/res/layout/fragment_profil.xml" value="0.22552083333333334" />
         <entry key="..\:/Backup/Cloud Backup/MEGASync/Projects/Android/AplikasiRimeSyari/app/src/main/res/layout/fragment_profil_tentang.xml" value="0.33" />
         <entry key="..\:/Backup/Cloud Backup/MEGASync/Projects/Android/AplikasiRimeSyari/app/src/main/res/layout/fragment_register.xml" value="0.22552083333333334" />
+        <entry key="..\:/Backup/Cloud Backup/MEGASync/Projects/Android/AplikasiRimeSyari/app/src/main/res/layout/fragment_reseller_kyc_preview.xml" value="0.22552083333333334" />
         <entry key="..\:/Backup/Cloud Backup/MEGASync/Projects/Android/AplikasiRimeSyari/app/src/main/res/layout/item_home_produk_grid.xml" value="2.0" />
+        <entry key="..\:/Backup/Cloud Backup/MEGASync/Projects/Android/AplikasiRimeSyari/app/src/main/res/layout/item_keranjang_detail_list.xml" value="0.75" />
         <entry key="..\:/Backup/Cloud Backup/MEGASync/Projects/Android/AplikasiRimeSyari/app/src/main/res/layout/item_profil_testimoni_list.xml" value="0.1" />
         <entry key="..\:/Backup/Cloud Backup/MEGASync/Projects/Android/AplikasiRimeSyari/app/src/main/res/menu/menu_form_profil_biodata.xml" value="0.20277777777777778" />
+        <entry key="..\:/Backup/Cloud Backup/MEGASync/Projects/Android/AplikasiRimeSyari/app/src/main/res/menu/menu_keranjang_detail.xml" value="0.22552083333333334" />
+        <entry key="..\:/Backup/Cloud Backup/MEGASync/Projects/Android/AplikasiRimeSyari/app/src/main/res/menu/menu_keranjang_detail_longclick.xml" value="0.22552083333333334" />
+        <entry key="..\:/Backup/Cloud Backup/MEGASync/Projects/Android/AplikasiRimeSyari/app/src/main/res/menu/menu_keranjang_detail_update.xml" value="0.22552083333333334" />
         <entry key="..\:/Backup/Cloud Backup/MEGASync/Projects/Android/AplikasiRimeSyari/app/src/main/res/menu/menu_profil_alamat.xml" value="0.20277777777777778" />
         <entry key="..\:/Backup/Cloud Backup/MEGASync/Projects/Android/AplikasiRimeSyari/app/src/main/res/menu/menu_profil_biodata.xml" value="0.20277777777777778" />
         <entry key="..\:/Backup/Cloud Backup/MEGASync/Projects/Android/AplikasiRimeSyari/app/src/main/res/menu/menu_profil_biodata_alamat_floating.xml" value="0.20277777777777778" />
         <entry key="..\:/Backup/Cloud Backup/MEGASync/Projects/Android/AplikasiRimeSyari/app/src/main/res/menu/menu_profil_biodata_alamat_toolbar.xml" value="0.20277777777777778" />
+        <entry key="..\:/Backup/Cloud Backup/MEGASync/Projects/Android/AplikasiRimeSyari/app/src/main/res/mipmap-anydpi-v26/ic_launcher.xml" value="0.2361111111111111" />
         <entry key="..\:/Backup/Cloud Backup/MEGASync/Projects/Android/kotlin/RimeSyariFix/app/src/main/res/drawable-v24/ic_launcher_foreground.xml" value="0.18888888888888888" />
         <entry key="..\:/Backup/Cloud Backup/MEGASync/Projects/Android/kotlin/RimeSyariFix/app/src/main/res/drawable/ic_launcher_background.xml" value="0.18888888888888888" />
         <entry key="..\:/Backup/Cloud Backup/MEGASync/Projects/Android/kotlin/RimeSyariFix/app/src/main/res/drawable/ic_menu_gallery.xml" value="0.18888888888888888" />

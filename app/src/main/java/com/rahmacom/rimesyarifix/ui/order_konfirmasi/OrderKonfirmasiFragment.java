@@ -24,12 +24,4 @@ public class OrderKonfirmasiFragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         return inflater.inflate(R.layout.fragment_order_konfirmasi, container, false);
     }
-
-    @Override
-    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
-        super.onActivityCreated(savedInstanceState);
-        mViewModel = new ViewModelProvider(this).get(OrderKonfirmasiViewModel.class);
-        // TODO: Use the ViewModel
-    }
-
 }
