@@ -215,11 +215,14 @@
 
             <TextView
                 android:id="@+id/tv_order_detail_payment_notice"
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
+                android:textColor="@color/gray_700"
+                app:layout_constraintEnd_toStartOf="@+id/gr_order_detail"
                 app:layout_constraintStart_toStartOf="@+id/gl_order_detail"
-                app:layout_constraintTop_toBottomOf="@+id/tv_order_detail_metode_pembelian_title" />
+                app:layout_constraintTop_toBottomOf="@+id/tv_order_detail_metode_pembelian_title"
+                tools:text="Silahkan bayar sebelum tanggal 22 Mei 2021. Anda dapat mengupload bukti pembayaran anda disini" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 

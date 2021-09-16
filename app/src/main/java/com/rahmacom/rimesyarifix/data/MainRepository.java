@@ -17,17 +17,22 @@ import com.rahmacom.rimesyarifix.data.model.Size;
 import com.rahmacom.rimesyarifix.data.model.Testimony;
 import com.rahmacom.rimesyarifix.data.model.User;
 import com.rahmacom.rimesyarifix.data.model.UserShipment;
+import com.rahmacom.rimesyarifix.data.model.UserVerification;
 import com.rahmacom.rimesyarifix.data.model.Village;
 import com.rahmacom.rimesyarifix.data.network.api.RimeSyariAPI;
 import com.rahmacom.rimesyarifix.data.network.response.ResponseLogin;
 import com.rahmacom.rimesyarifix.data.vo.Resource;
 
+import java.io.File;
 import java.io.IOException;
 import java.util.List;
 
 import javax.inject.Inject;
 import javax.inject.Singleton;
 
+import okhttp3.MediaType;
+import okhttp3.MultipartBody;
+import okhttp3.RequestBody;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -2187,6 +2192,217 @@ public class MainRepository {
 
             @Override
             public void onFailure(Call<Testimony> call, Throwable t) {
+                data.postValue(Resource.error(t.getMessage(), null));
+            }
+        });
+
+        return data;
+    }
+
+    /*
+     * ---------------------------------------------------------------------------------------------
+     *
+     * VERIFIKASI KYC
+     *
+     * ---------------------------------------------------------------------------------------------
+     */
+
+    public LiveData<Resource<UserVerification>> newVerification(String token) {
+        MutableLiveData<Resource<UserVerification>> data = new MutableLiveData<>();
+        data.postValue(Resource.loading(null));
+
+        Call<UserVerification> api = rimeSyariAPI.newVerification(token);
+        api.enqueue(new Callback<UserVerification>() {
+            @Override
+            public void onResponse(@NonNull Call<UserVerification> call, @NonNull Response<UserVerification> response) {
+                switch (response.code()) {
+                    case 200:
+                    case 201:
+                        data.postValue(Resource.success(response.body()));
+                        break;
+
+                    case 204:
+                        data.postValue(Resource.empty(null));
+                        break;
+
+                    case 400:
+                        data.postValue(Resource.invalid(response.message()));
+                        break;
+
+                    case 401:
+                        data.postValue(Resource.unauthorized(response.message()));
+                        break;
+
+                    case 403:
+                        data.postValue(Resource.forbidden(response.message()));
+                        break;
+
+                    case 404:
+                    case 405:
+                        data.postValue(Resource.error(response.message(), null));
+                        break;
+
+                    case 422:
+                        data.postValue(Resource.unprocessableEntity(response.message(), null));
+                        break;
+                }
+            }
+
+            @Override
+            public void onFailure(@NonNull Call<UserVerification> call, @NonNull Throwable t) {
+                data.postValue(Resource.error(t.getMessage(), null));
+            }
+        });
+
+        return data;
+    }
+
+    public LiveData<Resource<Boolean>> checkIfUserIsElligible(String token) {
+        MutableLiveData<Resource<Boolean>> data = new MutableLiveData<>();
+        data.postValue(Resource.loading(null));
+
+        Call<Boolean> api = rimeSyariAPI.checkIfUserIsElligible(token);
+        api.enqueue(new Callback<Boolean>() {
+            @Override
+            public void onResponse(Call<Boolean> call, Response<Boolean> response) {
+                switch (response.code()) {
+                    case 200:
+                    case 201:
+                        data.postValue(Resource.success(response.body()));
+                        break;
+
+                    case 204:
+                        data.postValue(Resource.empty(null));
+                        break;
+
+                    case 400:
+                        data.postValue(Resource.invalid(response.message()));
+                        break;
+
+                    case 401:
+                        data.postValue(Resource.unauthorized(response.message()));
+                        break;
+
+                    case 403:
+                        data.postValue(Resource.forbidden(response.message()));
+                        break;
+
+                    case 404:
+                    case 405:
+                        data.postValue(Resource.error(response.message(), null));
+                        break;
+
+                    case 422:
+                        data.postValue(Resource.unprocessableEntity(response.message(), null));
+                        break;
+                }
+            }
+
+            @Override
+            public void onFailure(Call<Boolean> call, Throwable t) {
+                data.postValue(Resource.error(t.getMessage(), null));
+            }
+        });
+
+        return data;
+    }
+
+    public LiveData<Resource<UserVerification>> uploadImage(String token, File image, int imageType) {
+        MutableLiveData<Resource<UserVerification>> data = new MutableLiveData<>();
+        data.postValue(Resource.loading(null));
+
+        RequestBody requestBody = RequestBody.create(MediaType.parse("multipart/form-data"), image);
+        MultipartBody.Part imagePart = MultipartBody.Part.createFormData("path", image.getName(), requestBody);
+
+        Call<UserVerification> api = rimeSyariAPI.uploadVerificationImage(token, imagePart, imageType);
+        api.enqueue(new Callback<UserVerification>() {
+            @Override
+            public void onResponse(Call<UserVerification> call, Response<UserVerification> response) {
+                switch (response.code()) {
+                    case 200:
+                    case 201:
+                        data.postValue(Resource.success(response.body()));
+                        break;
+
+                    case 204:
+                        data.postValue(Resource.empty(null));
+                        break;
+
+                    case 400:
+                        data.postValue(Resource.invalid(response.message()));
+                        break;
+
+                    case 401:
+                        data.postValue(Resource.unauthorized(response.message()));
+                        break;
+
+                    case 403:
+                        data.postValue(Resource.forbidden(response.message()));
+                        break;
+
+                    case 404:
+                    case 405:
+                        data.postValue(Resource.error(response.message(), null));
+                        break;
+
+                    case 422:
+                        data.postValue(Resource.unprocessableEntity(response.message(), null));
+                        break;
+                }
+            }
+
+            @Override
+            public void onFailure(Call<UserVerification> call, Throwable t) {
+                data.postValue(Resource.error(t.getMessage(), null));
+            }
+        });
+
+        return data;
+    }
+
+    public LiveData<Resource<UserVerification>> verificationStatus(String token) {
+        MutableLiveData<Resource<UserVerification>> data = new MutableLiveData<>();
+        data.postValue(Resource.loading(null));
+
+        Call<UserVerification> api = rimeSyariAPI.verificationStatus(token);
+        api.enqueue(new Callback<UserVerification>() {
+            @Override
+            public void onResponse(@NonNull Call<UserVerification> call, @NonNull Response<UserVerification> response) {
+                switch (response.code()) {
+                    case 200:
+                    case 201:
+                        data.postValue(Resource.success(response.body()));
+                        break;
+
+                    case 204:
+                        data.postValue(Resource.empty(null));
+                        break;
+
+                    case 400:
+                        data.postValue(Resource.invalid(response.message()));
+                        break;
+
+                    case 401:
+                        data.postValue(Resource.unauthorized(response.message()));
+                        break;
+
+                    case 403:
+                        data.postValue(Resource.forbidden(response.message()));
+                        break;
+
+                    case 404:
+                    case 405:
+                        data.postValue(Resource.error(response.message(), null));
+                        break;
+
+                    case 422:
+                        data.postValue(Resource.unprocessableEntity(response.message(), null));
+                        break;
+                }
+            }
+
+            @Override
+            public void onFailure(@NonNull Call<UserVerification> call, @NonNull Throwable t) {
                 data.postValue(Resource.error(t.getMessage(), null));
             }
         });

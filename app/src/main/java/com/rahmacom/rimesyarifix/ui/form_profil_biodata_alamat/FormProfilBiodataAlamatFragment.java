@@ -46,7 +46,6 @@ public class FormProfilBiodataAlamatFragment extends Fragment {
     public static final int IS_CREATING = 1;
     public static final int IS_UPDATING = 2;
 
-    private long villageId = 0;
     private int state;
 
     @Override

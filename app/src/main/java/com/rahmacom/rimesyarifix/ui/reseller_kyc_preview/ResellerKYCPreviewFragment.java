@@ -9,25 +9,31 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
+import androidx.navigation.ui.AppBarConfiguration;
+import androidx.navigation.ui.NavigationUI;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.rahmacom.rimesyarifix.R;
-import com.rahmacom.rimesyarifix.databinding.FragmentResellerKycCameraBinding;
+import com.bumptech.glide.Glide;
+import com.rahmacom.rimesyarifix.databinding.FragmentResellerKycPreviewBinding;
 import com.rahmacom.rimesyarifix.manager.PreferenceManager;
 
+import dagger.hilt.android.AndroidEntryPoint;
+
+@AndroidEntryPoint
 public class ResellerKYCPreviewFragment extends Fragment {
 
     private ResellerKYCPreviewViewModel viewModel;
-    private FragmentResellerKycCameraBinding binding;
+    private FragmentResellerKycPreviewBinding binding;
     private NavController navController;
     private PreferenceManager manager;
+    private ResellerKYCPreviewFragmentArgs args;
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        binding = FragmentResellerKycCameraBinding.inflate(inflater, container, false);
+        binding = FragmentResellerKycPreviewBinding.inflate(inflater, container, false);
         return binding.getRoot();
     }
 
@@ -37,5 +43,25 @@ public class ResellerKYCPreviewFragment extends Fragment {
         viewModel = new ViewModelProvider(requireActivity()).get(ResellerKYCPreviewViewModel.class);
         navController = Navigation.findNavController(view);
         manager = new PreferenceManager(requireContext());
+        args = ResellerKYCPreviewFragmentArgs.fromBundle(getArguments());
+
+        setupToolbar();
+        Glide.with(view)
+                .load(args.getFileUri())
+                .into(binding.ivResellerKycPreviewFoto);
     }
+
+    private void setupToolbar() {
+        AppBarConfiguration appBarConfiguration = new AppBarConfiguration.Builder(navController.getGraph()).build();
+        NavigationUI.setupWithNavController(binding.toolbarResellerKycPreview, navController, appBarConfiguration);
+    }
+
+    private void nextImageType() {
+        navController.popBackStack();
+    }
+
+    private void takeNewImage() {
+
+    }
+
 }

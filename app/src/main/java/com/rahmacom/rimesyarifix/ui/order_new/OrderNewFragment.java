@@ -185,8 +185,6 @@ public class OrderNewFragment extends Fragment {
 
         viewModel.setLiveOrder(pesan, kodeDiskon, userShipmentId, paymentMethodId, productIds, colorIds, sizeIds, quantities);
         viewModel.newOrder.observe(getViewLifecycleOwner(), order -> {
-            Timber.d("Status: %s", order.getStatus().toString());
-            Timber.d("Message: %s", order.getMessage());
             switch (order.getStatus()) {
                 case SUCCESS:
                     Toast.makeText(requireContext(), "Order berhasil dibuat!", Toast.LENGTH_SHORT).show();

@@ -234,12 +234,6 @@
         android:label="Syarat dan Ketentuan"
         tools:layout="@layout/fragment_reseller_info">
         <action
-            android:id="@+id/resellerInfoFragment_to_formEditBiodataFragment"
-            app:destination="@id/formEditBiodataFragment" />
-        <action
-            android:id="@+id/resellerInfoFragment_to_resellerKYCFragment"
-            app:destination="@id/resellerKYCFragment" />
-        <action
             android:id="@+id/resellerInfoFragment_to_resellerStatusVerifikasiFragment"
             app:destination="@id/resellerStatusVerifikasiFragment" />
     </fragment>
@@ -248,12 +242,14 @@
         android:name="com.rahmacom.rimesyarifix.ui.reseller_kyc.ResellerKYCFragment"
         tools:layout="@layout/fragment_reseller_kyc_camera">
         <argument
-            android:name="user_verification_id"
+            android:name="image_type"
             app:argType="integer"
             android:defaultValue="-1" />
         <action
             android:id="@+id/resellerKYCFragment_to_resellerKYCPreviewFragment"
-            app:destination="@id/resellerKYCPreviewFragment" />
+            app:destination="@id/resellerKYCPreviewFragment"
+            app:popUpTo="@id/resellerKYCPreviewFragment"
+            app:popUpToInclusive="true" />
     </fragment>
     <fragment
         android:id="@+id/resellerStatusVerifikasiFragment"
@@ -266,7 +262,20 @@
             android:defaultValue="-1" />
         <action
             android:id="@+id/resellerStatusVerifikasiFragment_to_resellerKYCFragment"
-            app:destination="@id/resellerKYCFragment" />
+            app:destination="@id/resellerKYCFragment"
+            app:popUpTo="@id/resellerKYCFragment"
+            app:popUpToInclusive="true" />
+        <action
+            android:id="@+id/resellerStatusVerifikasiFragment_to_formEditBiodataFragment"
+            app:destination="@id/formEditBiodataFragment" />
+        <argument
+            android:name="image_path"
+            app:argType="string"
+            app:nullable="true" />
+        <argument
+            android:name="image_type"
+            app:argType="integer"
+            android:defaultValue="-1" />
     </fragment>
     <fragment
         android:id="@+id/splashScreenFragment"
@@ -409,6 +418,16 @@
         tools:layout="@layout/fragment_reseller_kyc_preview" >
         <action
             android:id="@+id/resellerKYCPreviewFragment_to_resellerStatusVerifikasiFragment"
-            app:destination="@id/resellerStatusVerifikasiFragment" />
+            app:destination="@id/resellerStatusVerifikasiFragment"
+            app:popUpTo="@id/resellerStatusVerifikasiFragment"
+            app:popUpToInclusive="true" />
+        <argument
+            android:name="file_uri"
+            app:argType="string"
+            app:nullable="true" />
+        <argument
+            android:name="image_type"
+            app:argType="integer"
+            android:defaultValue="-1" />
     </fragment>
 </navigation>

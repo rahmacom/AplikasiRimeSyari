@@ -22,6 +22,8 @@ import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentActivity;
+import androidx.navigation.NavController;
+import androidx.navigation.Navigation;
 
 import com.google.common.util.concurrent.ListenableFuture;
 import com.rahmacom.rimesyarifix.databinding.FragmentResellerKycCameraBinding;
@@ -37,7 +39,6 @@ import java.util.concurrent.Executors;
 
 public class ResellerKYCFragment extends Fragment {
 
-    public static final String KYC_ARGS = "kyc_args";
     public static final int KYC_FACE = 1;
     public static final int KYC_ID_CARD = 2;
     public static final int KYC_FACE_AND_ID_CARD = 3;
@@ -60,14 +61,9 @@ public class ResellerKYCFragment extends Fragment {
     private CameraSelector cameraSelector = CameraSelector.DEFAULT_BACK_CAMERA;
     private Boolean switchCam = true;
 
-    private FragmentActivity activity;
+    private NavController navController;
 
-    public static ResellerKYCFragment newInstance(int mode) {
-        ResellerKYCFragment fragment = new ResellerKYCFragment();
-        Bundle args = new Bundle();
-        args.putInt(KYC_ARGS, mode);
-        return new ResellerKYCFragment();
-    }
+    private FragmentActivity activity;
 
     @Override
     public void onAttach(@NonNull @NotNull Context context) {
@@ -100,6 +96,8 @@ public class ResellerKYCFragment extends Fragment {
         } else {
             ActivityCompat.requestPermissions(activity, REQUIRED_PERMISSIONS, REQUEST_CODE_PERMISSIONS);
         }
+
+        navController = Navigation.findNavController(view);
 
         binding.btnTakePhoto.setOnClickListener(v -> takePhoto());
         binding.btnSwitchCamera.setOnClickListener(v -> {
@@ -151,10 +149,14 @@ public class ResellerKYCFragment extends Fragment {
                 @Override
                 public void onImageSaved(@NonNull ImageCapture.OutputFileResults outputFileResults) {
                     Uri savedUri = Uri.fromFile(photoFile);
-                    String message = "Photo captured successfully: " + savedUri;
+                    String message = "Photo captured successfully: " + photoFile;
                     Toast.makeText(activity, message, Toast.LENGTH_SHORT)
                             .show();
                     Log.d(TAG, message);
+
+                    ResellerKYCFragmentDirections.ResellerKYCFragmentToResellerKYCPreviewFragment action = ResellerKYCFragmentDirections.resellerKYCFragmentToResellerKYCPreviewFragment(null);
+                    action.setFileUri(photoFile.toURI().toString());
+                    navController.navigate(action);
                 }
 
                 @Override

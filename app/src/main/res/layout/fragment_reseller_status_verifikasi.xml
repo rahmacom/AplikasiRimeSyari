@@ -1,13 +1,152 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".ui.reseller_status_verifikasi.ResellerStatusVerifikasiFragment">
 
-    <TextView
+    <com.google.android.material.appbar.MaterialToolbar
+        android:id="@+id/toolbar_reseller_status_verifikasi"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="Anda sudah melakukan verifikasi" />
+        android:layout_height="wrap_content"
+        android:minHeight="?attr/actionBarSize"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
-</FrameLayout>
+    <TextView
+        android:id="@+id/tv_reseller_status_verifikasi_judul_title"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="16dp"
+        android:fontFamily="@font/rubik_medium"
+        android:text="Keterangan"
+        android:textColor="@color/gray_600"
+        android:textSize="12sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/toolbar_reseller_status_verifikasi" />
+
+    <TextView
+        android:id="@+id/tv_reseller_status_verifikasi_judul"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:text="Saat ini anda sedang dalam proses mendaftar sebagai reseller Rime Syari. Mohon lengkapi persyaratan yang diperlukan terlebih dahulu."
+        android:textColor="@color/gray_700"
+        app:layout_constraintEnd_toEndOf="@+id/tv_reseller_status_verifikasi_judul_title"
+        app:layout_constraintStart_toStartOf="@+id/tv_reseller_status_verifikasi_judul_title"
+        app:layout_constraintTop_toBottomOf="@+id/tv_reseller_status_verifikasi_judul_title"
+        app:lineHeight="20sp" />
+
+    <TextView
+        android:id="@+id/tv_reseller_status_verifikasi_deskripsi_title"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:fontFamily="@font/rubik_medium"
+        android:text="Tentang Reseller Rime Syari"
+        android:textColor="@color/gray_600"
+        android:textSize="12sp"
+        app:layout_constraintEnd_toEndOf="@+id/tv_reseller_status_verifikasi_judul"
+        app:layout_constraintStart_toStartOf="@+id/tv_reseller_status_verifikasi_judul"
+        app:layout_constraintTop_toBottomOf="@+id/tv_reseller_status_verifikasi_judul" />
+
+    <TextView
+        android:id="@+id/tv_reseller_status_verifikasi_deskripsi"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:text="Reseller Rime Syari adalah customer yang memiliki izin untuk melakukan penjualan kembali barang yang dibeli. Reseller mendapatkan harga khusus dari Rime Syari ketika melakukan pembelian produk."
+        android:textColor="@color/gray_700"
+        app:layout_constraintEnd_toEndOf="@+id/tv_reseller_status_verifikasi_deskripsi_title"
+        app:layout_constraintStart_toStartOf="@+id/tv_reseller_status_verifikasi_deskripsi_title"
+        app:layout_constraintTop_toBottomOf="@+id/tv_reseller_status_verifikasi_deskripsi_title"
+        app:lineHeight="20sp" />
+
+    <TextView
+        android:id="@+id/tv_reseller_status_verifikasi_biodata_title"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="16dp"
+        android:fontFamily="@font/rubik_medium"
+        android:text="Biodata"
+        android:textColor="@color/gray_600"
+        android:textSize="12sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/divider2" />
+
+    <View
+        android:id="@+id/divider2"
+        android:layout_width="0dp"
+        android:layout_height="1dp"
+        android:layout_marginTop="16dp"
+        android:background="?android:attr/listDivider"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tv_reseller_status_verifikasi_deskripsi" />
+
+    <TextView
+        android:id="@+id/tv_reseller_status_verifikasi_foto_wajah_title"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:fontFamily="@font/rubik_medium"
+        android:text="Upload foto wajah"
+        android:textSize="12sp"
+        app:layout_constraintEnd_toEndOf="@+id/tv_reseller_status_verifikasi_biodata_title"
+        app:layout_constraintStart_toStartOf="@+id/tv_reseller_status_verifikasi_biodata"
+        app:layout_constraintTop_toBottomOf="@+id/tv_reseller_status_verifikasi_biodata" />
+
+    <TextView
+        android:id="@+id/tv_reseller_status_verifikasi_foto_identitas_title"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:fontFamily="@font/rubik_medium"
+        android:text="Upload foto identitas"
+        android:textSize="12sp"
+        app:layout_constraintEnd_toEndOf="@+id/tv_reseller_status_verifikasi_foto_wajah_title"
+        app:layout_constraintStart_toStartOf="@+id/tv_reseller_status_verifikasi_foto_wajah_title"
+        app:layout_constraintTop_toBottomOf="@+id/tv_reseller_status_verifikasi_foto_wajah" />
+
+    <TextView
+        android:id="@+id/tv_reseller_status_verifikasi_biodata"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:text="Selesai"
+        android:textColor="@color/gray_700"
+        android:textStyle="italic"
+        app:layout_constraintStart_toStartOf="@+id/tv_reseller_status_verifikasi_biodata_title"
+        app:layout_constraintTop_toBottomOf="@+id/tv_reseller_status_verifikasi_biodata_title" />
+
+    <TextView
+        android:id="@+id/tv_reseller_status_verifikasi_foto_wajah"
+        android:layout_width="wrap_content"
+        android:layout_height="17dp"
+        android:layout_marginTop="8dp"
+        android:text="Belum selesai"
+        android:textColor="@color/gray_700"
+        android:textStyle="italic"
+        app:layout_constraintStart_toStartOf="@+id/tv_reseller_status_verifikasi_foto_wajah_title"
+        app:layout_constraintTop_toBottomOf="@+id/tv_reseller_status_verifikasi_foto_wajah_title" />
+
+    <TextView
+        android:id="@+id/tv_reseller_status_verifikasi_foto_identitas"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:text="Belum selesai"
+        android:textColor="@color/gray_700"
+        android:textStyle="italic"
+        app:layout_constraintStart_toStartOf="@+id/tv_reseller_status_verifikasi_foto_identitas_title"
+        app:layout_constraintTop_toBottomOf="@+id/tv_reseller_status_verifikasi_foto_identitas_title" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

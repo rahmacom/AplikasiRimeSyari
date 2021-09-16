@@ -185,14 +185,14 @@ public class KeranjangDetailFragment extends Fragment {
         binding.btnKeranjangDetailBuatOrder.setOnClickListener(v -> createOrder());
 
         adapter.setOnProductItemChangedListener((product, jumlah) -> {
-            if (product.getPivot().getJumlah() != jumlah) {
+            if (product.getPivot().getJumlah() > 0) {
                 int position = products.indexOf(product);
                 quantities.set(position, jumlah);
-                state = IS_UPDATING;
-
-                Timber.d(Arrays.toString(adapter.getCheckedProducts().toArray()));
             } else {
+                adapter.removeItem(product);
+                binding.rvKeranjangDetailProdukList.swapAdapter(adapter, true);
             }
+            state = IS_UPDATING;
         });
     }
 

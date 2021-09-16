@@ -1,18 +1,22 @@
 package com.rahmacom.rimesyarifix.data.model;
 
+import com.google.gson.annotations.SerializedName;
+
 public class UserVerification {
-    private int id;
+    @SerializedName("face_path")
     private String facePath;
+
+    @SerializedName("id_card_path")
     private String idCardPath;
+
+    @SerializedName("result")
     private String result;
 
-    public int getId() {
-        return id;
-    }
+    @SerializedName("similarity")
+    private double similarity;
 
-    public void setId(int id) {
-        this.id = id;
-    }
+    @SerializedName("verification_status")
+    private VerificationStatus verificationStatus;
 
     public String getFacePath() {
         return facePath;
@@ -36,5 +40,21 @@ public class UserVerification {
 
     public void setResult(String result) {
         this.result = result;
+    }
+
+    public double getSimilarity() {
+        return similarity;
+    }
+
+    public void setSimilarity(double similarity) {
+        this.similarity = similarity;
+    }
+
+    public VerificationStatus getVerificationStatus() {
+        return verificationStatus;
+    }
+
+    public void setVerificationStatus(VerificationStatus verificationStatus) {
+        this.verificationStatus = verificationStatus;
     }
 }

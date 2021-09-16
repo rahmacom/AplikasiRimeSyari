@@ -31,7 +31,6 @@ import retrofit2.http.Headers;
 import retrofit2.http.Multipart;
 import retrofit2.http.PATCH;
 import retrofit2.http.POST;
-import retrofit2.http.PUT;
 import retrofit2.http.Part;
 import retrofit2.http.Path;
 import retrofit2.http.Query;
@@ -274,17 +273,21 @@ public interface RimeSyariAPI {
     @Headers({"Accept: application/json"})
     Call<Post> viewPost(@Header("Authorization") String token, @Path("post") int postId);
 
+    @POST("verifications/create")
+    @Headers({"Accept: application/json"})
+    Call<UserVerification> newVerification(@Header("Authorization") String token);
+
     @POST("verifications/verify")
     @FormUrlEncoded
     @Headers({"Accept: application/json"})
-    Call<UserVerification> checkIfUserIsElligible(@Header("Authorization") String token);
+    Call<Boolean> checkIfUserIsElligible(@Header("Authorization") String token);
 
-    @POST("verifications/image")
+    @POST("verifications/upload")
     @Multipart
     @Headers({"Accept: application/json"})
     Call<UserVerification> uploadVerificationImage(@Header("Authorization") String token,
-                                       @Query("image_type") int type,
-                                       @Part("path") MultipartBody.Part path);
+                                                   @Part("path") MultipartBody.Part path,
+                                                   @Field("image_type") int type);
 
     @GET("verifications/status")
     @Headers({"Accept: application/json"})
