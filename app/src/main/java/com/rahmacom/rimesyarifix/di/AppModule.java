@@ -2,6 +2,7 @@ package com.rahmacom.rimesyarifix.di;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import com.rahmacom.rimesyarifix.data.network.api.RajaOngkirAPI;
 import com.rahmacom.rimesyarifix.data.network.api.RimeSyariAPI;
 import com.rahmacom.rimesyarifix.utils.Const;
 
@@ -33,5 +34,21 @@ public class AppModule {
                 .addConverterFactory(gsonFactory)
                 .build()
                 .create(RimeSyariAPI.class);
+    }
+
+    @Singleton
+    @Provides
+    public static RajaOngkirAPI proviceRajaOngkirService() {
+        final Gson gson = new GsonBuilder()
+                .setDateFormat("yyyy-MM-dd HH:mm:ss")
+                .create();
+
+        final Converter.Factory gsonFactory = GsonConverterFactory.create(gson);
+
+        return new Retrofit.Builder()
+                .baseUrl(Const.BASE_RAJAONGKIR_API_URL)
+                .addConverterFactory(gsonFactory)
+                .build()
+                .create(RajaOngkirAPI.class);
     }
 }

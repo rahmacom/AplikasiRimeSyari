@@ -1,80 +1,78 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_margin="8dp">
 
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:padding="@dimen/layout_padding">
+    <de.hdodenhof.circleimageview.CircleImageView
+        android:id="@+id/iv_profil_testimoni_avatar"
+        android:layout_width="42dp"
+        android:layout_height="42dp"
+        android:src="@drawable/bg"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
-        <de.hdodenhof.circleimageview.CircleImageView
-            android:id="@+id/iv_profil_testimoni_avatar"
-            android:layout_width="42dp"
-            android:layout_height="42dp"
-            android:src="@drawable/bg"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+    <TextView
+        android:id="@+id/tv_profil_testimoni_nama"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:letterSpacing="0.06"
+        android:text="Nama"
+        android:textAllCaps="false"
+        android:textColor="@color/gray_800"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="@+id/iv_profil_testimoni_avatar"
+        app:layout_constraintStart_toEndOf="@+id/iv_profil_testimoni_avatar"
+        app:layout_constraintTop_toTopOf="@+id/iv_profil_testimoni_avatar" />
 
-        <TextView
-            android:id="@+id/tv_profil_testimoni_nama"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
-            android:letterSpacing="0.06"
-            android:text="Nama"
-            android:textAllCaps="false"
-            android:textColor="@color/gray_800"
-            android:textSize="16sp"
-            android:textStyle="bold"
-            app:layout_constraintBottom_toBottomOf="@+id/iv_profil_testimoni_avatar"
-            app:layout_constraintStart_toEndOf="@+id/iv_profil_testimoni_avatar"
-            app:layout_constraintTop_toTopOf="@+id/iv_profil_testimoni_avatar" />
+    <TextView
+        android:id="@+id/tv_profil_testimoni_tanggal"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="16dp"
+        android:text="16-08-2021"
+        android:textAlignment="viewEnd"
+        android:textColor="@color/gray_500"
+        android:textSize="10sp"
+        android:textStyle="italic"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tv_profil_testimoni_isi" />
 
-        <TextView
-            android:id="@+id/tv_profil_testimoni_tanggal"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
-            android:text="16-08-2021"
-            android:textAlignment="viewEnd"
-            android:textColor="@color/gray_500"
-            android:textSize="10sp"
-            android:textStyle="italic"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/tv_profil_testimoni_isi" />
+    <TextView
+        android:id="@+id/tv_profil_testimoni_isi"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:letterSpacing="0.04"
+        android:lineSpacingExtra="4sp"
+        android:text="Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book."
+        android:textColor="@color/gray_700"
+        android:textSize="12sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/tv_profil_testimoni_nama"
+        app:layout_constraintTop_toBottomOf="@+id/iv_profil_testimoni_avatar" />
 
-        <TextView
-            android:id="@+id/tv_profil_testimoni_rating"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="4 Star"
-            android:textAlignment="viewEnd"
-            android:textColor="@color/gray_600"
-            android:textSize="12sp"
-            android:textStyle="italic"
-            app:layout_constraintBottom_toBottomOf="@+id/tv_profil_testimoni_nama"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="@+id/tv_profil_testimoni_nama" />
+    <RatingBar
+        android:id="@+id/rating_profil_testimoni_list"
+        style="@style/Widget.AppCompat.RatingBar.Small"
+        android:layout_width="wrap_content"
+        android:layout_height="0dp"
+        android:layout_marginEnd="16dp"
+        android:fitsSystemWindows="true"
+        android:indeterminateDrawable="@drawable/icon_star"
+        android:longClickable="false"
+        android:max="5"
+        android:nestedScrollingEnabled="false"
+        android:numStars="5"
+        android:stepSize="1"
+        app:layout_constraintBottom_toBottomOf="@+id/tv_profil_testimoni_nama"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/tv_profil_testimoni_nama" />
 
-        <TextView
-            android:id="@+id/tv_profil_testimoni_isi"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:letterSpacing="0.04"
-            android:lineSpacingExtra="2sp"
-            android:text="Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book."
-            android:textColor="@color/gray_700"
-            android:textSize="12sp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="@+id/tv_profil_testimoni_nama"
-            app:layout_constraintTop_toBottomOf="@+id/iv_profil_testimoni_avatar" />
-
-    </androidx.constraintlayout.widget.ConstraintLayout>
-
-</androidx.cardview.widget.CardView>
+</androidx.constraintlayout.widget.ConstraintLayout>

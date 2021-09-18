@@ -95,6 +95,7 @@ public class FormProfilBiodataFragment extends Fragment {
     }
 
     private void updateProfile() {
+        String nik = binding.etFormProfilBiodataNik.getText().toString();
         String nama = binding.etFormProfilBiodataNamaLengkap.getText().toString();
         String jenisKelamin = (String) binding.spinnerFormProfilBiodataJenisKelamin.getSelectedItem();
         Character jk = jenisKelamin.toLowerCase().charAt(0);
@@ -110,6 +111,7 @@ public class FormProfilBiodataFragment extends Fragment {
             switch (user.getStatus()) {
                 case SUCCESS:
                     Toast.makeText(requireContext(), "Profil berhasil diubah", Toast.LENGTH_SHORT).show();
+                    manager.setString(Const.KEY_NIK, user.getData().getNik());
                     manager.setString(Const.KEY_NAMA_LENGKAP, user.getData().getNamaLengkap());
                     manager.setString(Const.KEY_JENIS_KELAMIN, user.getData().getJenisKelamin());
                     manager.setString(Const.KEY_TEMPAT_LAHIR, user.getData().getTempatLahir());

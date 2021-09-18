@@ -6,6 +6,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TimePicker;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -29,6 +30,7 @@ import org.jetbrains.annotations.NotNull;
 import java.util.ArrayList;
 
 import dagger.hilt.android.AndroidEntryPoint;
+import timber.log.Timber;
 
 @AndroidEntryPoint
 public class ProfilFragment extends Fragment {
@@ -49,10 +51,11 @@ public class ProfilFragment extends Fragment {
     public void onViewCreated(@NonNull @NotNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         viewModel = new ViewModelProvider(requireActivity()).get(ProfilViewModel.class);
-        viewModel.setLiveToken(Const.KEY_TOKEN);
-
-        manager = new PreferenceManager(requireContext());
         navController = Navigation.findNavController(view);
+        manager = new PreferenceManager(requireContext());
+
+        viewModel.setLiveToken(manager.getString(Const.KEY_TOKEN));
+
         setUpDataProfil();
     }
 
@@ -117,6 +120,7 @@ public class ProfilFragment extends Fragment {
 
     private void logout() {
         viewModel.logout.observe(getViewLifecycleOwner(), logout -> {
+            Timber.d(logout.getStatus().toString());
             switch (logout.getStatus()) {
                 case SUCCESS:
                     manager.removePreference(Const.KEY_TOKEN);
@@ -138,15 +142,29 @@ public class ProfilFragment extends Fragment {
 
                     navController.navigate(ProfilFragmentDirections.globalToLoginFragment());
                 case LOADING:
+                case EMPTY:
                     break;
 
-                case EMPTY:
                 case ERROR:
                 case INVALID:
                 case UNAUTHORIZED:
                 case FORBIDDEN:
                 case UNPROCESSABLE_ENTITY:
+                    manager.removePreference(Const.KEY_TOKEN);
+                    manager.removePreference(Const.KEY_TYPE);
+                    manager.removePreference(Const.KEY_NIK);
+                    manager.removePreference(Const.KEY_NAMA_LENGKAP);
+                    manager.removePreference(Const.KEY_JENIS_KELAMIN);
+                    manager.removePreference(Const.KEY_EMAIL);
+                    manager.removePreference(Const.KEY_TEMPAT_LAHIR);
+                    manager.removePreference(Const.KEY_TGL_LAHIR);
+                    manager.removePreference(Const.KEY_ALAMAT);
+                    manager.removePreference(Const.KEY_NO_TELP);
+                    manager.removePreference(Const.KEY_NO_WA);
+                    manager.removePreference(Const.KEY_ROLE);
+                    manager.removePreference(Const.KEY_AVATAR);
                     Toast.makeText(requireContext(), "Terjadi error! Silahkan hubungi admin atau restart aplikasi", Toast.LENGTH_SHORT).show();
+                    navController.navigate(ProfilFragmentDirections.globalToLoginFragment());
                     break;
             }
         });

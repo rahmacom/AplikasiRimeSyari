@@ -21,7 +21,9 @@ import com.rahmacom.rimesyarifix.data.network.response.ResponseLogin;
 import java.util.List;
 
 import okhttp3.MultipartBody;
+import okhttp3.RequestBody;
 import retrofit2.Call;
+import retrofit2.http.Body;
 import retrofit2.http.DELETE;
 import retrofit2.http.Field;
 import retrofit2.http.FormUrlEncoded;
@@ -278,7 +280,6 @@ public interface RimeSyariAPI {
     Call<UserVerification> newVerification(@Header("Authorization") String token);
 
     @POST("verifications/verify")
-    @FormUrlEncoded
     @Headers({"Accept: application/json"})
     Call<Boolean> checkIfUserIsElligible(@Header("Authorization") String token);
 
@@ -286,8 +287,8 @@ public interface RimeSyariAPI {
     @Multipart
     @Headers({"Accept: application/json"})
     Call<UserVerification> uploadVerificationImage(@Header("Authorization") String token,
-                                                   @Part("path") MultipartBody.Part path,
-                                                   @Field("image_type") int type);
+                                                   @Part MultipartBody.Part imagePart,
+                                                   @Part("image_type") RequestBody imageType);
 
     @GET("verifications/status")
     @Headers({"Accept: application/json"})

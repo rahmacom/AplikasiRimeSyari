@@ -21,6 +21,7 @@ import com.rahmacom.rimesyarifix.databinding.FragmentResellerKycPreviewBinding;
 import com.rahmacom.rimesyarifix.manager.PreferenceManager;
 
 import dagger.hilt.android.AndroidEntryPoint;
+import timber.log.Timber;
 
 @AndroidEntryPoint
 public class ResellerKYCPreviewFragment extends Fragment {
@@ -49,6 +50,9 @@ public class ResellerKYCPreviewFragment extends Fragment {
         Glide.with(view)
                 .load(args.getFileUri())
                 .into(binding.ivResellerKycPreviewFoto);
+
+        binding.btnResellerKycPreviewGunakan.setOnClickListener(v -> useImage());
+        binding.btnResellerKycPreviewAmbilBaru.setOnClickListener(v -> retakeImage());
     }
 
     private void setupToolbar() {
@@ -56,12 +60,16 @@ public class ResellerKYCPreviewFragment extends Fragment {
         NavigationUI.setupWithNavController(binding.toolbarResellerKycPreview, navController, appBarConfiguration);
     }
 
-    private void nextImageType() {
-        navController.popBackStack();
+    private void useImage() {
+        ResellerKYCPreviewFragmentDirections.ResellerKYCPreviewFragmentToResellerStatusVerifikasiFragment action =
+                ResellerKYCPreviewFragmentDirections
+                        .resellerKYCPreviewFragmentToResellerStatusVerifikasiFragment(args.getFileUri());
+        action.setImageType(args.getImageType());
+        navController.navigate(action);
     }
 
-    private void takeNewImage() {
-
+    private void retakeImage() {
+        navController.popBackStack();
     }
 
 }

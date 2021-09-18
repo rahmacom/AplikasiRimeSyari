@@ -152,6 +152,7 @@
             android:scaleX="0.75"
             android:scaleY="0.75"
             android:text="@null"
+            android:visibility="gone"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 

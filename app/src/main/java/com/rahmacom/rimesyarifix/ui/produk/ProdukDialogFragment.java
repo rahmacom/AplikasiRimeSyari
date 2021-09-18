@@ -24,14 +24,12 @@ import com.rahmacom.rimesyarifix.utils.Const;
 
 import java.util.ArrayList;
 
-import timber.log.Timber;
-
 public class ProdukDialogFragment extends BottomSheetDialogFragment {
 
     private DialogFragmentProdukBinding binding;
     private KeranjangViewModel viewModel;
     private NavController navController;
-    private ProdukDialogAdapter adapter;
+    private ProdukKeranjangDialogAdapter adapter;
     private ProdukDialogFragmentDirections.ProdukDialogFragmentToKeranjangDetailFragment action;
     private ProdukDialogFragmentArgs args;
 
@@ -46,7 +44,7 @@ public class ProdukDialogFragment extends BottomSheetDialogFragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         viewModel = new ViewModelProvider(requireActivity()).get(KeranjangViewModel.class);
-        navController = Navigation.findNavController(view);
+        navController = Navigation.findNavController(requireParentFragment().requireView());
         args = ProdukDialogFragmentArgs.fromBundle(getArguments());
         PreferenceManager manager = new PreferenceManager(requireContext());
         action = ProdukDialogFragmentDirections.produkDialogFragmentToKeranjangDetailFragment();
@@ -82,7 +80,7 @@ public class ProdukDialogFragment extends BottomSheetDialogFragment {
     }
 
     private void setupRecyclerView(ArrayList<Cart> items) {
-        adapter = new ProdukDialogAdapter();
+        adapter = new ProdukKeranjangDialogAdapter();
         adapter.setList(items);
         binding.rvProdukDialogListKeranjang.setAdapter(adapter);
         binding.rvProdukDialogListKeranjang.setLayoutManager(new LinearLayoutManager(requireContext()));

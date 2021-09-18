@@ -9,6 +9,7 @@
         <entry key="..\:/Backup/Cloud Backup/MEGASync/Projects/Android/AplikasiRimeSyari/app/src/main/res/drawable/ic_baseline_flip_camera_ios_24.xml" value="0.2361111111111111" />
         <entry key="..\:/Backup/Cloud Backup/MEGASync/Projects/Android/AplikasiRimeSyari/app/src/main/res/drawable/ic_launcher_background.xml" value="0.2361111111111111" />
         <entry key="..\:/Backup/Cloud Backup/MEGASync/Projects/Android/AplikasiRimeSyari/app/src/main/res/drawable/ic_launcher_foreground.xml" value="0.2361111111111111" />
+        <entry key="..\:/Backup/Cloud Backup/MEGASync/Projects/Android/AplikasiRimeSyari/app/src/main/res/layout/dialog_fragment_form_profil_biodata_date_picker.xml" value="0.22552083333333334" />
         <entry key="..\:/Backup/Cloud Backup/MEGASync/Projects/Android/AplikasiRimeSyari/app/src/main/res/layout/fragment_form_profil_biodata.xml" value="0.33" />
         <entry key="..\:/Backup/Cloud Backup/MEGASync/Projects/Android/AplikasiRimeSyari/app/src/main/res/layout/fragment_form_profil_biodata_alamat.xml" value="0.33" />
         <entry key="..\:/Backup/Cloud Backup/MEGASync/Projects/Android/AplikasiRimeSyari/app/src/main/res/layout/fragment_home.xml" value="0.20277777777777778" />
@@ -17,18 +18,19 @@
         <entry key="..\:/Backup/Cloud Backup/MEGASync/Projects/Android/AplikasiRimeSyari/app/src/main/res/layout/fragment_order_detail.xml" value="0.5" />
         <entry key="..\:/Backup/Cloud Backup/MEGASync/Projects/Android/AplikasiRimeSyari/app/src/main/res/layout/fragment_order_konfirmasi.xml" value="0.33" />
         <entry key="..\:/Backup/Cloud Backup/MEGASync/Projects/Android/AplikasiRimeSyari/app/src/main/res/layout/fragment_order_list.xml" value="0.1109375" />
-        <entry key="..\:/Backup/Cloud Backup/MEGASync/Projects/Android/AplikasiRimeSyari/app/src/main/res/layout/fragment_order_new.xml" value="0.22552083333333334" />
+        <entry key="..\:/Backup/Cloud Backup/MEGASync/Projects/Android/AplikasiRimeSyari/app/src/main/res/layout/fragment_order_new.xml" value="0.5" />
         <entry key="..\:/Backup/Cloud Backup/MEGASync/Projects/Android/AplikasiRimeSyari/app/src/main/res/layout/fragment_produk.xml" value="0.22552083333333334" />
         <entry key="..\:/Backup/Cloud Backup/MEGASync/Projects/Android/AplikasiRimeSyari/app/src/main/res/layout/fragment_produk_testimoni.xml" value="0.22552083333333334" />
         <entry key="..\:/Backup/Cloud Backup/MEGASync/Projects/Android/AplikasiRimeSyari/app/src/main/res/layout/fragment_profil.xml" value="0.22552083333333334" />
         <entry key="..\:/Backup/Cloud Backup/MEGASync/Projects/Android/AplikasiRimeSyari/app/src/main/res/layout/fragment_profil_tentang.xml" value="0.33" />
+        <entry key="..\:/Backup/Cloud Backup/MEGASync/Projects/Android/AplikasiRimeSyari/app/src/main/res/layout/fragment_profil_testimoni.xml" value="0.22552083333333334" />
         <entry key="..\:/Backup/Cloud Backup/MEGASync/Projects/Android/AplikasiRimeSyari/app/src/main/res/layout/fragment_register.xml" value="0.22552083333333334" />
         <entry key="..\:/Backup/Cloud Backup/MEGASync/Projects/Android/AplikasiRimeSyari/app/src/main/res/layout/fragment_reseller_info.xml" value="0.33" />
         <entry key="..\:/Backup/Cloud Backup/MEGASync/Projects/Android/AplikasiRimeSyari/app/src/main/res/layout/fragment_reseller_kyc_preview.xml" value="0.33" />
-        <entry key="..\:/Backup/Cloud Backup/MEGASync/Projects/Android/AplikasiRimeSyari/app/src/main/res/layout/fragment_reseller_status_verifikasi.xml" value="0.25" />
+        <entry key="..\:/Backup/Cloud Backup/MEGASync/Projects/Android/AplikasiRimeSyari/app/src/main/res/layout/fragment_reseller_status_verifikasi.xml" value="0.3847184986595174" />
         <entry key="..\:/Backup/Cloud Backup/MEGASync/Projects/Android/AplikasiRimeSyari/app/src/main/res/layout/item_home_produk_grid.xml" value="2.0" />
         <entry key="..\:/Backup/Cloud Backup/MEGASync/Projects/Android/AplikasiRimeSyari/app/src/main/res/layout/item_keranjang_detail_list.xml" value="0.75" />
-        <entry key="..\:/Backup/Cloud Backup/MEGASync/Projects/Android/AplikasiRimeSyari/app/src/main/res/layout/item_profil_testimoni_list.xml" value="0.1" />
+        <entry key="..\:/Backup/Cloud Backup/MEGASync/Projects/Android/AplikasiRimeSyari/app/src/main/res/layout/item_profil_testimoni_list.xml" value="0.5" />
         <entry key="..\:/Backup/Cloud Backup/MEGASync/Projects/Android/AplikasiRimeSyari/app/src/main/res/menu/menu_form_profil_biodata.xml" value="0.20277777777777778" />
         <entry key="..\:/Backup/Cloud Backup/MEGASync/Projects/Android/AplikasiRimeSyari/app/src/main/res/menu/menu_keranjang_detail.xml" value="0.22552083333333334" />
         <entry key="..\:/Backup/Cloud Backup/MEGASync/Projects/Android/AplikasiRimeSyari/app/src/main/res/menu/menu_keranjang_detail_longclick.xml" value="0.22552083333333334" />

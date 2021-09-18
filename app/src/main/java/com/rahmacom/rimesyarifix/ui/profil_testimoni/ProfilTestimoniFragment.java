@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -11,10 +12,16 @@ import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
+import androidx.navigation.ui.AppBarConfiguration;
+import androidx.navigation.ui.NavigationUI;
+import androidx.recyclerview.widget.LinearLayoutManager;
 
+import com.rahmacom.rimesyarifix.data.model.Testimony;
 import com.rahmacom.rimesyarifix.databinding.FragmentProfilTestimoniBinding;
 import com.rahmacom.rimesyarifix.manager.PreferenceManager;
 import com.rahmacom.rimesyarifix.utils.Const;
+
+import java.util.ArrayList;
 
 public class ProfilTestimoniFragment extends Fragment {
 
@@ -36,6 +43,9 @@ public class ProfilTestimoniFragment extends Fragment {
         manager = new PreferenceManager(requireContext());
         navController = Navigation.findNavController(view);
         viewModel.setLiveToken(manager.getString(Const.KEY_TOKEN));
+
+        setupToolbar();
+        userTestimonies();
     }
 
     @Override
@@ -44,7 +54,39 @@ public class ProfilTestimoniFragment extends Fragment {
         binding = null;
     }
 
-    private void setupRecyclerView() {
+    private void setupToolbar() {
+        AppBarConfiguration appBarConfiguration = new AppBarConfiguration.Builder(navController.getGraph()).build();
+        NavigationUI.setupWithNavController(binding.toolbarProfilTestimoni, navController, appBarConfiguration);
+    }
 
+    private void setupRecyclerView(ArrayList<Testimony> list) {
+        adapter = new ProfilTestimoniAdapter();
+        adapter.setLists(list);
+
+        binding.rvProfilTestimoni.setAdapter(adapter);
+        binding.rvProfilTestimoni.setLayoutManager(new LinearLayoutManager(requireContext()));
+        binding.rvProfilTestimoni.setHasFixedSize(true);
+    }
+
+    private void userTestimonies() {
+        viewModel.userTestimonies.observe(getViewLifecycleOwner(), testimonies -> {
+            switch (testimonies.getStatus()) {
+                case SUCCESS:
+                    setupRecyclerView((ArrayList<Testimony>) testimonies.getData());
+                    break;
+
+                case LOADING:
+                    break;
+
+                case EMPTY:
+                case ERROR:
+                case INVALID:
+                case UNAUTHORIZED:
+                case FORBIDDEN:
+                case UNPROCESSABLE_ENTITY:
+                    Toast.makeText(requireContext(), "Terjadi error! Silahkan hubungi admin rime atau restart aplikasi", Toast.LENGTH_SHORT).show();
+                    break;
+            }
+        });
     }
 }

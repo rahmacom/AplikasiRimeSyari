@@ -182,10 +182,7 @@ public class ProdukFragment extends Fragment {
         int colorId = binding.chipgroupProdukWarna.getCheckedChipId();
         int sizeId = binding.chipgroupProdukUkuran.getCheckedChipId();
 
-        // kondisi < 1 karena id pada
-        // color dan size mulai
-        // dari 1
-        if (colorId < 1 && sizeId < 1) {
+        if (colorId < 1 && sizeId < 0) {
             Toast.makeText(requireContext(), "Pilih warna dan ukuran terlebih dahulu", Toast.LENGTH_SHORT).show();
         } else {
             ProdukFragmentDirections.ProdukFragmentToProdukDialogFragment action = ProdukFragmentDirections.produkFragmentToProdukDialogFragment();
@@ -207,17 +204,20 @@ public class ProdukFragment extends Fragment {
         }
 
         liveData.observe(getViewLifecycleOwner(), integer -> {
+            Timber.d(integer.getMessage());
             switch (integer.getStatus()) {
                 case SUCCESS:
                     if (liked) {
-                        binding.ivProdukSuka.setColorFilter(ContextCompat.getColor(requireContext(), R.color.gray_600));
-                    } else {
                         binding.ivProdukSuka.setColorFilter(ContextCompat.getColor(requireContext(), R.color.pink_400));
+                    } else {
+                        binding.ivProdukSuka.setColorFilter(ContextCompat.getColor(requireContext(), R.color.gray_600));
                     }
                     binding.tvProdukSukaText.setText(String.valueOf(integer.getData()));
                     break;
 
                 case LOADING:
+                    break;
+
                 case EMPTY:
                 case ERROR:
                     Toast.makeText(requireContext(), "Terjadi error! Silahkan coba lagi", Toast.LENGTH_SHORT).show();

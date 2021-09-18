@@ -65,10 +65,10 @@ public class OrderDetailAdapter extends RecyclerView.Adapter<OrderDetailAdapter.
             binding.tvOrderProdukHarga.setText(Helper.convertToRP(product.getHarga()));
             binding.tvOrderProdukJumlah.setText(String.format("x%d item", product.getPivot()
                     .getJumlah()));
-            binding.tvOrderProdukWarna.setText(product.getPivot()
+            binding.tvOrderProdukWarna.setText("warna " + product.getPivot()
                     .getColor()
                     .getName());
-            binding.tvOrderProdukSize.setText(product.getPivot()
+            binding.tvOrderProdukSize.setText("size" + product.getPivot()
                     .getSize()
                     .getName());
             binding.tvOrderProdukSubtotal.setText(Helper.convertToRP(product.getPivot().getSubTotal()));

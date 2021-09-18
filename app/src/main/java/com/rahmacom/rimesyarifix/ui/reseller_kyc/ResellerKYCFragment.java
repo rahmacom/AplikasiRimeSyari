@@ -5,6 +5,7 @@ import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
+import android.util.Size;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -39,6 +40,7 @@ import java.util.concurrent.Executors;
 
 public class ResellerKYCFragment extends Fragment {
 
+    public static final String KYC_ARGS = "kyc_args";
     public static final int KYC_FACE = 1;
     public static final int KYC_ID_CARD = 2;
     public static final int KYC_FACE_AND_ID_CARD = 3;
@@ -54,6 +56,7 @@ public class ResellerKYCFragment extends Fragment {
 
     private ResellerKYCViewModel viewModel;
     private FragmentResellerKycCameraBinding binding;
+    private ResellerKYCFragmentArgs args;
 
     private ImageCapture imageCapture;
     private File outputDir;
@@ -90,6 +93,7 @@ public class ResellerKYCFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
 
         activity = requireActivity();
+        args = ResellerKYCFragmentArgs.fromBundle(getArguments());
 
         if (isAllPermissionGranted()) {
             startCamera(cameraSelector);
@@ -149,13 +153,12 @@ public class ResellerKYCFragment extends Fragment {
                 @Override
                 public void onImageSaved(@NonNull ImageCapture.OutputFileResults outputFileResults) {
                     Uri savedUri = Uri.fromFile(photoFile);
-                    String message = "Photo captured successfully: " + photoFile;
-                    Toast.makeText(activity, message, Toast.LENGTH_SHORT)
-                            .show();
+                    String message = "Photo captured successfully: " + photoFile.getAbsolutePath();
                     Log.d(TAG, message);
 
                     ResellerKYCFragmentDirections.ResellerKYCFragmentToResellerKYCPreviewFragment action = ResellerKYCFragmentDirections.resellerKYCFragmentToResellerKYCPreviewFragment(null);
-                    action.setFileUri(photoFile.toURI().toString());
+                    action.setFileUri(photoFile.getPath());
+                    action.setImageType(args.getImageType());
                     navController.navigate(action);
                 }
 
@@ -181,7 +184,9 @@ public class ResellerKYCFragment extends Fragment {
             Preview preview = new Preview.Builder().build();
             preview.setSurfaceProvider(binding.viewFinder.getSurfaceProvider());
 
-            imageCapture = new ImageCapture.Builder().build();
+            imageCapture = new ImageCapture.Builder()
+                    .setTargetResolution(new Size(1024, 768))
+                    .build();
 
             try {
                 if (cameraProvider != null) {

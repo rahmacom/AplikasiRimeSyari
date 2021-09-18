@@ -91,6 +91,7 @@ public class LoginFragment extends Fragment {
                         break;
 
                     case INVALID:
+                    case UNPROCESSABLE_ENTITY:
                         binding.pbLoginLoading.setVisibility(View.INVISIBLE);
                         binding.btnLogin.setText("Login");
                         etUser.setText("");
@@ -98,6 +99,7 @@ public class LoginFragment extends Fragment {
                         Toast.makeText(requireContext(), "Login gagal! Username atau password salah", Toast.LENGTH_SHORT)
                                 .show();
                         break;
+
                 }
             });
         });

@@ -31,12 +31,9 @@ public class MainActivity extends AppCompatActivity {
         binding = MainActivityBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
-        // setSupportActionBar(binding.mainAppBar.mainToolbar);
-
         NavHostFragment navHostFragment = (NavHostFragment) getSupportFragmentManager().findFragmentById(binding.navHostFragmentActivityMain.getId());
         navController = Objects.requireNonNull(navHostFragment)
                 .getNavController();
-        // navController = Navigation.findNavController(binding.getRoot());
 
         mAppBarConfig = new AppBarConfiguration.Builder(R.id.nav_home, R.id.nav_order, R.id.nav_profil).build();
 
@@ -48,7 +45,6 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        // NavigationUI.setupActionBarWithNavController(this, navController, mAppBarConfig);
         NavigationUI.setupWithNavController(binding.navView, navController);
     }
 

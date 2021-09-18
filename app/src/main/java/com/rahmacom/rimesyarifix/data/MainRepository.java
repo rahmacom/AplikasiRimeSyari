@@ -270,7 +270,8 @@ public class MainRepository {
         Call<ResponseLogin> api = rimeSyariAPI.logout(token);
         api.enqueue(new Callback<ResponseLogin>() {
             @Override
-            public void onResponse(Call<ResponseLogin> call, Response<ResponseLogin> response) {
+            public void onResponse(@NonNull Call<ResponseLogin> call, @NonNull Response<ResponseLogin> response) {
+                Timber.d(response.message());
                 switch (response.code()) {
                     case 200:
                     case 201:
@@ -2311,13 +2312,17 @@ public class MainRepository {
         MutableLiveData<Resource<UserVerification>> data = new MutableLiveData<>();
         data.postValue(Resource.loading(null));
 
-        RequestBody requestBody = RequestBody.create(MediaType.parse("multipart/form-data"), image);
-        MultipartBody.Part imagePart = MultipartBody.Part.createFormData("path", image.getName(), requestBody);
+        RequestBody requestImagePath = RequestBody.create(image, MediaType.parse("multipart/form-data"));
+        MultipartBody.Part imagePart = MultipartBody.Part.createFormData("path", image.getName(), requestImagePath);
+        RequestBody requestImageType = RequestBody.create(String.valueOf(imageType), MediaType.parse("text/plain"));
 
-        Call<UserVerification> api = rimeSyariAPI.uploadVerificationImage(token, imagePart, imageType);
+        Timber.d(requestImagePath.toString());
+
+        Call<UserVerification> api = rimeSyariAPI.uploadVerificationImage(token, imagePart, requestImageType);
         api.enqueue(new Callback<UserVerification>() {
             @Override
-            public void onResponse(Call<UserVerification> call, Response<UserVerification> response) {
+            public void onResponse(@NonNull Call<UserVerification> call, @NonNull Response<UserVerification> response) {
+                Timber.d(response.code() + ": " + response.message());
                 switch (response.code()) {
                     case 200:
                     case 201:
@@ -2354,6 +2359,7 @@ public class MainRepository {
             @Override
             public void onFailure(Call<UserVerification> call, Throwable t) {
                 data.postValue(Resource.error(t.getMessage(), null));
+                Timber.e(t);
             }
         });
 

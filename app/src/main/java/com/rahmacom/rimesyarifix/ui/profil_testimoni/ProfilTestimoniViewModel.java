@@ -1,9 +1,15 @@
 package com.rahmacom.rimesyarifix.ui.profil_testimoni;
 
+import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
+import androidx.lifecycle.Transformations;
 import androidx.lifecycle.ViewModel;
 
 import com.rahmacom.rimesyarifix.data.MainRepository;
+import com.rahmacom.rimesyarifix.data.model.Testimony;
+import com.rahmacom.rimesyarifix.data.vo.Resource;
+
+import java.util.List;
 
 import javax.inject.Inject;
 
@@ -19,6 +25,9 @@ public class ProfilTestimoniViewModel extends ViewModel {
     public ProfilTestimoniViewModel(MainRepository mainRepository) {
         this.mainRepository = mainRepository;
     }
+
+    public final LiveData<Resource<List<Testimony>>> userTestimonies = Transformations.switchMap(liveToken, token ->
+            mainRepository.userTestimonies(token));
 
     public void setLiveToken(String token) {
         liveToken.setValue(token);

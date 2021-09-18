@@ -22,6 +22,7 @@ import com.rahmacom.rimesyarifix.databinding.FragmentResellerStatusVerifikasiBin
 import com.rahmacom.rimesyarifix.manager.PreferenceManager;
 import com.rahmacom.rimesyarifix.ui.form_profil_biodata_alamat.FormProfilBiodataAlamatFragment;
 import com.rahmacom.rimesyarifix.ui.reseller_kyc.ResellerKYCFragment;
+import com.rahmacom.rimesyarifix.utils.Const;
 
 import java.io.File;
 
@@ -34,6 +35,7 @@ public class ResellerStatusVerifikasiFragment extends Fragment {
     private NavController navController;
     private PreferenceManager manager;
     private ResellerStatusVerifikasiFragmentArgs args;
+    private boolean[] isEligible;
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -49,6 +51,8 @@ public class ResellerStatusVerifikasiFragment extends Fragment {
         manager = new PreferenceManager(requireContext());
         args = ResellerStatusVerifikasiFragmentArgs.fromBundle(getArguments());
 
+        viewModel.setLiveToken(manager.getString(Const.KEY_TOKEN));
+
         setupToolbar();
         verificationStatus();
         checkUserEligibility();
@@ -56,6 +60,8 @@ public class ResellerStatusVerifikasiFragment extends Fragment {
         if (args.getImagePath() != null && args.getImageType() > 0) {
             uploadImage();
         }
+
+        isEligible = new boolean[]{false, false, false};
     }
 
     private void setupToolbar() {
@@ -64,22 +70,32 @@ public class ResellerStatusVerifikasiFragment extends Fragment {
     }
 
     private void setDataBinding(UserVerification userVerification) {
-        binding.tvResellerStatusVerifikasiFotoWajah.setText((userVerification.getFacePath() != null) ? "Selesai" : "Belum selesai");
-        binding.tvResellerStatusVerifikasiFotoIdentitas.setText((userVerification.getIdCardPath() != null) ? "Selesai" : "Belum selesai");
+        Timber.d("setDataBinding");
+        binding.btnFragmentResellerStatusVerifikasiCekFotoWajah.setText((userVerification.getFacePath() != null) ? "Selesai" : "Belum selesai");
+        binding.btnFragmentResellerStatusVerifikasiCekFotoIdentitas.setText((userVerification.getIdCardPath() != null) ? "Selesai" : "Belum selesai");
         binding.tvResellerStatusVerifikasiJudul.setText(userVerification.getVerificationStatus().getName());
 
-        binding.tvResellerStatusVerifikasiBiodata.setOnClickListener(v -> {
+        binding.btnFragmentResellerStatusVerifikasiCekBiodata.setOnClickListener(v -> {
             ResellerStatusVerifikasiFragmentDirections.ResellerStatusVerifikasiFragmentToFormEditBiodataFragment action = ResellerStatusVerifikasiFragmentDirections.resellerStatusVerifikasiFragmentToFormEditBiodataFragment();
             action.setState(FormProfilBiodataAlamatFragment.IS_UPDATING);
             navController.navigate(action);
         });
 
-        binding.tvResellerStatusVerifikasiFotoWajah.setOnClickListener(v -> openCamera(ResellerKYCFragment.KYC_FACE));
-        binding.tvResellerStatusVerifikasiFotoIdentitas.setOnClickListener(v -> openCamera(ResellerKYCFragment.KYC_ID_CARD));
+        binding.btnFragmentResellerStatusVerifikasiCekFotoWajah.setOnClickListener(v -> openCamera(ResellerKYCFragment.KYC_FACE));
+        binding.btnFragmentResellerStatusVerifikasiCekFotoIdentitas.setOnClickListener(v -> openCamera(ResellerKYCFragment.KYC_ID_CARD));
+
+        if (userVerification.getFacePath() != null) {
+            isEligible[1] = true;
+        }
+
+        if (userVerification.getIdCardPath() != null) {
+            isEligible[2] = true;
+        }
     }
 
     private void verificationStatus() {
-        viewModel.verificationStatus.observe(getViewLifecycleOwner(), userVerificationObserver());
+        Timber.d("verificationStatus");
+        viewModel.verificationStatus.observe(getViewLifecycleOwner(), userVerificationObserver);
     }
 
     private void checkUserEligibility() {
@@ -87,7 +103,8 @@ public class ResellerStatusVerifikasiFragment extends Fragment {
             Timber.d(isEligible.getMessage());
             switch (isEligible.getStatus()) {
                 case SUCCESS:
-                    binding.tvResellerStatusVerifikasiBiodata.setText((isEligible.getData()) ? "Memenuhi syarat" : "Belum memenuhi syarat");
+                    binding.btnFragmentResellerStatusVerifikasiCekBiodata.setText((isEligible.getData()) ? "Memenuhi syarat" : "Belum memenuhi syarat");
+                    this.isEligible[0] = isEligible.getData();
                     break;
 
                 case LOADING:
@@ -112,30 +129,32 @@ public class ResellerStatusVerifikasiFragment extends Fragment {
     private void uploadImage() {
         int type = args.getImageType();
         File image = new File(args.getImagePath());
+        Timber.d(image.getPath());
+        Timber.d(String.valueOf(image.isFile()));
 
         viewModel.setLivePhoto(image, type);
-        viewModel.uploadImage.observe(getViewLifecycleOwner(), userVerificationObserver());
+        viewModel.uploadImage.observe(getViewLifecycleOwner(), userVerificationObserver);
     }
 
-    private Observer<Resource<UserVerification>> userVerificationObserver() {
-        return userVerification -> {
-            switch (userVerification.getStatus()) {
-                case SUCCESS:
-                    setDataBinding(userVerification.getData());
-                    break;
+    private Observer<Resource<UserVerification>> userVerificationObserver = userVerification -> {
+        Timber.d(userVerification.getStatus().toString());
+        Timber.d(userVerification.getMessage());
+        switch (userVerification.getStatus()) {
+            case SUCCESS:
+                setDataBinding(userVerification.getData());
+                break;
 
-                case LOADING:
-                    break;
+            case LOADING:
+                break;
 
-                case EMPTY:
-                case ERROR:
-                case INVALID:
-                case UNAUTHORIZED:
-                case FORBIDDEN:
-                case UNPROCESSABLE_ENTITY:
-                    Toast.makeText(requireContext(), "Terjadi Error! Silahkan coba lagi atau hubungi admin Rime Syari", Toast.LENGTH_SHORT).show();
-                    break;
-            }
-        };
-    }
+            case EMPTY:
+            case ERROR:
+            case INVALID:
+            case UNAUTHORIZED:
+            case FORBIDDEN:
+            case UNPROCESSABLE_ENTITY:
+                Toast.makeText(requireContext(), "Terjadi Error! Silahkan coba lagi atau hubungi admin Rime Syari", Toast.LENGTH_SHORT).show();
+                break;
+        }
+    };
 }

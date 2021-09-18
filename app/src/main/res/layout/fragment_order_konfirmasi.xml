@@ -21,6 +21,7 @@
 
     <Button
         android:id="@+id/btn_order_konfirmas_to_detail"
+        style="@style/Widget.MaterialComponents.Button.UnelevatedButton"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="32dp"
@@ -32,9 +33,12 @@
 
     <Button
         android:id="@+id/btn_order_konfirmasi_to_home"
+        style="@style/Widget.MaterialComponents.Button.UnelevatedButton"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
+        android:layout_marginTop="16dp"
+        android:insetTop="0dp"
+        android:insetBottom="0dp"
         android:text="Kembali ke Beranda"
         android:textAlignment="viewStart"
         app:layout_constraintEnd_toEndOf="parent"

@@ -1,206 +1,218 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
     tools:context=".ui.form_profil_biodata.FormProfilBiodataFragment">
 
-    <androidx.appcompat.widget.Toolbar
+    <com.google.android.material.appbar.MaterialToolbar
         android:id="@+id/toolbar_form_profil_biodata"
-        android:layout_width="0dp"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:minHeight="?attr/actionBarSize"
         android:theme="@style/ThemeOverlay.RimeSyariFix.ToolBar"
-        android:background="@color/white"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        android:background="@color/white" />
 
-    <TextView
-        android:id="@+id/tv_form_profil_biodata_nama_lengkap_title"
-        android:layout_width="wrap_content"
+    <ScrollView
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:text="Nama Lengkap"
-        android:textColor="@color/gray_600"
-        android:textSize="12sp"
-        app:layout_constraintStart_toStartOf="@+id/et_form_profil_biodata_nik"
-        app:layout_constraintTop_toBottomOf="@+id/et_form_profil_biodata_nik" />
+        android:paddingTop="@dimen/layout_padding">
 
-    <EditText
-        android:id="@+id/et_form_profil_biodata_nama_lengkap"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="16dp"
-        android:ems="10"
-        android:inputType="textPersonName"
-        android:text="Name"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="@+id/tv_form_profil_biodata_nama_lengkap_title"
-        app:layout_constraintTop_toBottomOf="@+id/tv_form_profil_biodata_nama_lengkap_title" />
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
 
-    <TextView
-        android:id="@+id/tv_form_profil_biodata_jenis_kelamin_title"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:text="Jenis Kelamin"
-        android:textColor="@color/gray_600"
-        android:textSize="12sp"
-        app:layout_constraintStart_toStartOf="@+id/et_form_profil_biodata_nama_lengkap"
-        app:layout_constraintTop_toBottomOf="@+id/et_form_profil_biodata_nama_lengkap" />
+            <TextView
+                android:id="@+id/tv_form_profil_biodata_nama_lengkap_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:text="Nama Lengkap"
+                android:textColor="@color/gray_600"
+                android:textSize="12sp"
+                app:layout_constraintStart_toStartOf="@+id/et_form_profil_biodata_nik"
+                app:layout_constraintTop_toBottomOf="@+id/et_form_profil_biodata_nik" />
 
-    <Spinner
-        android:id="@+id/spinner_form_profil_biodata_jenis_kelamin"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="16dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="@+id/tv_form_profil_biodata_jenis_kelamin_title"
-        app:layout_constraintTop_toBottomOf="@+id/tv_form_profil_biodata_jenis_kelamin_title" />
+            <EditText
+                android:id="@+id/et_form_profil_biodata_nama_lengkap"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="16dp"
+                android:ems="10"
+                android:inputType="textPersonName"
+                android:text="Name"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="@+id/tv_form_profil_biodata_nama_lengkap_title"
+                app:layout_constraintTop_toBottomOf="@+id/tv_form_profil_biodata_nama_lengkap_title" />
 
-    <TextView
-        android:id="@+id/tv_form_profil_biodata_tempat_lahir_title"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:text="Tempat Lahir"
-        android:textColor="@color/gray_600"
-        android:textSize="12sp"
-        app:layout_constraintStart_toStartOf="@+id/spinner_form_profil_biodata_jenis_kelamin"
-        app:layout_constraintTop_toBottomOf="@+id/spinner_form_profil_biodata_jenis_kelamin" />
+            <TextView
+                android:id="@+id/tv_form_profil_biodata_jenis_kelamin_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:text="Jenis Kelamin"
+                android:textColor="@color/gray_600"
+                android:textSize="12sp"
+                app:layout_constraintStart_toStartOf="@+id/et_form_profil_biodata_nama_lengkap"
+                app:layout_constraintTop_toBottomOf="@+id/et_form_profil_biodata_nama_lengkap" />
 
-    <EditText
-        android:id="@+id/et_form_profil_biodata_tempat_lahir"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="16dp"
-        android:ems="10"
-        android:inputType="textPersonName"
-        android:text="Name"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="@+id/tv_form_profil_biodata_tempat_lahir_title"
-        app:layout_constraintTop_toBottomOf="@+id/tv_form_profil_biodata_tempat_lahir_title" />
+            <Spinner
+                android:id="@+id/spinner_form_profil_biodata_jenis_kelamin"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="16dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="@+id/tv_form_profil_biodata_jenis_kelamin_title"
+                app:layout_constraintTop_toBottomOf="@+id/tv_form_profil_biodata_jenis_kelamin_title" />
 
-    <TextView
-        android:id="@+id/tv_form_profil_biodata_tgl_lahir_title"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:text="Tanggal Lahir"
-        android:textColor="@color/gray_600"
-        android:textSize="12sp"
-        app:layout_constraintStart_toStartOf="@+id/et_form_profil_biodata_tempat_lahir"
-        app:layout_constraintTop_toBottomOf="@+id/et_form_profil_biodata_tempat_lahir" />
+            <TextView
+                android:id="@+id/tv_form_profil_biodata_tempat_lahir_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:text="Tempat Lahir"
+                android:textColor="@color/gray_600"
+                android:textSize="12sp"
+                app:layout_constraintStart_toStartOf="@+id/spinner_form_profil_biodata_jenis_kelamin"
+                app:layout_constraintTop_toBottomOf="@+id/spinner_form_profil_biodata_jenis_kelamin" />
 
-    <EditText
-        android:id="@+id/et_form_profil_biodata_tgl_lahir"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="16dp"
-        android:ems="10"
-        android:inputType="date"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="@+id/tv_form_profil_biodata_tgl_lahir_title"
-        app:layout_constraintTop_toBottomOf="@+id/tv_form_profil_biodata_tgl_lahir_title" />
+            <EditText
+                android:id="@+id/et_form_profil_biodata_tempat_lahir"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="16dp"
+                android:ems="10"
+                android:inputType="textPersonName"
+                android:text="Name"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="@+id/tv_form_profil_biodata_tempat_lahir_title"
+                app:layout_constraintTop_toBottomOf="@+id/tv_form_profil_biodata_tempat_lahir_title" />
 
-    <TextView
-        android:id="@+id/tv_form_profil_biodata_alamat_user_title"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:text="Alamat"
-        android:textColor="@color/gray_600"
-        android:textSize="12sp"
-        app:layout_constraintStart_toStartOf="@+id/et_form_profil_biodata_tgl_lahir"
-        app:layout_constraintTop_toBottomOf="@+id/et_form_profil_biodata_tgl_lahir" />
+            <TextView
+                android:id="@+id/tv_form_profil_biodata_tgl_lahir_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:text="Tanggal Lahir"
+                android:textColor="@color/gray_600"
+                android:textSize="12sp"
+                app:layout_constraintStart_toStartOf="@+id/et_form_profil_biodata_tempat_lahir"
+                app:layout_constraintTop_toBottomOf="@+id/et_form_profil_biodata_tempat_lahir" />
 
-    <EditText
-        android:id="@+id/et_form_profil_biodata_alamat_user"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="16dp"
-        android:ems="10"
-        android:gravity="start|top"
-        android:inputType="textMultiLine"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="@+id/tv_form_profil_biodata_alamat_user_title"
-        app:layout_constraintTop_toBottomOf="@+id/tv_form_profil_biodata_alamat_user_title" />
+            <EditText
+                android:id="@+id/et_form_profil_biodata_tgl_lahir"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="16dp"
+                android:ems="10"
+                android:inputType="date"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="@+id/tv_form_profil_biodata_tgl_lahir_title"
+                app:layout_constraintTop_toBottomOf="@+id/tv_form_profil_biodata_tgl_lahir_title" />
 
-    <TextView
-        android:id="@+id/tv_form_profil_biodata_no_telp_title"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:text="No. Telpon"
-        android:textColor="@color/gray_600"
-        android:textSize="12sp"
-        app:layout_constraintStart_toStartOf="@+id/et_form_profil_biodata_alamat_user"
-        app:layout_constraintTop_toBottomOf="@+id/et_form_profil_biodata_alamat_user" />
+            <TextView
+                android:id="@+id/tv_form_profil_biodata_alamat_user_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:text="Alamat"
+                android:textColor="@color/gray_600"
+                android:textSize="12sp"
+                app:layout_constraintStart_toStartOf="@+id/et_form_profil_biodata_tgl_lahir"
+                app:layout_constraintTop_toBottomOf="@+id/et_form_profil_biodata_tgl_lahir" />
 
-    <EditText
-        android:id="@+id/et_form_profil_biodata_no_telp"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="16dp"
-        android:ems="10"
-        android:inputType="phone"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="@+id/tv_form_profil_biodata_no_telp_title"
-        app:layout_constraintTop_toBottomOf="@+id/tv_form_profil_biodata_no_telp_title" />
+            <EditText
+                android:id="@+id/et_form_profil_biodata_alamat_user"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="16dp"
+                android:ems="10"
+                android:gravity="start|top"
+                android:inputType="textMultiLine"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="@+id/tv_form_profil_biodata_alamat_user_title"
+                app:layout_constraintTop_toBottomOf="@+id/tv_form_profil_biodata_alamat_user_title" />
 
-    <TextView
-        android:id="@+id/tv_form_profil_biodata_whatsapp_title"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:text="Whatsapp"
-        android:textColor="@color/gray_600"
-        android:textSize="12sp"
-        app:layout_constraintStart_toStartOf="@+id/et_form_profil_biodata_no_telp"
-        app:layout_constraintTop_toBottomOf="@+id/et_form_profil_biodata_no_telp" />
+            <TextView
+                android:id="@+id/tv_form_profil_biodata_no_telp_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:text="No. Telpon"
+                android:textColor="@color/gray_600"
+                android:textSize="12sp"
+                app:layout_constraintStart_toStartOf="@+id/et_form_profil_biodata_alamat_user"
+                app:layout_constraintTop_toBottomOf="@+id/et_form_profil_biodata_alamat_user" />
 
-    <EditText
-        android:id="@+id/et_form_profil_biodata_whatsapp"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="16dp"
-        android:ems="10"
-        android:inputType="phone"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="@+id/tv_form_profil_biodata_whatsapp_title"
-        app:layout_constraintTop_toBottomOf="@+id/tv_form_profil_biodata_whatsapp_title" />
+            <EditText
+                android:id="@+id/et_form_profil_biodata_no_telp"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="16dp"
+                android:ems="10"
+                android:inputType="phone"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="@+id/tv_form_profil_biodata_no_telp_title"
+                app:layout_constraintTop_toBottomOf="@+id/tv_form_profil_biodata_no_telp_title" />
 
-    <TextView
-        android:id="@+id/tv_form_profil_biodata_nik_title"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="16dp"
-        android:text="NIK"
-        android:textColor="@color/gray_600"
-        android:textSize="12sp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/toolbar_form_profil_biodata" />
+            <TextView
+                android:id="@+id/tv_form_profil_biodata_whatsapp_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:text="Whatsapp"
+                android:textColor="@color/gray_600"
+                android:textSize="12sp"
+                app:layout_constraintStart_toStartOf="@+id/et_form_profil_biodata_no_telp"
+                app:layout_constraintTop_toBottomOf="@+id/et_form_profil_biodata_no_telp" />
 
-    <EditText
-        android:id="@+id/et_form_profil_biodata_nik"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="16dp"
-        android:ems="10"
-        android:inputType="textPersonName"
-        android:text="Name"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="@+id/tv_form_profil_biodata_nik_title"
-        app:layout_constraintTop_toBottomOf="@+id/tv_form_profil_biodata_nik_title" />
+            <EditText
+                android:id="@+id/et_form_profil_biodata_whatsapp"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="16dp"
+                android:ems="10"
+                android:inputType="phone"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="@+id/tv_form_profil_biodata_whatsapp_title"
+                app:layout_constraintTop_toBottomOf="@+id/tv_form_profil_biodata_whatsapp_title" />
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+            <TextView
+                android:id="@+id/tv_form_profil_biodata_nik_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="16dp"
+                android:text="NIK"
+                android:textColor="@color/gray_600"
+                android:textSize="12sp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/toolbar_form_profil_biodata" />
+
+            <EditText
+                android:id="@+id/et_form_profil_biodata_nik"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="16dp"
+                android:ems="10"
+                android:inputType="textPersonName"
+                android:text="Name"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="@+id/tv_form_profil_biodata_nik_title"
+                app:layout_constraintTop_toBottomOf="@+id/tv_form_profil_biodata_nik_title" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </ScrollView>
+
+</LinearLayout>

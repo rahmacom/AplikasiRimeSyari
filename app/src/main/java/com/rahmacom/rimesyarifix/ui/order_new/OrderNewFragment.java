@@ -183,29 +183,33 @@ public class OrderNewFragment extends Fragment {
         String pesan = binding.etOrderNewPesan.getText().toString();
         String kodeDiskon = binding.etOrderNewKodeDiskon.getText().toString();
 
-        viewModel.setLiveOrder(pesan, kodeDiskon, userShipmentId, paymentMethodId, productIds, colorIds, sizeIds, quantities);
-        viewModel.newOrder.observe(getViewLifecycleOwner(), order -> {
-            switch (order.getStatus()) {
-                case SUCCESS:
-                    Toast.makeText(requireContext(), "Order berhasil dibuat!", Toast.LENGTH_SHORT).show();
-                    OrderNewFragmentDirections.OrderNewFragmentToOrderKonfirmasiFragment action = OrderNewFragmentDirections.orderNewFragmentToOrderKonfirmasiFragment();
-                    action.setOrderId(order.getData().getId());
-                    navController.navigate(action);
+        if (paymentMethodId < 0) {
+            Toast.makeText(requireContext(), "Harap pilih metode pembayaran", Toast.LENGTH_SHORT).show();
+        } else {
+            viewModel.setLiveOrder(pesan, kodeDiskon, userShipmentId, paymentMethodId, productIds, colorIds, sizeIds, quantities);
+            viewModel.newOrder.observe(getViewLifecycleOwner(), order -> {
+                switch (order.getStatus()) {
+                    case SUCCESS:
+                        Toast.makeText(requireContext(), "Order berhasil dibuat!", Toast.LENGTH_SHORT).show();
+                        OrderNewFragmentDirections.OrderNewFragmentToOrderKonfirmasiFragment action = OrderNewFragmentDirections.orderNewFragmentToOrderKonfirmasiFragment();
+                        action.setOrderId(order.getData().getId());
+                        navController.navigate(action);
 
-                    break;
-                case LOADING:
-                case EMPTY:
-                case ERROR:
-                case INVALID:
-                case UNAUTHORIZED:
-                case FORBIDDEN:
-                    break;
+                        break;
+                    case LOADING:
+                    case EMPTY:
+                    case ERROR:
+                    case INVALID:
+                    case UNAUTHORIZED:
+                    case FORBIDDEN:
+                        break;
 
-                case UNPROCESSABLE_ENTITY:
-                    Toast.makeText(requireContext(), "Tidak dapat memproses order. Silahkan cek ulang produk yang dibeli dan pastikan produk masih tersedia.", Toast.LENGTH_SHORT).show();
-                    navController.popBackStack();
-                    break;
-            }
-        });
+                    case UNPROCESSABLE_ENTITY:
+                        Toast.makeText(requireContext(), "Tidak dapat memproses order. Silahkan cek ulang produk yang dibeli dan pastikan produk masih tersedia.", Toast.LENGTH_SHORT).show();
+                        navController.popBackStack();
+                        break;
+                }
+            });
+        }
     }
 }

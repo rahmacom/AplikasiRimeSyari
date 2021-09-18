@@ -68,7 +68,7 @@ public class HomeProdukAdapter extends RecyclerView.Adapter<HomeProdukAdapter.Vi
         void bind(Product product) {
             binding.tvHomeProdukNama.setText(product.getNama());
             binding.tvHomeProdukHarga.setText(Helper.convertToRP(product.getHarga()));
-            binding.tvHomeProdukSuka.setText(String.valueOf(product.getSuka()));
+            binding.tvHomeProdukSuka.setText(String.valueOf(product.getLikesCount()));
             binding.tvHomeProdukRating.setText(String.format("%s / 5", product.getReviewAvg()));
 
             if (product.getTotalStok() > 0) {
