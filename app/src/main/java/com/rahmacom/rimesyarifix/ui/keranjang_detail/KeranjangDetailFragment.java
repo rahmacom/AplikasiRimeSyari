@@ -1,5 +1,6 @@
 package com.rahmacom.rimesyarifix.ui.keranjang_detail;
 
+import android.app.AlertDialog;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -13,6 +14,7 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.Lifecycle;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.NavController;
@@ -79,7 +81,6 @@ public class KeranjangDetailFragment extends Fragment {
         viewModel.setLiveToken(manager.getString(Const.KEY_TOKEN));
 
         setupToolbar();
-        setToolbarViewState(state);
         showCartDetail(args.getCartId());
     }
 
@@ -88,12 +89,13 @@ public class KeranjangDetailFragment extends Fragment {
         switch (item.getItemId()) {
             case R.id.menu_keranjang_simpan:
                 if (state == IS_CREATING) {
+                    Timber.d("IS_CREATING");
                     newCart();
                     return true;
                 }
 
                 if (state == IS_UPDATING) {
-                    Timber.d(String.valueOf(args.getViewState()));
+                    Timber.d("IS_UPDATING");
                     updateCart();
                     return true;
                 }
@@ -101,21 +103,30 @@ public class KeranjangDetailFragment extends Fragment {
                 return false;
 
             case R.id.menu_keranjang_hapus:
-                deleteCart();
+                if (state == IS_CREATING) {
+                    item.setTitle("Batal");
+                    navController.popBackStack();
+                    return true;
+                } else {
+                    item.setTitle("Hapus");
+                    AlertDialog builder = new AlertDialog.Builder(requireContext())
+                            .setIcon(R.drawable.icon_info)
+                            .setPositiveButton("Ya", (dialog, which) -> deleteCart())
+                            .setNegativeButton("Tidak", (dialog, which) -> dialog.dismiss())
+                            .setTitle("Hapus keranjang?")
+                            .setMessage("Anda yakin ingin menghapus keranjang ini?")
+                            .setCancelable(true)
+                            .create();
+                    builder.show();
+                }
                 return true;
         }
         return super.onOptionsItemSelected(item);
     }
 
     @Override
-    public void onPause() {
-        super.onPause();
-        clear();
-    }
-
-    @Override
-    public void onDestroy() {
-        super.onDestroy();
+    public void onResume() {
+        super.onResume();
         clear();
     }
 
@@ -123,6 +134,7 @@ public class KeranjangDetailFragment extends Fragment {
         AppBarConfiguration appBarConfiguration = new AppBarConfiguration.Builder(navController.getGraph()).build();
         NavigationUI.setupWithNavController(binding.toolbarKeranjangDetail, navController, appBarConfiguration);
 
+        binding.toolbarKeranjangDetail.inflateMenu(R.menu.menu_keranjang_detail);
         binding.toolbarKeranjangDetail.setOnMenuItemClickListener(this::onOptionsItemSelected);
     }
 
@@ -167,27 +179,21 @@ public class KeranjangDetailFragment extends Fragment {
                 adapter.removeItem(position);
                 binding.rvKeranjangDetailProdukList.swapAdapter(adapter, true);
                 state = IS_UPDATING;
-                setToolbarViewState(state);
             }
         }).attachToRecyclerView(binding.rvKeranjangDetailProdukList);
 
         binding.btnKeranjangDetailBuatOrder.setOnClickListener(v -> createOrder());
 
         adapter.setOnProductItemChangedListener((product, jumlah) -> {
-            if (product.getPivot().getJumlah() != jumlah) {
+            if (product.getPivot().getJumlah() > 0) {
                 int position = products.indexOf(product);
                 quantities.set(position, jumlah);
-                state = IS_UPDATING;
-                setToolbarViewState(state);
-
-                Timber.d(Arrays.toString(adapter.getCheckedProducts().toArray()));
             } else {
-                setToolbarViewState(IS_SHOWING);
+                adapter.removeItem(product);
+                binding.rvKeranjangDetailProdukList.swapAdapter(adapter, true);
             }
+            state = IS_UPDATING;
         });
-
-        binding.etKeranjangDetailJudul.addTextChangedListener(watchEditTexts());
-        binding.etKeranjangDetailDeskripsi.addTextChangedListener(watchEditTexts());
     }
 
     private void setupRecyclerView(ArrayList<Product> items) {
@@ -196,23 +202,6 @@ public class KeranjangDetailFragment extends Fragment {
         binding.rvKeranjangDetailProdukList.setAdapter(adapter);
         binding.rvKeranjangDetailProdukList.setHasFixedSize(true);
         binding.rvKeranjangDetailProdukList.setLayoutManager(new LinearLayoutManager(requireContext()));
-    }
-
-    private void setToolbarViewState(int state) {
-        if (binding.toolbarKeranjangDetail.getMenu() != null) {
-            binding.toolbarKeranjangDetail.getMenu().clear();
-        }
-
-        switch (state) {
-            case IS_CREATING:
-            case IS_UPDATING:
-                binding.toolbarKeranjangDetail.inflateMenu(R.menu.menu_keranjang_detail_update);
-                break;
-
-            case IS_SHOWING:
-                binding.toolbarKeranjangDetail.inflateMenu(R.menu.menu_keranjang_detail);
-                break;
-        }
     }
 
     private void showCartDetail(int cartId) {
@@ -254,7 +243,6 @@ public class KeranjangDetailFragment extends Fragment {
                     Toast.makeText(requireContext(), "Keranjang berhasil dibuat", Toast.LENGTH_SHORT).show();
                     setDataBinding(cart.getData());
                     state = IS_SHOWING;
-                    setToolbarViewState(state);
                     break;
 
                 case LOADING:
@@ -295,7 +283,6 @@ public class KeranjangDetailFragment extends Fragment {
                     Toast.makeText(requireContext(), "Keranjang berhasil diupdate", Toast.LENGTH_SHORT).show();
                     setDataBinding(cart.getData());
                     state = IS_SHOWING;
-                    setToolbarViewState(state);
                     break;
 
                 case LOADING:
@@ -332,49 +319,28 @@ public class KeranjangDetailFragment extends Fragment {
 
     }
 
-    private TextWatcher watchEditTexts() {
-        return new TextWatcher() {
-            @Override
-            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-
-            }
-
-            @Override
-            public void onTextChanged(CharSequence s, int start, int before, int count) {
-                state = IS_UPDATING;
-                setToolbarViewState(state);
-            }
-
-            @Override
-            public void afterTextChanged(Editable s) {
-
-            }
-        };
-    }
-
     private void createOrder() {
         KeranjangDetailFragmentDirections.KeranjangDetailFragmentToOrderNewFragment action =
                 KeranjangDetailFragmentDirections.keranjangDetailFragmentToOrderNewFragment();
 
         action.setCartId(args.getCartId());
-        action.setProductId(Helper.convertToIntArray(productIds));
-        action.setColorId(Helper.convertToIntArray(colorIds));
-        action.setSizeId(Helper.convertToIntArray(sizeIds));
-        action.setJumlah(Helper.convertToIntArray(quantities));
-        action.setProductHarga(Helper.convertToIntArray(productPrices));
+        action.setProductIds(Helper.convertToIntArray(productIds));
+        action.setColorIds(Helper.convertToIntArray(colorIds));
+        action.setSizeIds(Helper.convertToIntArray(sizeIds));
+        action.setQuantities(Helper.convertToIntArray(quantities));
+        action.setProductPrices(Helper.convertToIntArray(productPrices));
 
         navController.navigate(action);
     }
 
     private void clear() {
-        binding.etKeranjangDetailJudul.setText("");
-        binding.etKeranjangDetailDeskripsi.setText("");
-        binding.toolbarKeranjangDetail.getMenu().clear();
-        productIds.clear();
-        productPrices.clear();
-        colorIds.clear();
-        sizeIds.clear();
-        quantities.clear();
-        adapter.clearItems();
+        binding.etKeranjangDetailJudul.setText(null);
+        binding.etKeranjangDetailDeskripsi.setText(null);
+        binding.tvKeranjangDetailTotalJumlah.setText("0 item");
+        binding.tvKeranjangDetailTotalHarga.setText("Rp 0");
+        if (adapter != null) {
+            adapter.clearItems();
+        }
+        state = args.getViewState();
     }
 }

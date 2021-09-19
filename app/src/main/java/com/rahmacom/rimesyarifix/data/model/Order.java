@@ -5,7 +5,6 @@ import com.google.gson.annotations.SerializedName;
 import java.util.List;
 
 public class Order {
-
     @SerializedName("id")
     private int id;
 
@@ -26,6 +25,9 @@ public class Order {
 
     @SerializedName("berat")
     private int berat;
+
+    @SerializedName("expiry_date")
+    private String expiryDate;
 
     @SerializedName("discount_id")
     private int discountId;
@@ -55,8 +57,16 @@ public class Order {
         return id;
     }
 
+    public void setId(int id) {
+        this.id = id;
+    }
+
     public String getNomor() {
         return nomor;
+    }
+
+    public void setNomor(String nomor) {
+        this.nomor = nomor;
     }
 
     public String getPesan() {
@@ -97,6 +107,14 @@ public class Order {
 
     public void setBerat(int berat) {
         this.berat = berat;
+    }
+
+    public String getExpiryDate() {
+        return expiryDate;
+    }
+
+    public void setExpiryDate(String expiryDate) {
+        this.expiryDate = expiryDate;
     }
 
     public int getDiscountId() {

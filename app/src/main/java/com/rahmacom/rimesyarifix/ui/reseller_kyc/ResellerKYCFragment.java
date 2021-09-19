@@ -5,6 +5,7 @@ import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
+import android.util.Size;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -22,6 +23,8 @@ import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentActivity;
+import androidx.navigation.NavController;
+import androidx.navigation.Navigation;
 
 import com.google.common.util.concurrent.ListenableFuture;
 import com.rahmacom.rimesyarifix.databinding.FragmentResellerKycCameraBinding;
@@ -53,6 +56,7 @@ public class ResellerKYCFragment extends Fragment {
 
     private ResellerKYCViewModel viewModel;
     private FragmentResellerKycCameraBinding binding;
+    private ResellerKYCFragmentArgs args;
 
     private ImageCapture imageCapture;
     private File outputDir;
@@ -60,14 +64,9 @@ public class ResellerKYCFragment extends Fragment {
     private CameraSelector cameraSelector = CameraSelector.DEFAULT_BACK_CAMERA;
     private Boolean switchCam = true;
 
-    private FragmentActivity activity;
+    private NavController navController;
 
-    public static ResellerKYCFragment newInstance(int mode) {
-        ResellerKYCFragment fragment = new ResellerKYCFragment();
-        Bundle args = new Bundle();
-        args.putInt(KYC_ARGS, mode);
-        return new ResellerKYCFragment();
-    }
+    private FragmentActivity activity;
 
     @Override
     public void onAttach(@NonNull @NotNull Context context) {
@@ -94,12 +93,15 @@ public class ResellerKYCFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
 
         activity = requireActivity();
+        args = ResellerKYCFragmentArgs.fromBundle(getArguments());
 
         if (isAllPermissionGranted()) {
             startCamera(cameraSelector);
         } else {
             ActivityCompat.requestPermissions(activity, REQUIRED_PERMISSIONS, REQUEST_CODE_PERMISSIONS);
         }
+
+        navController = Navigation.findNavController(view);
 
         binding.btnTakePhoto.setOnClickListener(v -> takePhoto());
         binding.btnSwitchCamera.setOnClickListener(v -> {
@@ -151,10 +153,13 @@ public class ResellerKYCFragment extends Fragment {
                 @Override
                 public void onImageSaved(@NonNull ImageCapture.OutputFileResults outputFileResults) {
                     Uri savedUri = Uri.fromFile(photoFile);
-                    String message = "Photo captured successfully: " + savedUri;
-                    Toast.makeText(activity, message, Toast.LENGTH_SHORT)
-                            .show();
+                    String message = "Photo captured successfully: " + photoFile.getAbsolutePath();
                     Log.d(TAG, message);
+
+                    ResellerKYCFragmentDirections.ResellerKYCFragmentToResellerKYCPreviewFragment action = ResellerKYCFragmentDirections.resellerKYCFragmentToResellerKYCPreviewFragment(null);
+                    action.setFileUri(photoFile.getPath());
+                    action.setImageType(args.getImageType());
+                    navController.navigate(action);
                 }
 
                 @Override
@@ -179,7 +184,9 @@ public class ResellerKYCFragment extends Fragment {
             Preview preview = new Preview.Builder().build();
             preview.setSurfaceProvider(binding.viewFinder.getSurfaceProvider());
 
-            imageCapture = new ImageCapture.Builder().build();
+            imageCapture = new ImageCapture.Builder()
+                    .setTargetResolution(new Size(1024, 768))
+                    .build();
 
             try {
                 if (cameraProvider != null) {

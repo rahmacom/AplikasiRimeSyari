@@ -11,7 +11,7 @@ import com.rahmacom.rimesyarifix.databinding.ItemProdukDialogListBinding;
 
 import java.util.ArrayList;
 
-public class ProdukDialogAdapter extends RecyclerView.Adapter<ProdukDialogAdapter.ViewHolder> {
+public class ProdukKeranjangDialogAdapter extends RecyclerView.Adapter<ProdukKeranjangDialogAdapter.ViewHolder> {
 
     private ItemProdukDialogListBinding binding;
     private final ArrayList<Cart> list = new ArrayList<>();

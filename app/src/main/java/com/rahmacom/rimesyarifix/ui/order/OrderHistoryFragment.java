@@ -67,7 +67,7 @@ public class OrderHistoryFragment extends Fragment {
                 super.onPageSelected(position);
                 viewModel.setLiveOrder(position != 0
                         ? position + 4
-                        : 0);
+                        : 8);
             }
         });
     }

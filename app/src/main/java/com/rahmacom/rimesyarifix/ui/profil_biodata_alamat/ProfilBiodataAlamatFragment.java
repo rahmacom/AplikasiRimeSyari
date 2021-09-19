@@ -96,7 +96,12 @@ public class ProfilBiodataAlamatFragment extends Fragment {
 
         adapter.setOnItemClickListener(userShipment -> {
             if (state == IS_SELECTING) {
-                setShipmentAddressForNewOrder(userShipment.getId());
+                navController
+                        .getPreviousBackStackEntry()
+                        .getSavedStateHandle()
+                        .set("user_shipment_id", userShipment.getId());
+
+                navController.popBackStack();
             } else {
                 updateShipmentAddress(userShipment.getId());
             }
@@ -129,15 +134,6 @@ public class ProfilBiodataAlamatFragment extends Fragment {
 
             menu.show();
         });
-    }
-
-    private void setShipmentAddressForNewOrder(int userShipmentId) {
-        navController
-                .getPreviousBackStackEntry()
-                .getSavedStateHandle()
-                .set("user_shipment_id", userShipmentId);
-
-        navController.popBackStack();
     }
 
     private void getShipmentAddresses() {

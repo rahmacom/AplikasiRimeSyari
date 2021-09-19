@@ -55,9 +55,7 @@ public class ProfilBiodataFragment extends Fragment {
 
         binding.toolbarProfilBiodata.setTitle("Biodata user");
 
-        binding.btnEditProfil.setOnClickListener(v -> {
-            navController.navigate(ProfilBiodataFragmentDirections.profilBiodataFragmentToFormEditBiodataFragment());
-        });
+        binding.btnEditProfil.setOnClickListener(v -> navController.navigate(ProfilBiodataFragmentDirections.profilBiodataFragmentToFormEditBiodataFragment()));
     }
 
     @Override

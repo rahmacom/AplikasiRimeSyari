@@ -24,15 +24,14 @@ import com.rahmacom.rimesyarifix.utils.Const;
 
 import java.util.ArrayList;
 
-import timber.log.Timber;
-
 public class ProdukDialogFragment extends BottomSheetDialogFragment {
 
     private DialogFragmentProdukBinding binding;
     private KeranjangViewModel viewModel;
     private NavController navController;
-    private ProdukDialogAdapter adapter;
+    private ProdukKeranjangDialogAdapter adapter;
     private ProdukDialogFragmentDirections.ProdukDialogFragmentToKeranjangDetailFragment action;
+    private ProdukDialogFragmentArgs args;
 
     @Nullable
     @Override
@@ -46,23 +45,27 @@ public class ProdukDialogFragment extends BottomSheetDialogFragment {
         super.onViewCreated(view, savedInstanceState);
         viewModel = new ViewModelProvider(requireActivity()).get(KeranjangViewModel.class);
         navController = Navigation.findNavController(requireParentFragment().requireView());
-        com.rahmacom.rimesyarifix.ui.produk.ProdukDialogFragmentArgs args = ProdukDialogFragmentArgs.fromBundle(getArguments());
+        args = ProdukDialogFragmentArgs.fromBundle(getArguments());
         PreferenceManager manager = new PreferenceManager(requireContext());
         action = ProdukDialogFragmentDirections.produkDialogFragmentToKeranjangDetailFragment();
 
-        int productId = args.getProductId();
-        int colorId = args.getColorId();
-        int sizeId = args.getSizeId();
-        int jumlah = args.getJumlah();
-
         viewModel.setLiveToken(manager.getString(Const.KEY_TOKEN));
+        getCarts();
+        binding.btnProdukDialogKeranjangBaru.setOnClickListener(v -> newCart());
+    }
+
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+        binding = null;
+    }
+
+    private void getCarts() {
         viewModel.getAllCarts.observe(getViewLifecycleOwner(), carts -> {
             switch (carts.getStatus()) {
                 case SUCCESS:
                     setupRecyclerView((ArrayList<Cart>) carts.getData());
-                    adapter.setOnItemClickListener(cart -> updateCart(
-                            cart.getId(),
-                            productId, colorId, sizeId, jumlah));
+                    adapter.setOnItemClickListener(cart -> updateCart(cart.getId()));
                     break;
 
                 case EMPTY:
@@ -74,18 +77,10 @@ public class ProdukDialogFragment extends BottomSheetDialogFragment {
                     break;
             }
         });
-
-        binding.btnProdukDialogKeranjangBaru.setOnClickListener(v -> newCart(productId, colorId, sizeId, jumlah));
-    }
-
-    @Override
-    public void onDestroyView() {
-        super.onDestroyView();
-        binding = null;
     }
 
     private void setupRecyclerView(ArrayList<Cart> items) {
-        adapter = new ProdukDialogAdapter();
+        adapter = new ProdukKeranjangDialogAdapter();
         adapter.setList(items);
         binding.rvProdukDialogListKeranjang.setAdapter(adapter);
         binding.rvProdukDialogListKeranjang.setLayoutManager(new LinearLayoutManager(requireContext()));
@@ -93,21 +88,19 @@ public class ProdukDialogFragment extends BottomSheetDialogFragment {
         binding.rvProdukDialogListKeranjang.setHasFixedSize(true);
     }
 
-    private void newCart(int productId, int colorId, int sizeId, int jumlah) {
+    private void newCart() {
         action.setViewState(KeranjangDetailFragment.IS_CREATING);
-        action.setProductId(productId);
-        action.setColorId(colorId);
-        action.setSizeId(sizeId);
-        action.setJumlah(jumlah);
+        action.setProductId(args.getProductId());
+        action.setColorId(args.getColorId());
+        action.setSizeId(args.getSizeId());
+        action.setJumlah(args.getJumlah());
 
         navController.navigate(action);
     }
 
-    private void updateCart(int cartId, int productId, int colorId, int sizeId, int jumlah) {
-        viewModel.setLiveKeranjang(cartId, productId, colorId, sizeId, jumlah);
+    private void updateCart(int cartId) {
+        viewModel.setLiveKeranjang(cartId, args.getProductId(), args.getColorId(), args.getSizeId(), args.getJumlah());
         viewModel.addProductToCart.observe(getViewLifecycleOwner(), cart -> {
-            Timber.d(cart.getStatus().toString());
-            Timber.d(cart.getMessage());
             switch (cart.getStatus()) {
                 case SUCCESS:
                     action.setViewState(KeranjangDetailFragment.IS_SHOWING);

@@ -97,6 +97,12 @@ public class RegisterFragment extends Fragment {
                     binding.pbRegisterLoading.setVisibility(View.VISIBLE);
                     binding.btnRegisterDaftar.setText("");
                     break;
+
+                case UNPROCESSABLE_ENTITY:
+                    binding.btnRegisterDaftar.setText("Daftar");
+                    binding.pbRegisterLoading.setVisibility(View.INVISIBLE);
+                    Toast.makeText(requireContext(), "Terjadi error! email telah terdaftar.", Toast.LENGTH_SHORT).show();
+                    break;
             }
         });
     }

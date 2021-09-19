@@ -8,6 +8,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.rahmacom.rimesyarifix.data.model.Testimony;
+import com.rahmacom.rimesyarifix.data.model.User;
 import com.rahmacom.rimesyarifix.databinding.ItemProfilTestimoniListBinding;
 
 import java.util.ArrayList;
@@ -50,20 +51,24 @@ public class ProfilTestimoniAdapter extends RecyclerView.Adapter<ProfilTestimoni
         }
 
         void bind(Testimony testimony) {
-            String nama = testimony.getUser().getNamaLengkap();
-            if (nama == null) {
-                nama = testimony.getUser().getEmail();
+            User user = testimony.getUser();
+            if (user != null) {
+                String nama = (user != null) ? user.getNamaLengkap() : "";
+                if (nama == null) {
+                    nama = testimony.getUser().getEmail();
+                }
+
+                binding.tvProfilTestimoniNama.setText(nama);
+
+                if (testimony.getUser().getAvatar() != null) {
+                    Glide.with(binding.getRoot())
+                            .load(testimony.getUser().getAvatar())
+                            .into(binding.ivProfilTestimoniAvatar);
+                }
             }
 
-            binding.tvProfilTestimoniNama.setText(nama);
             binding.tvProfilTestimoniIsi.setText(testimony.getIsi());
-            binding.tvProfilTestimoniRating.setText(testimony.getRating() + " star");
-
-            if (testimony.getUser().getAvatar() != null) {
-                Glide.with(binding.getRoot())
-                        .load(testimony.getUser().getAvatar())
-                        .into(binding.ivProfilTestimoniAvatar);
-            }
+            binding.ratingProfilTestimoniList.setRating(testimony.getRating());
         }
     }
 }

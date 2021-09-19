@@ -36,4 +36,9 @@ public class District {
     public void setRegency(Regency regency) {
         this.regency = regency;
     }
+
+    @Override
+    public String toString() {
+        return name;
+    }
 }

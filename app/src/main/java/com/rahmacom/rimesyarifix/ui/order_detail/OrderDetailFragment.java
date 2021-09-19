@@ -91,6 +91,7 @@ public class OrderDetailFragment extends Fragment {
         binding.tvOrderDetailTotalJumlah.setText(String.format("%s item", order.getJumlah()));
         binding.tvOrderDetailStatus.setText(order.getStatus()
                 .getName());
+        binding.tvOrderDetailMetodePembayaranText.setText(order.getPaymentMethod().getName());
 
         setupRecyclerView((ArrayList<Product>) order.getProducts());
     }

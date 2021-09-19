@@ -12,21 +12,22 @@ import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
+import androidx.navigation.ui.AppBarConfiguration;
+import androidx.navigation.ui.NavigationUI;
 
 import com.rahmacom.rimesyarifix.databinding.FragmentResellerInfoBinding;
 import com.rahmacom.rimesyarifix.manager.PreferenceManager;
 import com.rahmacom.rimesyarifix.utils.Const;
 
-public class ResellerInfoFragment extends Fragment {
+import dagger.hilt.android.AndroidEntryPoint;
+import timber.log.Timber;
 
+@AndroidEntryPoint
+public class ResellerInfoFragment extends Fragment {
     private ResellerInfoViewModel viewModel;
     private FragmentResellerInfoBinding binding;
     private PreferenceManager manager;
     private NavController navController;
-
-    public static ResellerInfoFragment newInstance() {
-        return new ResellerInfoFragment();
-    }
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -39,12 +40,12 @@ public class ResellerInfoFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
         viewModel = new ViewModelProvider(requireActivity()).get(ResellerInfoViewModel.class);
         manager = new PreferenceManager(requireContext());
+        navController = Navigation.findNavController(view);
+
+        setupToolbar();
 
         viewModel.setLiveToken(manager.getString(Const.KEY_TOKEN));
-        binding.btnMulaiKycVerifikasi.setOnClickListener(v -> {
-            Navigation.findNavController(view)
-                    .navigate(ResellerInfoFragmentDirections.resellerInfoFragmentToResellerKYCFragment());
-        });
+        binding.btnMulaiKycVerifikasi.setOnClickListener(v -> newVerification());
     }
 
     @Override
@@ -53,7 +54,27 @@ public class ResellerInfoFragment extends Fragment {
         binding = null;
     }
 
-    private void checkIfUserIsElligible() {
+    private void setupToolbar() {
+        AppBarConfiguration appBarConfiguration = new AppBarConfiguration.Builder(navController.getGraph()).build();
+        NavigationUI.setupWithNavController(binding.toolbarResellerInfo, navController, appBarConfiguration);
+    }
 
+    private void newVerification() {
+        viewModel.beginResellerVerification.observe(getViewLifecycleOwner(), userVerificationResource -> {
+            Timber.d(userVerificationResource.getMessage());
+            switch (userVerificationResource.getStatus()) {
+                case SUCCESS:
+                    navController.navigate(ResellerInfoFragmentDirections.resellerInfoFragmentToResellerStatusVerifikasiFragment(null));
+                    break;
+
+                case EMPTY:
+                case ERROR:
+                case INVALID:
+                case UNAUTHORIZED:
+                case FORBIDDEN:
+                case UNPROCESSABLE_ENTITY:
+                    break;
+            }
+        });
     }
 }

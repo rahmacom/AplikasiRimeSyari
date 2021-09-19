@@ -11,12 +11,13 @@
         tools:layout="@layout/fragment_order">
         <action
             android:id="@+id/nav_order_to_orderDetailFragment"
+            app:enterAnim="?android:attr/windowEnterAnimation"
+            app:exitAnim="?android:attr/windowExitAnimation"
             app:destination="@id/orderDetailFragment" />
     </fragment>
     <action
         android:id="@+id/global_to_loginFragment"
         app:destination="@id/loginFragment"
-        app:launchSingleTop="true"
         app:popUpTo="@id/loginFragment"
         app:popUpToInclusive="true" />
     <fragment
@@ -100,6 +101,11 @@
             android:name="jumlah"
             app:argType="integer"
             android:defaultValue="-1" />
+        <argument
+            android:name="judul"
+            app:argType="string"
+            app:nullable="true"
+            android:defaultValue="@null" />
     </fragment>
     <fragment
         android:id="@+id/keranjangFragment"
@@ -233,23 +239,22 @@
         android:label="Syarat dan Ketentuan"
         tools:layout="@layout/fragment_reseller_info">
         <action
-            android:id="@+id/resellerInfoFragment_to_formEditBiodataFragment"
-            app:destination="@id/formEditBiodataFragment" />
-        <action
-            android:id="@+id/resellerInfoFragment_to_resellerKYCFragment"
-            app:destination="@id/resellerKYCFragment" />
+            android:id="@+id/resellerInfoFragment_to_resellerStatusVerifikasiFragment"
+            app:destination="@id/resellerStatusVerifikasiFragment" />
     </fragment>
     <fragment
         android:id="@+id/resellerKYCFragment"
         android:name="com.rahmacom.rimesyarifix.ui.reseller_kyc.ResellerKYCFragment"
         tools:layout="@layout/fragment_reseller_kyc_camera">
-        <action
-            android:id="@+id/resellerKYCFragment_to_resellerStatusVerifikasiFragment"
-            app:destination="@id/resellerStatusVerifikasiFragment" />
         <argument
-            android:name="user_verification_id"
+            android:name="image_type"
             app:argType="integer"
             android:defaultValue="-1" />
+        <action
+            android:id="@+id/resellerKYCFragment_to_resellerKYCPreviewFragment"
+            app:destination="@id/resellerKYCPreviewFragment"
+            app:popUpTo="@id/resellerKYCPreviewFragment"
+            app:popUpToInclusive="true" />
     </fragment>
     <fragment
         android:id="@+id/resellerStatusVerifikasiFragment"
@@ -258,6 +263,22 @@
         tools:layout="@layout/fragment_reseller_status_verifikasi" >
         <argument
             android:name="user_verification_id"
+            app:argType="integer"
+            android:defaultValue="-1" />
+        <action
+            android:id="@+id/resellerStatusVerifikasiFragment_to_resellerKYCFragment"
+            app:destination="@id/resellerKYCFragment"
+            app:popUpTo="@id/resellerKYCFragment"
+            app:popUpToInclusive="true" />
+        <action
+            android:id="@+id/resellerStatusVerifikasiFragment_to_formEditBiodataFragment"
+            app:destination="@id/formEditBiodataFragment" />
+        <argument
+            android:name="image_path"
+            app:argType="string"
+            app:nullable="true" />
+        <argument
+            android:name="image_type"
             app:argType="integer"
             android:defaultValue="-1" />
     </fragment>
@@ -291,7 +312,8 @@
         android:label="Pilih Keranjang">
         <action
             android:id="@+id/produkDialogFragment_to_keranjangDetailFragment"
-            app:destination="@id/keranjangDetailFragment" />
+            app:destination="@id/keranjangDetailFragment"
+            app:popUpToInclusive="false" />
         <argument
             android:name="color_id"
             android:defaultValue="-1"
@@ -333,27 +355,27 @@
             app:argType="integer"
             android:defaultValue="-1" />
         <argument
-            android:name="product_id"
+            android:name="productIds"
             app:argType="integer[]"
             app:nullable="true"
             android:defaultValue="@null" />
         <argument
-            android:name="color_id"
+            android:name="colorIds"
             app:argType="integer[]"
             app:nullable="true"
             android:defaultValue="@null" />
         <argument
-            android:name="size_id"
+            android:name="sizeIds"
             app:argType="integer[]"
             app:nullable="true"
             android:defaultValue="@null" />
         <argument
-            android:name="jumlah"
+            android:name="quantities"
             app:argType="integer[]"
             app:nullable="true"
             android:defaultValue="@null" />
         <argument
-            android:name="product_harga"
+            android:name="productPrices"
             app:argType="integer[]"
             app:nullable="true"
             android:defaultValue="@null" />
@@ -365,11 +387,22 @@
         tools:layout="@layout/fragment_order_konfirmasi">
         <action
             android:id="@+id/action_orderKonfirmasiFragment_to_orderDetailFragment"
-            app:destination="@id/orderDetailFragment" />
+            app:destination="@id/orderDetailFragment"
+            app:popUpTo="@id/orderDetailFragment"
+            app:popUpToInclusive="true" />
         <argument
             android:name="order_id"
             android:defaultValue="-1"
             app:argType="integer" />
+        <argument
+            android:name="payment_method_id"
+            app:argType="integer"
+            android:defaultValue="-1" />
+        <action
+            android:id="@+id/orderKonfirmasiFragment_to_nav_home"
+            app:destination="@id/nav_home"
+            app:popUpTo="@id/nav_home"
+            app:popUpToInclusive="true" />
     </fragment>
     <fragment
         android:id="@+id/postinganFragment"
@@ -387,6 +420,25 @@
         android:label="fragment_produk_testimoni"
         tools:layout="@layout/fragment_produk_testimoni" >
         <argument android:name="product_id"
+            app:argType="integer"
+            android:defaultValue="-1" />
+    </fragment>
+    <fragment
+        android:id="@+id/resellerKYCPreviewFragment"
+        android:name="com.rahmacom.rimesyarifix.ui.reseller_kyc_preview.ResellerKYCPreviewFragment"
+        android:label="fragment_reseller_kyc_preview"
+        tools:layout="@layout/fragment_reseller_kyc_preview" >
+        <action
+            android:id="@+id/resellerKYCPreviewFragment_to_resellerStatusVerifikasiFragment"
+            app:destination="@id/resellerStatusVerifikasiFragment"
+            app:popUpTo="@id/resellerStatusVerifikasiFragment"
+            app:popUpToInclusive="true" />
+        <argument
+            android:name="file_uri"
+            app:argType="string"
+            app:nullable="true" />
+        <argument
+            android:name="image_type"
             app:argType="integer"
             android:defaultValue="-1" />
     </fragment>

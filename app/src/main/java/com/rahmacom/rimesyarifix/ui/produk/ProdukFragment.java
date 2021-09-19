@@ -48,6 +48,7 @@ public class ProdukFragment extends Fragment {
     private ProdukViewModel viewModel;
     private NavController navController;
     private PreferenceManager manager;
+    private ProdukFragmentArgs args;
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -60,41 +61,36 @@ public class ProdukFragment extends Fragment {
         viewModel = new ViewModelProvider(requireActivity()).get(ProdukViewModel.class);
         navController = Navigation.findNavController(view);
         manager = new PreferenceManager(requireContext());
+        args = ProdukFragmentArgs.fromBundle(getArguments());
 
-        setupToolbar();
-
-        int productId = ProdukFragmentArgs.fromBundle(getArguments())
-                .getProductId();
+        setupToolbar();;
 
         viewModel.setLiveToken(manager.getString(Const.KEY_TOKEN));
-        viewModel.setLiveProductId(productId);
+        viewModel.setLiveProductId(args.getProductId());
 
         viewModel.viewProduct.observe(getViewLifecycleOwner(), product -> {
-            if (product != null) {
-                Timber.d(product.getStatus().toString());
-                switch (product.getStatus()) {
-                    case SUCCESS:
-                        setDataBinding(Objects.requireNonNull(product.getData()));
-                        binding.toolbarFragmentProduk.setTitle(product.getData()
-                                .getNama());
-                        binding.btnProdukAction.setOnClickListener(v -> {
-                            int jumlah = 1;
-                            if (Objects.equals(manager.getString(Const.KEY_ROLE), "reseller")) {
-                                jumlah = product.getData().getResellerMinimum();
-                            }
-                            onBtnProdukActionClick(product.getData().getId(), jumlah);
-                        });
-                        break;
+            switch (product.getStatus()) {
+                case SUCCESS:
+                    setDataBinding(product.getData());
+                    binding.toolbarFragmentProduk.setTitle(product.getData()
+                            .getNama());
+                    binding.btnProdukAction.setOnClickListener(v -> {
+                        int jumlah = 1;
+                        if (Objects.equals(manager.getString(Const.KEY_ROLE), "reseller")) {
+                            jumlah = product.getData().getResellerMinimum();
+                        }
+                        onBtnProdukActionClick(jumlah);
+                    });
+                    break;
 
-                    case EMPTY:
-                        break;
+                case EMPTY:
+                    break;
 
-                    case ERROR:
-                    case LOADING:
-                    case UNAUTHORIZED:
-                        Timber.d(product.getMessage());
-                        break;
-                }
+                case ERROR:
+                case LOADING:
+                case UNAUTHORIZED:
+                    Timber.d(product.getMessage());
+                    break;
             }
         });
     }
@@ -181,17 +177,22 @@ public class ProdukFragment extends Fragment {
         };
     }
 
-    private void onBtnProdukActionClick(int productId, int jumlah) {
+    private void onBtnProdukActionClick(int jumlah) {
+        int productId = args.getProductId();
         int colorId = binding.chipgroupProdukWarna.getCheckedChipId();
         int sizeId = binding.chipgroupProdukUkuran.getCheckedChipId();
 
-        ProdukFragmentDirections.ProdukFragmentToProdukDialogFragment action = ProdukFragmentDirections.produkFragmentToProdukDialogFragment();
-        action.setProductId(productId);
-        action.setColorId(colorId);
-        action.setSizeId(sizeId);
-        action.setJumlah(jumlah);
+        if (colorId < 1 && sizeId < 0) {
+            Toast.makeText(requireContext(), "Pilih warna dan ukuran terlebih dahulu", Toast.LENGTH_SHORT).show();
+        } else {
+            ProdukFragmentDirections.ProdukFragmentToProdukDialogFragment action = ProdukFragmentDirections.produkFragmentToProdukDialogFragment();
+            action.setProductId(productId);
+            action.setColorId(colorId);
+            action.setSizeId(sizeId);
+            action.setJumlah(jumlah);
 
-        navController.navigate(action);
+            navController.navigate(action);
+        }
     }
 
     private void likeProduct(boolean liked) {
@@ -203,17 +204,20 @@ public class ProdukFragment extends Fragment {
         }
 
         liveData.observe(getViewLifecycleOwner(), integer -> {
+            Timber.d(integer.getMessage());
             switch (integer.getStatus()) {
                 case SUCCESS:
                     if (liked) {
-                        binding.ivProdukSuka.setColorFilter(ContextCompat.getColor(requireContext(), R.color.gray_600));
-                    } else {
                         binding.ivProdukSuka.setColorFilter(ContextCompat.getColor(requireContext(), R.color.pink_400));
+                    } else {
+                        binding.ivProdukSuka.setColorFilter(ContextCompat.getColor(requireContext(), R.color.gray_600));
                     }
                     binding.tvProdukSukaText.setText(String.valueOf(integer.getData()));
                     break;
 
                 case LOADING:
+                    break;
+
                 case EMPTY:
                 case ERROR:
                     Toast.makeText(requireContext(), "Terjadi error! Silahkan coba lagi", Toast.LENGTH_SHORT).show();
