@@ -25,6 +25,12 @@ public class ProfilBiodataAlamatAdapter extends RecyclerView.Adapter<ProfilBioda
         notifyDataSetChanged();
     }
 
+    public void removeItem(UserShipment userShipment) {
+        int position = list.indexOf(userShipment);
+        list.remove(position);
+        notifyItemRemoved(position);
+    }
+
     public void setOnItemClickListener(OnItemClickListener onItemClickListener) {
         this.onItemClickListener = onItemClickListener;
     }

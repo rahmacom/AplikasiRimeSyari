@@ -6,6 +6,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.PopupMenu;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -46,7 +47,9 @@ public class ProfilBiodataAlamatFragment extends Fragment {
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        binding = FragmentProfilBiodataAlamatBinding.inflate(inflater, container, false);
+        if (binding == null) {
+            binding = FragmentProfilBiodataAlamatBinding.inflate(inflater, container, false);
+        }
         return binding.getRoot();
     }
 
@@ -80,6 +83,7 @@ public class ProfilBiodataAlamatFragment extends Fragment {
         NavigationUI.setupWithNavController(binding.toolbarProfilBiodataAlamat, navController, appBarConfiguration);
         binding.toolbarProfilBiodataAlamat.setTitle("Alamat yang disimpan");
 
+        binding.toolbarProfilBiodataAlamat.getMenu().clear();
         binding.toolbarProfilBiodataAlamat.inflateMenu(R.menu.menu_profil_biodata_alamat_toolbar);
         binding.toolbarProfilBiodataAlamat.setOnMenuItemClickListener(this::onOptionsItemSelected);
     }
@@ -125,7 +129,7 @@ public class ProfilBiodataAlamatFragment extends Fragment {
                         return true;
 
                     case R.id.menu_profil_biodata_alamat_remove:
-                        removeShipmentAddress(userShipment.getId());
+                        removeShipmentAddress(userShipment);
                         return true;
                 }
 
@@ -156,7 +160,29 @@ public class ProfilBiodataAlamatFragment extends Fragment {
     }
 
     private void setAsDefaultShipmentAddress(int userShipmentId) {
+        viewModel.setLiveUserShipment(userShipmentId);
+        viewModel.setAsDefaultShipment.observe(getViewLifecycleOwner(), userShipment -> {
+            Timber.d(userShipment.getMessage());
+            Timber.d(userShipment.getStatus().toString());
+            switch (userShipment.getStatus()) {
+                case SUCCESS:
+                    Toast.makeText(requireContext(), "Berhasil set alamat menjadi default", Toast.LENGTH_SHORT).show();
+                    manager.setInt(Const.KEY_USER_SHIPMENT_ID, userShipment.getData().getId());
+                    break;
 
+                case LOADING:
+                    break;
+
+                case EMPTY:
+                case ERROR:
+                case INVALID:
+                case UNAUTHORIZED:
+                case FORBIDDEN:
+                case UNPROCESSABLE_ENTITY:
+                    Toast.makeText(requireContext(), "Terjadi error! Silahkan coba lagi atau hubungi admin rime syari", Toast.LENGTH_SHORT).show();
+                    break;
+            }
+        });
     }
 
     private void newShipmentAddress() {
@@ -172,7 +198,28 @@ public class ProfilBiodataAlamatFragment extends Fragment {
         navController.navigate(action);
     }
 
-    private void removeShipmentAddress(int userShipmentId) {
+    private void removeShipmentAddress(UserShipment shipment) {
+        viewModel.setLiveUserShipment(shipment.getId());
+        viewModel.removeUserShipmentAddress.observe(getViewLifecycleOwner(), userShipment -> {
+            Timber.d(userShipment.getStatus().toString());
+            switch (userShipment.getStatus()) {
+                case SUCCESS:
+                    Toast.makeText(requireContext(), "Alamat berhasil dihapus", Toast.LENGTH_SHORT).show();
+                    adapter.removeItem(shipment);
+                    break;
 
+                case LOADING:
+                    break;
+
+                case EMPTY:
+                case ERROR:
+                case INVALID:
+                case UNAUTHORIZED:
+                case FORBIDDEN:
+                case UNPROCESSABLE_ENTITY:
+                    Toast.makeText(requireContext(), "Terjadi error! Tidak dapat menghapus alamat. Silahkan coba lagi.", Toast.LENGTH_SHORT).show();
+                    break;
+            }
+        });
     }
 }

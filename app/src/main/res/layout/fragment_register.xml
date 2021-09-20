@@ -35,7 +35,7 @@
         app:layout_constraintTop_toTopOf="@+id/guideline6" />
 
     <EditText
-        android:id="@+id/edt_register_no_hp"
+        android:id="@+id/et_register_email"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="24dp"
@@ -58,7 +58,7 @@
         android:hint="Password"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/edt_register_no_hp" />
+        app:layout_constraintTop_toBottomOf="@+id/et_register_email" />
 
     <EditText
         android:id="@+id/edt_register_password_confirm"

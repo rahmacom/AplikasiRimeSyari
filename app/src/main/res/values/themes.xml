@@ -109,7 +109,7 @@
     </style>
 
     <style name="ThemeOverlay.RimeSyariFix.DialogNegativeButton" parent="">
-        <item name="colorPrimary">@color/gray_400</item>
+        <item name="colorPrimary">@color/gray_500</item>
         <item name="android:fontFamily">@font/rubik</item>
     </style>
 

@@ -1,5 +1,6 @@
 package com.rahmacom.rimesyarifix.ui.form_profil_biodata;
 
+import android.app.DatePickerDialog;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
@@ -7,6 +8,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.DatePicker;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -23,8 +25,11 @@ import com.rahmacom.rimesyarifix.databinding.FragmentFormProfilBiodataBinding;
 import com.rahmacom.rimesyarifix.manager.PreferenceManager;
 import com.rahmacom.rimesyarifix.utils.Const;
 
+import java.text.SimpleDateFormat;
 import java.util.Arrays;
+import java.util.Calendar;
 import java.util.List;
+import java.util.Locale;
 
 import dagger.hilt.android.AndroidEntryPoint;
 import timber.log.Timber;
@@ -40,7 +45,9 @@ public class FormProfilBiodataFragment extends Fragment {
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        binding = FragmentFormProfilBiodataBinding.inflate(inflater, container, false);
+        if (binding == null) {
+            binding = FragmentFormProfilBiodataBinding.inflate(inflater, container, false);
+        }
         return binding.getRoot();
     }
 
@@ -52,8 +59,10 @@ public class FormProfilBiodataFragment extends Fragment {
         navController = Navigation.findNavController(view);
 
         viewModel.setLiveToken(manager.getString(Const.KEY_TOKEN));
-        getUserDetail();
+
         setupToolbar();
+        showDatePicker();
+        getUserDetail();
     }
 
     private void setupToolbar() {
@@ -72,6 +81,34 @@ public class FormProfilBiodataFragment extends Fragment {
             return true;
         }
         return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        binding = null;
+    }
+
+    private void showDatePicker() {
+        Calendar calendar = Calendar.getInstance();
+
+        DatePickerDialog.OnDateSetListener dateSetListener = (view, year, month, dayOfMonth) -> {
+            calendar.set(Calendar.YEAR, year);
+            calendar.set(Calendar.MONTH, month);
+            calendar.set(Calendar.DAY_OF_MONTH, dayOfMonth);
+
+            String dateFormat = "yyyy-MM-dd";
+            SimpleDateFormat sdf = new SimpleDateFormat(dateFormat, Locale.getDefault());
+
+            binding.etFormProfilBiodataTglLahir.setText(sdf.format(calendar.getTime()));
+        };
+
+        binding.etFormProfilBiodataTglLahir.setOnClickListener(v ->
+                new DatePickerDialog(requireContext(), dateSetListener,
+                        calendar.get(Calendar.YEAR),
+                        calendar.get(Calendar.MONTH),
+                        calendar.get(Calendar.DAY_OF_MONTH)
+                ).show());
     }
 
     private void getUserDetail() {
@@ -105,7 +142,7 @@ public class FormProfilBiodataFragment extends Fragment {
         String noHp = binding.etFormProfilBiodataNoTelp.getText().toString();
         String noWa = binding.etFormProfilBiodataWhatsapp.getText().toString();
 
-        viewModel.setLiveUser(nama, jk, tempatLahir, tglLahir, noHp, noWa, alamat);
+        viewModel.setLiveUser(nik, nama, jk, tempatLahir, tglLahir, noHp, noWa, alamat);
         viewModel.updateProfile.observe(getViewLifecycleOwner(), user -> {
             Timber.d(user.getStatus().toString());
             switch (user.getStatus()) {

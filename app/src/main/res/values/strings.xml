@@ -1,5 +1,11 @@
 <resources>
     <string name="app_name">Rime Syari</string>
+    <string name="title_nav_home">Beranda</string>
+    <string name="title_nav_order">Order</string>
+    <string name="title_nav_profile">Profil</string>
+    <string name="title_toolbar_home">Selamat datang, %s</string>
+    <string name="key_str_items">%d item</string>
+    <string name="key_str_harga">Rp %d</string>
     <string name="key_notif">notifikasi</string>
     <string name="key_simpan">simpan_keranjang</string>
     <string name="key_ttg_app">tentang</string>

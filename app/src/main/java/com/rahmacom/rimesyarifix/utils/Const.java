@@ -4,7 +4,7 @@ public class Const {
 //    public static final String BASE_URL = "http://politani.myskripsi.xyz/";
 //    public static final String BASE_URL = "http://rimesyari.myskripsi.xyz/";
 //    public static final String BASE_URL = "http://192.168.1.16/rime/public/";
-    public static final String BASE_URL = "http://192.168.206.152/rime/public/";
+    public static final String BASE_URL = "http://192.168.46.152/rime/public/";
     public static final String BASE_API_URL = BASE_URL + "api/";
     public static final String BASE_RAJAONGKIR_API_URL = "https://api.rajaongkir.com/starter/";
 

@@ -308,7 +308,7 @@
     </fragment>
     <dialog
         android:id="@+id/produkDialogFragment"
-        android:name="com.rahmacom.rimesyarifix.ui.produk.ProdukDialogFragment"
+        android:name="com.rahmacom.rimesyarifix.ui.produk.ProdukKeranjangDialogFragment"
         android:label="Pilih Keranjang">
         <action
             android:id="@+id/produkDialogFragment_to_keranjangDetailFragment"

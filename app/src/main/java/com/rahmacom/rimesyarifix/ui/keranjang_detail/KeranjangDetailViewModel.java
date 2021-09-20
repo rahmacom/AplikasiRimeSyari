@@ -25,7 +25,7 @@ public class KeranjangDetailViewModel extends ViewModel {
     private MainRepository mainRepository;
 
     public LiveData<Resource<Product>> getProduct = Transformations.switchMap(liveKeranjang, cart ->
-            mainRepository.viewProduct(liveToken.getValue(), cart.id));
+            mainRepository.newCartViewProduct(liveToken.getValue(), cart.productId, cart.colorId, cart.sizeId));
 
     public LiveData<Resource<Cart>> viewCart = Transformations.switchMap(liveKeranjang, cart ->
             mainRepository.viewCart(liveToken.getValue(), cart.id));
@@ -61,6 +61,14 @@ public class KeranjangDetailViewModel extends ViewModel {
     public void setLiveKeranjang(int id) {
         Keranjang keranjang = new Keranjang();
         keranjang.id = id;
+        liveKeranjang.setValue(keranjang);
+    }
+
+    public void setLiveKeranjang(int productId, int colorId, int sizeId) {
+        Keranjang keranjang = new Keranjang();
+        keranjang.productId = productId;
+        keranjang.colorId = colorId;
+        keranjang.sizeId = sizeId;
         liveKeranjang.setValue(keranjang);
     }
 
