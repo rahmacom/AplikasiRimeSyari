@@ -48,14 +48,14 @@ public class RegisterFragment extends Fragment {
         });
 
         final EditText etUser = binding.edtRegisterNamaLengkap;
-        final EditText etHp = binding.edtRegisterNoHp;
+        final EditText etEmail = binding.etRegisterEmail;
         final EditText etPassword = binding.edtRegisterPassword;
         final EditText etPasswordConfirm = binding.edtRegisterPasswordConfirm;
 
         binding.btnRegisterDaftar.setOnClickListener(v -> {
             try {
                 viewModel.setRegister(etUser.getText().toString(),
-                        etHp.getText().toString(),
+                        etEmail.getText().toString(),
                         etPassword.getText().toString(),
                         etPasswordConfirm.getText().toString());
             } catch (Exception e) {

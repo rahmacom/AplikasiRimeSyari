@@ -71,7 +71,7 @@ public interface RimeSyariAPI {
     @FormUrlEncoded
     @Headers({"Accept: application/json"})
 //    Call<User> updateProfile(@Header("Authorization") String token, @Field("nama_lengkap") String name, @Field("jenis_kelamin") String jenisKelamin, @Field("tempat_lahir") String tempatLahir, @Field("tgl_lahir") String tglLahir, @Field("alamat") String alamat, @Field("no_hp") String noHP, @Field("no_wa") String noWA);
-    Call<User> updateProfile(@Header("Authorization") String token, @Field("nama_lengkap") String name, @Field("jk") char jk, @Field("tempat_lahir") String tempatLahir, @Field("tgl_lahir") String tglLahir, @Field("alamat") String alamat, @Field("no_hp") String noHP, @Field("no_wa") String noWA);
+    Call<User> updateProfile(@Header("Authorization") String token, @Field("nik") String nik, @Field("nama_lengkap") String name, @Field("jk") char jk, @Field("tempat_lahir") String tempatLahir, @Field("tgl_lahir") String tglLahir, @Field("alamat") String alamat, @Field("no_hp") String noHP, @Field("no_wa") String noWA);
 
     @GET("products")
     @Headers({"Accept: application/json"})
@@ -107,6 +107,10 @@ public interface RimeSyariAPI {
                        @Field("color_id") int colorId,
                        @Field("size_id") int sizeId,
                        @Field("jumlah") int jumlah);
+
+    @GET("products/{product}/{color}/{size}")
+    @Headers({"Accept: application/json"})
+    Call<Product> newCartViewProduct(@Header("Authorization") String token, @Path("product") int productId, @Path("color") int colorId, @Path("size") int sizeId);
 
     @PATCH("carts/{cart}")
     @FormUrlEncoded
@@ -235,7 +239,7 @@ public interface RimeSyariAPI {
     @Headers({"Accept: application/json"})
     Call<UserShipment> removeShipmentAddress(@Header("Authorization") String token, @Path("user_shipment") int shipmentId);
 
-    @PATCH("user_shipment/{user_shipment}")
+    @PATCH("user_shipment/{user_shipment}/default")
     @Headers({"Accept: application/json"})
     Call<UserShipment> setAsDefaultShipmentAddress(@Header("Authorization") String token, @Path("user_shipment") int shipmentId);
 

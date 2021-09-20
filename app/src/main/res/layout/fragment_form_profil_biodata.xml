@@ -43,7 +43,6 @@
                 android:layout_marginEnd="16dp"
                 android:ems="10"
                 android:inputType="textPersonName"
-                android:text="Name"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="@+id/tv_form_profil_biodata_nama_lengkap_title"
                 app:layout_constraintTop_toBottomOf="@+id/tv_form_profil_biodata_nama_lengkap_title" />
@@ -88,7 +87,6 @@
                 android:layout_marginEnd="16dp"
                 android:ems="10"
                 android:inputType="textPersonName"
-                android:text="Name"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="@+id/tv_form_profil_biodata_tempat_lahir_title"
                 app:layout_constraintTop_toBottomOf="@+id/tv_form_profil_biodata_tempat_lahir_title" />
@@ -111,6 +109,7 @@
                 android:layout_marginTop="8dp"
                 android:layout_marginEnd="16dp"
                 android:ems="10"
+                android:focusable="false"
                 android:inputType="date"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="@+id/tv_form_profil_biodata_tgl_lahir_title"
@@ -191,12 +190,11 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
-                android:layout_marginTop="16dp"
                 android:text="NIK"
                 android:textColor="@color/gray_600"
                 android:textSize="12sp"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/toolbar_form_profil_biodata" />
+                app:layout_constraintTop_toTopOf="parent" />
 
             <EditText
                 android:id="@+id/et_form_profil_biodata_nik"
@@ -206,7 +204,6 @@
                 android:layout_marginEnd="16dp"
                 android:ems="10"
                 android:inputType="textPersonName"
-                android:text="Name"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="@+id/tv_form_profil_biodata_nik_title"
                 app:layout_constraintTop_toBottomOf="@+id/tv_form_profil_biodata_nik_title" />

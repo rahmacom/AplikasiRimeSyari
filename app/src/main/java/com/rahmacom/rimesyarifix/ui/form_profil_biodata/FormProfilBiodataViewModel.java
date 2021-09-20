@@ -32,8 +32,9 @@ public class FormProfilBiodataViewModel extends ViewModel {
         liveToken.setValue(token);
     }
 
-    public void setLiveUser(String namaLengkap, Character jk,  String tempatLahir, String tglLahir, String noHP, String noWA, String alamat) {
+    public void setLiveUser(String nik, String namaLengkap, Character jk,  String tempatLahir, String tglLahir, String noHP, String noWA, String alamat) {
         User user = new User();
+        user.setNik(nik);
         user.setNamaLengkap(namaLengkap);
         user.setJk(jk);
         user.setTempatLahir(tempatLahir);

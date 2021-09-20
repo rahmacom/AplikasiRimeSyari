@@ -24,14 +24,14 @@ import com.rahmacom.rimesyarifix.utils.Const;
 
 import java.util.ArrayList;
 
-public class ProdukDialogFragment extends BottomSheetDialogFragment {
+public class ProdukKeranjangDialogFragment extends BottomSheetDialogFragment {
 
     private DialogFragmentProdukBinding binding;
     private KeranjangViewModel viewModel;
     private NavController navController;
     private ProdukKeranjangDialogAdapter adapter;
-    private ProdukDialogFragmentDirections.ProdukDialogFragmentToKeranjangDetailFragment action;
-    private ProdukDialogFragmentArgs args;
+    private ProdukKeranjangDialogFragmentDirections.ProdukDialogFragmentToKeranjangDetailFragment action;
+    private ProdukKeranjangDialogFragmentArgs args;
 
     @Nullable
     @Override
@@ -45,9 +45,9 @@ public class ProdukDialogFragment extends BottomSheetDialogFragment {
         super.onViewCreated(view, savedInstanceState);
         viewModel = new ViewModelProvider(requireActivity()).get(KeranjangViewModel.class);
         navController = Navigation.findNavController(requireParentFragment().requireView());
-        args = ProdukDialogFragmentArgs.fromBundle(getArguments());
+        args = ProdukKeranjangDialogFragmentArgs.fromBundle(getArguments());
         PreferenceManager manager = new PreferenceManager(requireContext());
-        action = ProdukDialogFragmentDirections.produkDialogFragmentToKeranjangDetailFragment();
+        action = ProdukKeranjangDialogFragmentDirections.produkDialogFragmentToKeranjangDetailFragment();
 
         viewModel.setLiveToken(manager.getString(Const.KEY_TOKEN));
         getCarts();

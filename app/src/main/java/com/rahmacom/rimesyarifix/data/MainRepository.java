@@ -370,6 +370,7 @@ public class MainRepository {
 
         Call<User> api = rimeSyariAPI.updateProfile(
                 token,
+                user.getNik(),
                 user.getNamaLengkap(),
                 user.getJk(),
                 user.getTempatLahir(),
@@ -536,6 +537,56 @@ public class MainRepository {
         return data;
     }
 
+    public LiveData<Resource<Product>> newCartViewProduct(String token, int id, int colorId, int sizeId) {
+        MutableLiveData<Resource<Product>> data = new MutableLiveData<>();
+        data.postValue(Resource.loading(null));
+
+        Call<Product> api = rimeSyariAPI.newCartViewProduct(token, id, colorId, sizeId);
+        api.enqueue(new Callback<Product>() {
+            @Override
+            public void onResponse(@NonNull Call<Product> call, @NonNull Response<Product> response) {
+                switch (response.code()) {
+                    case 200:
+                    case 201:
+                        data.postValue(Resource.success(response.body()));
+                        break;
+
+                    case 204:
+                        data.postValue(Resource.empty(null));
+                        break;
+
+                    case 400:
+                        data.postValue(Resource.invalid(response.message()));
+                        break;
+
+                    case 401:
+                        data.postValue(Resource.unauthorized(response.message()));
+                        break;
+
+                    case 403:
+                        data.postValue(Resource.forbidden(response.message()));
+                        break;
+
+                    case 404:
+                    case 405:
+                        data.postValue(Resource.error(response.message(), null));
+                        break;
+
+                    case 422:
+                        data.postValue(Resource.unprocessableEntity(response.message(), null));
+                        break;
+                }
+            }
+
+            @Override
+            public void onFailure(@NonNull Call<Product> call, @NonNull Throwable t) {
+                data.postValue(Resource.error(t.getMessage(), null));
+            }
+        });
+
+        return data;
+    }
+
     public LiveData<Resource<Cart>> newCart(String token, String judul, String deskripsi, int productId, int colorId, int sizeId, int jumlah) {
         MutableLiveData<Resource<Cart>> data = new MutableLiveData<>();
         data.postValue(Resource.loading(null));
@@ -573,6 +624,11 @@ public class MainRepository {
                         break;
 
                     case 422:
+                        try {
+                            Timber.d(response.errorBody().string());
+                        } catch (IOException e) {
+                            e.printStackTrace();
+                        }
                         data.postValue(Resource.unprocessableEntity(response.message(), null));
                         break;
                 }
