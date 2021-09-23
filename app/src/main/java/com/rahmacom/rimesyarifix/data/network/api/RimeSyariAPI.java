@@ -239,7 +239,7 @@ public interface RimeSyariAPI {
     @Headers({"Accept: application/json"})
     Call<UserShipment> removeShipmentAddress(@Header("Authorization") String token, @Path("user_shipment") int shipmentId);
 
-    @PATCH("user_shipment/{user_shipment}/default")
+    @PATCH("user_shipments/{user_shipment}/default")
     @Headers({"Accept: application/json"})
     Call<UserShipment> setAsDefaultShipmentAddress(@Header("Authorization") String token, @Path("user_shipment") int shipmentId);
 
@@ -298,9 +298,9 @@ public interface RimeSyariAPI {
     @Headers({"Accept: application/json"})
     Call<UserVerification> verificationStatus(@Header("Authorization") String token);
 
-    @POST("profile/upload")
+    @POST("profile/upload_avatar")
     @Multipart
     @Headers({"Accept: application/json"})
     Call<Image> uploadAvatar(@Header("Authorization") String token,
-                             @Part("path") MultipartBody.Part path);
+                             @Part MultipartBody.Part imagePart);
 }

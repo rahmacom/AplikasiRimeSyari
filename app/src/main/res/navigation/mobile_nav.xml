@@ -202,6 +202,9 @@
         <action
             android:id="@+id/profilBiodataFragment_to_profilBiodataAlamatFragment"
             app:destination="@id/profilBiodataAlamatFragment" />
+        <action
+            android:id="@+id/profilBiodataFragment_to_formUploadFotoFragment"
+            app:destination="@id/formUploadFotoFragment" />
     </fragment>
     <fragment
         android:id="@+id/profilTentangFragment"
@@ -442,4 +445,9 @@
             app:argType="integer"
             android:defaultValue="-1" />
     </fragment>
+    <fragment
+        android:id="@+id/formUploadFotoFragment"
+        android:name="com.rahmacom.rimesyarifix.ui.form_upload_foto.FormUploadFotoFragment"
+        android:label="fragment_form_upload_foto"
+        tools:layout="@layout/fragment_form_upload_foto" />
 </navigation>

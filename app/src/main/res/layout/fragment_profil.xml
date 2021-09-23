@@ -17,8 +17,9 @@
             android:id="@+id/iv_profil_foto"
             android:layout_width="150dp"
             android:layout_height="150dp"
-            android:layout_marginTop="16dp"
+            android:layout_marginTop="64dp"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.498"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             tools:src="@tools:sample/avatars" />

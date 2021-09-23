@@ -47,12 +47,13 @@
 
     <ImageView
         android:id="@+id/iv_form_alamat_list_check"
-        android:layout_width="32dp"
-        android:layout_height="32dp"
+        android:layout_width="24dp"
+        android:layout_height="24dp"
         android:visibility="gone"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/icon_check" />
+        app:srcCompat="@drawable/icon_check"
+        tools:visibility="visible" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -25,6 +25,27 @@ public class ProfilBiodataAlamatAdapter extends RecyclerView.Adapter<ProfilBioda
         notifyDataSetChanged();
     }
 
+    public void addCheck(UserShipment userShipment) {
+        int pos = list.indexOf(userShipment);
+        list.get(pos).setDefault(true);
+        notifyItemChanged(pos);
+    }
+
+    public void removeCheck(UserShipment userShipment) {
+        int pos = list.indexOf(userShipment);
+        list.get(pos).setDefault(false);
+        notifyItemChanged(pos);
+    }
+
+    public UserShipment findCheckedItem(boolean isDefault) {
+        for (UserShipment userShipment : list) {
+            if (isDefault == userShipment.isDefault()) {
+                return userShipment;
+            }
+        }
+        return null;
+    }
+
     public void removeItem(UserShipment userShipment) {
         int position = list.indexOf(userShipment);
         list.remove(position);
@@ -77,6 +98,11 @@ public class ProfilBiodataAlamatAdapter extends RecyclerView.Adapter<ProfilBioda
         void bind(UserShipment userShipment) {
             binding.tvFormAlamatText.setText(userShipment.getAlamat());
             binding.tvFormAlamatKotaText.setText(userShipment.getVillage().getName());
+            if (userShipment.isDefault()) {
+                binding.ivFormAlamatListCheck.setVisibility(View.VISIBLE);
+            } else {
+                binding.ivFormAlamatListCheck.setVisibility(View.GONE);
+            }
         }
     }
 

@@ -45,9 +45,7 @@ public class PreferenceManager {
     }
 
     public String getString(String prefName) {
-        return preferences.contains(prefName)
-                ? preferences.getString(prefName, null)
-                : "";
+        return preferences.getString(prefName, "");
     }
 
     public int getInt(String prefName) {

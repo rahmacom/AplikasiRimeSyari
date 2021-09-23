@@ -118,7 +118,7 @@ public class ProfilBiodataAlamatFragment extends Fragment {
             menu.setOnMenuItemClickListener(item -> {
                 switch (item.getItemId()) {
                     case R.id.menu_profil_biodata_alamat_set_as_default:
-                        setAsDefaultShipmentAddress(userShipment.getId());
+                        setAsDefaultShipmentAddress(userShipment);
                         return true;
 
                     case R.id.menu_profil_alamat_edit:
@@ -159,8 +159,8 @@ public class ProfilBiodataAlamatFragment extends Fragment {
         });
     }
 
-    private void setAsDefaultShipmentAddress(int userShipmentId) {
-        viewModel.setLiveUserShipment(userShipmentId);
+    private void setAsDefaultShipmentAddress(UserShipment shipment) {
+        viewModel.setLiveUserShipment(shipment.getId());
         viewModel.setAsDefaultShipment.observe(getViewLifecycleOwner(), userShipment -> {
             Timber.d(userShipment.getMessage());
             Timber.d(userShipment.getStatus().toString());
@@ -168,6 +168,7 @@ public class ProfilBiodataAlamatFragment extends Fragment {
                 case SUCCESS:
                     Toast.makeText(requireContext(), "Berhasil set alamat menjadi default", Toast.LENGTH_SHORT).show();
                     manager.setInt(Const.KEY_USER_SHIPMENT_ID, userShipment.getData().getId());
+                    adapter.addCheck(userShipment.getData());
                     break;
 
                 case LOADING:

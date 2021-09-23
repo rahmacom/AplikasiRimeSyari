@@ -14,6 +14,7 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.camera.core.AspectRatio;
 import androidx.camera.core.CameraSelector;
 import androidx.camera.core.ImageCapture;
 import androidx.camera.core.ImageCaptureException;
@@ -32,11 +33,15 @@ import com.rahmacom.rimesyarifix.databinding.FragmentResellerKycCameraBinding;
 import org.jetbrains.annotations.NotNull;
 
 import java.io.File;
+import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Locale;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
+
+import id.zelory.compressor.Compressor;
+import timber.log.Timber;
 
 public class ResellerKYCFragment extends Fragment {
 
@@ -152,14 +157,23 @@ public class ResellerKYCFragment extends Fragment {
             imgCapture.takePicture(outputFileOptions, ContextCompat.getMainExecutor(requireContext()), new ImageCapture.OnImageSavedCallback() {
                 @Override
                 public void onImageSaved(@NonNull ImageCapture.OutputFileResults outputFileResults) {
-                    Uri savedUri = Uri.fromFile(photoFile);
-                    String message = "Photo captured successfully: " + photoFile.getAbsolutePath();
-                    Log.d(TAG, message);
+                    Compressor compressor = new Compressor(requireContext())
+                            .setMaxHeight(1280)
+                            .setMaxWidth(720);
+                    File compressedFile = null;
 
-                    ResellerKYCFragmentDirections.ResellerKYCFragmentToResellerKYCPreviewFragment action = ResellerKYCFragmentDirections.resellerKYCFragmentToResellerKYCPreviewFragment(null);
-                    action.setFileUri(photoFile.getPath());
-                    action.setImageType(args.getImageType());
-                    navController.navigate(action);
+                    try {
+                        compressedFile = compressor.compressToFile(photoFile);
+                        String message = "Photo captured successfully: " + photoFile.getAbsolutePath();
+                        Timber.d(message);
+                    } catch (IOException e) {
+                        Timber.e(e);
+                    } finally {
+                        ResellerKYCFragmentDirections.ResellerKYCFragmentToResellerKYCPreviewFragment action = ResellerKYCFragmentDirections.resellerKYCFragmentToResellerKYCPreviewFragment(null);
+                        action.setFileUri(compressedFile.getPath());
+                        action.setImageType(args.getImageType());
+                        navController.navigate(action);
+                    }
                 }
 
                 @Override
@@ -185,7 +199,7 @@ public class ResellerKYCFragment extends Fragment {
             preview.setSurfaceProvider(binding.viewFinder.getSurfaceProvider());
 
             imageCapture = new ImageCapture.Builder()
-                    .setTargetResolution(new Size(1024, 768))
+                    .setTargetAspectRatio(AspectRatio.RATIO_16_9)
                     .build();
 
             try {

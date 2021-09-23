@@ -118,6 +118,12 @@ public class ProdukFragment extends Fragment {
         binding.tvProdukSukaText.setText(String.valueOf(product.getLikesCount()));
         binding.tvProdukRatingText.setText(product.getReviewAvg() + " / 5 (" + product.getReviewCount() + " review)");
 
+        if (product.isLiked()) {
+            binding.ivProdukSuka.setColorFilter(ContextCompat.getColor(requireContext(), R.color.pink_400));
+        } else {
+            binding.ivProdukSuka.setColorFilter(ContextCompat.getColor(requireContext(), R.color.gray_600));
+        }
+
         binding.tvProdukRatingText.setOnClickListener(v -> {
             ProdukFragmentDirections.ProdukFragmentToProdukTestimoniFragment action = ProdukFragmentDirections.produkFragmentToProdukTestimoniFragment();
             action.setProductId(product.getId());

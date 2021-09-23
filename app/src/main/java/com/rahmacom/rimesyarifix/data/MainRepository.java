@@ -7,6 +7,7 @@ import androidx.lifecycle.MutableLiveData;
 import com.rahmacom.rimesyarifix.data.model.Cart;
 import com.rahmacom.rimesyarifix.data.model.Color;
 import com.rahmacom.rimesyarifix.data.model.District;
+import com.rahmacom.rimesyarifix.data.model.Image;
 import com.rahmacom.rimesyarifix.data.model.Order;
 import com.rahmacom.rimesyarifix.data.model.PaymentMethod;
 import com.rahmacom.rimesyarifix.data.model.Post;
@@ -422,6 +423,64 @@ public class MainRepository {
 
             @Override
             public void onFailure(Call<User> call, Throwable t) {
+                data.postValue(Resource.error(t.getMessage(), null));
+            }
+        });
+
+        return data;
+    }
+
+    public LiveData<Resource<Image>> uploadProfilePhoto(String token, File image) {
+        MutableLiveData<Resource<Image>> data = new MutableLiveData<>();
+        data.postValue(Resource.loading(null));
+
+        RequestBody requestImagePath = RequestBody.create(image, MediaType.parse("multipart/form-data"));
+        MultipartBody.Part imagePart = MultipartBody.Part.createFormData("path", image.getName(), requestImagePath);
+
+        Call<Image> api = rimeSyariAPI.uploadAvatar(token, imagePart);
+        api.enqueue(new Callback<Image>() {
+            @Override
+            public void onResponse(@NonNull Call<Image> call, @NonNull Response<Image> response) {
+                switch (response.code()) {
+                    case 200:
+                    case 201:
+                        data.postValue(Resource.success(response.body()));
+                        break;
+
+                    case 204:
+                        data.postValue(Resource.empty(null));
+                        break;
+
+                    case 400:
+                        data.postValue(Resource.invalid(response.message()));
+                        break;
+
+                    case 401:
+                        data.postValue(Resource.unauthorized(response.message()));
+                        break;
+
+                    case 403:
+                        data.postValue(Resource.forbidden(response.message()));
+                        break;
+
+                    case 404:
+                    case 500:
+                        try {
+                            Timber.e(response.errorBody().string());
+                        } catch (IOException e) {
+                            e.printStackTrace();
+                        }
+                        data.postValue(Resource.error(response.message(), null));
+                        break;
+
+                    case 422:
+                        data.postValue(Resource.unprocessableEntity(response.message(), null));
+                        break;
+                }
+            }
+
+            @Override
+            public void onFailure(@NonNull Call<Image> call, @NonNull Throwable t) {
                 data.postValue(Resource.error(t.getMessage(), null));
             }
         });
@@ -1578,6 +1637,8 @@ public class MainRepository {
         MutableLiveData<Resource<UserShipment>> data = new MutableLiveData<>();
         data.postValue(Resource.loading(null));
 
+        Timber.d(String.valueOf(shipmentId));
+
         Call<UserShipment> api = rimeSyariAPI.setAsDefaultShipmentAddress(token, shipmentId);
         api.enqueue(new Callback<UserShipment>() {
             @Override
@@ -1607,6 +1668,11 @@ public class MainRepository {
                     case 404:
                     case 405:
                         data.postValue(Resource.error(response.message(), null));
+                        try {
+                            Timber.d(response.errorBody().string());
+                        } catch (IOException e) {
+                            e.printStackTrace();
+                        }
                         break;
 
                     case 422:

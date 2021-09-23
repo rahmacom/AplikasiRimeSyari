@@ -43,7 +43,6 @@
                 android:layout_marginEnd="16dp"
                 android:ems="10"
                 android:inputType="textPersonName"
-                android:text="Name"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="@+id/tv_form_profil_biodata_nama_lengkap_title"
                 app:layout_constraintTop_toBottomOf="@+id/tv_form_profil_biodata_nama_lengkap_title" />

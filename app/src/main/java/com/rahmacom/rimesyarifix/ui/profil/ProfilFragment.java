@@ -19,6 +19,7 @@ import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
+import com.bumptech.glide.Glide;
 import com.rahmacom.rimesyarifix.R;
 import com.rahmacom.rimesyarifix.data.vo.Status;
 import com.rahmacom.rimesyarifix.databinding.FragmentProfilBinding;
@@ -71,6 +72,11 @@ public class ProfilFragment extends Fragment {
 
         binding.tvProfilNamaLengkapUser.setText(manager.getString(Const.KEY_NAMA_LENGKAP));
         binding.tvProfilEmailUser.setText(manager.getString(Const.KEY_EMAIL));
+
+        Glide.with(binding.getRoot())
+                .load(manager.getString(Const.KEY_AVATAR))
+                .into(binding.ivProfilFoto);
+
         setupMenuClick();
     }
 

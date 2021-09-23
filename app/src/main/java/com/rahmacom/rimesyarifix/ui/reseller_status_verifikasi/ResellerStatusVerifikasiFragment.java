@@ -109,6 +109,7 @@ public class ResellerStatusVerifikasiFragment extends Fragment {
 
                 case LOADING:
                     break;
+
                 case EMPTY:
                 case ERROR:
                 case INVALID:
@@ -136,7 +137,7 @@ public class ResellerStatusVerifikasiFragment extends Fragment {
         viewModel.uploadImage.observe(getViewLifecycleOwner(), userVerificationObserver);
     }
 
-    private Observer<Resource<UserVerification>> userVerificationObserver = userVerification -> {
+    private final Observer<Resource<UserVerification>> userVerificationObserver = userVerification -> {
         Timber.d(userVerification.getStatus().toString());
         Timber.d(userVerification.getMessage());
         switch (userVerification.getStatus()) {

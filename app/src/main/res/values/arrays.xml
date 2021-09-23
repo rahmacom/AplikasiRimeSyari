@@ -54,6 +54,11 @@
         <item>Status</item>
     </string-array>
 
+    <string-array name="dialog_form_upload_foto_list">
+        <item>Pilih dari galeri</item>
+        <item>Buka kamera</item>
+    </string-array>
+
     <string-array name="list_biodata_profil_dummy">
         <item>Jane Doe</item>
         <item>Perempuan</item>

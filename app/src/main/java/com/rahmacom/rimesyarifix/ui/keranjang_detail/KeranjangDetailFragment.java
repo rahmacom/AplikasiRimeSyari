@@ -129,7 +129,7 @@ public class KeranjangDetailFragment extends Fragment {
         AppBarConfiguration appBarConfiguration = new AppBarConfiguration.Builder(navController.getGraph()).build();
         NavigationUI.setupWithNavController(binding.toolbarKeranjangDetail, navController, appBarConfiguration);
 
-        binding.toolbarKeranjangDetail.inflateMenu(R.menu.menu_keranjang_detail);
+        binding.toolbarKeranjangDetail.inflateMenu(R.menu.menu_keranjang_detail_create);
         binding.toolbarKeranjangDetail.setOnMenuItemClickListener(this::onOptionsItemSelected);
     }
 
