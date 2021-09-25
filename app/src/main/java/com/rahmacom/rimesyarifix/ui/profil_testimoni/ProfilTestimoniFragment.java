@@ -60,7 +60,7 @@ public class ProfilTestimoniFragment extends Fragment {
     }
 
     private void setupRecyclerView(ArrayList<Testimony> list) {
-        adapter = new ProfilTestimoniAdapter();
+        adapter = new ProfilTestimoniAdapter(requireContext());
         adapter.setLists(list);
 
         binding.rvProfilTestimoni.setAdapter(adapter);

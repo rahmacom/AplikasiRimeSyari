@@ -74,6 +74,7 @@ public class FormUploadFotoFragment extends Fragment {
         setImageBinding(args.getImageUri());
 
         binding.ivFormUploadFotoProfil.setOnClickListener(v -> showUploadImageDialog());
+        binding.ivFormUploadFotoUbah.setOnClickListener(v -> showUploadImageDialog());
     }
 
     @Override
@@ -87,30 +88,33 @@ public class FormUploadFotoFragment extends Fragment {
         super.onAttach(context);
         galleryLauncher = registerForActivityResult(new ActivityResultContracts.GetContent(),
                 uriResult -> {
-                    Glide.with(binding.getRoot())
-                            .load(uriResult)
-                            .into(binding.ivFormUploadFotoProfil);
+                    if (uriResult != null) {
+                        Glide.with(binding.getRoot())
+                                .load(uriResult)
+                                .into(binding.ivFormUploadFotoProfil);
 
-                    try {
-                        File file = Helper.bitmapToFile(MediaStore.Images.Media.getBitmap(requireContext().getContentResolver(), uriResult), requireActivity());
-                        binding.btnFormUploadFotoSimpan.setOnClickListener(v -> updateProfilePhoto(file));
-                    } catch (IOException e) {
-                        e.printStackTrace();
+                        try {
+                            File file = Helper.bitmapToFile(MediaStore.Images.Media.getBitmap(requireContext().getContentResolver(), uriResult), requireActivity());
+
+                            binding.btnFormUploadFotoSimpan.setOnClickListener(v -> updateProfilePhoto(file));
+                        } catch (IOException e) {
+                            e.printStackTrace();
+                        }
                     }
                 });
 
         cameraLauncher = registerForActivityResult(new ActivityResultContracts.StartActivityForResult(),
                 activityResult -> {
-                    Bundle extras = activityResult.getData().getExtras();
-                    if (extras != null) {
+                    Intent data = activityResult.getData();
+                    if (data != null) {
                         Glide.with(binding.getRoot())
-                                .load(extras.get("data"))
+                                .load(data.getExtras().get("data"))
                                 .into(binding.ivFormUploadFotoProfil);
+
+                        File file = Helper.bitmapToFile((Bitmap) data.getExtras().get("data"), requireActivity());
+
+                        binding.btnFormUploadFotoSimpan.setOnClickListener(v -> updateProfilePhoto(file));
                     }
-
-                    File file = Helper.bitmapToFile((Bitmap) activityResult.getData().getExtras().get("data"), requireActivity());
-
-                    binding.btnFormUploadFotoSimpan.setOnClickListener(v -> updateProfilePhoto(file));
                 });
     }
 
@@ -126,7 +130,7 @@ public class FormUploadFotoFragment extends Fragment {
             switch (image.getStatus()) {
                 case SUCCESS:
                     Toast.makeText(requireContext(), "Foto profil berhasil disimpan.", Toast.LENGTH_SHORT).show();
-                    manager.setString(Const.KEY_AVATAR, image.getData().getPath());
+                    manager.setString(Const.KEY_AVATAR, Const.BASE_URL + image.getData().getPath());
                     break;
                 case EMPTY:
                 case ERROR:

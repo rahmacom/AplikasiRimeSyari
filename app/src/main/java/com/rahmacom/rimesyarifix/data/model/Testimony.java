@@ -25,6 +25,9 @@ public class Testimony {
     @SerializedName("user")
     private User user;
 
+    @SerializedName("product")
+    private Product product;
+
     public int getId() {
         return id;
     }
@@ -77,7 +80,7 @@ public class Testimony {
         return user;
     }
 
-    public void setUser(User user) {
-        this.user = user;
+    public Product getProduct() {
+        return product;
     }
 }

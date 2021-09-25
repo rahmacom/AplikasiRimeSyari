@@ -19,6 +19,9 @@
     <string name="hint_password">Password...</string>
     <string name="hint_key_login">Email...</string>
     <string name="link_forget">Lupa kata sandi?</string>
+    <string name="payment_method_transaction_warning">Silahkan lakukan pembayaran secepatnya. Klik keterangan untuk melihat proses pembayaran atau upload bukti pembayaran.</string>
+    <string name="payment_method_success">Anda telah membayar order ini.</string>
+    <string name="payment_method_cod">Silahkan bayar ke kurir. Kurir akan mengkonfirmasi pembayaran anda ke admin rimesyari.</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="reseller_mulai_kyc">Mulai verifikasi KYC</string>

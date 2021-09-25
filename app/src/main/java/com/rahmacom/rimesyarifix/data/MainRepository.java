@@ -1215,6 +1215,59 @@ public class MainRepository {
         return data;
     }
 
+    public LiveData<Resource<Boolean>> payOrder(String token, int orderId, File image) {
+        MutableLiveData<Resource<Boolean>> data = new MutableLiveData<>();
+        data.postValue(Resource.loading(null));
+
+        RequestBody requestImagePath = RequestBody.create(image, MediaType.parse("multipart/form-data"));
+        MultipartBody.Part imagePart = MultipartBody.Part.createFormData("path", image.getName(), requestImagePath);
+
+        Call<Boolean> api = rimeSyariAPI.uploadPayment(token, orderId, imagePart);
+        api.enqueue(new Callback<Boolean>() {
+            @Override
+            public void onResponse(Call<Boolean> call, Response<Boolean> response) {
+                switch (response.code()) {
+                    case 200:
+                    case 201:
+                        data.postValue(Resource.success(response.body()));
+                        break;
+
+                    case 204:
+                        data.postValue(Resource.empty(null));
+                        break;
+
+                    case 400:
+                        data.postValue(Resource.invalid(response.message()));
+                        break;
+
+                    case 401:
+                        data.postValue(Resource.unauthorized(response.message()));
+                        break;
+
+                    case 403:
+                        data.postValue(Resource.forbidden(response.message()));
+                        break;
+
+                    case 404:
+                    case 405:
+                        data.postValue(Resource.error(response.message(), null));
+                        break;
+
+                    case 422:
+                        data.postValue(Resource.unprocessableEntity(response.message(), null));
+                        break;
+                }
+            }
+
+            @Override
+            public void onFailure(Call<Boolean> call, Throwable t) {
+                data.postValue(Resource.error(t.getMessage(), null));
+            }
+        });
+
+        return data;
+    }
+
     /*
      * ---------------------------------------------------------------------------------------------
      *
@@ -2493,6 +2546,56 @@ public class MainRepository {
         data.postValue(Resource.loading(null));
 
         Call<UserVerification> api = rimeSyariAPI.verificationStatus(token);
+        api.enqueue(new Callback<UserVerification>() {
+            @Override
+            public void onResponse(@NonNull Call<UserVerification> call, @NonNull Response<UserVerification> response) {
+                switch (response.code()) {
+                    case 200:
+                    case 201:
+                        data.postValue(Resource.success(response.body()));
+                        break;
+
+                    case 204:
+                        data.postValue(Resource.empty(null));
+                        break;
+
+                    case 400:
+                        data.postValue(Resource.invalid(response.message()));
+                        break;
+
+                    case 401:
+                        data.postValue(Resource.unauthorized(response.message()));
+                        break;
+
+                    case 403:
+                        data.postValue(Resource.forbidden(response.message()));
+                        break;
+
+                    case 404:
+                    case 405:
+                        data.postValue(Resource.error(response.message(), null));
+                        break;
+
+                    case 422:
+                        data.postValue(Resource.unprocessableEntity(response.message(), null));
+                        break;
+                }
+            }
+
+            @Override
+            public void onFailure(@NonNull Call<UserVerification> call, @NonNull Throwable t) {
+                data.postValue(Resource.error(t.getMessage(), null));
+            }
+        });
+
+        return data;
+    }
+
+    public LiveData<Resource<UserVerification>> beginVerification(String token) {
+        MutableLiveData<Resource<UserVerification>> data = new MutableLiveData<>();
+        data.postValue(Resource.loading(null));
+
+        Call<UserVerification> api = rimeSyariAPI.beginVerification(token);
         api.enqueue(new Callback<UserVerification>() {
             @Override
             public void onResponse(@NonNull Call<UserVerification> call, @NonNull Response<UserVerification> response) {

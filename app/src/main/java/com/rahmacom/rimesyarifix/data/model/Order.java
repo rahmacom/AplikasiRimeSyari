@@ -29,6 +29,9 @@ public class Order {
     @SerializedName("expiry_date")
     private String expiryDate;
 
+    @SerializedName("is_paid")
+    private boolean isPaid;
+
     @SerializedName("discount_id")
     private int discountId;
 
@@ -115,6 +118,14 @@ public class Order {
 
     public void setExpiryDate(String expiryDate) {
         this.expiryDate = expiryDate;
+    }
+
+    public boolean isPaid() {
+        return isPaid;
+    }
+
+    public void setPaid(boolean paid) {
+        isPaid = paid;
     }
 
     public int getDiscountId() {

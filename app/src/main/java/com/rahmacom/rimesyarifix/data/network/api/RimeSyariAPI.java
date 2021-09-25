@@ -33,6 +33,7 @@ import retrofit2.http.Headers;
 import retrofit2.http.Multipart;
 import retrofit2.http.PATCH;
 import retrofit2.http.POST;
+import retrofit2.http.PUT;
 import retrofit2.http.Part;
 import retrofit2.http.Path;
 import retrofit2.http.Query;
@@ -298,9 +299,20 @@ public interface RimeSyariAPI {
     @Headers({"Accept: application/json"})
     Call<UserVerification> verificationStatus(@Header("Authorization") String token);
 
+    @POST("verification/start")
+    @Headers({"Accept: application/json"})
+    Call<UserVerification> beginVerification(@Header("Authorization") String token);
+
     @POST("profile/upload_avatar")
     @Multipart
     @Headers({"Accept: application/json"})
     Call<Image> uploadAvatar(@Header("Authorization") String token,
                              @Part MultipartBody.Part imagePart);
+
+    @POST("orders/{order}/upload")
+    @Multipart
+    @Headers({"Accept: application/json"})
+    Call<Boolean> uploadPayment(@Header("Authorization") String token,
+                                @Path("order") int orderId,
+                                @Part MultipartBody.Part imagePart);
 }

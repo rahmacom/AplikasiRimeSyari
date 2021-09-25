@@ -188,6 +188,8 @@ public class ProdukFragment extends Fragment {
         int colorId = binding.chipgroupProdukWarna.getCheckedChipId();
         int sizeId = binding.chipgroupProdukUkuran.getCheckedChipId();
 
+        Timber.d("size_id: %s", sizeId);
+
         if (colorId < 1 && sizeId < 0) {
             Toast.makeText(requireContext(), "Pilih warna dan ukuran terlebih dahulu", Toast.LENGTH_SHORT).show();
         } else {

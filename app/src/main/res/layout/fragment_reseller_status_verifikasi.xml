@@ -59,7 +59,7 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
-        android:text="Reseller Rime Syari adalah customer yang memiliki izin untuk melakukan penjualan kembali barang yang dibeli. Reseller mendapatkan harga khusus dari Rime Syari ketika melakukan pembelian produk."
+        android:text="Reseller Rime Syari adalah customer yang memiliki izin untuk melakukan penjualan kembali barang yang dibeli. Reseller mendapatkan harga khusus dari Rime Syari ketika melakukan pembelian produk dengan minimal jumlah barang tertentu."
         android:textColor="@color/gray_700"
         app:layout_constraintEnd_toEndOf="@+id/tv_reseller_status_verifikasi_deskripsi_title"
         app:layout_constraintStart_toStartOf="@+id/tv_reseller_status_verifikasi_deskripsi_title"
@@ -128,10 +128,13 @@
         android:text="Lakukan verifikasi"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/btn_fragment_reseller_status_verifikasi_cek_foto_identitas"
+        app:layout_constraintVertical_bias="1.0" />
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/btn_fragment_reseller_status_verifikasi_cek_biodata"
+        style="@style/Widget.MaterialComponents.Button.UnelevatedButton"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
@@ -146,6 +149,7 @@
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/btn_fragment_reseller_status_verifikasi_cek_foto_wajah"
+        style="@style/Widget.MaterialComponents.Button.UnelevatedButton"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
@@ -160,6 +164,7 @@
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/btn_fragment_reseller_status_verifikasi_cek_foto_identitas"
+        style="@style/Widget.MaterialComponents.Button.UnelevatedButton"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"

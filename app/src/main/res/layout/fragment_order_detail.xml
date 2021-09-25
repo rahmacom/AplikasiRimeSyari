@@ -222,7 +222,7 @@
                 app:layout_constraintEnd_toStartOf="@+id/gr_order_detail"
                 app:layout_constraintStart_toStartOf="@+id/gl_order_detail"
                 app:layout_constraintTop_toBottomOf="@+id/tv_order_detail_metode_pembelian_title"
-                tools:text="Silahkan bayar sebelum tanggal 22 Mei 2021. Anda dapat mengupload bukti pembayaran anda disini" />
+                tools:text="Silahkan lakukan pembayaran secepatnya. Klik keterangan untuk melihat proses pembayaran atau upload bukti pembayaran." />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
