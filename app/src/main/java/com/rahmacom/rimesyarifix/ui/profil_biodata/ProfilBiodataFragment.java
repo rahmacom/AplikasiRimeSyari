@@ -55,7 +55,11 @@ public class ProfilBiodataFragment extends Fragment {
 
         binding.toolbarProfilBiodata.setTitle("Biodata user");
 
-        binding.btnEditProfil.setOnClickListener(v -> navController.navigate(ProfilBiodataFragmentDirections.profilBiodataFragmentToFormEditBiodataFragment()));
+        binding.btnProfilBiodataEdit.setOnClickListener(v -> navController.navigate(ProfilBiodataFragmentDirections.profilBiodataFragmentToFormEditBiodataFragment()));
+        binding.btnProfilBiodataUploadFoto.setOnClickListener(v -> {
+            ProfilBiodataFragmentDirections.ProfilBiodataFragmentToFormUploadFotoFragment action = ProfilBiodataFragmentDirections.profilBiodataFragmentToFormUploadFotoFragment(manager.getString(Const.KEY_AVATAR));
+            navController.navigate(action);
+        });
     }
 
     @Override

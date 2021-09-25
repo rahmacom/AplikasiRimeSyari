@@ -23,7 +23,7 @@ public class KeranjangViewModel extends ViewModel {
     private MainRepository mainRepository;
 
     public final LiveData<Resource<List<Cart>>> getAllCarts = Transformations.switchMap(liveToken, keranjang ->
-            mainRepository.getAllCarts(liveToken.getValue()));
+            mainRepository.allCarts(liveToken.getValue()));
 
     public final LiveData<Resource<Cart>> newCart =
             Transformations.switchMap(liveKeranjang, keranjang ->

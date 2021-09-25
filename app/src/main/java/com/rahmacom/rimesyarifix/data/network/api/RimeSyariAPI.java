@@ -91,7 +91,7 @@ public interface RimeSyariAPI {
 
     @GET("carts")
     @Headers({"Accept: application/json"})
-    Call<List<Cart>> getAllCarts(@Header("Authorization") String token);
+    Call<List<Cart>> allCarts(@Header("Authorization") String token);
 
     @GET("carts/{cart}")
     @Headers({"Accept: application/json"})

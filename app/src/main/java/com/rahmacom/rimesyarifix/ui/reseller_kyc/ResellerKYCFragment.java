@@ -29,6 +29,7 @@ import androidx.navigation.Navigation;
 
 import com.google.common.util.concurrent.ListenableFuture;
 import com.rahmacom.rimesyarifix.databinding.FragmentResellerKycCameraBinding;
+import com.rahmacom.rimesyarifix.utils.Helper;
 
 import org.jetbrains.annotations.NotNull;
 
@@ -119,7 +120,7 @@ public class ResellerKYCFragment extends Fragment {
             startCamera(cameraSelector);
         });
 
-        outputDir = getOutputDir();
+        outputDir = Helper.getOutputDir(activity);
 
         cameraExecutor = Executors.newSingleThreadExecutor();
     }
@@ -178,7 +179,7 @@ public class ResellerKYCFragment extends Fragment {
 
                 @Override
                 public void onError(@NonNull @NotNull ImageCaptureException exception) {
-                    Log.e(TAG, "Photo capture failed: ", exception);
+                    Timber.e(exception);
                 }
             });
         }
@@ -208,7 +209,7 @@ public class ResellerKYCFragment extends Fragment {
                     cameraProvider.bindToLifecycle(activity, cameraSelector, preview, imageCapture);
                 }
             } catch (Exception e) {
-                Log.e(TAG, "Use case binding failed: ", e);
+                Timber.e(e);
             }
         }, ContextCompat.getMainExecutor(requireActivity()));
     }
@@ -220,20 +221,5 @@ public class ResellerKYCFragment extends Fragment {
             }
         }
         return true;
-    }
-
-    private File getOutputDir() {
-        File mediaDir = null;
-
-        for (File dir : activity.getExternalMediaDirs()) {
-            if (dir != null && dir.exists()) {
-                mediaDir = dir;
-                break;
-            } else {
-                mediaDir = activity.getFilesDir();
-            }
-        }
-
-        return mediaDir;
     }
 }

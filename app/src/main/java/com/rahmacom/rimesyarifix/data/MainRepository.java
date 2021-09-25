@@ -496,11 +496,11 @@ public class MainRepository {
      * ---------------------------------------------------------------------------------------------
      */
 
-    public LiveData<Resource<List<Cart>>> getAllCarts(String token) {
+    public LiveData<Resource<List<Cart>>> allCarts(String token) {
         MutableLiveData<Resource<List<Cart>>> data = new MutableLiveData<>();
         data.postValue(Resource.loading(null));
 
-        Call<List<Cart>> api = rimeSyariAPI.getAllCarts(token);
+        Call<List<Cart>> api = rimeSyariAPI.allCarts(token);
         api.enqueue(new Callback<List<Cart>>() {
             @Override
             public void onResponse(Call<List<Cart>> call, Response<List<Cart>> response) {

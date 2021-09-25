@@ -449,5 +449,7 @@
         android:id="@+id/formUploadFotoFragment"
         android:name="com.rahmacom.rimesyarifix.ui.form_upload_foto.FormUploadFotoFragment"
         android:label="fragment_form_upload_foto"
-        tools:layout="@layout/fragment_form_upload_foto" />
+        tools:layout="@layout/fragment_form_upload_foto" >
+        <argument android:name="image_uri" />
+    </fragment>
 </navigation>

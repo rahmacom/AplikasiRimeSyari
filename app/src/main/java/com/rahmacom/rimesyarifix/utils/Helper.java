@@ -1,16 +1,29 @@
 package com.rahmacom.rimesyarifix.utils;
 
+import android.app.Activity;
+import android.content.Context;
+import android.content.ContextWrapper;
+import android.database.Cursor;
+import android.graphics.Bitmap;
+import android.net.Uri;
+import android.provider.MediaStore;
+
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.OutputStream;
 import java.sql.Timestamp;
 import java.text.DecimalFormat;
 import java.text.DecimalFormatSymbols;
 import java.text.NumberFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.time.format.DateTimeFormatter;
 import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
 import java.util.Locale;
+import java.util.UUID;
 
 public class Helper {
     public static String convertToRP(long harga) {
@@ -63,5 +76,53 @@ public class Helper {
         }
 
         return null;
+    }
+
+    public static File bitmapToFile(Bitmap bmp, Activity activity) {
+        ContextWrapper wrapper = new ContextWrapper(activity);
+
+        File file = getOutputDir(activity);
+        file = new File(file, UUID.randomUUID() + ".jpg");
+
+        try {
+            OutputStream fos = new FileOutputStream(file);
+            bmp.compress(Bitmap.CompressFormat.JPEG, 100, fos);
+            fos.flush();
+            fos.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        return file;
+    }
+
+    public static File getOutputDir(Activity activity) {
+        File mediaDir = null;
+
+        for (File dir : activity.getExternalMediaDirs()) {
+            if (dir != null && dir.exists()) {
+                mediaDir = dir;
+                break;
+            } else {
+                mediaDir = activity.getFilesDir();
+            }
+        }
+
+        return mediaDir;
+    }
+
+    public static String getContentFromUri(Uri uri, Context context) {
+        String result = null;
+        String[] projection = {MediaStore.Images.Media.DATA};
+
+        Cursor cursor = context.getContentResolver().query(uri, projection, null, null, null);
+
+        if (cursor.moveToFirst()) {
+            int idx = cursor.getColumnIndexOrThrow(MediaStore.Images.Media.DATA);
+            result = cursor.getString(idx);
+            cursor.close();
+        }
+
+        return result;
     }
 }
