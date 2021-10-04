@@ -174,6 +174,9 @@
         <action
             android:id="@+id/nav_profil_to_resellerInfoFragment"
             app:destination="@id/resellerInfoFragment" />
+        <action
+            android:id="@+id/nav_profil_to_profilKontakFragment"
+            app:destination="@id/profilKontakFragment" />
     </fragment>
     <fragment
         android:id="@+id/produkFragment"
@@ -244,6 +247,10 @@
         <action
             android:id="@+id/resellerInfoFragment_to_resellerStatusVerifikasiFragment"
             app:destination="@id/resellerStatusVerifikasiFragment" />
+        <argument
+            android:name="verification_status_id"
+            app:argType="integer"
+            android:defaultValue="-1" />
     </fragment>
     <fragment
         android:id="@+id/resellerKYCFragment"
@@ -284,6 +291,11 @@
             android:name="image_type"
             app:argType="integer"
             android:defaultValue="-1" />
+        <action
+            android:id="@+id/resellerStatusVerifikasiFragment_to_resellerInfoFragment"
+            app:destination="@id/resellerInfoFragment"
+            app:popUpTo="@id/resellerInfoFragment"
+            app:popUpToInclusive="true" />
     </fragment>
     <fragment
         android:id="@+id/splashScreenFragment"
@@ -452,4 +464,9 @@
         tools:layout="@layout/fragment_form_upload_foto" >
         <argument android:name="image_uri" />
     </fragment>
+    <fragment
+        android:id="@+id/profilKontakFragment"
+        android:name="com.rahmacom.rimesyarifix.ui.profil_kontak.ProfilKontakFragment"
+        android:label="fragment_profil_kontak"
+        tools:layout="@layout/fragment_profil_kontak" />
 </navigation>

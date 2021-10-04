@@ -2390,7 +2390,7 @@ public class MainRepository {
         Call<UserVerification> api = rimeSyariAPI.newVerification(token);
         api.enqueue(new Callback<UserVerification>() {
             @Override
-            public void onResponse(@NonNull Call<UserVerification> call, @NonNull Response<UserVerification> response) {
+            public void onResponse(Call<UserVerification> call, Response<UserVerification> response) {
                 switch (response.code()) {
                     case 200:
                     case 201:

@@ -47,6 +47,7 @@
         android:layout_marginEnd="4dp"
         android:text="@string/link_forget"
         android:textColor="@color/gray_400"
+        android:visibility="gone"
         app:layout_constraintEnd_toEndOf="@+id/edt_login_password"
         app:layout_constraintTop_toBottomOf="@+id/edt_login_password" />
 

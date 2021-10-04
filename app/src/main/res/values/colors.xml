@@ -25,5 +25,7 @@
     <color name="pink_800">#9D174D</color>
     <color name="pink_900">#831843</color>
 
+    <color name="blue">#0000ff</color>
+
     <color name="yellow_300">#FDE047</color>
 </resources>

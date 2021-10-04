@@ -5,6 +5,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -60,6 +61,7 @@ public class ResellerInfoFragment extends Fragment {
     }
 
     private void newVerification() {
+        Timber.d("newVerificationCalled");
         viewModel.beginResellerVerification.observe(getViewLifecycleOwner(), userVerificationResource -> {
             Timber.d(userVerificationResource.getMessage());
             switch (userVerificationResource.getStatus()) {
@@ -73,6 +75,7 @@ public class ResellerInfoFragment extends Fragment {
                 case UNAUTHORIZED:
                 case FORBIDDEN:
                 case UNPROCESSABLE_ENTITY:
+                    Toast.makeText(requireContext(), "Terjadi error! Silahkan coba lagi atau hubungi admin rimesyari", Toast.LENGTH_SHORT).show();
                     break;
             }
         });

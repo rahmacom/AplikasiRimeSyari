@@ -50,7 +50,6 @@ public class OrderDetailFragment extends Fragment {
     private OrderDetailAdapter adapter;
 
     private ActivityResultLauncher<String> galleryLauncher;
-    private ActivityResultLauncher<Intent> cameraLauncher;
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -110,16 +109,6 @@ public class OrderDetailFragment extends Fragment {
                         }
                     }
                 });
-
-        cameraLauncher = registerForActivityResult(new ActivityResultContracts.StartActivityForResult(),
-                activityResult -> {
-                    Intent data = activityResult.getData();
-                    if (data != null) {
-                        File file = Helper.bitmapToFile((Bitmap) data.getExtras().get("data"), requireActivity());
-
-                        payOrder(file);
-                    }
-                });
     }
 
     private void setupToolbar() {
@@ -152,13 +141,8 @@ public class OrderDetailFragment extends Fragment {
                 .setTitle("Upload foto dari")
                 .setIcon(R.drawable.icon_info)
                 .setItems(R.array.dialog_form_upload_foto_list, ((dialog, which) -> {
-                    switch (which) {
-                        case 0:
-                            galleryLauncher.launch("image/*");
-                            break;
-                        case 1:
-                            cameraLauncher.launch(new Intent(MediaStore.ACTION_IMAGE_CAPTURE));
-                            break;
+                    if (which == 0) {
+                        galleryLauncher.launch("image/*");
                     }
                 }))
                 .create();

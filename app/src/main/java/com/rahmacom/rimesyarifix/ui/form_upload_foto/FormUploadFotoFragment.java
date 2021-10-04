@@ -5,11 +5,15 @@ import androidx.activity.result.ActivityResultCallback;
 import androidx.activity.result.ActivityResultLauncher;
 import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.appcompat.app.AlertDialog;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.content.ContextCompat;
 import androidx.lifecycle.ViewModelProvider;
 
+import android.Manifest;
 import android.content.Context;
 import android.content.ContextWrapper;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Bundle;
@@ -52,7 +56,6 @@ public class FormUploadFotoFragment extends Fragment {
     private FormUploadFotoFragmentArgs args;
 
     private ActivityResultLauncher<String> galleryLauncher;
-    private ActivityResultLauncher<Intent> cameraLauncher;
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -102,20 +105,6 @@ public class FormUploadFotoFragment extends Fragment {
                         }
                     }
                 });
-
-        cameraLauncher = registerForActivityResult(new ActivityResultContracts.StartActivityForResult(),
-                activityResult -> {
-                    Intent data = activityResult.getData();
-                    if (data != null) {
-                        Glide.with(binding.getRoot())
-                                .load(data.getExtras().get("data"))
-                                .into(binding.ivFormUploadFotoProfil);
-
-                        File file = Helper.bitmapToFile((Bitmap) data.getExtras().get("data"), requireActivity());
-
-                        binding.btnFormUploadFotoSimpan.setOnClickListener(v -> updateProfilePhoto(file));
-                    }
-                });
     }
 
     private void setImageBinding(String url) {
@@ -149,14 +138,8 @@ public class FormUploadFotoFragment extends Fragment {
                 .setTitle("Pilih foto")
                 .setItems(R.array.dialog_form_upload_foto_list, (dialog, which) -> {
                     Timber.d(String.valueOf(which));
-                    switch (which) {
-                        case 0:
-                            galleryLauncher.launch("image/*");
-                            break;
-
-                        case 1:
-                            cameraLauncher.launch(new Intent(MediaStore.ACTION_IMAGE_CAPTURE));
-                            break;
+                    if (which == 0) {
+                        galleryLauncher.launch("image/*");
                     }
                 })
                 .create();

@@ -299,7 +299,7 @@ public interface RimeSyariAPI {
     @Headers({"Accept: application/json"})
     Call<UserVerification> verificationStatus(@Header("Authorization") String token);
 
-    @POST("verification/start")
+    @POST("verifications/start")
     @Headers({"Accept: application/json"})
     Call<UserVerification> beginVerification(@Header("Authorization") String token);
 

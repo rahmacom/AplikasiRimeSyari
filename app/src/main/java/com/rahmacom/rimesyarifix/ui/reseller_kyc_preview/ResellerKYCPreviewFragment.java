@@ -58,6 +58,7 @@ public class ResellerKYCPreviewFragment extends Fragment {
     private void setupToolbar() {
         AppBarConfiguration appBarConfiguration = new AppBarConfiguration.Builder(navController.getGraph()).build();
         NavigationUI.setupWithNavController(binding.toolbarResellerKycPreview, navController, appBarConfiguration);
+        binding.toolbarResellerKycPreview.setTitle("Hasil foto");
     }
 
     private void useImage() {

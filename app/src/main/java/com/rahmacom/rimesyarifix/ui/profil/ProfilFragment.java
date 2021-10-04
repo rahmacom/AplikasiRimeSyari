@@ -118,6 +118,10 @@ public class ProfilFragment extends Fragment {
                     break;
 
                 case 4:
+                    navController.navigate(ProfilFragmentDirections.navProfilToProfilKontakFragment());
+                    break;
+
+                case 5:
                     logout();
                     break;
             }

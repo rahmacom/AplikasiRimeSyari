@@ -83,6 +83,13 @@ public class ResellerStatusVerifikasiFragment extends Fragment {
 
         binding.btnFragmentResellerStatusVerifikasiCekFotoWajah.setOnClickListener(v -> openCamera(ResellerKYCFragment.KYC_FACE));
         binding.btnFragmentResellerStatusVerifikasiCekFotoIdentitas.setOnClickListener(v -> openCamera(ResellerKYCFragment.KYC_ID_CARD));
+        binding.btnResellerStatusVerifikasiMulaiVerifikasi.setOnClickListener(v -> {
+            if (isEligible[0] && isEligible[1] && isEligible[2]) {
+                beginVerification();
+            } else {
+                Toast.makeText(requireContext(), "Silahkan lengkapi persyaratan terlebih dahulu", Toast.LENGTH_SHORT).show();
+            }
+        });
 
         if (userVerification.getFacePath() != null) {
             isEligible[1] = true;
@@ -96,6 +103,49 @@ public class ResellerStatusVerifikasiFragment extends Fragment {
     private void verificationStatus() {
         Timber.d("verificationStatus");
         viewModel.verificationStatus.observe(getViewLifecycleOwner(), userVerificationObserver);
+    }
+
+    private void beginVerification() {
+        viewModel.beginVerification.observe(getViewLifecycleOwner(), userVerificationResource -> {
+            Timber.d(userVerificationResource.getMessage());
+            switch (userVerificationResource.getStatus()) {
+                case SUCCESS:
+                    ResellerStatusVerifikasiFragmentDirections.ResellerStatusVerifikasiFragmentToResellerInfoFragment action = ResellerStatusVerifikasiFragmentDirections.resellerStatusVerifikasiFragmentToResellerInfoFragment();
+                    if (userVerificationResource.getData().getVerificationStatus().getId() == 3) {
+                        Toast.makeText(requireContext(), "Verifikasi selesai! Anda sekarang menjadi seorang reseller", Toast.LENGTH_SHORT).show();
+                        action.setVerificationStatusId(userVerificationResource.getData().getVerificationStatus().getId());
+                        navController.navigate(action);
+                    } else if (userVerificationResource.getData().getVerificationStatus().getId() == 4) {
+                        Toast.makeText(requireContext(), "Verifikasi gagal! Anda dapat mencoba lagi", Toast.LENGTH_SHORT).show();
+                        action.setVerificationStatusId(userVerificationResource.getData().getVerificationStatus().getId());
+                        navController.navigate(action);
+                    }
+                    break;
+
+                case LOADING:
+                    Toast.makeText(requireContext(), "Tunggu sebentar...", Toast.LENGTH_SHORT).show();
+                    break;
+
+                case EMPTY:
+                    Timber.d("empty 204");
+                    break;
+                case ERROR:
+                    Timber.d("error 404");
+                    break;
+                case INVALID:
+                    Timber.d("invalid 400");
+                    break;
+                case UNAUTHORIZED:
+                    Timber.d("unathorized 401");
+                    break;
+                case FORBIDDEN:
+                    Timber.d("forbidden 403");
+                    break;
+                case UNPROCESSABLE_ENTITY:
+                    Toast.makeText(requireContext(), "Terjadi error! Silahkan hubungi admin rimesyari", Toast.LENGTH_SHORT).show();
+                    break;
+            }
+        });
     }
 
     private void checkUserEligibility() {

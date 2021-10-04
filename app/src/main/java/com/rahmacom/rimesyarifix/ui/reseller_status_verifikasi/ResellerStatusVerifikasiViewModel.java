@@ -47,6 +47,9 @@ public class ResellerStatusVerifikasiViewModel extends ViewModel {
     public final LiveData<Resource<Boolean>> checkIfUserIsEligible = Transformations.switchMap(liveToken, token ->
             mainRepository.checkIfUserIsElligible(token));
 
+    public final LiveData<Resource<UserVerification>> beginVerification = Transformations.switchMap(liveToken, token ->
+            mainRepository.beginVerification(token));
+
     static class Photo {
         File image;
         int imageType;

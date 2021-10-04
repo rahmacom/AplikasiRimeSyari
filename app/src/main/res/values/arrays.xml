@@ -5,6 +5,7 @@
         <item>Daftar jadi Reseller</item>
         <item>Testimoni</item>
         <item>Tentang</item>
+        <item>Kontak</item>
         <item>Logout</item>
     </string-array>
 
@@ -18,6 +19,7 @@
         <item>@id/nav_profil_to_resellerInfoFragment</item>
         <item>@id/nav_profil_to_profilTestimoniFragment</item>
         <item>@id/nav_profil_to_profilTentangFragment</item>
+        <item>@id/nav_profil_to_profilKontakFragment</item>
         <item/>
     </integer-array>
 
@@ -26,6 +28,7 @@
         <item>@drawable/icon_register</item>
         <item>@drawable/icon_star</item>
         <item>@drawable/icon_info</item>
+        <item>@drawable/icon_person</item>
         <item>@drawable/icon_logout</item>
     </integer-array>
 
@@ -56,7 +59,6 @@
 
     <string-array name="dialog_form_upload_foto_list">
         <item>Pilih dari galeri</item>
-        <item>Buka kamera</item>
     </string-array>
 
     <string-array name="list_biodata_profil_dummy">
