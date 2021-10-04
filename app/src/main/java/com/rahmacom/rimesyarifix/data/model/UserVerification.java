@@ -15,6 +15,9 @@ public class UserVerification {
     @SerializedName("similarity")
     private double similarity;
 
+    @SerializedName("verification_status_id")
+    private int verificationStatusId;
+
     @SerializedName("verification_status")
     private VerificationStatus verificationStatus;
 
@@ -48,6 +51,14 @@ public class UserVerification {
 
     public void setSimilarity(double similarity) {
         this.similarity = similarity;
+    }
+
+    public int getVerificationStatusId() {
+        return verificationStatusId;
+    }
+
+    public void setVerificationStatusId(int verificationStatusId) {
+        this.verificationStatusId = verificationStatusId;
     }
 
     public VerificationStatus getVerificationStatus() {

@@ -291,11 +291,6 @@
             android:name="image_type"
             app:argType="integer"
             android:defaultValue="-1" />
-        <action
-            android:id="@+id/resellerStatusVerifikasiFragment_to_resellerInfoFragment"
-            app:destination="@id/resellerInfoFragment"
-            app:popUpTo="@id/resellerInfoFragment"
-            app:popUpToInclusive="true" />
     </fragment>
     <fragment
         android:id="@+id/splashScreenFragment"

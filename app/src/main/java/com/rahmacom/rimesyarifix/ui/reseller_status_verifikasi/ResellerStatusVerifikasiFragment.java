@@ -110,15 +110,12 @@ public class ResellerStatusVerifikasiFragment extends Fragment {
             Timber.d(userVerificationResource.getMessage());
             switch (userVerificationResource.getStatus()) {
                 case SUCCESS:
-                    ResellerStatusVerifikasiFragmentDirections.ResellerStatusVerifikasiFragmentToResellerInfoFragment action = ResellerStatusVerifikasiFragmentDirections.resellerStatusVerifikasiFragmentToResellerInfoFragment();
+                    binding.tvResellerStatusVerifikasiJudul.setText(userVerificationResource.getData().getVerificationStatus().getName());
                     if (userVerificationResource.getData().getVerificationStatus().getId() == 3) {
-                        Toast.makeText(requireContext(), "Verifikasi selesai! Anda sekarang menjadi seorang reseller", Toast.LENGTH_SHORT).show();
-                        action.setVerificationStatusId(userVerificationResource.getData().getVerificationStatus().getId());
-                        navController.navigate(action);
+                        Toast.makeText(requireContext(), "Verifikasi berhasil! Anda sekarang menjadi seorang reseller. Anda dapat kembali ke halaman utama", Toast.LENGTH_SHORT).show();
+                        binding.btnResellerStatusVerifikasiMulaiVerifikasi.setVisibility(View.GONE);
                     } else if (userVerificationResource.getData().getVerificationStatus().getId() == 4) {
                         Toast.makeText(requireContext(), "Verifikasi gagal! Anda dapat mencoba lagi", Toast.LENGTH_SHORT).show();
-                        action.setVerificationStatusId(userVerificationResource.getData().getVerificationStatus().getId());
-                        navController.navigate(action);
                     }
                     break;
 
@@ -127,20 +124,12 @@ public class ResellerStatusVerifikasiFragment extends Fragment {
                     break;
 
                 case EMPTY:
-                    Timber.d("empty 204");
-                    break;
                 case ERROR:
-                    Timber.d("error 404");
-                    break;
                 case INVALID:
-                    Timber.d("invalid 400");
-                    break;
                 case UNAUTHORIZED:
-                    Timber.d("unathorized 401");
-                    break;
                 case FORBIDDEN:
-                    Timber.d("forbidden 403");
                     break;
+
                 case UNPROCESSABLE_ENTITY:
                     Toast.makeText(requireContext(), "Terjadi error! Silahkan hubungi admin rimesyari", Toast.LENGTH_SHORT).show();
                     break;
